@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웰컴드론 - 메인</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'], },
+                    colors: { primary: '#D4AF37', primaryHover: '#B5952F', darkBg: '#050505', cardBg: '#111111', cardBorder: '#222222', }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000000; }
+        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+    </style>
+</head>
+<body class="font-sans text-gray-300 bg-black antialiased selection:bg-primary selection:text-black flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
+                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표 최 용 진</span>
+                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                    </div>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-gray-300 hover:text-primary font-medium transition-colors">솔루션 & 촬영</a>
+                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">솔루션 & 촬영</a>
+                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow flex items-center justify-center pt-20 border-b border-cardBorder relative overflow-hidden">
+        <!-- 배경 영상 추가 -->
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/39844bb8-ade7-4447-bbea-090ab2f09efe.mp4?w=1386&h=1040">
+        </video>
+        <!-- 영상을 약간 어둡게 눌러주어 글씨가 잘 보이게 하는 오버레이 -->
+        <div class="absolute inset-0 bg-black/60 z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 relative z-10 text-center">
+            <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-semibold text-sm tracking-wide">
+                DJI 산업용 및 농업용 드론 공식 워런티 대리점
+            </div>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+                최고의 비행 기술로 완성하는 <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-200">완벽한 솔루션</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white-400 mb-10 font-light max-w-2xl mx-auto">
+                웰컴드론은 기체 판매부터 DJI Dock 자동화 솔루션, 전문 항공 촬영까지 당신의 비즈니스에 필요한 모든 드론 서비스를 제공합니다.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="solution.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center">
+                    자동 무인화 드론 솔루션 <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a href="contact.html" class="bg-transparent text-white border-2 border-bold-600 px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all flex items-center justify-center">
+                    상담 문의
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: contact@welcomedrone.co.kr</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) { nav.style.background = 'rgba(5, 5, 5, 0.9)'; nav.classList.add('border-b', 'border-[#222]'); }
+            else { nav.style.background = 'rgba(0, 0, 0, 0.5)'; nav.classList.remove('border-b', 'border-[#222]'); }
+        });
+    </script>
+</body>
+</html>
