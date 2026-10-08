@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회사 소개 - 웰컴드론</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'], }, colors: { primary: '#D4AF37', primaryHover: '#B5952F', darkBg: '#050505', cardBg: '#111111', cardBorder: '#222222', } } } }
+    </script>
+    <style>
+        body { background-color: #000000; }
+        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+    </style>
+</head>
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
+                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표 최 용 진</span>
+                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                    </div>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="about.html" class="text-primary font-bold">회사 소개</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-gray-300 hover:text-primary font-medium transition-colors">솔루션 & 촬영</a>
+                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">회사 소개</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">솔루션 & 촬영</a>
+                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-24 pb-20">
+        <!-- 기존 회사 소개 섹션 -->
+        <section id="about" class="py-12 bg-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 lg:order-1 relative rounded-2xl overflow-hidden shadow-2xl border border-cardBorder group bg-[#0a0a0a]">
+                        <div class="aspect-[4/3] flex items-center justify-center p-10">
+                            <img src="https://cdn.ttlnews.com/news/photo/202607/3124367_723129_346.jpg" alt="웰컴드론 인프라">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <div class="bg-black/80 backdrop-blur-md border border-primary/20 p-4 rounded-xl">
+                                <p class="text-primary font-bold text-lg">충남 지역 거점 드론 센터</p>
+                                <p class="text-gray-300 text-sm mt-1">신속한 A/S와 체계적인 교육 인프라 완비</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-1 lg:order-2">
+                        <h2 class="text-primary font-bold tracking-wider uppercase text-sm mb-2">About Us</h2>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">성공적인 비즈니스를 위한<br/><span class="text-primary">최고의 드론 파트너, 웰컴드론</span></h3>
+                        <p class="text-gray-400 leading-relaxed mb-6 text-lg">
+                            웰컴드론은 <strong>충청남도 보령시</strong>를 거점으로 활동하는 DJI 산업용 및 농업용 드론 전문 딜러십입니다. 
+                            단순한 기체 판매를 넘어, 기체 구매에 필요한 행정 절차 지원부터 사후 관리(A/S), DJI Dock을 활용한 무인화 솔루션 컨설팅까지 원스톱으로 제공합니다.
+                        </p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30"><i class="fa-solid fa-check text-xs"></i></div>
+                                <span class="ml-3 text-gray-300 text-lg">DJI 산업용/농업용 기체 맞춤 컨설팅 및 판매</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30"><i class="fa-solid fa-check text-xs"></i></div>
+                                <span class="ml-3 text-gray-300 text-lg">농업용 드론 구매 행정 절차(계약서, 서약서 등) 완벽 지원</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 새롭게 추가된 주요 사업 실적 섹션 (세로형 리스트 레이아웃) -->
+        <section id="projects" class="py-20 bg-darkBg border-t border-cardBorder relative">
+            <!-- 배경 데코레이션 -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-briefcase mr-1"></i> Our Projects</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">웰컴드론 주요 사업 실적</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-lg">현장에서 검증된 기술력. 다양한 산업 분야에서 성공적으로 임무를 완수한 웰컴드론의 핵심 프로젝트를 소개합니다.</p>
+                </div>
+
+                <!-- 세로로 4개가 나열되는 구조 (space-y-12) -->
+                <div class="space-y-12">
+                    
+                    <!-- 1. 독 스테이션 운용 (사진 좌측) -->
+                    <div class="flex flex-col md:flex-row bg-cardBg border border-cardBorder rounded-3xl overflow-hidden group hover:border-primary/50 transition-colors duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+                        <div class="w-full md:w-1/2 h-64 md:h-auto overflow-hidden relative bg-[#111] flex-shrink-0">
+                            <img src="https://i.pinimg.com/736x/ee/42/0f/ee420fa2b5f9e69cde09c2aecb3924e7.jpg" alt="독 스테이션 운용" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-cardBg hidden md:block"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent md:hidden"></div>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                            <div class="w-12 h-12 bg-black border border-primary/30 rounded-full flex items-center justify-center text-primary mb-6 shadow-inner">
+                                <i class="fa-solid fa-satellite-dish text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">1. 독 스테이션 운용</h3>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                DJI Dock 무인화 드론 스테이션을 현장에 성공적으로 구축 및 운용하여, 인력 투입 없이도 24시간 자율 비행과 원격 관제 임무를 완벽하게 수행했습니다. 악천후 속에서도 끄떡없는 자동화 모니터링 시스템을 제공합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 2. 드론 방제 (사진 우측) -->
+                    <div class="flex flex-col md:flex-row-reverse bg-cardBg border border-cardBorder rounded-3xl overflow-hidden group hover:border-primary/50 transition-colors duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+                        <div class="w-full md:w-1/2 h-64 md:h-auto overflow-hidden relative bg-[#111] flex-shrink-0">
+                            <img src="https://i.pinimg.com/736x/5d/46/04/5d460449f70a3b2ba4d0171f7b762aae.jpg" alt="드론 방제" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-cardBg hidden md:block"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent md:hidden"></div>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                            <div class="w-12 h-12 bg-black border border-primary/30 rounded-full flex items-center justify-center text-primary mb-6 shadow-inner">
+                                <i class="fa-solid fa-leaf text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">2. 드론 방제</h3>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                대규모 농지 및 까다로운 지형의 과수원을 대상으로 최신 농업용 드론(DJI Agras 시리즈)을 활용한 정밀 방제 작업을 진행했습니다. 인력 대비 방제 시간을 극적으로 단축하고 고른 약제 살포로 작업 효율을 극대화했습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 3. 시설 점검 (사진 좌측) -->
+                    <div class="flex flex-col md:flex-row bg-cardBg border border-cardBorder rounded-3xl overflow-hidden group hover:border-primary/50 transition-colors duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+                        <div class="w-full md:w-1/2 h-64 md:h-auto overflow-hidden relative bg-[#111] flex-shrink-0">
+                            <img src="https://i.pinimg.com/736x/82/ee/83/82ee83d7785f15a5c7861e603b437b12.jpg" alt="시설 점검" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-cardBg hidden md:block"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent md:hidden"></div>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                            <div class="w-12 h-12 bg-black border border-primary/30 rounded-full flex items-center justify-center text-primary mb-6 shadow-inner">
+                                <i class="fa-solid fa-tower-cell text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">3. 시설 점검</h3>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                고해상도 광학 및 열화상 카메라를 탑재한 산업용 드론을 투입하여 사람의 접근이 위험한 현장을 점검했습니다. 고압 송전탑, 태양광 패널, 고층 교량 등의 미세한 크랙 및 비정상 발열 결함을 안전하고 신속하게 탐지했습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 4. 드론 해양 안전관리 (사진 우측) -->
+                    <div class="flex flex-col md:flex-row-reverse bg-cardBg border border-cardBorder rounded-3xl overflow-hidden group hover:border-primary/50 transition-colors duration-300 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.1)]">
+                        <div class="w-full md:w-1/2 h-64 md:h-auto overflow-hidden relative bg-[#111] flex-shrink-0">
+                            <img src="https://i.pinimg.com/736x/22/55/f5/2255f5a96ba4c47de356751daaafd158.jpg" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-cardBg hidden md:block"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-cardBg to-transparent md:hidden"></div>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                            <div class="w-12 h-12 bg-black border border-primary/30 rounded-full flex items-center justify-center text-primary mb-6 shadow-inner">
+                                <i class="fa-solid fa-life-ring text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 group-hover:text-primary transition-colors">4. 드론 해양 안전관리</h3>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                광활한 해수욕장 및 연안 지역에서 실시간 드론 모니터링과 장거리 스피커 방송 시스템을 운용했습니다. 광학 줌 렌즈를 활용해 사각지대 없는 효율적인 순찰망을 구축하고 피서객의 안전을 지켜냈습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: contact@welcomedrone.co.kr</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+    </script>
+</body>
+</html>
