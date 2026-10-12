@@ -16,15 +16,15 @@
     </style>
 </head>
 <body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
-                    <!-- 로고 파일명 통일 완료 -->
                     <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain">
                     <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
-                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
-                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표 최 용 진</span>
+                        <a href="tel:010-9420-9946" class="text-primary text-sm font-bold tracking-wide hover:text-white transition-colors"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</a>
                     </div>
                 </div>
                 <div class="hidden lg:flex space-x-8 items-center">
@@ -40,6 +40,7 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
@@ -55,19 +56,18 @@
     <main class="flex-grow pt-24 pb-20 bg-black">
         <section id="products-industrial" class="py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- 헤더 영역 -->
+                
+                <!-- 1. 기존 산업용 드론 카테고리 -->
                 <div class="text-center mb-16">
                     <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-industry mr-1"></i> Enterprise</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">산업용 드론 라인업</h2>
                     <p class="text-gray-400 max-w-2xl mx-auto">측량, 점검, 공공 안전 등 다양한 산업 현장의 효율을 극대화하는 DJI Enterprise 제품군입니다.</p>
                 </div>
 
-                <!-- 제품 라인업 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-                    <!-- Matrice 4E (클릭 시 m4e.html 로 이동) -->
                     <a href="m4e.html" class="block group bg-cardBg border border-cardBorder rounded-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer">
                         <div class="aspect-[4/3] relative overflow-hidden bg-[#1a1a1a]">
-                            <img src="https://se-cdn.djiits.com/tpc/uploads/carousel/image/d91e59cbba790f714c5ab5b866c82db4@ultra.jpg?format=webp">
+                            <img src="https://se-cdn.djiits.com/tpc/uploads/carousel/image/d91e59cbba790f714c5ab5b866c82db4@ultra.jpg?format=webp" alt="Matrice 4E" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
                             <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">Matrice 4E</h3>
@@ -77,12 +77,10 @@
                             </div>
                         </div>
                     </a>
-                    
-                    <!-- Matrice 4T (클릭 시 m4t.html 로 이동) -->
                     <a href="m4t.html" class="block group bg-cardBg border border-cardBorder rounded-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer">
                         <div class="aspect-[4/3] relative overflow-hidden bg-[#1a1a1a]">
                             <div class="absolute top-4 right-4 z-10 bg-primary/20 border border-primary/30 text-primary text-xs font-bold px-3 py-1 rounded-full shadow-md">Thermal</div>
-                            <img src="https://images.ctfassets.net/et769tc4wc1v/5TPAt1H8ZoK12XiRHeKvKX/42a3da9bbe1818f136f3150800d678b9/matrice_4e_1.jpg?w=1638&h=1638&fl=progressive&q=50&fm=jpg&bg=transparent">
+                            <img src="https://images.ctfassets.net/et769tc4wc1v/5TPAt1H8ZoK12XiRHeKvKX/42a3da9bbe1818f136f3150800d678b9/matrice_4e_1.jpg?w=1638&h=1638&fl=progressive&q=50&fm=jpg&bg=transparent" alt="Matrice 4T" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
                             <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">Matrice 4T</h3>
@@ -92,11 +90,9 @@
                             </div>
                         </div>
                     </a>
-                    
-                    <!-- M400 (클릭 시 m400.html 로 이동) -->
                     <a href="m400.html" class="block group bg-cardBg border border-cardBorder rounded-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer">
                         <div class="aspect-[4/3] relative overflow-hidden bg-[#1a1a1a]">
-                            <img src="https://images.squarespace-cdn.com/content/v1/56833a8d57eb8d0dbae7fd43/dc756a13-0280-42a8-a376-3330571300c4/%E5%B3%A1%E8%B0%B7%E6%B5%8B%E7%BB%98_%E4%B8%89%E8%B4%9F%E8%BD%BD.jpg">
+                            <img src="https://images.squarespace-cdn.com/content/v1/56833a8d57eb8d0dbae7fd43/dc756a13-0280-42a8-a376-3330571300c4/%E5%B3%A1%E8%B0%B7%E6%B5%8B%E7%BB%98_%E4%B8%89%E8%B4%9F%E8%BD%BD.jpg" alt="M400" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
                             <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">M400</h3>
@@ -106,11 +102,9 @@
                             </div>
                         </div>
                     </a>
-                    
-                    <!-- M30T (클릭 시 m30t.html 로 이동) -->
                     <a href="m30t.html" class="block group bg-cardBg border border-cardBorder rounded-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer">
                         <div class="aspect-[4/3] relative overflow-hidden bg-[#1a1a1a]">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GPJRkgtWnS7k1Bqzx1S0UE4v7QFj-yZYFA_IwwmeJQ&s=10">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5GPJRkgtWnS7k1Bqzx1S0UE4v7QFj-yZYFA_IwwmeJQ&s=10" alt="M30T" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
                             <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">M30T</h3>
@@ -122,7 +116,7 @@
                     </a>
                 </div>
 
-                <!-- 2. 신규 운송 및 운반 드론 카테고리 -->
+                <!-- 2. 신규 운송 및 운반 드론 카테고리 (가로로 꽉 찬 레이아웃) -->
                 <div class="pt-20 border-t border-[#333]">
                     <div class="text-center mb-16">
                         <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-box-open mr-1"></i> Delivery & Transport</span>
@@ -130,58 +124,52 @@
                         <p class="text-gray-400 max-w-2xl mx-auto">산악 지대, 해상, 재난 지역 등 기존 물류의 한계를 뛰어넘는 대용량 화물 운송 솔루션입니다.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-                        <!-- DJI FlyCart 100 -->
-                        <a href="flycart100.html" class="block group bg-cardBg border border-cardBorder rounded-2xl hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col cursor-pointer">
-                            <div class="aspect-[4/3] relative overflow-hidden bg-[#1a1a1a]">
-                                <div class="absolute top-4 right-4 z-10 bg-primary/20 border border-primary/30 text-primary text-xs font-bold px-3 py-1 rounded-full shadow-md">DELIVERY</div>
-                                <!-- 기체 이미지는 추후 원하시는 사진 링크로 변경하실 수 있습니다. -->
-                                <img src="https://www-cdn.djiits.com/cms/uploads/a14f7a990decfb29f912b3c202c10e48@770*462.jpg" alt="DJI FlyCart 100" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                    <!-- FlyCart 100 가로 와이드 카드 -->
+                    <div class="mb-20">
+                        <a href="flycart100.html" class="flex flex-col md:flex-row bg-cardBg border border-cardBorder rounded-3xl overflow-hidden group hover:border-primary/50 transition-all duration-500 shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-1">
+                            <!-- 왼쪽 이미지 영역 -->
+                            <div class="w-full md:w-1/2 h-72 md:h-auto min-h-[350px] relative overflow-hidden bg-[#1a1a1a]">
+                                <div class="absolute top-6 left-6 z-10 bg-primary/20 border border-primary/30 text-primary text-xs font-bold px-4 py-1.5 rounded-full shadow-md tracking-widest">HEAVY-LIFT DELIVERY</div>
+                                <img src="https://www-cdn.djiits.com/cms/uploads/a14f7a990decfb29f912b3c202c10e48@770*462.jpg" alt="DJI FlyCart 100" class="absolute inset-0 w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-700">
                             </div>
-                            <div class="p-6 flex-grow flex flex-col">
-                                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">DJI FlyCart 100</h3>
-                                <p class="text-gray-400 text-sm flex-grow">극한의 환경에서도 무거운 화물을 안전하고 신속하게 운송할 수 있도록 설계된 차세대 대형 무인 배송 플랫폼입니다.</p>
-                                <div class="mt-4 pt-4 border-t border-[#333] flex justify-between items-center text-primary font-bold">
-                                    <span>제품 상세 보기</span><i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            <!-- 오른쪽 텍스트 영역 -->
+                            <div class="w-full md:w-1/2 p-8 md:p-10 lg:p-14 flex flex-col justify-center">
+                                <h3 class="text-3xl lg:text-4xl font-bold text-white mb-4 group-hover:text-primary transition-colors">DJI FlyCart 100</h3>
+                                <p class="text-gray-400 text-lg leading-relaxed flex-grow mb-8">
+                                    극한의 환경에서도 무거운 화물을 안전하고 신속하게 운송할 수 있도록 설계된 차세대 대형 무인 배송 플랫폼입니다. 듀얼 배터리 장착 시 최대 30kg, 싱글 배터리 장착 시 최대 40kg의 하중을 감당하며 기존 물류의 한계를 완벽히 돌파합니다.
+                                </p>
+                                <div class="pt-6 border-t border-[#333] flex justify-between items-center text-primary font-bold text-lg">
+                                    <span>제품 상세 보기</span>
+                                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/30 group-hover:bg-primary group-hover:text-black transition-all">
+                                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                    </div>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
 
-                <!-- [새로 추가된 섹션] 산업용 드론 도입 장점 -->
+                <!-- 산업용 드론 도입 장점 -->
                 <div class="pt-20 border-t border-[#333]">
                     <h3 class="text-2xl md:text-3xl font-bold text-white mb-10 text-center">왜 DJI 산업용 드론을 도입해야 할까요?</h3>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- 장점 1 -->
                         <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
-                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
-                                <i class="fa-solid fa-chart-line text-2xl"></i>
-                            </div>
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30"><i class="fa-solid fa-chart-line text-2xl"></i></div>
                             <h5 class="text-lg font-bold text-white mb-3">압도적인 업무 효율성 향상</h5>
                             <p class="text-gray-400 text-sm leading-relaxed">수일이 걸리던 대규모 지형 측량과 시설물 점검을 단 몇 시간 내에 완료하여, 프로젝트의 전체 공기를 획기적으로 단축시킵니다.</p>
                         </div>
-                        <!-- 장점 2 -->
                         <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
-                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
-                                <i class="fa-solid fa-helmet-safety text-2xl"></i>
-                            </div>
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30"><i class="fa-solid fa-helmet-safety text-2xl"></i></div>
                             <h5 class="text-lg font-bold text-white mb-3">위험 현장 작업자 안전 보장</h5>
                             <p class="text-gray-400 text-sm leading-relaxed">고압 송전탑, 가파른 절벽, 화재 현장 등 인력 투입이 위험한 고위험군 작업을 드론이 완벽하게 대체하여 중대재해를 원천 차단합니다.</p>
                         </div>
-                        <!-- 장점 3 -->
                         <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
-                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
-                                <i class="fa-solid fa-microchip text-2xl"></i>
-                            </div>
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30"><i class="fa-solid fa-microchip text-2xl"></i></div>
                             <h5 class="text-lg font-bold text-white mb-3">초정밀 데이터 및 열화상 분석</h5>
                             <p class="text-gray-400 text-sm leading-relaxed">RTK 모듈을 통한 센티미터(cm)급 고정밀 맵핑과 열화상 센서를 융합하여 육안으로 볼 수 없는 미세한 결함과 온도 이상을 즉각 탐지합니다.</p>
                         </div>
-                        <!-- 장점 4 -->
                         <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
-                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
-                                <i class="fa-solid fa-sack-dollar text-2xl"></i>
-                            </div>
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30"><i class="fa-solid fa-sack-dollar text-2xl"></i></div>
                             <h5 class="text-lg font-bold text-white mb-3">다운타임 방지 및 비용 절감</h5>
                             <p class="text-gray-400 text-sm leading-relaxed">설비 가동을 중단하지 않고도 실시간 모니터링이 가능하며, 크레인이나 비계 등 고가의 특수 장비 대여 비용과 인건비를 획기적으로 줄여줍니다.</p>
                         </div>
