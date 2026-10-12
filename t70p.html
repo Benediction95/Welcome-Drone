@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJI Agras T70P 상세정보 - 웰컴드론</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'], }, colors: { primary: '#D4AF37', primaryHover: '#B5952F', darkBg: '#050505', cardBg: '#111111', cardBorder: '#222222', } } } }
+    </script>
+    <style>
+        body { background-color: #000000; }
+        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+    </style>
+</head>
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain">
+                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
+                        <a href="tel:010-9420-9946" class="text-primary text-sm font-bold tracking-wide hover:text-white transition-colors"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</a>
+                    </div>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
+                    <a href="agri.html" class="text-primary font-bold">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-gray-300 hover:text-primary font-medium transition-colors">무인화 솔루션</a>
+                    <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
+                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">무인화 솔루션</a>
+                <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
+                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-32 pb-20 bg-darkBg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 flex items-center justify-center h-[500px]">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShA9Lnu7H9aWmK-AMlGkgiPIQcbgK4mf8f5LPFUBErH39TYjGorzIbtsrW&s=10" alt="DJI Agras T70P" class="max-w-full max-h-full object-contain drop-shadow-2xl">
+                </div>
+                <div>
+                    <span class="inline-block mb-4 px-3 py-1 bg-green-900/40 text-green-500 text-xs font-bold rounded border border-green-500/30 tracking-widest">LARGE-SCALE AGRICULTURE</span>
+                    <h1 class="text-4xl md:text-5xl font-black text-white mb-6">DJI Agras T70P</h1>
+                    <p class="text-xl text-primary font-bold mb-6">대규모 농지 관리에 최적화된 압도적 페이로드의 플래그십 방제 드론</p>
+                    <p class="text-gray-400 leading-relaxed mb-8">
+                        Agras T70P는 대규모 농업 비즈니스를 위한 궁극의 플래그십 솔루션입니다. 최대 40kg의 강력한 분사 페이로드와 50kg의 입제 살포 페이로드를 자랑하며, 한 번의 비행으로 훨씬 더 넓은 면적을 커버합니다. 업그레이드된 마그네틱 드라이브 임펠러 펌프와 듀얼 분사 시스템을 통해 두껍고 넓은 과수원에서도 완벽한 방제 효과를 제공합니다.
+                    </p>
+                    <ul class="space-y-3 mb-10">
+                        <li class="flex items-center text-gray-300"><i class="fa-solid fa-check text-primary mr-3"></i> 40kg 액제 분사 / 50kg 입제(비료/종자) 살포 페이로드</li>
+                        <li class="flex items-center text-gray-300"><i class="fa-solid fa-check text-primary mr-3"></i> 초고속 마그네틱 드라이브 펌프로 대유량 정밀 분사</li>
+                        <li class="flex items-center text-gray-300"><i class="fa-solid fa-check text-primary mr-3"></i> 전방위 장애물 회피 시스템 및 스마트 3D 지형 매핑</li>
+                        <li class="flex items-center text-gray-300"><i class="fa-solid fa-check text-primary mr-3"></i> 대용량 배터리 고속 충전 (9분 초고속 충전)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-[#0a0a0a] border border-[#333] rounded-3xl p-8 lg:p-10">
+                    <h3 class="text-2xl font-bold text-white mb-6 border-b border-[#222] pb-4"><i class="fa-solid fa-box-open mr-2 text-primary"></i> 기체 기본 구성 (In the Box)</h3>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-gray-400 text-sm">
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> 기체 (Agras T70P) x 1</li>
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> DJI RC Plus 조종기 x 1</li>
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> DB1560 인텔리전트 플라이트 배터리 x 3</li>
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> D12000iE 다기능 인버터 발전기 x 1</li>
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> 40L 액제 탱크 x 1</li>
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> T70P 입제 살포기 x 1 (옵션)</li>
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> 예비 프로펠러 및 공구 세트</li>
+                        <li class="flex items-center"><i class="fa-solid fa-caret-right text-primary/50 mr-2"></i> 1년 농업용 Care Enterprise 패키지</li>
+                    </ul>
+                </div>
+
+                <div class="bg-cardBg border border-primary/30 rounded-3xl p-8 lg:p-10 flex flex-col justify-center relative overflow-hidden shadow-[0_0_30px_rgba(212,175,55,0.05)]">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-900/10 rounded-full blur-3xl"></div>
+                    <div class="text-center relative z-10">
+                        <h3 class="text-gray-400 text-lg mb-2">Agras T70P 농업용 콤보</h3>
+                        <p class="text-4xl md:text-5xl font-black text-white mb-8">견적 문의<span class="text-lg font-normal text-gray-500 ml-2">(도입 맞춤 상담)</span></p>
+                        <p class="text-sm text-gray-400 mb-10 leading-relaxed">
+                            대규모 작물 방제 목적에 맞춰 입제 살포기, 대용량 배터리 및 초고속 충전 발전기 세트 구성 등 맞춤형 컨설팅을 제공합니다.
+                        </p>
+                        <a href="tel:010-9420-9946" class="w-full bg-primary text-black py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center justify-center">
+                            <i class="fa-solid fa-phone-volume mr-3"></i> 010-9420-9946 전화로 빠른 상담하기
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: contact@welcomedrone.co.kr</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+    </script>
+</body>
+</html>
