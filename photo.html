@@ -16,11 +16,11 @@
     </style>
 </head>
 <body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
-                    <!-- 로고 파일명 통일 완료 -->
                     <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain">
                     <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
                         <span class="text-gray-400 text-xs font-medium mb-0.5">대표 최 용 진</span>
@@ -52,23 +52,38 @@
         </div>
     </nav>
 
-    <main class="flex-grow pt-24 pb-20 bg-darkBg relative overflow-hidden">
+    <!-- [새로 추가된 영역] 꽉 찬 동영상 헤더 -->
+    <header class="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
+        <!-- 배경 동영상 (모바일 지원을 위해 playsinline 추가, 무한 반복) -->
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <!-- 핀터레스트 영상은 직접 삽입이 어려워 원본 화질을 보장하기 위해 대체 고화질 드론 촬영 영상으로 셋팅해두었습니다. -->
+            <source src="https://pin.it/7I0yKfFi5">
+        </video>
+        <!-- 영상 위에 깔리는 검은색 반투명 오버레이 (글씨가 잘 보이도록) -->
+        <div class="absolute inset-0 bg-black/60 z-0"></div>
+        
+        <!-- 영상 위 텍스트 -->
+        <div class="relative z-10 text-center px-4">
+            <span class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-camera-retro mr-1"></i> Aerial Photography
+            </span>
+            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">전문 항공 촬영 서비스</h1>
+            <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto drop-shadow-md">
+                풍부한 비행 경험과 전문 촬영 노하우를 갖춘 전문가가 최상급 기체를 활용하여 차원이 다른 고품질의 결과물을 제공합니다.
+            </p>
+        </div>
+    </header>
+
+    <main class="flex-grow pb-20 bg-darkBg relative overflow-hidden">
         <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
         
-        <section id="photo" class="py-12">
+        <section id="photo" class="py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <!-- 페이지 헤더 -->
-                <div class="text-center mb-16">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-camera-retro mr-1"></i> Aerial Photography</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">전문 항공 촬영 서비스</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">풍부한 비행 경험과 전문 촬영 노하우를 갖춘 전문가가 최상급 기체를 활용하여 차원이 다른 고품질의 결과물을 제공합니다.</p>
-                </div>
 
                 <!-- 1. 드론 항공 촬영이 필요한 이유 -->
                 <div class="mb-24">
                     <h3 class="text-2xl md:text-3xl font-bold text-white mb-10 text-center">드론 항공 촬영, 왜 필요할까요?</h3>
                     <div class="grid md:grid-cols-3 gap-6">
-                        <!-- 이유 1 -->
                         <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 text-center">
                             <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 mx-auto border border-primary/30">
                                 <i class="fa-solid fa-expand text-2xl"></i>
@@ -76,7 +91,6 @@
                             <h4 class="text-xl font-bold text-white mb-3">압도적인 스케일과 시각적 효과</h4>
                             <p class="text-gray-400 text-sm leading-relaxed">지상에서는 결코 담을 수 없는 넓은 화각과 다이내믹한 앵글을 제공하여 기업 홍보, 부동산, 관광지 영상의 퀄리티와 몰입감을 극대화합니다.</p>
                         </div>
-                        <!-- 이유 2 -->
                         <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 text-center">
                             <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 mx-auto border border-primary/30">
                                 <i class="fa-solid fa-shield-halved text-2xl"></i>
@@ -84,7 +98,6 @@
                             <h4 class="text-xl font-bold text-white mb-3">안전하고 신속한 시설 점검</h4>
                             <p class="text-gray-400 text-sm leading-relaxed">사람이 접근하기 위험하거나 불가능한 고층 빌딩, 교량, 산업 설비 등을 안전하고 신속하게 근접 촬영하여 구조적 결함과 위험 요소를 파악합니다.</p>
                         </div>
-                        <!-- 이유 3 -->
                         <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 text-center">
                             <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 mx-auto border border-primary/30">
                                 <i class="fa-solid fa-map-location-dot text-2xl"></i>
