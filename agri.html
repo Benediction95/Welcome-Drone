@@ -22,8 +22,8 @@
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
                     <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain">
                     <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
-                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
-                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표 최 용 진</span>
+                        <a href="tel:010-9420-9946" class="text-primary text-sm font-bold tracking-wide hover:text-white transition-colors"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</a>
                     </div>
                 </div>
                 <div class="hidden lg:flex space-x-8 items-center">
@@ -54,13 +54,15 @@
     <main class="flex-grow pt-24 pb-20 bg-darkBg">
         <section id="products-agri" class="py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- 헤더 타이틀 -->
                 <div class="text-center mb-16">
                     <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-leaf mr-1"></i> Agriculture</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">농업용 드론 라인업</h2>
                     <p class="text-gray-400 max-w-2xl mx-auto">정밀 농업의 새로운 기준. 완벽한 방제 솔루션을 웰컴드론에서 만나보세요.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- 제품 목록 그리드 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-20">
                     <!-- Agras T25P (Coming Soon) -->
                     <div class="block group bg-cardBg rounded-2xl shadow-lg border border-cardBorder overflow-hidden flex flex-col relative opacity-90 cursor-default">
                         <div class="absolute top-4 left-4 z-10 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg tracking-wider">COMING SOON</div>
@@ -77,7 +79,7 @@
                     <!-- T25 -->
                     <a href="https://ag.dji.com/kr/t25" target="_blank" class="block group bg-cardBg rounded-2xl shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-2 transition-all duration-300 border border-cardBorder overflow-hidden flex flex-col cursor-pointer">
                         <div class="overflow-hidden bg-[#1a1a1a] aspect-[4/3] relative">
-                            <img src="https://m.kosecomall.com/web/product/big/202605/702d8d5822d226e3bb7cc88bfa088f8c.jpg">
+                            <img src="https://m.kosecomall.com/web/product/big/202605/702d8d5822d226e3bb7cc88bfa088f8c.jpg" alt="Agras T25" class="w-full h-full object-cover">
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
                             <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors mb-2">DJI Agras T25</h3>
@@ -91,7 +93,7 @@
                     <!-- T70P -->
                     <a href="https://ag.dji.com/kr/t70p" target="_blank" class="block group bg-cardBg rounded-2xl shadow-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] hover:-translate-y-2 transition-all duration-300 border border-cardBorder overflow-hidden flex flex-col cursor-pointer">
                         <div class="overflow-hidden bg-[#1a1a1a] aspect-[4/3] relative">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShA9Lnu7H9aWmK-AMlGkgiPIQcbgK4mf8f5LPFUBErH39TYjGorzIbtsrW&s=10">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShA9Lnu7H9aWmK-AMlGkgiPIQcbgK4mf8f5LPFUBErH39TYjGorzIbtsrW&s=10" alt="Agras T70P" class="w-full h-full object-cover">
                         </div>
                         <div class="p-6 flex-grow flex flex-col">
                             <div class="flex justify-between items-start mb-2">
@@ -105,6 +107,46 @@
                         </div>
                     </a>
                 </div>
+
+                <!-- [새로 추가된 섹션] 농업용 드론 도입 장점 -->
+                <div class="pt-20 border-t border-[#333]">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-10 text-center">왜 DJI 농업용 드론을 선택해야 할까요?</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- 장점 1 -->
+                        <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
+                                <i class="fa-solid fa-stopwatch text-2xl"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-white mb-3">압도적인 방제 효율</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">수천 평의 넓은 농지도 단 몇 분 만에 방제가 가능합니다. 기존 인력 대비 작업 시간을 혁신적으로 단축하여 적기 방제에 최적화되어 있습니다.</p>
+                        </div>
+                        <!-- 장점 2 -->
+                        <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
+                                <i class="fa-solid fa-droplet text-2xl"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-white mb-3">초정밀·균일한 살포</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">로터의 강력한 하향 풍압과 이중 분사 원심식 시스템을 통해 작물 잎의 뒷면과 뿌리 근처까지 약제를 빈틈없이 균일하게 도포합니다.</p>
+                        </div>
+                        <!-- 장점 3 -->
+                        <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
+                                <i class="fa-solid fa-coins text-2xl"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-white mb-3">인력난 해결 및 비용 절감</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">단 1~2명의 인원만으로도 넓은 면적을 완벽하게 관리할 수 있어 농촌의 심각한 인력 부족 현상을 해결하고, 장기적인 인건비를 크게 절감합니다.</p>
+                        </div>
+                        <!-- 장점 4 -->
+                        <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 border border-primary/30">
+                                <i class="fa-solid fa-satellite text-2xl"></i>
+                            </div>
+                            <h5 class="text-lg font-bold text-white mb-3">스마트 지형 탐지 & 자동화</h5>
+                            <p class="text-gray-400 text-sm leading-relaxed">전방위 장애물 회피 레이다와 지형 탐지 기능으로 경사지 과수원에서도 안전하며, 간편한 자동 비행 경로 설정으로 누구나 쉽게 조작할 수 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
@@ -117,7 +159,7 @@
                     <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
                 </div>
                 <div class="text-sm text-center md:text-right space-y-1">
-                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 000-00-00000</p>
                     <p>주소: 충청남도 보령시 보령북로 81</p>
                     <p>연락처: 010 - 9420 - 9946 | 이메일: contact@welcomedrone.co.kr</p>
                     <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
@@ -125,8 +167,21 @@
             </div>
         </div>
     </footer>
+    
     <script>
         document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        
+        // 스크롤 시 네비게이션 바 블러 효과
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
     </script>
 </body>
 </html>
