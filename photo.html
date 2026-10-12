@@ -20,10 +20,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <!-- 로고 파일명 통일 완료 -->
                     <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain">
                     <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
                         <span class="text-gray-400 text-xs font-medium mb-0.5">대표 최 용 진</span>
-                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                        <a href="tel:010-9420-9946" class="text-primary text-sm font-bold tracking-wide hover:text-white transition-colors"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</a>
                     </div>
                 </div>
                 <div class="hidden lg:flex space-x-8 items-center">
@@ -56,51 +57,106 @@
         
         <section id="photo" class="py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <!-- 페이지 헤더 -->
                 <div class="text-center mb-16">
                     <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-camera-retro mr-1"></i> Aerial Photography</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">전문 항공 촬영 서비스</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">풍부한 비행 경험과 전문 촬영 노하우를 갖춘 전문가가 직접 비행하여, 차원이 다른 고품질의 결과물을 제공합니다.</p>
+                    <p class="text-gray-400 max-w-2xl mx-auto">풍부한 비행 경험과 전문 촬영 노하우를 갖춘 전문가가 최상급 기체를 활용하여 차원이 다른 고품질의 결과물을 제공합니다.</p>
                 </div>
 
-                <div class="flex flex-col lg:flex-row items-center gap-10 bg-cardBg border border-cardBorder rounded-3xl overflow-hidden shadow-2xl hover:border-primary/50 transition-colors duration-300">
-                    <div class="w-full lg:w-1/2 aspect-video lg:aspect-auto lg:h-[500px] bg-[#1a1a1a] relative overflow-hidden">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBnDHF-xQ9bc8ORRVJ7vB9o0oB-sbulPelLjNGXcZbUQ&s=10" alt="전문 항공 촬영" class="w-full h-full object-cover opacity-80 hover:scale-105 transition-transform duration-700">
-                    </div>
-                    <div class="w-full lg:w-1/2 p-8 lg:p-12">
-                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 text-primary mb-6">
-                            <i class="fa-solid fa-camera text-xl"></i>
+                <!-- 1. 드론 항공 촬영이 필요한 이유 -->
+                <div class="mb-24">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-10 text-center">드론 항공 촬영, 왜 필요할까요?</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- 이유 1 -->
+                        <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 text-center">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 mx-auto border border-primary/30">
+                                <i class="fa-solid fa-expand text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">압도적인 스케일과 시각적 효과</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">지상에서는 결코 담을 수 없는 넓은 화각과 다이내믹한 앵글을 제공하여 기업 홍보, 부동산, 관광지 영상의 퀄리티와 몰입감을 극대화합니다.</p>
                         </div>
-                        <h3 class="text-3xl font-bold text-white mb-6">현장 맞춤형 고해상도 촬영</h3>
-                        <ul class="space-y-6">
-                            <li class="flex items-start">
-                                <i class="fa-solid fa-video text-primary mt-1.5 mr-4 text-lg"></i>
-                                <div>
-                                    <h4 class="text-white font-bold text-lg">고해상도 현장 기록 및 점검</h4>
-                                    <p class="text-gray-500 text-sm mt-1">건설 현장, 시설물, 태양광 패널 등 사람의 접근이 어려운 곳의 정밀 촬영을 안전하고 신속하게 진행합니다.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa-solid fa-map-location-dot text-primary mt-1.5 mr-4 text-lg"></i>
-                                <div>
-                                    <h4 class="text-white font-bold text-lg">2D / 3D 정밀 맵핑 (Mapping)</h4>
-                                    <p class="text-gray-500 text-sm mt-1">지적 조사 및 공간 정보 분석을 위한 고정밀 데이터 수집 모델링을 통해 설계와 시공 간의 오차를 분석합니다.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fa-solid fa-film text-primary mt-1.5 mr-4 text-lg"></i>
-                                <div>
-                                    <h4 class="text-white font-bold text-lg">고품질 기업 홍보 영상 제작</h4>
-                                    <p class="text-gray-500 text-sm mt-1">광활한 항공 뷰를 활용한 시네마틱 홍보 영상 기획 및 촬영으로 기업과 공공기관의 브랜드 가치를 높입니다.</p>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="mt-10 pt-6 border-t border-[#333]">
-                            <button onclick="location.href='contact.html'" class="bg-primary/10 border border-primary text-primary px-6 py-3 rounded-xl font-bold hover:bg-primary hover:text-black transition-colors w-full sm:w-auto">
-                                촬영 단가 문의하기 <i class="fa-solid fa-arrow-right ml-2"></i>
-                            </button>
+                        <!-- 이유 2 -->
+                        <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 text-center">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 mx-auto border border-primary/30">
+                                <i class="fa-solid fa-shield-halved text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">안전하고 신속한 시설 점검</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">사람이 접근하기 위험하거나 불가능한 고층 빌딩, 교량, 산업 설비 등을 안전하고 신속하게 근접 촬영하여 구조적 결함과 위험 요소를 파악합니다.</p>
+                        </div>
+                        <!-- 이유 3 -->
+                        <div class="bg-cardBg border border-cardBorder p-8 rounded-2xl hover:border-primary/50 transition-colors duration-300 text-center">
+                            <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-6 mx-auto border border-primary/30">
+                                <i class="fa-solid fa-map-location-dot text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-white mb-3">고정밀 3D 맵핑 데이터 구축</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">단순한 영상 촬영을 넘어 넓은 지형과 구조물의 정확한 수치 데이터를 수집함으로써 지적 측량, 건설 현장 시공 진척도 관리에 필수적으로 활용됩니다.</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- 2. 촬영 가능 기체 라인업 -->
+                <div class="pt-16 border-t border-[#333]">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 text-center">촬영 전문 기체 라인업</h3>
+                    <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12">웰컴드론은 현장 상황과 목적에 맞춰 최고의 결과물을 낼 수 있는 최상급 드론을 운용합니다.</p>
+                    
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        
+                        <!-- DJI Mavic 3 Pro -->
+                        <div class="bg-[#0a0a0a] border border-[#333] rounded-3xl overflow-hidden shadow-2xl hover:border-primary/50 transition-colors duration-300 flex flex-col group">
+                            <div class="h-64 bg-[#111] relative overflow-hidden flex items-center justify-center p-6">
+                                <div class="absolute top-4 right-4 bg-primary/20 text-primary text-[10px] px-3 py-1.5 rounded-full font-bold border border-primary/30 z-10 tracking-widest">CINEMA</div>
+                                <img src="https://stormoff.com/upload/iblock/cba/cba45d4380ce3ca3d41071d227f549c4.jpg" alt="DJI Mavic 3 Pro" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8 flex-grow flex flex-col">
+                                <h4 class="text-2xl font-bold text-white mb-2">DJI Mavic 3 Pro</h4>
+                                <p class="text-primary font-bold text-sm mb-4">고해상도 시네마틱 영상 및 홍보물 특화</p>
+                                <p class="text-gray-400 text-sm leading-relaxed flex-grow">
+                                    세계 최초로 3구경 카메라(핫셀블라드 광각, 미디엄 망원, 망원)를 탑재한 플래그십 기체입니다. 압도적인 색감과 화질로 5.1K 고해상도 촬영이 가능하며, 기업 홍보 영상, TV 프로그램, 고품질 유튜브 콘텐츠 등 최고의 영상미가 필요한 작업에 투입됩니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- DJI Avata 360 -->
+                        <div class="bg-[#0a0a0a] border border-[#333] rounded-3xl overflow-hidden shadow-2xl hover:border-primary/50 transition-colors duration-300 flex flex-col group">
+                            <div class="h-64 bg-[#111] relative overflow-hidden flex items-center justify-center p-6">
+                                <div class="absolute top-4 right-4 bg-primary/20 text-primary text-[10px] px-3 py-1.5 rounded-full font-bold border border-primary/30 z-10 tracking-widest">FPV / 360</div>
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVgIqXQYm16y0HlS70J_kQ_eO3L2a73sR19u4p5yUUXB62O2Q65K2Tz_M&s=10" alt="DJI Avata 360" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8 flex-grow flex flex-col">
+                                <h4 class="text-2xl font-bold text-white mb-2">DJI Avata 360</h4>
+                                <p class="text-primary font-bold text-sm mb-4">실내외 다이내믹 1인칭(FPV) 비행 특화</p>
+                                <p class="text-gray-400 text-sm leading-relaxed flex-grow">
+                                    협소한 공간을 넘나드는 빠르고 역동적인 1인칭 시점(FPV) 비행에 최적화되었습니다. 프로펠러 가드가 기본 장착되어 공장 내부나 실내 장애물이 많은 곳에서도 안전하게 비행하며, 마치 새가 되어 나는 듯한 몰입감 넘치는 360도 다이내믹 앵글을 연출합니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- DJI Matrice 4E -->
+                        <div class="bg-[#0a0a0a] border border-[#333] rounded-3xl overflow-hidden shadow-2xl hover:border-primary/50 transition-colors duration-300 flex flex-col group">
+                            <div class="h-64 bg-[#111] relative overflow-hidden flex items-center justify-center p-6">
+                                <div class="absolute top-4 right-4 bg-primary/20 text-primary text-[10px] px-3 py-1.5 rounded-full font-bold border border-primary/30 z-10 tracking-widest">MAPPING</div>
+                                <img src="https://se-cdn.djiits.com/tpc/uploads/carousel/image/d91e59cbba790f714c5ab5b866c82db4@ultra.jpg?format=webp" alt="DJI Matrice 4E" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="p-8 flex-grow flex flex-col">
+                                <h4 class="text-2xl font-bold text-white mb-2">DJI Matrice 4E</h4>
+                                <p class="text-primary font-bold text-sm mb-4">고정밀 측량 및 인프라 정밀 점검 특화</p>
+                                <p class="text-gray-400 text-sm leading-relaxed flex-grow">
+                                    기계식 셔터와 고해상도 센서, 실시간 RTK 네트워크를 탑재하여 오차 없는 센티미터(cm)급 정밀도를 자랑합니다. 넓은 건설 현장의 2D/3D 맵핑, 지형 측량, 그리고 전문적인 인프라 데이터 수집에 필수적인 산업용 특화 장비입니다.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 문의하기 유도 버튼 -->
+                <div class="mt-20 text-center">
+                    <button onclick="location.href='contact.html'" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center mx-auto">
+                        촬영 단가 및 견적 문의하기 <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+
             </div>
         </section>
     </main>
@@ -123,6 +179,18 @@
     </footer>
     <script>
         document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        
+        // 스크롤 시 네비게이션 바 블러 효과
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
     </script>
 </body>
 </html>
