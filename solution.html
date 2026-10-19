@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>솔루션 & 촬영 - 웰컴드론</title>
+    <title>무인화 솔루션 - 웰컴드론</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -51,194 +51,154 @@
         </div>
     </nav>
 
-    <main class="flex-grow pt-24 pb-20 bg-darkBg relative overflow-hidden">
-        <!-- Background Decoration -->
-        <div class="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <!-- 상단 헤더 -->
+    <header class="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
+        <!-- 1. 배경 동영상 (자동재생, 무한반복, 음소거 필수) -->
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <!-- 여기에 원하시는 영상 링크(mp4)를 넣으세요 -->
+            <source src="https://cdn.pixabay.com/video/2026/10/12/382194_large.mp4" type="video/mp4">
+        </video>
         
-        <section id="solutions" class="py-12">
+        <!-- 2. 영상 위에 깔리는 검은색 반투명 막 (글씨가 잘 보이도록 어둡게 눌러줌) -->
+        <div class="absolute inset-0 bg-black/60 z-0"></div>
+        
+        <!-- 3. 영상 위에 올라가는 텍스트 영역 -->
+        <div class="relative z-10 text-center px-4">
+            <!-- 위쪽 작은 태그 글씨 -->
+            <span class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-drone mr-1"></i> WELCOME DRONE
+            </span>
+            <!-- 메인 제목 -->
+            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">여기에 메인 제목 입력</h1>
+            <!-- 서브 설명 -->
+            <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto drop-shadow-md">
+                여기에 서브 설명을 입력하세요. 영상 위에 하얀색으로 예쁘게 나타납니다.
+            </p>
+        </div>
+    </header>
+
+    <main class="flex-grow pb-20 bg-darkBg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <section class="py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center mb-16">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-cube mr-1"></i> Solutions & Services</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">무인화 솔루션 및 전문 촬영</h2>
-                    <p class="text-gray-400 max-w-2xl mx-auto">미래 산업의 핵심인 무인 자동화 비행부터 전문가의 정밀한 항공 촬영까지, 웰컴드론이 완벽하게 수행합니다.</p>
+
+                <!-- [섹션 1] 미디어 좌측, 텍스트 우측 -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
+                    <div class="relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
+                        <!-- 영상 소스는 실제 보유하신 도크4 영상 링크로 교체하세요 -->
+                        <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <source src="https://cdn.pixabay.com/video/2021/08/18/85487-590059918_large.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute top-4 left-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">01. BATTERY SWAP</div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">단 <span class="text-primary">25초</span>, 무중단 연속 임무의 완성</h3>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                            기존 30분 이상 소요되던 충전 대기 시간을 완벽하게 없앴습니다. DJI Dock 4는 드론이 복귀하는 즉시 기계식 스왑 시스템을 통해 단 25초 만에 완충된 배터리로 자동 교체합니다. 산불, 수색 등 긴박한 재난 상황에서도 공백 없는 24시간 연속 운용을 보장합니다.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-bolt text-xs"></i></div>
+                                <p class="text-gray-300">자동 배터리 스왑 모듈 내장</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-infinity text-xs"></i></div>
+                                <p class="text-gray-300">대기 시간 제로, 무한에 가까운 사이클 비행</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="space-y-16">
-                    <!-- DJI Dock 3 Detailed Section -->
-                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 lg:p-12 overflow-hidden hover:border-primary/50 transition-colors duration-300">
-                        <div class="text-center max-w-3xl mx-auto mb-12">
-                            <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 text-primary mb-4">
-                                <i class="fa-solid fa-satellite-dish text-xl"></i>
-                            </div>
-                            <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">DJI Dock 3 무인 자동화 시스템</h3>
-                            <p class="text-gray-400 text-lg">어떤 환경에서도 중단 없는 완벽한 원격 운영. 고정형은 물론 차량 탑재 배치까지 지원하며 더욱 강력해진 차세대 드론 스테이션입니다.</p>
-                        </div>
-
-                        <!-- Highlight Specs Grid -->
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                            <div class="bg-black/50 border border-[#333] rounded-2xl p-6 text-center">
-                                <i class="fa-solid fa-truck text-primary text-2xl mb-3"></i>
-                                <h4 class="text-white font-bold text-xl mb-1">55 kg</h4>
-                                <p class="text-gray-500 text-sm">차량 탑재 및 유연한 배치 지원</p>
-                            </div>
-                            <div class="bg-black/50 border border-[#333] rounded-2xl p-6 text-center">
-                                <i class="fa-solid fa-shield-halved text-primary text-2xl mb-3"></i>
-                                <h4 class="text-white font-bold text-xl mb-1">IP56</h4>
-                                <p class="text-gray-500 text-sm">강화된 방수/방진 (극한 환경 대기)</p>
-                            </div>
-                            <div class="bg-black/50 border border-[#333] rounded-2xl p-6 text-center">
-                                <i class="fa-solid fa-tower-broadcast text-primary text-2xl mb-3"></i>
-                                <h4 class="text-white font-bold text-xl mb-1">10 km</h4>
-                                <p class="text-gray-500 text-sm">최대 작동 반경 (광범위 커버리지)</p>
-                            </div>
-                            <div class="bg-black/50 border border-[#333] rounded-2xl p-6 text-center">
-                                <i class="fa-solid fa-stopwatch text-primary text-2xl mb-3"></i>
-                                <h4 class="text-white font-bold text-xl mb-1">54 Min</h4>
-                                <p class="text-gray-500 text-sm">최대 비행 시간 (고효율 배터리)</p>
-                            </div>
-                        </div>
-
-                        <!-- Image & Description Split -->
-                        <div class="grid lg:grid-cols-2 gap-10 items-center mb-12">
-                            <div class="relative rounded-2xl overflow-hidden aspect-[4/3] bg-black border border-[#333]">
-                                <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="DJI Dock 3 현장 설치 모습" class="w-full h-full object-cover">
-                            </div>
-                            <div>
-                                <h4 class="text-2xl font-bold text-white mb-4">클라우드 기반 24시간 자율 운항</h4>
-                                <p class="text-gray-400 mb-6 leading-relaxed">
-                                    DJI FlightHub 2를 통해 원격으로 자동 비행 임무를 수행합니다. 새로워진 Dock 3는 수평 보정 시스템과 차량 탑재 방식을 지원하여 고정된 장소를 넘어 이동형 현장에서도 즉각적인 운용이 가능합니다.
-                                </p>
-                                <ul class="space-y-4">
-                                    <li class="flex items-start">
-                                        <i class="fa-solid fa-check text-primary mt-1 mr-3"></i>
-                                        <p class="text-gray-300"><strong>차량 탑재 및 이동형 배치:</strong> 다양한 산업 현장의 위치 변화에 유연하게 대응</p>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fa-solid fa-check text-primary mt-1 mr-3"></i>
-                                        <p class="text-gray-300"><strong>안정적인 원격 충전:</strong> 복귀 시 고속 충전을 진행하며, 정전 시에도 백업 배터리로 귀환 보장</p>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <i class="fa-solid fa-check text-primary mt-1 mr-3"></i>
-                                        <p class="text-gray-300"><strong>고도화된 환경 감시:</strong> 기상 센서를 기반으로 한 자동 대기 및 클라우드 실시간 모니터링</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Industry Applications & ROI (이미지 오류 수정 완료) -->
-                        <div class="pt-16 border-t border-[#333] mb-16">
-                            <h4 class="text-2xl font-bold text-white mb-8 text-center">DJI Dock 3 산업별 활용 분야 및 도입 효과</h4>
-                            
-                            <div class="grid md:grid-cols-2 gap-8 mb-8">
-                                <!-- 건설 및 광업 -->
-                                <div class="bg-black/50 border border-[#333] rounded-2xl overflow-hidden hover:border-primary/40 transition-colors group">
-                                    <div class="h-48 overflow-hidden relative">
-                                        <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSOP7kC9EwdjaXUdKLcc1hZjPDPdMaB1q9XQveHVpGkLwXg7U-N" alt="건설 및 광업" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                                        <div class="absolute bottom-4 left-4 flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/30"><i class="fa-solid fa-helmet-safety text-sm"></i></div>
-                                            <h5 class="text-lg font-bold text-white">건설 및 광업</h5>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 space-y-3">
-                                        <p class="text-primary text-sm font-bold mb-4">공기 지연 및 재시공 비용 절감</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">시공 진척도 밀착 관리:</strong> 비행부터 현장 3D 맵핑 데이터 분석까지 걸리는 시간을 95% 이상 단축합니다.</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">손실 방지:</strong> 조종사가 현장에 상주할 필요 없이 도크를 통해 잦은 주기로 자동 촬영하므로, 설계 도면과 실제 시공 간의 오차를 조기에 발견해 막대한 재시공 비용과 공기 지연을 차단합니다.</p>
-                                    </div>
-                                </div>
-
-                                <!-- 시설물 및 인프라 유지보수 -->
-                                <div class="bg-black/50 border border-[#333] rounded-2xl overflow-hidden hover:border-primary/40 transition-colors group">
-                                    <div class="h-48 overflow-hidden relative">
-                                        <img src="https://www-cdn.djiits.com/cms/uploads/e3f5f191e819c2838d8c145ca1a42952@365*219.jpg" alt="시설물 및 인프라 유지보수" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                                        <div class="absolute bottom-4 left-4 flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/30"><i class="fa-solid fa-tower-cell text-sm"></i></div>
-                                            <h5 class="text-lg font-bold text-white">시설물 및 인프라 유지보수</h5>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 space-y-3">
-                                        <p class="text-primary text-sm font-bold mb-4">다운타임 및 산업재해 손실 방지</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">사전 결함 탐지:</strong> 사전에 설정된 경로를 따라 주기적인 자동 점검 비행을 수행하며, 적외선 열화상 카메라(Matrice 4TD)를 통해 송전탑, 태양광 패널, 배관의 비정상적인 온도 상승을 감지합니다.</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">손실 방지:</strong> 장비 고장으로 인한 예기치 않은 설비 가동 중단(다운타임) 피해를 막고, 고위험군인 고지대 점검을 드론이 대체하여 작업자 추락 등 중대재해 손실을 예방합니다.</p>
-                                    </div>
-                                </div>
-
-                                <!-- 소방 방재 및 산불 감시 -->
-                                <div class="bg-black/50 border border-[#333] rounded-2xl overflow-hidden hover:border-primary/40 transition-colors group">
-                                    <div class="h-48 overflow-hidden relative">
-                                        <img src="https://drone-parts-center.com/wp-content/uploads/2026/03/pack-pompiers-secours-dji-matrice-4td.png" alt="소방 방재 및 산불 감시" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                                        <div class="absolute bottom-4 left-4 flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/30"><i class="fa-solid fa-fire-flame-curved text-sm"></i></div>
-                                            <h5 class="text-lg font-bold text-white">소방 방재 및 산불 감시</h5>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 space-y-3">
-                                        <p class="text-primary text-sm font-bold mb-4">초기 진압 실패로 인한 재산 피해 최소화</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">극한 환경의 신속 투입:</strong> 차량 마운트 배치를 통해 이동식으로 현장에 빠르게 투입되며, 최고 50°C에서 최저 -30°C의 극한 온도에서도 원활하게 작동합니다.</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">손실 방지:</strong> 열화상 렌즈를 통해 화재 발화점과 이상 고온을 즉각 탐지하고, 산악 지형에서는 릴레이 비행으로 통신을 확보하여 대규모 산림 및 재산 소실을 선제적으로 줄입니다.</p>
-                                    </div>
-                                </div>
-
-                                <!-- 공공 안전 및 민간 보안 -->
-                                <div class="bg-black/50 border border-[#333] rounded-2xl overflow-hidden hover:border-primary/40 transition-colors group">
-                                    <div class="h-48 overflow-hidden relative">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcD4QjPxI2YwkKDbIszpkd0jI4bGceC2Hp7wwGAsAswmlM2DaTKqCJy04&s=10" alt="공공 안전 및 보안" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                                        <div class="absolute bottom-4 left-4 flex items-center gap-3">
-                                            <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary border border-primary/30"><i class="fa-solid fa-shield-halved text-sm"></i></div>
-                                            <h5 class="text-lg font-bold text-white">공공 안전 및 민간 보안</h5>
-                                        </div>
-                                    </div>
-                                    <div class="p-6 space-y-3">
-                                        <p class="text-primary text-sm font-bold mb-4">도난 및 자산 손실 방지</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">24시간 원격 감시:</strong> 클라우드 소프트웨어인 DJI FlightHub 2를 기반으로 주야간 연중무휴 순찰을 진행합니다.</p>
-                                        <p class="text-gray-400 text-sm leading-relaxed"><strong class="text-gray-300">손실 방지:</strong> 지능형 변화 감지 기능으로 미인가 차량이나 침입자를 파악하고, 스포트라이트와 300m 거리까지 도달하는 스피커 방송으로 즉각 경고하여 침입 및 도난 자산 손실을 방지합니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 인건비 및 운영비 최적화 배너 -->
-                            <div class="bg-gradient-to-r from-primary/10 via-[#111] to-black border border-primary/30 p-8 rounded-2xl flex flex-col md:flex-row items-center gap-6 shadow-[0_0_30px_rgba(212,175,55,0.05)]">
-                                <div class="flex-shrink-0 w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center text-primary border border-primary/50 text-2xl">
-                                    <i class="fa-solid fa-chart-line"></i>
-                                </div>
-                                <div class="text-center md:text-left">
-                                    <h5 class="text-xl font-bold text-white mb-2">인건비 및 운영비 최적화</h5>
-                                    <p class="text-gray-400 leading-relaxed text-sm">
-                                        현장에 전문 파일럿을 파견하지 않아도 기체의 보관, 자동 이착륙, 고속 충전, 정밀 데이터 수집 전 과정이 무인화되어 
-                                        <strong class="text-gray-200">기업의 고정 인건비와 출장 운영비를 극적으로 낮출 수 있습니다.</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Dedicated Drones: M4D / M4TD -->
-                        <div class="pt-10 border-t border-[#333]">
-                            <h4 class="text-2xl font-bold text-white mb-8 text-center">DJI Dock 3 전용 기체 라인업</h4>
-                            <div class="grid md:grid-cols-2 gap-8">
-                                <div class="bg-black/50 p-6 rounded-2xl border border-[#333] flex flex-col items-center text-center hover:border-primary/40 transition-colors">
-                                    <div class="w-full aspect-[16/9] mb-6 flex items-center justify-center bg-[#111] rounded-xl overflow-hidden">
-                                        <img src="https://se-cdn.djiits.com/tpc/uploads/carousel/image/a190551aac82c77b387c89b644a43ffc@ultra.jpg?format=webp" alt="Matrice 4D" class="h-full object-contain grayscale hover:grayscale-0 transition-all">
-                                    </div>
-                                    <h5 class="text-xl font-bold text-white mb-2">DJI Matrice 4D</h5>
-                                    <p class="text-primary text-sm font-bold mb-4">고정밀 매핑 및 전문가용 솔루션</p>
-                                    <p class="text-gray-400 text-sm">전문가용 4축 짐벌과 X9 카메라, LiDAR 포커싱을 탑재하여 고정밀 맵핑 모델을 생성하고 고화질의 영상 데이터를 수집합니다.</p>
-                                </div>
-                                <div class="bg-black/50 p-6 rounded-2xl border border-[#333] flex flex-col items-center text-center hover:border-primary/40 transition-colors">
-                                    <div class="w-full aspect-[16/9] mb-6 flex items-center justify-center bg-[#111] rounded-xl overflow-hidden relative">
-                                        <div class="absolute top-2 right-2 bg-primary/20 text-primary text-[10px] px-2 py-1 rounded font-bold border border-primary/30">Thermal</div>
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Iti4uW2QjqP63ba4KgVvmxzLOB4hpdI0WY6TmqpLUuDXQzmSp7cu7lo&s=10" alt="Matrice 4TD" class="h-full object-contain grayscale hover:grayscale-0 transition-all">
-                                    </div>
-                                    <h5 class="text-xl font-bold text-white mb-2">DJI Matrice 4TD</h5>
-                                    <p class="text-primary text-sm font-bold mb-4">야간 순찰 및 열화상 점검 특화</p>
-                                    <p class="text-gray-400 text-sm">광학 및 열화상 듀얼 카메라와 20배 줌 기능을 결합하여 산불 감시, 인명 수색, 시설물의 실시간 AI 분석 및 정밀 점검에 최적화되었습니다.</p>
-                                </div>
-                            </div>
-                        </div>
+                <!-- [섹션 2] 텍스트 좌측, 미디어 우측 -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">가장 중요한 순간, <span class="text-primary">21m/s</span> 즉각 이륙</h3>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                            "Always There, Always Ready." 긴급 출동 명령이 떨어지면 시스템이 즉각 반응하여 커버를 개방하고 비행을 시작합니다. 지상 교통 체증에 구애받지 않고 최대 21m/s의 엄청난 속도로 비행하여 지상 구조 대원보다 먼저 현장에 진입합니다.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-jet-fighter-up text-xs"></i></div>
+                                <p class="text-gray-300">사전 워밍업을 통한 명령 즉시 출동 시스템</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-truck-fast text-xs"></i></div>
+                                <p class="text-gray-300">차량 탑재 지원으로 언제 어디서든 기동성 확보</p>
+                            </li>
+                        </ul>
                     </div>
-                    
+                    <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
+                        <!-- 이미지 소스로 교체 가능 -->
+                        <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="신속 출동" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-4 right-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">02. FAST DEPLOY</div>
+                    </div>
+                </div>
+
+                <!-- [섹션 3] 미디어 좌측, 텍스트 우측 -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
+                    <div class="relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] bg-[#111] group flex items-center justify-center">
+                        <!-- 전용 기체 M5TD 이미지 -->
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1Iti4uW2QjqP63ba4KgVvmxzLOB4hpdI0WY6TmqpLUuDXQzmSp7cu7lo&s=10" alt="Matrice 5TD" class="w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute top-4 left-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">03. MATRICE 5TD</div>
+                    </div>
+                    <div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">다중 센서의 궁극적 진화, <span class="text-primary">Matrice 5TD</span></h3>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                            Dock 4 전용 기체인 Matrice 5TD는 광각 카메라, 고해상도 적외선 열화상 렌즈, mmWave 레이더, 그리고 정밀 LiDAR 센서를 단 하나의 기체에 모두 담았습니다. 낮과 밤, 악천후를 가리지 않고 완벽한 공간 정보와 열결함 데이터를 실시간으로 수집합니다.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-camera text-xs"></i></div>
+                                <p class="text-gray-300">광학 + 열화상 + LiDAR 올인원 통합 페이로드</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-shield-halved text-xs"></i></div>
+                                <p class="text-gray-300">강력한 전방위 장애물 회피 및 비행 안정성</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- [섹션 4] 텍스트 좌측, 미디어 우측 -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="order-2 lg:order-1">
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">스스로 생각하는 <span class="text-primary">17종 AI 감지 시스템</span></h3>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                            DJI FlightHub 2와 연동된 강력한 AI 알고리즘이 화면 속 상황을 실시간으로 분석합니다. 차량, 인물, 굴착기 등 17가지의 객체 유형을 스스로 식별하고 추적하여, 관리자가 놓칠 수 있는 미세한 현장의 변화나 보안 침입을 즉각적으로 경고합니다.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-brain text-xs"></i></div>
+                                <p class="text-gray-300">AI 기반 실시간 객체 식별 및 스마트 추적</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-cloud text-xs"></i></div>
+                                <p class="text-gray-300">클라우드 기반 원격 관제 (FlightHub 2 완벽 연동)</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
+                        <!-- 영상 소스 -->
+                        <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <source src="https://cdn.pixabay.com/video/2021/08/04/83861-584742630_large.mp4" type="video/mp4">
+                        </video>
+                        <div class="absolute top-4 right-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">04. AI WORKFLOW</div>
+                    </div>
+                </div>
+
+                <!-- 하단 도입 안내 배너 -->
+                <div class="mt-24 bg-gradient-to-r from-primary/10 via-[#111] to-black border border-primary/30 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">인건비 절감과 100% 무인화의 실현</h3>
+                    <p class="text-gray-400 text-lg mb-8 max-w-3xl mx-auto">
+                        더 이상 현장에 조종사가 상주할 필요가 없습니다. 기업의 고정 인건비를 획기적으로 낮추고 작업 효율을 극대화하는 DJI Dock 4 솔루션, 웰컴드론에서 현장 맞춤형 컨설팅을 받아보세요.
+                    </p>
+                    <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+                        솔루션 도입 상담하기 <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
         </section>
     </main>
 
@@ -260,6 +220,16 @@
     </footer>
     <script>
         document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
     </script>
 </body>
 </html>
