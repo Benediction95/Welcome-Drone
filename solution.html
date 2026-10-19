@@ -53,24 +53,15 @@
 
     <!-- 상단 헤더 -->
     <header class="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
-        <!-- 1. 배경 동영상 (자동재생, 무한반복, 음소거 필수) -->
         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
-            <!-- 여기에 원하시는 영상 링크(mp4)를 넣으세요 -->
             <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/f1e137e5-62da-40bb-a525-69dd32830bc4.mp4?w=2560&h=1440" type="video/mp4">
         </video>
-        
-        <!-- 2. 영상 위에 깔리는 검은색 반투명 막 (글씨가 잘 보이도록 어둡게 눌러줌) -->
         <div class="absolute inset-0 bg-black/60 z-0"></div>
-        
-        <!-- 3. 영상 위에 올라가는 텍스트 영역 -->
         <div class="relative z-10 text-center px-4">
-            <!-- 위쪽 작은 태그 글씨 -->
             <span class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase">
                 <i class="fa-solid fa-drone mr-1"></i> Always There, Always Ready
             </span>
-            <!-- 메인 제목 -->
             <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">DJI Dock 4</h1>
-            <!-- 서브 설명 -->
             <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto drop-shadow-md">
                 DJI 최초의 배터리 교체가 가능한 Dock
             </p>
@@ -86,7 +77,6 @@
                 <!-- [섹션 1] 미디어 좌측, 텍스트 우측 -->
                 <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
                     <div class="relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
-                        <!-- 영상 소스는 실제 보유하신 도크4 영상 링크로 교체하세요 -->
                         <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/99e45280-79ab-4121-9cbc-3bdaa90892bd.mp4?w=2400&h=1200" type="video/mp4">
                         </video>
@@ -129,7 +119,6 @@
                         </ul>
                     </div>
                     <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
-                        <!-- 영상 소스로 교체 가능 -->
                         <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/1915a283-4058-4ed7-92b2-2fd26e0b833c.mp4?w=2400&h=1200" type="video/mp4">
                         </video>
@@ -141,7 +130,7 @@
                 <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
                     <div class="relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] bg-[#111] group">
                         <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/581da91d-232b-484b-a48a-d87fbe7e7083.mp4?w=1184&h=960" type="video/mp4">
+                            <source src="https://cdn.pixabay.com/video/2020/05/24/40087-424564264_large.mp4" type="video/mp4">
                         </video>
                         <div class="absolute top-4 left-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">03. MATRICE 5TD</div>
                     </div>
@@ -182,11 +171,75 @@
                         </ul>
                     </div>
                     <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
-                        <!-- 영상 소스 -->
                         <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/4383fbf6-0bd6-4464-96bb-c3cde4e5bf33.mp4?w=1386&h=1040">
+                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/a2faf9c8-008d-4ba4-a94e-935dd36e8447.mp4?w=2400&h=1200" type="video/mp4">
                         </video>
                         <div class="absolute top-4 right-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">04. AI WORKFLOW</div>
+                    </div>
+                </div>
+
+                <!-- [섹션 5] 통신 및 데이터 전송 스펙 (영상 포함 카드 레이아웃) -->
+                <div class="pt-10 mb-16">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-satellite text-primary mr-1"></i> Connectivity</span>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">어떤 현장에서도 끊김 없는 데이터 통신</h3>
+                        <p class="text-gray-400 text-lg max-w-3xl mx-auto">드론이 촬영하는 모든 데이터와 제어 명령을 실시간으로 지연 없이 전송하는 강력한 통신 시스템을 지원합니다.</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- 1. 저지연 라이브 스트리밍 -->
+                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
+                            <div class="aspect-video relative overflow-hidden bg-[#111]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ed882c1b-3f78-4c81-b3cd-d3237723fd30.mp4?w=2400&h=1200">
+                                </video>
+                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
+                                    <i class="fa-solid fa-video"></i>
+                                </div>
+                            </div>
+                            <div class="p-8 text-center flex-grow flex flex-col items-center">
+                                <h4 class="text-xl font-bold text-white mb-3">저지연 라이브 스트리밍</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    초저지연 기술을 적용하여 드론이 촬영하는 고화질 현장 영상을 관리 센터 모니터에서 실시간으로 즉시 확인할 수 있습니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 2. 간섭 방지 전송 -->
+                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
+                            <div class="aspect-video relative overflow-hidden bg-[#111]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/901f2b3a-afa3-43ba-88f2-aed83beec975.mp4?w=2400&h=1200">
+                                </video>
+                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
+                                    <i class="fa-solid fa-shield-cat"></i>
+                                </div>
+                            </div>
+                            <div class="p-8 text-center flex-grow flex flex-col items-center">
+                                <h4 class="text-xl font-bold text-white mb-3">간섭 방지 전송</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    전파 방해가 심한 도심이나 복잡한 산업 현장에서도 신호 끊김을 원천 차단하는 O4 업그레이드 전송 시스템으로 기체를 안전하게 제어합니다.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 3. 고속 데이터 전송 -->
+                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
+                            <div class="aspect-video relative overflow-hidden bg-[#111]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/4383fbf6-0bd6-4464-96bb-c3cde4e5bf33.mp4?w=1386&h=1040">
+                                </video>
+                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                            </div>
+                            <div class="p-8 text-center flex-grow flex flex-col items-center">
+                                <h4 class="text-xl font-bold text-white mb-3">고속 데이터 전송</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    비행이 끝남과 동시에 기체가 수집한 방대한 3D 맵핑 데이터 및 고해상도 미디어 파일들을 클라우드 서버로 빠르게 전송하여 분석 시간을 단축합니다.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
