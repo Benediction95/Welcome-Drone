@@ -172,7 +172,7 @@
                     </div>
                     <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
                         <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/26f2770d-9e15-4406-b9a0-e116ebb5c758.mp4?w=2400&h=1200" type="video/mp4">
+                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/4383fbf6-0bd6-4464-96bb-c3cde4e5bf33.mp4?w=1386&h=1040" type="video/mp4">
                         </video>
                         <div class="absolute top-4 right-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">04. AI WORKFLOW</div>
                     </div>
@@ -224,7 +224,7 @@
                         <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
                             <div class="aspect-video relative overflow-hidden bg-[#111]">
                                 <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/4383fbf6-0bd6-4464-96bb-c3cde4e5bf33.mp4?w=1386&h=1040" type="video/mp4">
+                                    <source src="https://cdn.pixabay.com/video/2021/08/04/83861-584742630_large.mp4" type="video/mp4">
                                 </video>
                                 <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
                                     <i class="fa-solid fa-bolt"></i>
@@ -240,7 +240,7 @@
                     </div>
                 </div>
 
-                <!-- [섹션 6] 신규 추가: 다목적 확장 페이로드 스펙 -->
+                <!-- [섹션 6] 신규 추가: 다목적 확장 페이로드 스펙 (영상 포함 카드 레이아웃) -->
                 <div class="pt-16 mb-16 border-t border-[#333]">
                     <div class="text-center mb-12">
                         <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-layer-group text-primary mr-1"></i> Versatile Payload</span>
@@ -250,39 +250,60 @@
 
                     <div class="grid md:grid-cols-3 gap-8">
                         <!-- 1. 최대 450g 페이로드 -->
-                        <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary/50 hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-                            <div class="w-14 h-14 bg-[#1a1a1a] rounded-2xl flex items-center justify-center text-primary mb-6 border border-[#333] group-hover:bg-primary group-hover:text-black transition-colors relative z-10">
-                                <i class="fa-solid fa-weight-hanging text-2xl"></i>
+                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
+                            <div class="aspect-video relative overflow-hidden bg-[#111]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <!-- 임시 영상 링크 -->
+                                    <source src="https://www-cdn.djiits.com/dps/3db1bc9513e34c5f3736117ab5b07e15@origin.jpg?w=1184&h=960">
+                                </video>
+                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
+                                    <i class="fa-solid fa-weight-hanging"></i>
+                                </div>
                             </div>
-                            <h4 class="text-xl font-bold text-white mb-3 relative z-10">최대 450g 확장 페이로드</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed relative z-10">
-                                다양한 산업 현장의 특수 목적에 맞춰 서드파티 확장 모듈을 추가로 장착할 수 있는 450g의 넉넉한 페이로드 용량을 제공합니다.
-                            </p>
+                            <div class="p-8 text-center flex-grow flex flex-col items-center">
+                                <h4 class="text-xl font-bold text-white mb-3">최대 450g 확장 페이로드</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    다양한 산업 현장의 특수 목적에 맞춰 서드파티 확장 모듈을 추가로 장착할 수 있는 450g의 넉넉한 페이로드 용량을 제공합니다.
+                                </p>
+                            </div>
                         </div>
 
                         <!-- 2. 스피커/스포트라이트/낙하산 콤보 -->
-                        <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary/50 hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-                            <div class="w-14 h-14 bg-[#1a1a1a] rounded-2xl flex items-center justify-center text-primary mb-6 border border-[#333] group-hover:bg-primary group-hover:text-black transition-colors relative z-10">
-                                <i class="fa-solid fa-bullhorn text-2xl"></i>
+                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
+                            <div class="aspect-video relative overflow-hidden bg-[#111]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <!-- 임시 영상 링크 -->
+                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/a2f4b588-2135-4568-af0a-5294cbd78d23.mp4?w=1184&h=960" type="video/mp4">
+                                </video>
+                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
+                                    <i class="fa-solid fa-bullhorn"></i>
+                                </div>
                             </div>
-                            <h4 class="text-xl font-bold text-white mb-3 relative z-10">스피커/라이트/낙하산 콤보</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed relative z-10">
-                                고출력 스피커와 야간 수색용 스포트라이트로 구조 활동을 돕고, 비상 낙하산 시스템을 연동하여 도심 비행의 안전성을 극대화합니다.
-                            </p>
+                            <div class="p-8 text-center flex-grow flex flex-col items-center">
+                                <h4 class="text-xl font-bold text-white mb-3">스피커/라이트/낙하산 콤보</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    고출력 스피커와 야간 수색용 스포트라이트로 구조 활동을 돕고, 비상 낙하산 시스템을 연동하여 도심 비행의 안전성을 극대화합니다.
+                                </p>
+                            </div>
                         </div>
 
                         <!-- 3. 내장형 경고등 -->
-                        <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary/50 hover:-translate-y-2 transition-all duration-300 flex flex-col items-start group relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-                            <div class="w-14 h-14 bg-[#1a1a1a] rounded-2xl flex items-center justify-center text-primary mb-6 border border-[#333] group-hover:bg-primary group-hover:text-black transition-colors relative z-10">
-                                <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
+                            <div class="aspect-video relative overflow-hidden bg-[#111]">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <!-- 임시 영상 링크 -->
+                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/75676232-deec-443f-a207-d1c8ef0cf21e.mp4?w=1184&h=960" type="video/mp4">
+                                </video>
+                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
                             </div>
-                            <h4 class="text-xl font-bold text-white mb-3 relative z-10">내장형 사용자 맞춤 경고등</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed relative z-10">
-                                기체에 탑재된 스마트 경고등을 통해 비행 상태와 현장 상황에 맞춰 관리자가 직접 점멸 패턴과 색상을 설정하여 시인성을 확보합니다.
-                            </p>
+                            <div class="p-8 text-center flex-grow flex flex-col items-center">
+                                <h4 class="text-xl font-bold text-white mb-3">내장형 사용자 맞춤 경고등</h4>
+                                <p class="text-gray-400 text-sm leading-relaxed">
+                                    기체에 탑재된 스마트 경고등을 통해 비행 상태와 현장 상황에 맞춰 관리자가 직접 점멸 패턴과 색상을 설정하여 시인성을 확보합니다.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -294,4 +315,42 @@
                         더 이상 현장에 조종사가 상주할 필요가 없습니다. 기업의 고정 인건비를 획기적으로 낮추고 작업 효율을 극대화하는 DJI Dock 4 솔루션, 웰컴드론에서 현장 맞춤형 컨설팅을 받아보세요.
                     </p>
                     <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-                        솔루션 도입 상담하기 <i class="fa-solid fa
+                        솔루션 도입 상담하기 <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
+    </script>
+</body>
+</html>
