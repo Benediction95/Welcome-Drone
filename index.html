@@ -49,43 +49,26 @@
 </head>
 <body class="font-sans text-gray-300 bg-black antialiased selection:bg-primary selection:text-black flex flex-col min-h-screen">
 
-    <!-- [신규 추가] 팝업창 영역 (크기 확대 및 동영상 적용) -->
+    <!-- 팝업창 영역 -->
     <div id="welcome-popup" class="fixed inset-0 z-[100] flex items-center justify-center hidden transition-opacity duration-300 px-4">
-        <!-- 팝업 배경 (클릭 시 닫힘) -->
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closePopup()"></div>
-        
-        <!-- 팝업 콘텐츠 박스 (max-w-2xl로 대폭 확대) -->
         <div class="relative bg-[#0a0a0a] border border-primary/40 rounded-3xl w-full max-w-2xl p-6 sm:p-10 shadow-[0_0_60px_rgba(212,175,55,0.25)] popup-animate">
-            <!-- 닫기 버튼 -->
             <button onclick="closePopup()" class="absolute top-5 right-5 text-gray-500 hover:text-primary transition-colors focus:outline-none z-10 bg-black/50 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-            
             <div class="text-center mt-2 mb-6">
-                <span class="inline-block px-4 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full border border-primary/30 tracking-widest mb-4">
-                    NEW RELEASE
-                </span>
+                <span class="inline-block px-4 py-1.5 bg-primary/20 text-primary text-xs font-bold rounded-full border border-primary/30 tracking-widest mb-4">NEW RELEASE</span>
                 <h3 class="text-3xl font-black text-white mb-3">DJI Dock 4 전격 출시</h3>
-                <p class="text-gray-400 text-base leading-relaxed mb-6">
-                    기다림 없는 45초 자동 배터리 스왑 시스템.<br>
-                    웰컴드론에서 차세대 무인화 솔루션을 만나보세요!
-                </p>
-                
-                <!-- 팝업 동영상 (16:9 비율 유지) -->
+                <p class="text-gray-400 text-base leading-relaxed mb-6">기다림 없는 45초 자동 배터리 스왑 시스템.<br>웰컴드론에서 차세대 무인화 솔루션을 만나보세요!</p>
                 <div class="w-full aspect-video rounded-xl overflow-hidden border border-[#333] mb-8 relative bg-black">
                     <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
-                        <!-- 영상 링크 교체 가능 -->
                         <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/f1e137e5-62da-40bb-a525-69dd32830bc4.mp4?w=2560&h=1440" type="video/mp4">
                     </video>
                 </div>
-                
-                <!-- 버튼 -->
                 <a href="solution.html" class="inline-flex w-full items-center justify-center bg-primary text-black py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-colors shadow-[0_0_20px_rgba(212,175,55,0.3)]">
                     상세 솔루션 확인하기 <i class="fa-solid fa-arrow-right ml-2"></i>
                 </a>
             </div>
-            
-            <!-- 하단 옵션: 오늘 하루 보지 않기 -->
             <div class="flex items-center justify-between border-t border-[#222] pt-5">
                 <label class="flex items-center text-sm text-gray-500 cursor-pointer hover:text-white transition-colors group">
                     <input type="checkbox" id="hide-today" class="mr-2.5 w-4 h-4 accent-primary bg-[#111] border-gray-600 rounded cursor-pointer">
@@ -96,45 +79,64 @@
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
-                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
-                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
-                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
-                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+    <!-- Navigation 전체 컨테이너 -->
+    <div class="fixed w-full z-50 transition-all duration-300" id="navbar-container">
+        
+        <!-- [신규 추가] 상단 방문자 수 Top Bar -->
+        <div class="w-full bg-[#000000] border-b border-[#222] py-1.5 px-4 sm:px-6 lg:px-8 flex justify-end items-center text-[11px] sm:text-xs text-gray-400">
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <span class="flex items-center">
+                    <i class="fa-solid fa-user text-primary/80 mr-1.5"></i> Today: 
+                    <strong id="visit-today" class="text-white ml-1.5 font-bold tracking-wide">0</strong>
+                </span>
+                <span class="text-[#333]">|</span>
+                <span class="flex items-center">
+                    <i class="fa-solid fa-users text-primary/80 mr-1.5"></i> Total: 
+                    <strong id="visit-total" class="text-white ml-1.5 font-bold tracking-wide">0</strong>
+                </span>
+            </div>
+        </div>
+
+        <!-- 메인 네비게이션 바 -->
+        <nav class="w-full glass-nav" id="main-nav">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                        <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
+                        <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                            <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
+                            <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex space-x-8 items-center">
+                        <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
+                        <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                        <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                        <a href="solution.html" class="text-gray-300 hover:text-primary font-medium transition-colors">무인화 솔루션</a>
+                        <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
+                        <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                    </div>
+                    <div class="lg:hidden flex items-center">
+                        <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
                     </div>
                 </div>
-                <div class="hidden lg:flex space-x-8 items-center">
-                    <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
-                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
-                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
-                    <a href="solution.html" class="text-gray-300 hover:text-primary font-medium transition-colors">무인화 솔루션</a>
-                    <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
-                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
-                </div>
-                <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+                <div class="px-4 pt-2 pb-6 space-y-2">
+                    <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
+                    <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                    <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                    <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">무인화 솔루션</a>
+                    <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
+                    <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
                 </div>
             </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
-                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
-                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
-                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">무인화 솔루션</a>
-                <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
-                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <!-- Main Wrapper -->
-    <main class="flex-grow bg-black">
+    <main class="flex-grow bg-black pt-8">
         
         <!-- 1. Hero Section -->
         <section class="relative w-full h-screen flex items-center justify-center overflow-hidden border-b border-cardBorder">
@@ -172,13 +174,11 @@
                     <p class="text-gray-400 text-lg">새로운 기술 도입과 웰컴드론의 현장 프로젝트 스토리를 확인해보세요.</p>
                 </div>
 
-                <!-- News List (4 Items, Wide Cards) -->
+                <!-- News List -->
                 <div class="flex flex-col gap-8">
-                    
                     <!-- News Item 1 -->
                     <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group reveal-up" style="transition-delay: 100ms;">
                         <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
-                            <!-- 관련 임시 영상 -->
                             <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                 <source src="https://pixabay.com/videos/download/video-383656_medium.mp4" type="video/mp4">
                             </video>
@@ -188,10 +188,7 @@
                             <span class="text-primary text-sm font-bold mb-2">2026. 10. 19</span>
                             <h4 class="text-2xl font-bold text-white mb-4">보령시 해양경찰서 X 웰컴드론 합동작전</h4>
                             <p class="text-gray-400 leading-relaxed">
-                               보령 해양경찰서와 웰컴드론이 함께 선상 낚시객의 안전을 지키기 위한 합동 작전을 전개했습니다.
-                               바다 위 생명줄인 구명조끼 착용의 중요성을 적극적으로 알리고, 
-                               DJI Matrice 4E를 활용하여 안내방송을 진행하였습니다.
-                               앞으로도 모두가 안심하고 즐길 수 있는 해양 안전 문화 조성에 보탬이 되도록 최선을 다하겠습니다.
+                               보령 해양경찰서와 웰컴드론이 함께 선상 낚시객의 안전을 지키기 위한 합동 작전을 전개했습니다. 바다 위 생명줄인 구명조끼 착용의 중요성을 적극적으로 알리고, DJI Matrice 4E를 활용하여 안내방송을 진행하였습니다.
                             </p>
                         </div>
                     </div>
@@ -246,20 +243,16 @@
                             </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
         <!-- 3. DJI Dock 4 Release Section -->
         <section class="py-24 relative overflow-hidden">
-            <!-- Background Glow -->
             <div class="absolute top-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
-            
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     
-                    <!-- Left: Text & Comparison Content -->
                     <div class="order-2 lg:order-1 reveal-up">
                         <span class="inline-block mb-4 px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded border border-primary/30 tracking-widest">
                             <i class="fa-solid fa-satellite-dish mr-1"></i> NEW RELEASE
@@ -271,7 +264,6 @@
                             웰컴드론에서 차세대 무인화 솔루션 DJI Dock 4를 선보입니다. 기존 Dock 3 대비 압도적으로 진화한 배터리 자동 교체 시스템과 최첨단 센서로 24시간 끊김 없는 완벽한 원격 임무를 경험해 보십시오.
                         </p>
                         
-                        <!-- Dock 4 vs Dock 3 Highlight Points -->
                         <div class="space-y-8 mb-12 border-t border-[#333] pt-8">
                             <div class="flex items-start">
                                 <div class="w-12 h-12 rounded-2xl bg-black border border-primary/30 flex items-center justify-center text-primary mr-5 flex-shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
@@ -310,13 +302,11 @@
                             </div>
                         </div>
 
-                        <!-- CTA Button -->
                         <a href="solution.html" class="inline-flex items-center justify-center bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary hover:text-black transition-all shadow-[0_0_20px_rgba(212,175,55,0.2)]">
                             Dock 4 상세 보기 <i class="fa-solid fa-arrow-right ml-2"></i>
                         </a>
                     </div>
 
-                    <!-- Right: Dock 4 Video -->
                     <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden border border-[#333] shadow-[0_0_50px_rgba(212,175,55,0.2)] group aspect-[4/3] lg:aspect-auto lg:h-[650px] flex items-center justify-center bg-[#111] reveal-up" style="transition-delay: 200ms;">
                         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/f1e137e5-62da-40bb-a525-69dd32830bc4.mp4?w=2560&h=1440" type="video/mp4">
@@ -358,9 +348,15 @@
         
         // 네비게이션 바 블러 및 스크롤 디자인
         window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) { nav.style.background = 'rgba(5, 5, 5, 0.9)'; nav.classList.add('border-b', 'border-[#222]'); }
-            else { nav.style.background = 'rgba(0, 0, 0, 0.5)'; nav.classList.remove('border-b', 'border-[#222]'); }
+            const navContainer = document.getElementById('navbar-container');
+            const mainNav = document.getElementById('main-nav');
+            if (window.scrollY > 20) { 
+                mainNav.style.background = 'rgba(5, 5, 5, 0.9)'; 
+                mainNav.classList.add('border-b', 'border-[#222]'); 
+            } else { 
+                mainNav.style.background = 'rgba(0, 0, 0, 0.5)'; 
+                mainNav.classList.remove('border-b', 'border-[#222]'); 
+            }
         });
 
         // 스크롤 인터랙션 (Intersection Observer API)
@@ -368,7 +364,7 @@
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.15 // 요소가 15% 보일 때 애니메이션 실행
+                threshold: 0.15 
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
@@ -384,35 +380,49 @@
                 observer.observe(el);
             });
             
-            // --- 팝업 로직 추가 부분 ---
+            // --- 팝업 로직 ---
             const popup = document.getElementById('welcome-popup');
             const hideTodayCb = document.getElementById('hide-today');
-
-            // 브라우저 로컬 스토리지에 저장된 날짜 확인
             const hidePopupDate = localStorage.getItem('hideWelcomePopup');
             const today = new Date().toLocaleDateString();
 
             if (hidePopupDate !== today) {
-                // 저장된 날짜가 오늘이 아니면 (또는 값이 없으면) 팝업을 보여줌 (0.5초 딜레이)
-                setTimeout(() => {
-                    popup.classList.remove('hidden');
-                }, 500);
+                setTimeout(() => { popup.classList.remove('hidden'); }, 500);
             }
 
-            // 팝업 닫기 함수 (전역)
             window.closePopup = function() {
-                // '오늘 하루 열지 않기' 체크 시 로컬스토리지에 오늘 날짜 저장
                 if (hideTodayCb.checked) {
                     localStorage.setItem('hideWelcomePopup', today);
                 }
-                
-                // 부드럽게 사라지는 효과
                 popup.style.opacity = '0';
                 setTimeout(() => {
                     popup.classList.add('hidden');
-                    popup.style.opacity = '1'; // 다음 표시를 위해 투명도 초기화
+                    popup.style.opacity = '1'; 
                 }, 300);
             }
+
+            // --- 방문자 수 카운터 로직 (프론트엔드 시뮬레이션) ---
+            // ※ 실제 데이터 연동 시 이 부분을 지우고 서버(DB)에서 데이터를 불러와야 합니다.
+            let totalVisits = localStorage.getItem('wd_demo_total') || 3840;
+            let todayVisits = localStorage.getItem('wd_demo_today') || 45;
+            let lastVisit = localStorage.getItem('wd_demo_lastdate');
+
+            if (lastVisit !== today) {
+                // 날짜가 바뀌었으면 Today 초기화
+                todayVisits = 1;
+                totalVisits = parseInt(totalVisits) + 1;
+                localStorage.setItem('wd_demo_lastdate', today);
+            } else {
+                // 새로고침 할 때마다 데모용으로 카운트 1씩 증가
+                todayVisits = parseInt(todayVisits) + 1;
+                totalVisits = parseInt(totalVisits) + 1;
+            }
+
+            localStorage.setItem('wd_demo_today', todayVisits);
+            localStorage.setItem('wd_demo_total', totalVisits);
+
+            document.getElementById('visit-today').innerText = todayVisits.toLocaleString();
+            document.getElementById('visit-total').innerText = totalVisits.toLocaleString();
         });
     </script>
 </body>
