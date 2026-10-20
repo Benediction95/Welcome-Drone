@@ -49,7 +49,7 @@
 </head>
 <body class="font-sans text-gray-300 bg-black antialiased selection:bg-primary selection:text-black flex flex-col min-h-screen">
 
-    <!-- [업그레이드] 팝업창 영역 (크기 확대 및 동영상 적용) -->
+    <!-- [신규 추가] 팝업창 영역 (크기 확대 및 동영상 적용) -->
     <div id="welcome-popup" class="fixed inset-0 z-[100] flex items-center justify-center hidden transition-opacity duration-300 px-4">
         <!-- 팝업 배경 (클릭 시 닫힘) -->
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closePopup()"></div>
@@ -316,11 +316,13 @@
                         </a>
                     </div>
 
-                    <!-- Right: Dock 4 Image -->
+                    <!-- Right: Dock 4 Video -->
                     <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden border border-[#333] shadow-[0_0_50px_rgba(212,175,55,0.2)] group aspect-[4/3] lg:aspect-auto lg:h-[650px] flex items-center justify-center bg-[#111] reveal-up" style="transition-delay: 200ms;">
-                        <img src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/f1e137e5-62da-40bb-a525-69dd32830bc4.mp4?w=2560&h=1440" onerror="this.src='https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg'" alt="DJI Dock 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-8 left-8">
+                        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/f1e137e5-62da-40bb-a525-69dd32830bc4.mp4?w=2560&h=1440" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10"></div>
+                        <div class="absolute bottom-8 left-8 z-20">
                             <h3 class="text-2xl font-black text-white">DJI Dock 4</h3>
                             <p class="text-primary font-medium">Always There, Always Ready.</p>
                         </div>
