@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>산림청 및 국립공원공단 솔루션 - 웰컴드론</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'], }, colors: { primary: '#D4AF37', primaryHover: '#B5952F', darkBg: '#050505', cardBg: '#111111', cardBorder: '#222222', } } } }
+    </script>
+    <style>
+        body { background-color: #000000; }
+        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+    </style>
+</head>
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
+                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
+                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                    </div>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-primary font-bold">무인화 솔루션</a>
+                    <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
+                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">무인화 솔루션</a>
+                <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
+                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 상단 헤더 -->
+    <header class="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/39844bb8-ade7-4447-bbea-090ab2f09efe.mp4?w=1386&h=1040" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/60 z-0"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-12">
+            <span class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-tree mr-1"></i> 산림청 & 국립공원공단 스마트 모니터링
+            </span>
+            <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4">DJI Dock 기반 스마트 산림 및 국립공원 무인 자동화 통합 시스템</h1>
+            <p class="text-base md:text-lg text-gray-300 font-light max-w-2xl mx-auto drop-shadow-md">
+                24시간 무인 자율 순찰과 실시간 열화상 조기 탐지로 대한민국 소중한 산림 자원을 완벽하게 보호합니다.
+            </p>
+        </div>
+    </header>
+
+    <main class="flex-grow pb-24 bg-darkBg relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16">
+
+            <!-- 1. 추진 배경 및 제안 개요 -->
+            <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl mb-20 shadow-2xl">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold border border-primary/30">01</div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">추진 배경 및 제안 개요</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 text-gray-300">
+                    <div class="bg-black/40 p-6 rounded-2xl border border-[#222]">
+                        <h4 class="text-primary font-bold text-lg mb-2"><i class="fa-solid fa-bullseye mr-2"></i> 대상 기관</h4>
+                        <p class="text-gray-300 font-medium">산림청, 국립공원공단</p>
+                    </div>
+                    <div class="bg-black/40 p-6 rounded-2xl border border-[#222]">
+                        <h4 class="text-primary font-bold text-lg mb-2"><i class="fa-solid fa-lightbulb mr-2"></i> 제안 목적</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            광활한 산림 및 국립공원 구역 내에서 발생하는 산불, 불법 야영·취사, 샛길 등반, 시설물 훼손, 실종사고 등에 대응하기 위해, 현장 상주 인력 중심의 한계를 극복하고 24시간 무인 자동화 드론 시스템(DJI Dock)을 도입하여 골든타임을 확보하고 관리 효율을 극대화합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. 도입에 따른 핵심 이점 (Benefits) -->
+            <div class="mb-20">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-star mr-1"></i> Core Benefits</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">도입에 따른 핵심 이점</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- 이점 1 -->
+                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all duration-300 group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">1. 초동 대응 골든타임 확보</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                열화상 카메라 탑재 기체를 활용해 육안으로 식별하기 어려운 미세 열원(지중 연소, 초기 산불 징후)을 조기에 탐지합니다. 위급 상황 시 관제 센터에서 클릭 한 번으로 즉시 드론을 원격 발진시켜 현장을 실시간 HD 영상으로 파악합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 이점 2 -->
+                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all duration-300 group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">2. 24시간 전천후 무인 자율 순찰</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                사전 프로그래밍된 스케줄에 따라 야간, 주말, 악천후 직후 등 취약 시간대에도 공백 없는 순찰을 수행합니다. IP55 방수·방진 및 혹한·혹서기(-25℃~45℃) 대응으로 가혹한 산악 기후에서도 안정적으로 작동합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 이점 3 -->
+                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all duration-300 group">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-3">3. 인명 안전 및 중대재해 예방</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                급경사지, 화재 현장, 낙석·산사태 위험 지역에 인력을 직접 투입하는 대신 드론이 먼저 정찰을 수행하여 현장 요원의 2차 안전사고 위험을 원천적으로 차단합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI) -->
+            <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl mb-20 shadow-2xl">
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold border border-primary/30">03</div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">비용 절감 및 경제적 타당성 (ROI)</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                        <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 상주 인력 및 출장비 감축</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">광대한 면적을 감시하기 위해 투입되던 다수의 순찰 인력, 차량 유류비, 야간·휴일 근무수당 등의 운영 경비를 획기적으로 절감하고 감시 효율을 극대화합니다.</p>
+                    </div>
+                    <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                        <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-fire-flame-curved text-primary mr-2"></i> 대형 산불 및 복구비 최소화</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">초기 진화 여부에 따라 수천억 원의 피해가 발생하는 산불을 딥러닝/열화상 기반 '초기 연소(Pyrolysis) 단계'에서 차단하여 천문학적 복구 예산을 절감합니다.</p>
+                    </div>
+                    <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                        <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-screwdriver-wrench text-primary mr-2"></i> 장비 유지보수 및 수명 연장</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">자동 충전 및 기체 보호 기능으로 배터리 및 드론 수명을 최적 상태로 유지하며, 원격 자가 진단을 통해 유지보수 비용을 최소화합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 해외 활용 사례 (Global Case Studies) -->
+            <div class="mb-20">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-earth-asia mr-1"></i> Global Case Studies</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">해외 선진 활용 사례</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- 사례 1 -->
+                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">아이슬란드</span>
+                            <h4 class="text-xl font-bold text-white mb-3">화산 및 지형 재난 감시</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                화산 폭발 및 지형 변화가 극심한 위험 지역에서 DJI Dock과 열화상 드론을 결합하여 무인 정찰을 수행합니다. 사람이 접근하기 위험한 균열 구간과 용암의 지하 이동 흔적을 실시간 감지하여 구조대 안전을 확보합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 2 -->
+                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">유럽 연합</span>
+                            <h4 class="text-xl font-bold text-white mb-3">대규모 산림 화재 예방 네트워크</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                이탈리아 및 유럽 산림 지역에서 DJI Dock과 초정밀 환경 센서(Silvanet 등)를 결합하여 최대 70㎢ 범위의 영토를 24시간 감시합니다. IoT 센서 이상 감지 시 Dock이 즉시 자율 발진해 화재 여부를 교차 검증합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 3 -->
+                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">중국 지린성</span>
+                            <h4 class="text-xl font-bold text-white mb-3">전력망 및 산림 인접 자산 관리</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                드론 자율 운항 시스템을 도입하여 위험 구역 정기 순찰 및 시설물 점검을 자동화했습니다. 인력 중심 점검 대비 작업 효율이 2배 이상 향상되었으며, 산림 인접 시설의 화재 위험을 사전에 완벽히 예방했습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 제안서 마무리 방향 (결론) -->
+            <div class="bg-gradient-to-r from-primary/20 via-[#111] to-black border border-primary/40 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+                <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">산림청 및 국립공원공단 적용 기대효과</h3>
+                <blockquote class="text-lg md:text-xl text-gray-200 italic font-light max-w-4xl mx-auto leading-relaxed mb-8">
+                    "DJI Dock 도입은 단순한 드론 도입을 넘어, 대한민국 국토의 70%를 차지하는 산림과 국립공원을 <strong class="text-primary font-bold not-italic">'사람 중심의 육안 감시'에서 'AI와 무인 자동화 기반의 스마트 예방 체계'</strong>로 전환하는 패러다임의 혁신입니다. 이를 통해 예산 집행의 효율성은 극대화하고, 국민의 생명과 소중한 자연 자산을 안전하게 보호할 수 있습니다."
+                </blockquote>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="contact.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center">
+                        공공기관 솔루션 도입 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="solution.html" class="bg-transparent text-white border-2 border-[#444] px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all inline-flex items-center justify-center">
+                        무인화 솔루션 메인으로 돌아가기
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
+    </script>
+</body>
+</html>
