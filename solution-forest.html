@@ -144,7 +144,7 @@
                 </div>
             </div>
 
-            <!-- [신규 추가] 참고용 실시간 운용 영상 자료 섹션 -->
+            <!-- 참고용 실시간 운용 영상 자료 -->
             <div class="mb-20">
                 <div class="bg-cardBg border border-primary/40 rounded-3xl p-6 md:p-8 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden group">
                     <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
@@ -163,7 +163,7 @@
                         <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ed882c1b-3f78-4c81-b3cd-d3237723fd30.mp4?w=2400&h=1200" type="video/mp4">
                         </video>
-                        <div class="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/1:// text-xs text-white flex items-center space-x-2">
+                        <div class="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs text-white flex items-center space-x-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
                             <span>LIVE STREAMING PREVIEW</span>
                         </div>
@@ -171,14 +171,14 @@
                 </div>
             </div>
 
-            <!-- 3. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI) -->
+            <!-- 3. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI) [그래프 시각 자료 포함] -->
             <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl mb-20 shadow-2xl">
                 <div class="flex items-center space-x-3 mb-8">
                     <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold border border-primary/30">03</div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white">비용 절감 및 경제적 타당성 (ROI)</h2>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">비용 절감 및 경제적 타당성 (ROI 분석)</h2>
                 </div>
                 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
                     <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
                         <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 상주 인력 및 출장비 감축</h4>
                         <p class="text-gray-400 text-sm leading-relaxed">광대한 면적을 감시하기 위해 투입되던 다수의 순찰 인력, 차량 유류비, 야간·휴일 근무수당 등의 운영 경비를 획기적으로 절감하고 감시 효율을 극대화합니다.</p>
@@ -190,6 +190,77 @@
                     <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
                         <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-screwdriver-wrench text-primary mr-2"></i> 장비 유지보수 및 수명 연장</h4>
                         <p class="text-gray-400 text-sm leading-relaxed">자동 충전 및 기체 보호 기능으로 배터리 및 드론 수명을 최적 상태로 유지하며, 원격 자가 진단을 통해 유지보수 비용을 최소화합니다.</p>
+                    </div>
+                </div>
+
+                <!-- [시청각 자료] 비용 절감 효과 비교 그래프 (Visual Bar Chart) -->
+                <div class="bg-black/70 border border-[#333] p-6 md:p-8 rounded-2xl">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
+                        <div>
+                            <h4 class="text-white font-bold text-lg"><i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 육안 감시 체계 vs DJI Dock 무인 자동화 도입 비교</h4>
+                            <p class="text-gray-400 text-xs mt-1">연간 운영 예산 및 투입 공수(Man-hour) 절감 효과 시뮬레이션</p>
+                        </div>
+                        <div class="flex items-center space-x-4 text-xs">
+                            <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 인력 중심</span>
+                            <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 도입 후</span>
+                        </div>
+                    </div>
+
+                    <!-- 그래프 그리드 -->
+                    <div class="space-y-6">
+                        <!-- 항목 1: 순찰 및 인건비 예산 -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5">
+                                <span class="text-gray-300 font-medium">연간 순찰 인력 및 인건비용</span>
+                                <span class="text-primary font-bold">약 65% 절감</span>
+                            </div>
+                            <div class="space-y-2">
+                                <!-- 기존 -->
+                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                    <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (기준 비용)</div>
+                                </div>
+                                <!-- 도입 후 -->
+                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                    <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 35%;">절감 후 35%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 항목 2: 초기 산불 대응 골든타임 (단축) -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5">
+                                <span class="text-gray-300 font-medium">초동 탐지 및 현장 도착 소요 시간</span>
+                                <span class="text-primary font-bold">최대 80% 단축 (골든타임 확보)</span>
+                            </div>
+                            <div class="space-y-2">
+                                <!-- 기존 -->
+                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                    <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 평균 45분 소요</div>
+                                </div>
+                                <!-- 도입 후 -->
+                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                    <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 18%;">즉각 출동 평균 5~8분 이내</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 항목 3: 돌발 상황 감시 공백률 -->
+                        <div>
+                            <div class="flex justify-between text-sm mb-1.5">
+                                <span class="text-gray-300 font-medium">야간 및 취약시간대 감시 공백률</span>
+                                <span class="text-primary font-bold">0% 실현 (24시간 무중단)</span>
+                            </div>
+                            <div class="space-y-2">
+                                <!-- 기존 -->
+                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                    <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 70%;">기존 취약 시간 공백 발생</div>
+                                </div>
+                                <!-- 도입 후 -->
+                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                    <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 5%;">완전 무인 24/7 (0% 공백)</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -225,4 +296,67 @@
                     </div>
 
                     <!-- 사례 3 -->
-                    <div class="bg-cardBg border border-cardBorder
+                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">중국 지린성</span>
+                            <h4 class="text-xl font-bold text-white mb-3">전력망 및 산림 인접 자산 관리</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                                드론 자율 운항 시스템을 도입하여 위험 구역 정기 순찰 및 시설물 점검을 자동화했습니다. 인력 중심 점검 대비 작업 효율이 2배 이상 향상되었으며, 산림 인접 시설의 화재 위험을 사전에 완벽히 예방했습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 제안서 마무리 방향 (결론) -->
+            <div class="bg-gradient-to-r from-primary/20 via-[#111] to-black border border-primary/40 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+                <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">산림청 및 국립공원공단 적용 기대효과</h3>
+                <blockquote class="text-lg md:text-xl text-gray-200 italic font-light max-w-4xl mx-auto leading-relaxed mb-8">
+                    "DJI Dock 도입은 단순한 드론 도입을 넘어, 대한민국 국토의 70%를 차지하는 산림과 국립공원을 <strong class="text-primary font-bold not-italic">'사람 중심의 육안 감시'에서 'AI와 무인 자동화 기반의 스마트 예방 체계'</strong>로 전환하는 패러다임의 혁신입니다. 이를 통해 예산 집행의 효율성은 극대화하고, 국민의 생명과 소중한 자연 자산을 안전하게 보호할 수 있습니다."
+                </blockquote>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="contact.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center">
+                        공공기관 솔루션 도입 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="solution.html" class="bg-transparent text-white border-2 border-[#444] px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all inline-flex items-center justify-center">
+                        무인화 솔루션 메인으로 돌아가기
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
+    </script>
+</body>
+</html>
