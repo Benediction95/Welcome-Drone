@@ -66,17 +66,17 @@
         </div>
     </nav>
 
-    <!-- Main Content 시작 (여러 섹션 포함) -->
+    <!-- Main Wrapper -->
     <main class="flex-grow bg-black">
         
-        <!-- 0. 메인 히어로 섹션 (기존 영상 배경) -->
-        <section class="relative w-full h-[80vh] md:h-[100vh] flex items-center justify-center overflow-hidden border-b border-cardBorder pt-20">
+        <!-- 1. Hero Section -->
+        <section class="relative w-full h-screen flex items-center justify-center overflow-hidden border-b border-cardBorder">
             <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
                 <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/39844bb8-ade7-4447-bbea-090ab2f09efe.mp4?w=1386&h=1040">
             </video>
             <div class="absolute inset-0 bg-black/60 z-0"></div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mt-20">
                 <div class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-semibold text-sm tracking-wide">
                     DJI 산업용 및 농업용 드론 공식 워런티 대리점
                 </div>
@@ -84,26 +84,210 @@
                     최고의 비행 기술로 완성하는 <br/>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-yellow-200">웰컴드론</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-300 mb-10 font-light max-w-2xl mx-auto">
+                <p class="text-lg md:text-xl text-gray-400 mb-10 font-light max-w-2xl mx-auto">
                     웰컴드론은 기체 판매부터 DJI Dock 자동화 솔루션, 전문 항공 촬영까지 당신의 비즈니스에 필요한 모든 드론 서비스를 제공합니다.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="solution.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center">
-                        자동 무인화 솔루션 <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="contact.html" class="bg-transparent text-white border-2 border-gray-600 px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all flex items-center justify-center">
-                        상담 문의
+                <div class="flex justify-center">
+                    <a href="contact.html" class="bg-primary text-black px-10 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center">
+                        상담 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- 1. DJI Dock 4 출시 안내 섹션 -->
-        <section class="py-16 md:py-20 bg-[#0a0a0a] border-b border-cardBorder relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+        <!-- 2. News Section (웰컴드론 소식) -->
+        <section class="py-24 bg-darkBg relative border-b border-cardBorder">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-regular fa-newspaper mr-1"></i> Latest News</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">웰컴드론 소식</h2>
+                    <p class="text-gray-400 text-lg">새로운 기술 도입과 웰컴드론의 현장 프로젝트 스토리를 확인해보세요.</p>
+                </div>
+
+                <!-- News List (4 Items, Wide Cards) -->
+                <div class="flex flex-col gap-8">
+                    
+                    <!-- News Item 1 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <!-- 관련 임시 영상 -->
+                            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://cdn.pixabay.com/video/2019/04/10/22692-330456100_large.mp4" type="video/mp4">
+                            </video>
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Notice</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-primary text-sm font-bold mb-2">2026. 10. 15</span>
+                            <h4 class="text-2xl font-bold text-white mb-4">DJI FlyCart 100 대형 화물 운송 시연 성공</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                웰컴드론이 충남 산악 지역에서 최대 40kg의 하중을 견디는 DJI FlyCart 100의 윈치 시스템을 활용한 긴급 구호물품 수송 시연을 성공적으로 마쳤습니다. 기존 지상 물류의 한계를 완벽히 돌파한 사례로 평가받고 있습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- News Item 2 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://cdn.pixabay.com/video/2021/08/04/83861-584742630_large.mp4" type="video/mp4">
+                            </video>
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Project</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-primary text-sm font-bold mb-2">2026. 09. 28</span>
+                            <h4 class="text-2xl font-bold text-white mb-4">충남소방본부 재난 대응용 M30T 납품 및 교육 완료</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                야간 산악 수색 및 화재 현장 모니터링을 위해 충남소방본부에 고해상도 열화상 카메라가 탑재된 Matrice 30T 모델을 납품하고 현장 운용 교육을 완료했습니다. 1분 1초가 중요한 현장에서의 활약이 기대됩니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- News Item 3 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://cdn.pixabay.com/video/2026/10/12/382196_large.mp4" type="video/mp4">
+                            </video>
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Event</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-primary text-sm font-bold mb-2">2026. 08. 10</span>
+                            <h4 class="text-2xl font-bold text-white mb-4">2026 하반기 스마트 농업 방제 드론 세미나 성료</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                보령 거점 농업인들을 대상으로 진행된 DJI Agras T70P 및 T25P 방제 드론 시연 세미나가 성황리에 마무리되었습니다. 정밀 살포 기능과 자동화 맵핑 기능에 대한 뜨거운 관심이 집중되었습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- News Item 4 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://cdn.pixabay.com/video/2021/08/18/85487-590059918_large.mp4" type="video/mp4">
+                            </video>
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Notice</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-primary text-sm font-bold mb-2">2026. 07. 05</span>
+                            <h4 class="text-2xl font-bold text-white mb-4">웰컴드론 인프라 및 A/S 센터 확장 이전 안내</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                고객님들께 더 나은 서비스와 신속한 기체 점검(A/S)을 제공하기 위해 웰컴드론 본사 인프라를 확장 이전하였습니다. 넓은 교육장과 최신 정비 시설을 갖춘 새로운 공간에서 맞이하겠습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. DJI Dock 4 Release Section -->
+        <section class="py-24 relative overflow-hidden">
+            <!-- Background Glow -->
+            <div class="absolute top-1/2 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
+            
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="bg-cardBg border border-primary/30 rounded-3xl p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between shadow-[0_0_40px_rgba(212,175,55,0.05)]">
-                    <div class="lg:w-2/3 mb-8 lg:mb-0">
-                        <span class="inline-block px-3 py-1 mb-4 bg-primary/20 text-primary text-xs font-bold rounded-full border border-primary/30 tracking-widest">NEW ARRIVAL</span>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">차세대 무인화의 기준, <span class="text-primary">DJI Dock 4</span> 출시</h2>
-                        <p class="text-gray-400 text-lg leading
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    
+                    <!-- Left: Text & Comparison Content -->
+                    <div class="order-2 lg:order-1">
+                        <span class="inline-block mb-4 px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded border border-primary/30 tracking-widest">
+                            <i class="fa-solid fa-satellite-dish mr-1"></i> NEW RELEASE
+                        </span>
+                        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                            미래를 앞당긴 스테이션, <br/><span class="text-primary">DJI Dock 4 전격 출시</span>
+                        </h2>
+                        <p class="text-gray-400 text-lg leading-relaxed mb-10">
+                            웰컴드론에서 차세대 무인화 솔루션 DJI Dock 4를 선보입니다. 기존 Dock 3 대비 압도적으로 진화한 배터리 자동 교체 시스템과 최첨단 센서로 24시간 끊김 없는 완벽한 원격 임무를 경험해 보십시오.
+                        </p>
+                        
+                        <!-- Dock 4 vs Dock 3 Highlight Points -->
+                        <div class="space-y-8 mb-12 border-t border-[#333] pt-8">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-black border border-primary/30 flex items-center justify-center text-primary mr-5 flex-shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                                    <i class="fa-solid fa-battery-three-quarters text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold text-xl mb-2 flex items-center">
+                                        기다림 없는 25초 배터리 핫스왑
+                                        <span class="ml-3 bg-red-900/50 text-red-400 text-[10px] px-2 py-0.5 rounded border border-red-500/30">VS Dock 3</span>
+                                    </h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed">기존 Dock 3의 고속 충전(약 30분 대기) 방식을 뛰어넘어, 기계식 배터리 자동 스왑 시스템을 채택하여 단 25초 만에 다음 비행을 시작합니다.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-black border border-primary/30 flex items-center justify-center text-primary mr-5 flex-shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                                    <i class="fa-solid fa-camera text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold text-xl mb-2 flex items-center">
+                                        올인원 플래그십, Matrice 5TD 탑재
+                                        <span class="ml-3 bg-red-900/50 text-red-400 text-[10px] px-2 py-0.5 rounded border border-red-500/30">VS Dock 3</span>
+                                    </h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed">이전 모델(M3D/M3TD)과 달리 광학, 열화상, LiDAR, 레이더 센서가 하나의 기체에 모두 통합된 M5TD 모델로 더욱 폭넓은 데이터 수집이 가능해졌습니다.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-2xl bg-black border border-primary/30 flex items-center justify-center text-primary mr-5 flex-shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                                    <i class="fa-solid fa-jet-fighter-up text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-bold text-xl mb-2">최대 21m/s 초고속 즉각 출동</h4>
+                                    <p class="text-gray-400 text-sm leading-relaxed">명령 하달 시 예열 지연 없이 커버 개방과 동시에 이륙하여 지상 대원보다 먼저 재난 현장에 도착해 초동 대처 능력을 극대화합니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <a href="solution.html" class="inline-flex items-center justify-center bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-primary hover:text-black transition-all shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                            Dock 4 상세 보기 <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Right: Dock 4 Image -->
+                    <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden border border-[#333] shadow-[0_0_50px_rgba(212,175,55,0.2)] group aspect-[4/3] lg:aspect-auto lg:h-[650px] flex items-center justify-center bg-[#111]">
+                        <!-- Dock 4 관련 이미지로 교체하세요 -->
+                        <img src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/f1e137e5-62da-40bb-a525-69dd32830bc4.mp4?w=2560&h=1440" onerror="this.src='https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg'" alt="DJI Dock 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-8 left-8">
+                            <h3 class="text-2xl font-black text-white">DJI Dock 4</h3>
+                            <p class="text-primary font-medium">Always There, Always Ready.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) { nav.style.background = 'rgba(5, 5, 5, 0.9)'; nav.classList.add('border-b', 'border-[#222]'); }
+            else { nav.style.background = 'rgba(0, 0, 0, 0.5)'; nav.classList.remove('border-b', 'border-[#222]'); }
+        });
+    </script>
+</body>
+</html>
