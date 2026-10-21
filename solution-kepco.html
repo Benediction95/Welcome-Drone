@@ -259,43 +259,55 @@
                 </div>
             </div>
 
-            <!-- 4. 해외 활용 사례 (Global Case Studies) -->
+            <!-- 4. 해외 활용 사례 (Global Case Studies) - 세로형 3단 와이드 카드 레이아웃 (사진 자료 적용) -->
             <div class="mb-20">
                 <div class="text-center mb-12">
                     <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-earth-asia mr-1"></i> Global Case Studies</span>
                     <h2 class="text-3xl md:text-4xl font-bold text-white">해외 선진 활용 사례</h2>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- 사례 1 -->
-                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">미국 유틸리티 기업</span>
-                            <h4 class="text-xl font-bold text-white mb-3">광역 송전망 자율 점검</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                <div class="flex flex-col gap-8">
+                    <!-- 사례 1: 미국 유틸리티 기업 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="미국 광역 송전망 점검" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">US Utility Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">미국 유틸리티 기업</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">광역 송전망 자율 점검 시스템</h4>
+                            <p class="text-gray-400 leading-relaxed">
                                 험준한 산악과 사막 지형에 걸쳐진 송전선로에 DJI Dock 시스템을 구축하여 정기 무인 순찰을 수행합니다. 미세한 볼트 이완 및 송전선 과열 징후를 조기에 발견하여 대규모 전력 공급 중단을 성공적으로 예방했습니다.
                             </p>
                         </div>
                     </div>
 
-                    <!-- 사례 2 -->
-                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">유럽 전력망 운영사</span>
-                            <h4 class="text-xl font-bold text-white mb-3">AI 기반 애자 결함 자동 검출</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    <!-- 사례 2: 유럽 전력망 운영사 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/0ff5cc30522199f694696122d7a22ea6@770*462.jpg" alt="유럽 AI 애자 결함 검출" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/770x462/111111/D4AF37?text=Europe+Power+Grid'">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Europe Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">유럽 전력망 운영사</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">AI 기반 애자 결함 자동 검출</h4>
+                            <p class="text-gray-400 leading-relaxed">
                                 드론이 수집한 고화질 점검 데이터를 클라우드 AI 엔진과 연동하여 송전탑 애자의 파손 여부를 자동으로 분류합니다. 육안 검사 대비 정확도가 대폭 향상되고 점검 리포트 작성 시간이 90% 이상 단축되었습니다.
                             </p>
                         </div>
                     </div>
 
-                    <!-- 사례 3 -->
-                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between">
-                        <div>
-                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">중국 국가전망(SGCC)</span>
-                            <h4 class="text-xl font-bold text-white mb-3">스마트 변전소 및 송전탑 무인화</h4>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                주요 변전소 및 산악 송전선로 요충지에 도킹 스테이션을 배치하여 24시간 무중단 모니터링 체계를 확립했습니다. 악천후 직후크나 재난 발생 시 즉각적인 피해 상황 파악으로 신속한 복구 조치를 이끌어냈습니다.
+                    <!-- 사례 3: 중국 국가전망(SGCC) -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="중국 스마트 변전소 무인화" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Asia Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">중국 국가전망(SGCC)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">스마트 변전소 및 송전탑 무인화</h4>
+                            <p class="text-gray-400 leading-relaxed">
+                                주요 변전소 및 산악 송전선로 요충지에 도킹 스테이션을 배치하여 24시간 무중단 모니터링 체계를 확립했습니다. 악천후 직후나 재난 발생 시 즉각적인 피해 상황 파악으로 신속한 복구 조치를 이끌어냈습니다.
                             </p>
                         </div>
                     </div>
