@@ -89,7 +89,7 @@
         <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
         <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 현장 임무</span></div>
         <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 보안</span></div>
-        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. 3개년 예산/ROI</span></div>
         <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
         <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 시범사업 & 로드맵</span></div>
     </nav>
@@ -134,7 +134,7 @@
     <!-- [HERO SECTION] 산림청 & 국립공원공단 스마트 관제 제안서 -->
     <header id="hero" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 border-b border-cardBorder">
         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
-            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/6f386313-a1f8-458a-949d-cac56846107f.mp4?w=1386&h=1040" type="video/mp4">
+            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/39844bb8-ade7-4447-bbea-090ab2f09efe.mp4?w=1386&h=1040" type="video/mp4">
         </video>
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-darkBg z-0"></div>
 
@@ -151,7 +151,7 @@
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
-                    <i class="fa-solid fa-chart-line mr-2"></i> 경제적 효과 및 ROI 보기
+                    <i class="fa-solid fa-calculator mr-2"></i> 3개년 경제성·예산 비교 분석 보기
                 </a>
                 <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
                     도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -475,34 +475,178 @@
                 </div>
             </section>
 
-            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <!-- [개편] 6. 비용 절감 및 3개년 누적 총소유비용(TCO) & ROI 분석 -->
             <section id="roi-analysis" class="reveal-up">
-                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
-                    <div class="flex items-center space-x-3 mb-8">
-                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
-                        <div>
-                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
-                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl space-y-12">
+                    
+                    <!-- 섹션 타이틀 -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#222] pb-6 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & 3-Year TCO Analysis</span>
+                                <h2 class="text-2xl sm:text-3xl font-black text-white">3개년 누적 비용 비교 (TCO) 및 경제성 분석</h2>
+                            </div>
+                        </div>
+                        <div class="bg-black/60 px-4 py-2 rounded-xl border border-primary/30 text-xs text-gray-300">
+                            기준 면적: <strong class="text-white">반경 5~7km (약 8,000~10,000ha 권역 1곳)</strong>
                         </div>
                     </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+                    <!-- 핵심 요약 지표 카드 3종 -->
+                    <div class="grid sm:grid-cols-3 gap-6">
+                        <div class="bg-black/60 border border-primary/40 p-6 rounded-2xl relative overflow-hidden group hover:border-primary transition-all">
+                            <div class="text-xs text-primary font-bold uppercase tracking-wider mb-2">3개년 순 절감액</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 8,000만 원+</div>
+                            <p class="text-gray-400 text-xs">기존 1.9억 원 대비 약 1억~1.1억 원으로 총액 45% 이상 절감</p>
+                        </div>
+                        <div class="bg-black/60 border border-forestGreen/40 p-6 rounded-2xl relative overflow-hidden group hover:border-forestGreen transition-all">
+                            <div class="text-xs text-forestGreen font-bold uppercase tracking-wider mb-2">투자 회수 기간 (BEP)</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 1.3 ~ 1.5년</div>
+                            <p class="text-gray-400 text-xs">연간 4,100만 원 이상의 경상비 절감으로 도입 2년 차 조기 손익분기점 달성</p>
+                        </div>
+                        <div class="bg-black/60 border border-yellow-500/40 p-6 rounded-2xl relative overflow-hidden group hover:border-yellow-500 transition-all">
+                            <div class="text-xs text-yellow-400 font-bold uppercase tracking-wider mb-2">연간 운영비(OPEX) 절감율</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 70% 절감</div>
+                            <p class="text-gray-400 text-xs">인력 중심 연 5,700~6,000만 원 → 스테이션 연 1,600~1,800만 원</p>
+                        </div>
+                    </div>
+
+                    <!-- 3개년 누적 비용 상세 비교 테이블 (Table) -->
+                    <div class="overflow-x-auto rounded-2xl border border-[#333]">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-black/80 text-gray-300 border-b border-[#333] text-xs uppercase tracking-wider">
+                                    <th class="py-4 px-6 font-bold text-white">구분</th>
+                                    <th class="py-4 px-6 font-bold text-gray-400">① 미도입 (기존 인력 순찰 체계)</th>
+                                    <th class="py-4 px-6 font-bold text-primary">② DJI Dock 4 무인 스테이션 도입</th>
+                                    <th class="py-4 px-6 font-bold text-forestGreen">차액 (예산 절감액)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#222] bg-[#0c0c0c]">
+                                <!-- 초기 투자비 (CAPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        초기 투자비<br><span class="text-xs text-gray-500 font-normal">(CAPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 1,500만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 순찰 차량 1대 (중고/경차 감가상각 반영)</li>
+                                            <li>• 무전기, 이동식 감시 장비 구입</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 5,000만 ~ 6,000만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• DJI Dock 4 + Matrice 드론 세트: 약 3,500~4,200만 원</li>
+                                            <li>• 산림 지대 기초 토목/전원(태양광·상전)/통신 설치: 약 1,500~1,800만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-yellow-400 align-top">
+                                        Dock 도입 시 초기<br>+3,500만 ~ +4,500만 원
+                                    </td>
+                                </tr>
+
+                                <!-- 1년 차 운영비 (OPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        1년 차 운영비<br><span class="text-xs text-gray-500 font-normal">(OPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 5,700만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 기간제 감시원 4명 (봄·가을 각 5개월, 1인 월 230만 원 = 4,600만 원)</li>
+                                            <li>• 유류비 및 차량 유지비: 약 600만 원</li>
+                                            <li>• 보험, 피복비, 안전 소모품: 약 500만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 1,600만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 관제 플랫폼/클라우드 라이선스: 약 300만 원</li>
+                                            <li>• 배터리 소모품 및 정기 점검비: 약 500만 원</li>
+                                            <li>• 전문 관제/통합 대응 관리 인력 분담비: 약 600만 원</li>
+                                            <li>• 통신(LTE/5G) 및 전기료: 약 200만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-forestGreen align-top">
+                                        연간 약 4,100만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 2년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">2년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 5,800만 원</div>
+                                        <p class="text-xs text-gray-400">물가 및 인건비 인상분 반영</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 1,700만 원</div>
+                                        <p class="text-xs text-gray-400">정기 소모품 교체 및 클라우드 유지비</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-forestGreen align-top">
+                                        연간 약 4,100만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">3년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 6,000만 원</div>
+                                        <p class="text-xs text-gray-400">감시원 임금 상승 및 노후 차량 수리비</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 1,800만 원</div>
+                                        <p class="text-xs text-gray-400">배터리 세트 일괄 교체 및 종합 정밀 점검 포함</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-forestGreen align-top">
+                                        연간 약 4,200만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 총 누적 비용 (합계) -->
+                                <tr class="bg-black font-bold text-base border-t-2 border-[#333]">
+                                    <td class="py-5 px-6 text-primary">3년 총 누적 비용</td>
+                                    <td class="py-5 px-6 text-white">약 1억 9,000만 원</td>
+                                    <td class="py-5 px-6 text-primary bg-primary/[0.06]">약 1억 100만 ~ 1억 1,100만 원</td>
+                                    <td class="py-5 px-6 text-forestGreen text-lg">약 7,900만 ~ 8,900만 원 순절감</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 주요 금액 차이 발생 요인 3가지 상세 설명 -->
+                    <div class="grid md:grid-cols-3 gap-6 pt-2">
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 상주 인력·출장비 절감</h4>
+                            <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-users-slash"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">1. 고정 인건비의 획기적 절감</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                순찰 인력, 차량 유류비, 야간·휴일 초과근무 수당을 획기적으로 줄이고 단 1대의 스테이션으로 수십 ㎢ 권역을 상시 커버합니다.
+                                미도입 시 험준한 산악 특성상 4~5명의 감시원이 주간에만 조를 이뤄 순찰하지만, Dock 4 도입 시 24시간 원격 스케줄 순찰로 대체됩니다. 주간 반복 순찰 인력을 현장 전문 진화 인력 1명 선으로 재배치하여 인건비를 <strong>60~65% 이상 절감</strong>합니다.
                             </p>
                         </div>
+
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-fire-flame-curved text-primary mr-2"></i> 산불 대형화 복구비 최소화</h4>
+                            <div class="w-10 h-10 rounded-xl bg-forestGreen/20 text-forestGreen flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">2. 조기 손익분기점 (BEP 1.3~1.5년)</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                조기 진화 실패 시 발생하는 수천억 원의 사회적·산림 복원 예산을 초기 연소 감지로 사전 차단하여 천문학적 비용을 절감합니다.
+                                초기 설치 및 장비 구매에 약 5,000만~6,000만 원이 투입되나, 연간 경상운영비가 매년 4,100만 원 이상 절감됩니다. 도입 후 <strong>약 1.3년~1.5년 시점에 초기 투자금을 전액 회수</strong>하고 3년 누적 기준 약 8,000만 원 이상의 순예산을 절감합니다.
                             </p>
                         </div>
+
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-helicopter text-primary mr-2"></i> 고비용 헬기 의존도 축소</h4>
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-fire-extinguisher"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">3. 간접 피해 및 헬기 임차료 차단</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                시간당 수백만 원에 달하는 산불 감시 헬기 임차료와 정비 비용을 분담하여 공공기관의 예산 집행 효율을 극대화합니다.
+                                열화상 센서 기반의 초동 감시로 발화 초기 5~10분 내 연기·열원을 자동 탐지합니다. 대형 산불로 번졌을 때 소요되는 <strong>수억~수십억 원대의 헬기 임차료, 유류비, 산림 생태 복원 비용</strong>을 사전에 차단하는 경제적 파급효과가 탁월합니다.
                             </p>
                         </div>
                     </div>
@@ -512,29 +656,29 @@
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
                             <div>
                                 <h4 class="text-white font-bold text-base sm:text-lg">
-                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 인력·헬기 체계 vs DJI Dock 4 무인 자동화 체계 비교
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 3개년 누적 비용 및 현장 운용 효과 시각화
                                 </h4>
-                                <p class="text-gray-400 text-xs mt-1">연간 운영 유지비 및 초동 대응 소요 시간 시뮬레이션 지표</p>
+                                <p class="text-gray-400 text-xs mt-1">기존 인력 중심 대비 DJI Dock 4 도입 시 누적 지출액 및 대응 시간 비교</p>
                             </div>
                             <div class="flex items-center space-x-4 text-xs">
-                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
-                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> ① 미도입 (기존)</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> ② DJI Dock 4 도입</span>
                             </div>
                         </div>
 
                         <div class="space-y-6">
-                            <!-- 항목 1: 순찰 및 인건비 -->
+                            <!-- 항목 1: 3개년 누적 총비용(TCO) -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
-                                    <span class="text-gray-300 font-medium">연간 산림 순찰 인력 및 유지 운영비</span>
-                                    <span class="text-primary font-bold">약 65% 절감</span>
+                                    <span class="text-gray-300 font-medium">3개년 누적 총소유비용 (TCO)</span>
+                                    <span class="text-forestGreen font-bold">약 8,000만~8,900만 원 순절감 (45% 감소)</span>
                                 </div>
                                 <div class="space-y-2">
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (기준 비용)</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[11px] text-white flex items-center pl-3 font-bold" style="width: 100%;">기존 인력 체계: 약 1억 9,000만 원</div>
                                     </div>
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 35%;">절감 후 35%</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[11px] text-black flex items-center pl-3 font-bold transition-all duration-1000" style="width: 55%;">DJI Dock 4 도입: 약 1억 500만 원</div>
                                     </div>
                                 </div>
                             </div>
@@ -547,10 +691,10 @@
                                 </div>
                                 <div class="space-y-2">
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 평균 45분 소요 (인력 이동 한계)</div>
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 평균 45분 소요 (험지 도보 이동 한계)</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 18%;">즉각 출동 평균 5~8분 이내</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 18%;">즉각 출동 평균 5~8분 이내</div>
                                     </div>
                                 </div>
                             </div>
@@ -566,7 +710,7 @@
                                         <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 70%;">기존 야간 순찰 불가로 공백 발생</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">완전 무인 자율 24/7 (0% 공백)</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 5%;">완전 무인 자율 24/7 (0% 공백)</div>
                                     </div>
                                 </div>
                             </div>
