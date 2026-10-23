@@ -87,7 +87,7 @@
         <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
         <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 해양 임무</span></div>
         <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 통신</span></div>
-        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. 3개년 예산/ROI</span></div>
         <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
         <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 단계별 구축 로드맵</span></div>
     </nav>
@@ -148,7 +148,7 @@
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
-                    <i class="fa-solid fa-chart-line mr-2"></i> 해양 안전 ROI 및 비용 절감 보기
+                    <i class="fa-solid fa-calculator mr-2"></i> 3개년 경제성·예산 비교 분석 보기
                 </a>
                 <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
                     도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -463,83 +463,231 @@
                 </div>
             </section>
 
-            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <!-- [업그레이드] 6. 비용 절감 및 3개년 누적 총소유비용(TCO) & ROI 분석 -->
             <section id="roi-analysis" class="reveal-up">
-                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
-                    <div class="flex items-center space-x-3 mb-8">
-                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
-                        <div>
-                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
-                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl space-y-12">
+                    
+                    <!-- 섹션 헤더 -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#222] pb-6 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & 3-Year TCO Analysis</span>
+                                <h2 class="text-2xl sm:text-3xl font-black text-white">3개년 누적 비용 비교 (TCO) 및 경제성 분석</h2>
+                            </div>
+                        </div>
+                        <div class="bg-black/60 px-4 py-2 rounded-xl border border-primary/30 text-xs text-gray-300">
+                            산출 기준: <strong class="text-white">연안 연장 약 15~20km (갯벌·테트라포드·도서 취약 수역 1개 관제구역)</strong>
                         </div>
                     </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+                    <!-- 핵심 요약 지표 카드 3종 -->
+                    <div class="grid sm:grid-cols-3 gap-6">
+                        <div class="bg-black/60 border border-primary/40 p-6 rounded-2xl relative overflow-hidden group hover:border-primary transition-all">
+                            <div class="text-xs text-primary font-bold uppercase tracking-wider mb-2">3개년 총 순절감액</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 1.4억 ~ 1.5억 원</div>
+                            <p class="text-gray-400 text-xs">기존 2.9억 원 대비 약 1.4억~1.5억 원으로 연안 경비 총예산 50% 이상 절감</p>
+                        </div>
+                        <div class="bg-black/60 border border-oceanBlue/40 p-6 rounded-2xl relative overflow-hidden group hover:border-oceanBlue transition-all">
+                            <div class="text-xs text-oceanBlue font-bold uppercase tracking-wider mb-2">투자 회수 기간 (BEP)</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 1년 ~ 1년 3개월</div>
+                            <p class="text-gray-400 text-xs">함정 유류비 및 출동 수당 연 6,500만 원 절감으로 1년 차 전후 투자금 전액 회수</p>
+                        </div>
+                        <div class="bg-black/60 border border-yellow-500/40 p-6 rounded-2xl relative overflow-hidden group hover:border-yellow-500 transition-all">
+                            <div class="text-xs text-yellow-400 font-bold uppercase tracking-wider mb-2">연간 운영비(OPEX) 절감율</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 73% 절감</div>
+                            <p class="text-gray-400 text-xs">기존 출동 연 8,800만~9,400만 원 → 스테이션 연 2,300만~2,700만 원</p>
+                        </div>
+                    </div>
+
+                    <!-- 3개년 누적 비용 상세 비교 테이블 (TCO Table) -->
+                    <div class="overflow-x-auto rounded-2xl border border-[#333]">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-black/80 text-gray-300 border-b border-[#333] text-xs uppercase tracking-wider">
+                                    <th class="py-4 px-6 font-bold text-white">구분</th>
+                                    <th class="py-4 px-6 font-bold text-gray-400">① 미도입 (기존 연안구조정 및 순찰차 중심)</th>
+                                    <th class="py-4 px-6 font-bold text-primary">② DJI Dock 4 무인 스테이션 도입</th>
+                                    <th class="py-4 px-6 font-bold text-oceanBlue">차액 (예산 절감액)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#222] bg-[#0c0c0c]">
+                                <!-- 초기 구축비 (CAPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        초기 구축비<br><span class="text-xs text-gray-500 font-normal">(CAPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 2,000만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 파출소 연안 순찰차량 1대 (감가상각 반영)</li>
+                                            <li>• 투광기, 서치라이트, 이동식 안전계도 장비</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 6,500만 ~ 7,500만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• DJI Dock 4 + 열화상·스피커·서치라이트 기체: 약 4,500만~5,000만 원</li>
+                                            <li>• 해안가 파출소 옥상 기초 방청/전원·접지/통신 연계: 약 2,000만~2,500만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-yellow-400 align-top">
+                                        Dock 도입 시 초기<br>+4,500만 ~ +5,500만 원
+                                    </td>
+                                </tr>
+
+                                <!-- 1년 차 운영비 (OPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        1년 차 운영비<br><span class="text-xs text-gray-500 font-normal">(OPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 8,800만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 연안구조정 및 순찰정 유류비(확인 순찰 가동): 연 약 3,800만 원</li>
+                                            <li>• 야간·휴일 긴급 출동 인건비 및 위험근무수당: 연 약 3,500만 원</li>
+                                            <li>• 고마력 선외기 정기 점검 및 수리비: 약 1,500만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,300만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 해양 관제 플랫폼 라이선스 및 AI 비전 솔루션: 약 700만 원</li>
+                                            <li>• 배터리 소모품 및 염분 방지 하드웨어 유지정비: 약 600만 원</li>
+                                            <li>• 파출소 원격 관제 모니터링 업무 분담비: 약 800만 원</li>
+                                            <li>• 통신(LTE/5G) 및 전기료: 약 200만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-oceanBlue align-top">
+                                        연간 약 6,500만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 2년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">2년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,100만 원</div>
+                                        <p class="text-xs text-gray-400">해상 유가 변동 및 야간 인건비 인상분 반영</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,400만 원</div>
+                                        <p class="text-xs text-gray-400">정기 소모품 교체 및 관제 솔루션 유지</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-oceanBlue align-top">
+                                        연간 약 6,700만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">3년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,400만 원</div>
+                                        <p class="text-xs text-gray-400">선박 노후화에 따른 정비 비용 상승</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,700만 원</div>
+                                        <p class="text-xs text-gray-400">배터리 세트 일괄 교체 및 스테이션 주요 부품 정밀 오버홀 포함</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-oceanBlue align-top">
+                                        연간 약 6,700만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 총 누적 비용 (합계) -->
+                                <tr class="bg-black font-bold text-base border-t-2 border-[#333]">
+                                    <td class="py-5 px-6 text-primary">3년 총 누적 비용</td>
+                                    <td class="py-5 px-6 text-white">약 2억 9,300만 원</td>
+                                    <td class="py-5 px-6 text-primary bg-primary/[0.06]">약 1억 3,900만 ~ 1억 4,900만 원</td>
+                                    <td class="py-5 px-6 text-oceanBlue text-lg">약 1억 4,400만 ~ 1억 5,400만 원 순절감</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 주요 금액 차이 발생 요인 3가지 상세 카드 -->
+                    <div class="grid md:grid-cols-3 gap-6 pt-2">
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-gas-pump text-primary mr-2"></i> 함정 유류비·출동 비용 절감</h4>
+                            <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-gas-pump"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">1. 함정 유류비 및 출동 경비 대폭 절감</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                단순 확인성 출동에 고마력 경비함정을 가동하는 대신 드론으로 사전 정찰하여 연간 함정 유류비와 기관 감가상각비를 대폭 절감합니다.
+                                미도입 시 미식별 선박 확인 및 단순 갯벌 순찰에도 고출력 선외기 구조정과 경비정을 상시 출동시켜 막대한 유류비와 기관 감가상각비가 누적됩니다. Dock 4 도입 시 공중 무인 순찰로 불필요한 출동을 선별하여 <strong>출동 운영비를 70% 이상 절감</strong>합니다.
                             </p>
                         </div>
-                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-helicopter text-primary mr-2"></i> 해경 헬기 출동 분담 효과</h4>
+
+                        <div class="bg-black/50 p-6 rounded-2xl border border-oceanBlue/20 text-oceanBlue flex-col p-6 rounded-2xl border border-[#222]">
+                            <div class="w-10 h-10 rounded-xl bg-oceanBlue/20 text-oceanBlue flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">2. 조기 투자 회수 (BEP 1년~1년 3개월)</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                시간당 수백만 원이 소요되는 회전익 헬기 출동을 연안 수색 영역에서 드론이 대체 분담하여 비행 예산을 최적화합니다.
+                                초기 인프라 및 장비 구축에 약 6,500만~7,500만 원이 투입되나, 연간 약 6,500만~6,700만 원의 함정 가동비와 야간 출동 수당이 절감됩니다. 도입 후 <strong>약 1년~1년 3개월 시점에 손익분기점(BEP)을 돌파</strong>하여 3년 누적 기준 1.4억 원 이상의 순예산을 회수합니다.
                             </p>
                         </div>
+
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-users-gear text-primary mr-2"></i> 파출소 당직 인력 피로도 경감</h4>
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-helicopter"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">3. 대형 헬기 출동 분담 및 2차 사고 차단</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                야간 취약 시간대 정기 무인 순찰 자동화로 일선 파출소 경찰관의 격무를 해소하고 긴급 상황 대응 집중도를 극대화합니다.
+                                연안 실종 사고 시 시간당 수백만 원에 달하는 항공대 헬기 출동을 무인 드론이 1차 분담합니다. 또한 야간 테트라포드나 갯벌 암초 지대 진입 시 드론이 공중 서치라이트를 제공함으로써 <strong>구조 대원의 고립 및 전복 등 2차 안전사고 위험을 원천 차단</strong>합니다.
                             </p>
                         </div>
                     </div>
 
+                    <!-- [시각 자료] 비교 바 차트 -->
                     <div class="bg-black/80 border border-[#333] p-6 sm:p-8 rounded-2xl">
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
                             <div>
                                 <h4 class="text-white font-bold text-base sm:text-lg">
-                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 함정 순찰 체계 vs DJI Dock 4 무인 연안 관제 체계 비교
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 3개년 누적 비용 및 연안 출동 성과 시각화
                                 </h4>
-                                <p class="text-gray-400 text-xs mt-1">연안 출동 소요 시간 및 유류·운영 예산 절감 시뮬레이션</p>
+                                <p class="text-gray-400 text-xs mt-1">연안 15~20km 관제구역 기준 3개년 누적 지출액 및 초동 구조 도착 시간 비교</p>
                             </div>
                             <div class="flex items-center space-x-4 text-xs">
-                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
-                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> ① 미도입 (기존 출동 체계)</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> ② DJI Dock 4 도입</span>
                             </div>
                         </div>
 
                         <div class="space-y-6">
+                            <!-- 항목 1: 3개년 누적 총비용(TCO) -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
-                                    <span class="text-gray-300 font-medium">연안 확인 순찰 유류비 및 경비정 가동 비용</span>
-                                    <span class="text-primary font-bold">약 60% 절감</span>
+                                    <span class="text-gray-300 font-medium">3개년 누적 총소유비용 (TCO)</span>
+                                    <span class="text-oceanBlue font-bold">약 1억 4,400만~1억 5,400만 원 순절감 (50% 감소)</span>
                                 </div>
                                 <div class="space-y-2">
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (함정 기동 기준 비용)</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[11px] text-white flex items-center pl-3 font-bold" style="width: 100%;">기존 함정·인력 체계: 약 2억 9,300만 원</div>
                                     </div>
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 40%;">절감 후 40%</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[11px] text-black flex items-center pl-3 font-bold transition-all duration-1000" style="width: 50%;">DJI Dock 4 도입: 약 1억 4,400만 원</div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- 항목 2: 초동 구조 도착 시간 -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
-                                    <span class="text-gray-300 font-medium">익수 조난 신고 접수 후 최초 현장 도달 시간</span>
-                                    <span class="text-primary font-bold">최대 80% 단축 (초기 구조망 전개)</span>
+                                    <span class="text-gray-300 font-medium">익수·고립 신고 접수 후 최초 현장 도달 시간</span>
+                                    <span class="text-primary font-bold">최대 80% 단축 (골든타임 확보)</span>
                                 </div>
                                 <div class="space-y-2">
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 평균 25~35분 소요 (보트 출항·이동)</div>
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 평균 25~35분 소요 (보트 준비 및 이동)</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 15%;">드론 즉시 이륙 3~5분 이내 도달</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 15%;">드론 즉시 이륙 3~5분 이내 도달</div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- 항목 3: 저수심 감시 사각지대율 -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
                                     <span class="text-gray-300 font-medium">저수심·암초 지대 연안 감시 사각지대율</span>
@@ -547,10 +695,10 @@
                                 </div>
                                 <div class="space-y-2">
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 65%;">기존 함정 접근 불능 구역 다수</div>
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 65%;">기존 함정 진입 불능 구역 다수</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">공중 시각선 100% (사각지대 0%)</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 5%;">공중 시각선 100% (사각지대 0%)</div>
                                     </div>
                                 </div>
                             </div>
