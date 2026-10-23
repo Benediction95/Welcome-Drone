@@ -87,7 +87,7 @@
         <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
         <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 도로 임무</span></div>
         <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 안전</span></div>
-        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. 3개년 예산/ROI</span></div>
         <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
         <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 단계별 구축 로드맵</span></div>
     </nav>
@@ -148,7 +148,7 @@
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
-                    <i class="fa-solid fa-chart-line mr-2"></i> 고속도로 ROI 및 예산 절감 보기
+                    <i class="fa-solid fa-calculator mr-2"></i> 3개년 경제성·예산 비교 분석 보기
                 </a>
                 <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
                     도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -463,71 +463,218 @@
                 </div>
             </section>
 
-            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <!-- [업그레이드] 6. 비용 절감 및 3개년 누적 총소유비용(TCO) & ROI 분석 -->
             <section id="roi-analysis" class="reveal-up">
-                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
-                    <div class="flex items-center space-x-3 mb-8">
-                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
-                        <div>
-                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
-                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl space-y-12">
+                    
+                    <!-- 섹션 헤더 -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#222] pb-6 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & 3-Year TCO Analysis</span>
+                                <h2 class="text-2xl sm:text-3xl font-black text-white">3개년 누적 비용 비교 (TCO) 및 경제성 분석</h2>
+                            </div>
+                        </div>
+                        <div class="bg-black/60 px-4 py-2 rounded-xl border border-primary/30 text-xs text-gray-300">
+                            산출 기준: <strong class="text-white">고속도로 본선 15~20km (특수교량 2~3개소 및 절토사면 10~15개소 관제구역)</strong>
                         </div>
                     </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+                    <!-- 핵심 요약 지표 카드 3종 -->
+                    <div class="grid sm:grid-cols-3 gap-6">
+                        <div class="bg-black/60 border border-primary/40 p-6 rounded-2xl relative overflow-hidden group hover:border-primary transition-all">
+                            <div class="text-xs text-primary font-bold uppercase tracking-wider mb-2">3개년 총 순절감액</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 1.55억 ~ 1.65억 원</div>
+                            <p class="text-gray-400 text-xs">기존 3.05억 원 대비 1.42억~1.52억 원으로 유지관리 예산 51% 이상 순절감</p>
+                        </div>
+                        <div class="bg-black/60 border border-highwayAmber/40 p-6 rounded-2xl relative overflow-hidden group hover:border-highwayAmber transition-all">
+                            <div class="text-xs text-highwayAmber font-bold uppercase tracking-wider mb-2">투자 회수 기간 (BEP)</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 11개월 ~ 1년 2개월</div>
+                            <p class="text-gray-400 text-xs">교량차 임차비 및 차로 통제 비용 연 6,800만 원 절감으로 1년 차 전후 회수</p>
+                        </div>
+                        <div class="bg-black/60 border border-yellow-500/40 p-6 rounded-2xl relative overflow-hidden group hover:border-yellow-500 transition-all">
+                            <div class="text-xs text-yellow-400 font-bold uppercase tracking-wider mb-2">연간 운영비(OPEX) 절감율</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 72% 절감</div>
+                            <p class="text-gray-400 text-xs">기존 점검차량 연 9,000만~9,700만 원 → 스테이션 연 2,400만~2,800만 원</p>
+                        </div>
+                    </div>
+
+                    <!-- 3개년 누적 비용 상세 비교 테이블 (TCO Table) -->
+                    <div class="overflow-x-auto rounded-2xl border border-[#333]">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-black/80 text-gray-300 border-b border-[#333] text-xs uppercase tracking-wider">
+                                    <th class="py-4 px-6 font-bold text-white">구분</th>
+                                    <th class="py-4 px-6 font-bold text-gray-400">① 미도입 (기존 교량점검차 및 인력 순시)</th>
+                                    <th class="py-4 px-6 font-bold text-primary">② DJI Dock 4 무인 스테이션 도입</th>
+                                    <th class="py-4 px-6 font-bold text-highwayAmber">차액 (예산 절감액)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#222] bg-[#0c0c0c]">
+                                <!-- 초기 구축비 (CAPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        초기 구축비<br><span class="text-xs text-gray-500 font-normal">(CAPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 2,300만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 지사 순찰 차량(감가상각 반영) 및 차로 차단 싸인카 임차 분담비</li>
+                                            <li>• 사면 점검용 휴대용 측량기 및 교량 촬영 장비</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 6,500만 ~ 7,500만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• DJI Dock 4 + 고화소 줌·LiDAR 일체형 기체: 약 4,500만~5,000만 원</li>
+                                            <li>• IC/졸음쉼터 부지 기초 토목, 전원 인입, RTK 기준점 설치: 약 2,000만~2,500만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-yellow-400 align-top">
+                                        Dock 도입 시 초기<br>+4,200만 ~ +5,200만 원
+                                    </td>
+                                </tr>
+
+                                <!-- 1년 차 운영비 (OPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        1년 차 운영비<br><span class="text-xs text-gray-500 font-normal">(OPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,000만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 특수교량 점검차(BT차) 및 신호수 차로 통제비(연 20회): 약 5,000만 원</li>
+                                            <li>• 절토사면 정밀안전진단 외주 용역비: 약 2,800만 원</li>
+                                            <li>• 순찰 차량 유류비 및 안전장구 소모품: 약 1,200만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,400만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 도로 시설물 AI 균열 분석 및 3D 모델링 라이선스: 약 800만 원</li>
+                                            <li>• 하드웨어 정기 점검 및 배터리 소모품비: 약 600만 원</li>
+                                            <li>• 교통관제센터(TCC) 원격 모니터링 업무 분담비: 약 800만 원</li>
+                                            <li>• 통신(5G/LTE) 및 전기료: 약 200만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-highwayAmber align-top">
+                                        연간 약 6,600만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 2년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">2년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,400만 원</div>
+                                        <p class="text-xs text-gray-400">특수차량 임차료 및 차로 통제 인건비 상승분 반영</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,500만 원</div>
+                                        <p class="text-xs text-gray-400">정기 소모품 교체 및 클라우드 유지비</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-highwayAmber align-top">
+                                        연간 약 6,900만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">3년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,800만 원</div>
+                                        <p class="text-xs text-gray-400">교량 3종 시설물 정밀점검 주기 도래에 따른 비용 상승</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,800만 원</div>
+                                        <p class="text-xs text-gray-400">배터리 세트 일괄 교체 및 스테이션 주요 부품 정밀 오버홀 포함</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-highwayAmber align-top">
+                                        연간 약 7,000만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 총 누적 비용 (합계) -->
+                                <tr class="bg-black font-bold text-base border-t-2 border-[#333]">
+                                    <td class="py-5 px-6 text-primary">3년 총 누적 비용</td>
+                                    <td class="py-5 px-6 text-white">약 3억 500만 원</td>
+                                    <td class="py-5 px-6 text-primary bg-primary/[0.06]">약 1억 4,200만 ~ 1억 5,200만 원</td>
+                                    <td class="py-5 px-6 text-highwayAmber text-lg">약 1억 5,300만 ~ 1억 6,300만 원 순절감</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 주요 금액 차이 발생 요인 3가지 상세 카드 -->
+                    <div class="grid md:grid-cols-3 gap-6 pt-2">
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-truck-pickup text-primary mr-2"></i> 교량점검차·특수차량 임차비 절감</h4>
+                            <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-traffic-light"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">1. 차로 차단 및 특수차량 비용 절감</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                1회 투입에 수백만 원이 소요되는 교량점검 특수차량 투입 횟수를 드론 사전 진단으로 80% 이상 축소합니다.
+                                기존 교량 하부 점검 시 교량점검차(BT차) 임차와 차로 차단을 위한 싸인카·신호수 배치에 1회당 수백만 원이 소요됩니다. Dock 4 도입 시 상공 자율 비행으로 도로 통제 없이 점검하므로 <strong>연간 특수 점검 비용을 70% 이상 절감</strong>합니다.
                             </p>
                         </div>
-                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 차로 차단 교통 혼잡 비용 제로화</h4>
+
+                        <div class="bg-black/50 p-6 rounded-2xl border border-highwayAmber/20 text-highwayAmber flex-col p-6 rounded-2xl border border-[#222]">
+                            <div class="w-10 h-10 rounded-xl bg-highwayAmber/20 text-highwayAmber flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">2. 조기 투자 회수 (BEP 11~14개월)</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                점검을 위한 차선 통제가 필요 없어 사회적 물류 지체 비용과 정체에 따른 운전자 민원을 원천 해소합니다.
+                                초기 인프라 및 장비 구매에 약 6,500만~7,500만 원이 투입되지만, 연간 약 6,600만~7,000만 원의 외주 용역비 및 차량 운영비가 절감되어 <strong>도입 후 약 11개월~1년 2개월 시점에 손익분기점(BEP)에 도달</strong>합니다.
                             </p>
                         </div>
+
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-car-burst text-primary mr-2"></i> 2차 대형 교통사고 피해 방지</h4>
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-road-barrier"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">3. 교통 정체 손실 및 2차 사고 차단</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                고속도로 본선 정차 사고 시 상공 경고 방송으로 후속 차량 다중 추돌을 막아 수십억 원의 인명·물적 피해를 방지합니다.
+                                차로 차단으로 인한 사회적 물류 지체 손실 비용을 원천 제거합니다. 또한 고속도로 본선 2차 추돌 사고를 상공 경고 방송으로 사전 차단하여 <strong>사고당 수억~수십억 원대의 대형 인명 및 재산 피해를 예방</strong>하는 간접 경제 효과가 막대합니다.
                             </p>
                         </div>
                     </div>
 
+                    <!-- [시각 자료] 비교 바 차트 -->
                     <div class="bg-black/80 border border-[#333] p-6 sm:p-8 rounded-2xl">
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
                             <div>
                                 <h4 class="text-white font-bold text-base sm:text-lg">
-                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 인력·차량 투입 점검 vs DJI Dock 4 무인 자동화 체계 비교
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 3개년 누적 비용 및 시설 점검 성과 시각화
                                 </h4>
-                                <p class="text-gray-400 text-xs mt-1">연간 시설물 점검 예산 및 결함 진단 소요 시간 절감 시뮬레이션</p>
+                                <p class="text-gray-400 text-xs mt-1">고속도로 15~20km 관제구역 기준 3개년 누적 지출액 및 진단 소요 시간 비교</p>
                             </div>
                             <div class="flex items-center space-x-4 text-xs">
-                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
-                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> ① 미도입 (기존 점검차량)</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> ② DJI Dock 4 도입</span>
                             </div>
                         </div>
 
                         <div class="space-y-6">
+                            <!-- 항목 1: 3개년 누적 총비용(TCO) -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
-                                    <span class="text-gray-300 font-medium">연간 교량·사면 특수 차량 및 점검 인건비</span>
-                                    <span class="text-primary font-bold">약 65% 절감</span>
+                                    <span class="text-gray-300 font-medium">3개년 누적 총소유비용 (TCO)</span>
+                                    <span class="text-highwayAmber font-bold">약 1억 6,000만 원 순절감 (51% 감소)</span>
                                 </div>
                                 <div class="space-y-2">
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (기준 비용)</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[11px] text-white flex items-center pl-3 font-bold" style="width: 100%;">기존 점검 체계: 약 3억 500만 원</div>
                                     </div>
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 35%;">절감 후 35%</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[11px] text-black flex items-center pl-3 font-bold transition-all duration-1000" style="width: 49%;">DJI Dock 4 도입: 약 1억 4,700만 원</div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- 항목 2: 결함 검출 소요 시간 -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
-                                    <span class="text-gray-300 font-medium">광역 구간 시설물 정밀 스캔 및 보고 시간</span>
+                                    <span class="text-gray-300 font-medium">광역 구간(15~20km) 사면·교량 정밀 스캔 보고 시간</span>
                                     <span class="text-primary font-bold">최대 80% 단축</span>
                                 </div>
                                 <div class="space-y-2">
@@ -535,11 +682,12 @@
                                         <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 수일~수주 소요 (차로 차단 일정 조율)</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 20%;">자율 비행 후 수 시간 내 결과 생성</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 20%;">자율 비행 후 수 시간 내 결과 생성</div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- 항목 3: 점검원 도로변 위험 노출 시간 -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
                                     <span class="text-gray-300 font-medium">점검원 본선 고속도로 위험 노출 시간</span>
@@ -550,7 +698,7 @@
                                         <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 70%;">기존 갓길 및 도로변 상시 노출</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">완전 무인화 (0% 노출)</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 5%;">완전 무인화 (0% 노출)</div>
                                     </div>
                                 </div>
                             </div>
