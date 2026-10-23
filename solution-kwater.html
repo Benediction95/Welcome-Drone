@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국수자원공사(K-water) 스마트 댐·수자원 무인 관리 솔루션 - 웰컴드론</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Pretendard"', 'sans-serif'], },
+                    colors: {
+                        primary: '#D4AF37',
+                        primaryHover: '#B5952F',
+                        waterCyan: '#06B6D4',
+                        darkBg: '#050505',
+                        cardBg: '#111111',
+                        cardBorder: '#222222',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000000; }
+        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #444;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .nav-dot.active {
+            background-color: #D4AF37;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        .nav-dot .tooltip {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .nav-dot:hover .tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-primary selection:text-black">
+    
+    <!-- 우측 플로팅 퀵 내비게이션 -->
+    <nav class="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col gap-4 bg-black/60 backdrop-blur-md p-3 rounded-full border border-[#222]" id="sideNav">
+        <div class="nav-dot active" onclick="scrollToSection('hero')"><span class="tooltip">개요</span></div>
+        <div class="nav-dot" onclick="scrollToSection('background')"><span class="tooltip">01. 추진 배경</span></div>
+        <div class="nav-dot" onclick="scrollToSection('dock-system')"><span class="tooltip">02. Dock 4 시스템</span></div>
+        <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
+        <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 수자원 임무</span></div>
+        <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 수질</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 단계별 구축 로드맵</span></div>
+    </nav>
+
+    <!-- Global Navigation Bar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
+                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
+                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                    </div>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-primary font-bold">무인화 솔루션</a>
+                    <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
+                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">무인화 솔루션</a>
+                <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
+                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [HERO SECTION] -->
+    <header id="hero" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 border-b border-cardBorder">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://cdn.pixabay.com/video/2021/08/18/85487-590059918_large.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-darkBg z-0"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center py-20 reveal-up">
+            <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-waterCyan/40 bg-waterCyan/10 text-waterCyan font-bold text-xs sm:text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-droplet"></i> 한국수자원공사(K-water) 맞춤 제안서
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+                DJI Dock 4 기반 <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-200 to-waterCyan">스마트 댐·상수원·녹조 무인 자동화 통합 관제 체계</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                광활한 다목적 댐과 수변 구역을 24시간 자율 순찰하고, 댐체 미세 균열 및 누수 탐지와 다분광 기반 녹조 확산 분석을 원격으로 완성합니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
+                    <i class="fa-solid fa-chart-line mr-2"></i> 수자원 관리 ROI 및 비용 절감 보기
+                </a>
+                <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
+                    도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow bg-darkBg relative overflow-hidden">
+        <div class="absolute top-40 left-0 w-96 h-96 bg-waterCyan/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 space-y-28">
+
+            <!-- 1. 추진 배경 및 제안 개요 -->
+            <section id="background" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/40">01</div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Background & Overview</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">추진 배경 및 기존 수자원 관리의 한계</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                        <div class="space-y-4">
+                            <p class="text-gray-300 leading-relaxed text-base">
+                                소양강댐, 충주댐 등 전국 수십 개의 다목적 댐과 광역 상수원 보호구역은 <strong class="text-white font-semibold">수백 ㎢에 달하는 수역 면적과 험준한 호안선</strong>을 지니고 있어 관리선의 접근에 물리적 한계가 존재합니다.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-sm">
+                                장마철 수위 급상승 시 댐 상류 쓰레기 유입, 여름철 녹조 급확산, 수직 콘크리트 댐체 누수 점검 시 로프 하강 고위험 작업 등 기존 인력 관리 방식의 안전성과 예산 낭비가 지적되고 있습니다.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 pt-4">
+                                <div class="bg-black/60 p-4 rounded-2xl border border-[#222]">
+                                    <span class="text-xs text-red-400 font-bold block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 현행 관리선·로프 점검</span>
+                                    <p class="text-xs text-gray-400">광활한 수면 감시 지연, 고공 댐체 로프 점검 추락 위험, 녹조 발생 사후 인지</p>
+                                </div>
+                                <div class="bg-black/60 p-4 rounded-2xl border border-waterCyan/30">
+                                    <span class="text-xs text-waterCyan font-bold block mb-1"><i class="fa-solid fa-check-circle mr-1"></i> DJI Dock 4 전환</span>
+                                    <p class="text-xs text-gray-300">24시간 정기 자율 순찰, 다분광 녹조 조기 경보, 댐체 균열·누수 무인 정밀 매핑</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/70 p-6 sm:p-8 rounded-2xl border border-[#333] space-y-4">
+                            <h3 class="text-lg font-bold text-white border-b border-[#222] pb-3 flex items-center">
+                                <i class="fa-solid fa-bullseye text-primary mr-2"></i> 스마트 수자원 관리 제안 요약
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>대상 기관:</strong> 한국수자원공사(K-water 댐유역관리처, 수질안전처), 한강·낙동강·금강·영산강유역본부</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>핵심 장비:</strong> DJI Dock 4(24/7 전천후 스테이션) + Matrice 5TD(다분광 수질·열화상·초정밀 광학 줌)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>통합 플랫폼:</strong> 물종합상황실 K-HIT(물관리정보시스템) 및 댐 안전관리시스템 연동</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. DJI Dock 4 시스템 개요 & 참고 영상 -->
+            <section id="dock-system" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-cube mr-1"></i> 24/7 Water Reservoir Station
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">DJI Dock 4 댐·수변 무인 자동화 스테이션</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        다목적 댐 정상, 취수탑 옥상, 상수원 호안에 설치되어 사람 없이 스스로 출동하고 충전하는 완전 무인 수자원 관리 시스템입니다.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-droplet-slash"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">수변 다습·안개 환경 전천후 대응</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                댐 주변의 잦은 짙은 안개와 고습도 환경에 대비한 내장형 제습·공조 시스템으로 센서 결로 현상을 완벽히 방지합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-camera"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">다분광 센서 기반 엽록소-a(Chl-a) 측정</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                다파장 밴드 센서를 활용해 수면 위 조류 농도와 클로로필-a 수치를 원격으로 분석하여 녹조 발생 지도를 자동 생성합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-gauge-high"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">홍수기 45초 핫스왑 연속 방재 순시</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                태풍 및 집중호우 시 댐 수문 방류 전후 하류 침수 위험 지역을 45초 배터리 교체 주기로 연속 비행하며 주민 대피를 확인합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <div class="bg-cardBg border border-primary/40 rounded-3xl p-4 sm:p-6 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden group">
+                            <div class="w-full aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <source src="https://cdn.pixabay.com/video/2021/08/18/85487-590059918_large.mp4" type="video/mp4">
+                                </video>
+                                <div class="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs text-white flex items-center space-x-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-waterCyan animate-pulse"></span>
+                                    <span>댐 시설물 및 수변 환경 자율 모니터링 프리뷰</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 도입에 따른 4대 핵심 이점 (Benefits) -->
+            <section id="benefits" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-award mr-1"></i> Core Benefits
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">수자원공사 도입 4대 핵심 가치</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        수자원 안전과 수질 관리를 무인 자율 데이터 기반으로 업그레이드합니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-viruses"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">1. 녹조 발생 7일 전 예측</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                다분광 지표(NDCI) 정밀 분석으로 육안 식별 전 조류의 초기 확산을 감지하여 조류차단막 설치와 조기 방제를 가동합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cubes-stacked"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">2. 댐체 누수·균열 매핑</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                수직 댐 벽면을 따라 5m 근접 비행하며 열화상으로 콘크리트 침투 누수 지점과 백태(Efflorescence)를 정밀 진단합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-water-ladder"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">3. 부유물 유입량 3D 산정</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                집중호우 후 댐 상류에 유입되는 부유 쓰레기의 분포 면적과 부피를 항공 측량하여 수거 선박 배치를 최적화합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-shield-virus"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">4. 상수원 불법 행위 근절</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                차량 접근이 불가능한 호안선의 불법 낚시, 무단 경작, 오폐수 무단 방류를 AI 비전 탐지로 24시간 감시합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 수자원공사 현장 적용 4대 핵심 임무 (Use Cases) -->
+            <section id="use-cases" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-water text-primary mr-1"></i> Water Management Operations
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">수자원 현장 적용 4대 임무</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        다목적 댐과 상수원 보호 구역에서 즉시 적용 가능한 자율 점검 시나리오입니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-waterCyan/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-waterCyan/20 text-waterCyan px-3 py-1 rounded-full border border-waterCyan/40 font-bold">임무 01</span>
+                            <i class="fa-solid fa-plant-wilt text-2xl text-waterCyan"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">다분광 센서 기반 녹조(남조류) 모니터링 및 확산 예측</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            녹조 발생 취약 유입 지류와 본류를 정기 촬영하여 엽록소(Chl-a) 및 피코시아닌 흡수 파장을 분석합니다. 취수탑 인근 녹조 유입을 사전 예측하여 정수장 응집제 투입량 조절과 수중 폭기장치 가동을 최적화합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 녹조 경보제(관심·경계·대발생) 등급별 자동 알림
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-waterCyan/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/40 font-bold">임무 02</span>
+                            <i class="fa-solid fa-dam text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">콘크리트 댐체 미세 균열 및 침투 누수 열화상 진단</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            수직 댐체의 하류면 콘크리트 블록 이음부 및 여수로(Spillway) 구조물을 드론이 벽면 추종 자율 비행으로 스캔합니다. 콘크리트 내부 수분 침투로 인한 미세 온도 편차를 열화상으로 잡아내어 누수 위험을 사전에 차단합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 고위험 댐체 로프 하강 점검 인력 노출 0%
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-waterCyan/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full border border-yellow-500/30 font-bold">임무 03</span>
+                            <i class="fa-solid fa-trash-can text-2xl text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">홍수기 댐 유입 부유 쓰레기 분포 및 체적 항공 측량</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            집중호우 후 산림 유입 목재와 생활 쓰레기로 뒤덮인 저수구역을 정사영상으로 제작합니다. 3차원 수치표고모델(DEM)을 통해 부유물 총량(㎥)을 정밀 산출하여 수거 바지선과 인력 투입 계획을 최적 수립합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 부유물 차단막 파손 여부 및 수문 유입 실시간 감시
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-waterCyan/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-red-900/50 text-red-300 px-3 py-1 rounded-full border border-red-500/30 font-bold">임무 04</span>
+                            <i class="fa-solid fa-handcuffs text-2xl text-red-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">상수원 보호구역 불법 낚시 및 행락 취사 계도</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            도보 진입로가 없는 상수원 호소 내 낚시 좌대와 불법 수영 행위를 열화상 및 광학 줌으로 탐지합니다. 상공에서 방송 스피커로 상수원보호구역 처벌 조항 안내를 송출하고 위반 증거를 자동 캡처합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 차량 번호판 자동 인식 및 특별사법경찰관 단속 연계
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 데이터 통합 플랫폼 & 수자원 안전 체계 -->
+            <section id="tech-specs" class="reveal-up">
+                <div class="bg-gradient-to-br from-cardBg via-[#141414] to-black border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-2">Water-HIT Platform & Spatial Security</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mb-6">
+                                K-water 통합물관리시스템(K-HIT)과 <br/>
+                                <span class="text-waterCyan">3차원 수자원 디지털 트윈 데이터베이스</span>
+                            </h2>
+                            <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+                                스테이션에서 수집된 수질 분석 지표와 댐 시설물 점검 데이터는 수자원공사 물종합상황실과 실시간 연동됩니다. 댐 수위 데이터, 강우 레이더, 드론 영상이 단일 화면에 오버레이되어 홍수기 방류 의사결정을 지원합니다.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-shield-halved text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">국가 핵심 수자원 시설물 암호화 보안</h4>
+                                        <p class="text-gray-400 text-xs">댐체 정밀 3D 좌표 및 항공 데이터의 국가 중요시설 암호 보안 프로토콜 적용</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-chart-pie text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">수질 센서 스테이션 교차 검증 (Dual AI)</h4>
+                                        <p class="text-gray-400 text-xs">수중 자동 수질측정망 데이터와 드론 다분광 영상 데이터를 상호 보정하여 정확도 95% 달성</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black shadow-2xl">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/26f2770d-9e15-4406-b9a0-e116ebb5c758.mp4?w=2400&h=1200" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-6">
+                                <p class="text-xs text-gray-300">
+                                    <strong class="text-primary">댐 유역 통합 관제 화면:</strong> 3D 저수용량 모델 및 녹조 농도 분포 히트맵
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <section id="roi-analysis" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-ship text-primary mr-2"></i> 관리선 유류비 및 용선료 절감</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                매일 순찰선을 출항시키는 유류비와 인건비를 획기적으로 감축하고, 저수심 좌초 위험 구역을 안전하게 공중 순찰합니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-flask-vial text-primary mr-2"></i> 녹조 조기 차단 정수 처리비 절감</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                대발생 전 조기 차단막 가동으로 정수장 활성탄 투입비와 고도 정수 처리 약품 비용을 수십억 원 단위로 절약합니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-helmet-safety text-primary mr-2"></i> 댐 고소 점검 중대재해 제로화</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                수직 댐벽 로프 매달리기 점검과 홍수기 보트 접근 등 고위험 현장 작업을 무인 기체로 완전 대체합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/80 border border-[#333] p-6 sm:p-8 rounded-2xl">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
+                            <div>
+                                <h4 class="text-white font-bold text-base sm:text-lg">
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 인력·관리선 체계 vs DJI Dock 4 무인 수자원 관리 체계 비교
+                                </h4>
+                                <p class="text-gray-400 text-xs mt-1">연간 댐 유역 순찰 비용 및 녹조·누수 진단 소요 시간 비교 시뮬레이션</p>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">연간 댐 수역 관리선 운영비 및 수변 순찰 인건비</span>
+                                    <span class="text-primary font-bold">약 65% 절감</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (관리선 유류·인력 비용)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 35%;">절감 후 35%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">광역 수역 녹조 발생 분석 및 댐벽 정밀 진단 시간</span>
+                                    <span class="text-primary font-bold">최대 85% 단축</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 수일 소요 (선박 채수·실험실 분석)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 15%;">다분광 항공 스캔 즉시 히트맵 표출</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">수직 댐벽 로프 점검 등 고위험 작업자 노출률</span>
+                                    <span class="text-primary font-bold">0% 실현 (공중 무인 대체)</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 75%;">기존 정기적 로프 점검 투입</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">완전 무인화 (0% 노출)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. 해외 선진 활용 사례 (Global Case Studies) -->
+            <section id="global-cases" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-earth-asia mr-1"></i> Global Proven Cases
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">해외 선진 수자원 스마트 관리 사례</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        글로벌 수력발전 공사 및 수자원청에서 검증된 도킹 스테이션 운영 모델입니다.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-8">
+                    <!-- 사례 1: 프랑스 전력청 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="프랑스 수력발전 댐 점검" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">France Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">프랑스 전력청 (EDF Hydro)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">알프스 수력발전 댐 수직벽 균열 및 누수 무인 진단</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                험준한 산악에 위치한 150m 높이의 콘크리트 아치 댐에 도킹 스테이션을 설치해 일일 자동 순시를 수행했습니다. 열화상 카메라로 벽면 침투수 누수 경로를 0.1℃ 오차로 감지해 사전 보수를 완료했습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 2: 미국 수자원국 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/0ff5cc30522199f694696122d7a22ea6@770*462.jpg" alt="미국 상수원 녹조 감시" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/770x462/111111/D4AF37?text=US+Water+Reservoir'">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">US Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">미국 수자원개간국 (USBR)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">후버댐 및 콜로라도강 저수지 수질·녹조 다분광 자율 측량</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                광활한 인공호수의 조류 대발생 징후를 다분광 드론 자율 순시로 추적했습니다. 녹조 발생 지점을 선제 파악해 취수 수심을 자동 변경함으로써 대도시 수돗물 맛·냄새 물질 유입을 사전 차단했습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 3: 호주 머레이-달링 수자원청 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="호주 하천 수자원 관리" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Australia Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">호주 머레이-달링 유역청 (MDBA)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">홍수기 수문 방류 하류 범람 모니터링 및 댐 저수율 3D 측량</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                수문 개방 시 하류 유역의 제방 유실과 농경지 침수 범위를 실시간 매핑했습니다. 3D 정사영상을 통해 퇴적 토사량을 정확히 산정하여 댐 준설 공사 예산을 40% 절약했습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. 시범 사업 제안 & 단계별 구축 로드맵 -->
+            <section id="roadmap" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                            <i class="fa-solid fa-map-location-dot mr-1"></i> Phased Roadmap
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">스마트 수자원 관리 단계별 구축 로드맵</h2>
+                        <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                            거점 댐 실증부터 4대강 유역 통합 관제망 완성까지 단계별 구축 계획입니다.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">1단계 : 2026</span>
+                            <h4 class="text-xl font-bold text-white mb-3">거점 다목적 댐 시범 실증 (PoC)</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                보령댐 또는 대청댐 등 녹조 취약 및 주요 상수원 댐 1~2개소에 도킹 스테이션을 우선 구축하여 다분광 수질 분석과 댐벽 점검 정확도를 6개월간 검증합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full font-bold mb-4 inline-block">2단계 : 2027</span>
+                            <h4 class="text-xl font-bold text-white mb-3">유역본부별 핵심 댐 및 보 확대</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                한강·낙동강·금강 유역 주요 다목적 댐과 가동보로 스테이션을 확대 설치하고 K-water 물종합상황실과 실시간 수질 데이터베이스를 연동합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-waterCyan/20 text-waterCyan px-3 py-1 rounded-full font-bold mb-4 inline-block">3단계 : 2028+</span>
+                            <h4 class="text-xl font-bold text-white mb-3">전국 댐·상수원 100% 디지털 트윈 완성</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                전국 댐과 광역 상수도 관망을 연계하는 DJI Dock 4 스마트 워터 그리드를 확립하여 깨끗한 물 공급과 시설 안전의 완전 무인 관제를 달성합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. 결론 및 도입 상담 안내 -->
+            <section class="reveal-up">
+                <div class="bg-gradient-to-r from-waterCyan/20 via-[#111] to-black border border-primary/40 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+                    <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full mb-4 uppercase tracking-widest">
+                        Conclusion & Partnership
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-6">대한민국 수자원의 맑은 물과 안전을 책임지는 스마트 솔루션</h3>
+                    <blockquote class="text-base sm:text-lg md:text-xl text-gray-200 italic font-light max-w-4xl mx-auto leading-relaxed mb-8">
+                        "DJI Dock 4 도입은 국가 수자원 관리를 <strong class="text-primary font-bold not-italic">'사후 수질 대처 및 고위험 댐벽 로프 점검'에서 'AI 다분광 예방 진단과 24시간 무인 입체 관제'</strong>로 도약시키는 핵심 인프라입니다. 웰컴드론이 수자원 맞춤 환경 실사부터 데이터 플랫폼 구축까지 전담하겠습니다."
+                    </blockquote>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="contact.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center">
+                            <i class="fa-solid fa-headset mr-2"></i> 수자원공사 솔루션 도입 문의
+                        </a>
+                        <a href="solution.html" class="bg-transparent text-white border-2 border-[#444] px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all inline-flex items-center justify-center">
+                            무인화 솔루션 메인으로 돌아가기
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
+            document.getElementById('mobile-menu').classList.toggle('hidden'); 
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const navHeight = 80;
+                const elementPosition = el.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal-up');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            const sections = [
+                'hero', 'background', 'dock-system', 'benefits', 
+                'use-cases', 'tech-specs', 'roi-analysis', 'global-cases', 'roadmap'
+            ];
+            const dots = document.querySelectorAll('.nav-dot');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(secId => {
+                    const sec = document.getElementById(secId);
+                    if (sec) {
+                        const top = sec.offsetTop - 120;
+                        if (window.pageYOffset >= top) {
+                            current = secId;
+                        }
+                    }
+                });
+
+                sections.forEach((secId, idx) => {
+                    if (dots[idx]) {
+                        dots[idx].classList.remove('active');
+                        if (current === secId) {
+                            dots[idx].classList.add('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
