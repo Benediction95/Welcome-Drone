@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>해양경찰청 스마트 해양 안전·경비 솔루션 - 웰컴드론</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Pretendard"', 'sans-serif'], },
+                    colors: {
+                        primary: '#D4AF37',
+                        primaryHover: '#B5952F',
+                        oceanBlue: '#0284C7',
+                        darkBg: '#050505',
+                        cardBg: '#111111',
+                        cardBorder: '#222222',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000000; }
+        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #444;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .nav-dot.active {
+            background-color: #D4AF37;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        .nav-dot .tooltip {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .nav-dot:hover .tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-primary selection:text-black">
+    
+    <!-- 우측 플로팅 퀵 내비게이션 -->
+    <nav class="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col gap-4 bg-black/60 backdrop-blur-md p-3 rounded-full border border-[#222]" id="sideNav">
+        <div class="nav-dot active" onclick="scrollToSection('hero')"><span class="tooltip">개요</span></div>
+        <div class="nav-dot" onclick="scrollToSection('background')"><span class="tooltip">01. 추진 배경</span></div>
+        <div class="nav-dot" onclick="scrollToSection('dock-system')"><span class="tooltip">02. Dock 4 시스템</span></div>
+        <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
+        <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 해양 임무</span></div>
+        <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 통신</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 단계별 구축 로드맵</span></div>
+    </nav>
+
+    <!-- Global Navigation Bar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
+                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
+                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                    </div>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-primary font-bold">무인화 솔루션</a>
+                    <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
+                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">무인화 솔루션</a>
+                <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
+                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [HERO SECTION] -->
+    <header id="hero" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 border-b border-cardBorder">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://pixabay.com/videos/download/video-383656_medium.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-darkBg z-0"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center py-20 reveal-up">
+            <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-oceanBlue/40 bg-oceanBlue/10 text-oceanBlue font-bold text-xs sm:text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-water"></i> 대한민국 해양경찰청 맞춤 제안서
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+                DJI Dock 4 기반 <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-200 to-oceanBlue">스마트 연안 안전·해양 경비 무인 자동화 체계</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                연안 취약지 및 도서 지역을 24시간 자율 순찰하고, 해상 조난자 열화상 수색과 안전계도 방송 및 불법 조업·오염 감시를 무인 자동화로 완성합니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
+                    <i class="fa-solid fa-chart-line mr-2"></i> 해양 안전 ROI 및 비용 절감 보기
+                </a>
+                <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
+                    도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow bg-darkBg relative overflow-hidden">
+        <div class="absolute top-40 left-0 w-96 h-96 bg-oceanBlue/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 space-y-28">
+
+            <!-- 1. 추진 배경 및 제안 개요 -->
+            <section id="background" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/40">01</div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Background & Overview</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">추진 배경 및 연안 경비의 구조적 한계</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                        <div class="space-y-4">
+                            <p class="text-gray-300 leading-relaxed text-base">
+                                삼면이 바다인 대한민국 연안은 갯벌, 테트라포드, 무인도 등 <strong class="text-white font-semibold">경비함정과 구조 보트가 접근할 수 없는 천해 수역 사각지대</strong>가 광범위하게 존재합니다.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-sm">
+                                낚시객 및 해루질 조난 사고는 야간 및 밀물 시점에 집중되나, 육안 야간 수색의 한계와 출동 지연으로 골든타임 사수에 어려움이 큽니다.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 pt-4">
+                                <div class="bg-black/60 p-4 rounded-2xl border border-[#222]">
+                                    <span class="text-xs text-red-400 font-bold block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 현행 함정·인력 순찰</span>
+                                    <p class="text-xs text-gray-400">저수심 좌초 위험, 야간 원거리 육안 식별 불가, 기상 악화 시 출항 지연</p>
+                                </div>
+                                <div class="bg-black/60 p-4 rounded-2xl border border-oceanBlue/30">
+                                    <span class="text-xs text-oceanBlue font-bold block mb-1"><i class="fa-solid fa-check-circle mr-1"></i> DJI Dock 4 전환</span>
+                                    <p class="text-xs text-gray-300">명령 즉시 21m/s 급행 출동, 적외선 열화상 야간 체온 탐지, 확성기 계도 방송</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/70 p-6 sm:p-8 rounded-2xl border border-[#333] space-y-4">
+                            <h3 class="text-lg font-bold text-white border-b border-[#222] pb-3 flex items-center">
+                                <i class="fa-solid fa-bullseye text-primary mr-2"></i> 스마트 해양 안전 제안 요약
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>대상 기관:</strong> 해양경찰청(경비국, 구조안전국), 지방해양경찰청 및 일선 해양경찰서·파출소</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>핵심 장비:</strong> DJI Dock 4(염분 방지 차폐·자동 스왑) + Matrice 5TD(열화상·스피커·서치라이트)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>관제 연동:</strong> VTS(해상교통관제센터) 및 종합상황실과 실시간 영상·위성 데이터 동기화</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. DJI Dock 4 시스템 개요 & 참고 영상 -->
+            <section id="dock-system" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-cube mr-1"></i> 24/7 Coastal Station
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">DJI Dock 4 해양 특화 무인 자동화 스테이션</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        해풍과 염분에 완벽히 대응하는 내부 공조 밀폐형 구조로 파출소 옥상, 방파제, 함정 갑판에서 24시간 즉시 출동합니다.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-water"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">해양 부식 방지 코팅 & IP55 차폐</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                염분과 높은 습도에 강한 특수 방청 코팅과 완벽한 밀폐형 도어 시스템으로 해안가 상시 거치 시에도 내부 설비를 보호합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-wind"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">최대 12m/s 해풍 극복 이착륙</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                거센 바닷바람 속에서도 고정밀 RTK 센서와 통합 비전 포지셔닝으로 한 치의 오차 없이 자동 이착륙 및 45초 배터리 교체를 완료합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-ship"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">경비함정 갑판 및 연안 거점 배치</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                대형 함정 비행 갑판 또는 항만 파출소 거점에 배치하여 출항 전 원거리 레이더 미식별 선박을 선제 정찰합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <div class="bg-cardBg border border-primary/40 rounded-3xl p-4 sm:p-6 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden group">
+                            <div class="w-full aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <source src="https://pixabay.com/videos/download/video-383656_medium.mp4" type="video/mp4">
+                                </video>
+                                <div class="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs text-white flex items-center space-x-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-oceanBlue animate-pulse"></span>
+                                    <span>해양경찰 연안 안전 순찰 실시간 프리뷰</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 도입에 따른 4대 핵심 이점 (Benefits) -->
+            <section id="benefits" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-award mr-1"></i> Core Benefits
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">해양경찰 도입 4대 핵심 가치</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        함정 출항 및 대원 투입 전 무인 드론이 먼저 현장에 진입하여 확보하는 성과입니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-person-swimming"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">1. 익수자 골든타임 단축</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                조난 신고 즉시 3분 이내 해상에 도착하여 구명환(최대 450g)을 투하하고 정확한 조류 표류 좌표를 타전합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">2. 원격 안전계도 방송</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                밀물 시간대 갯벌 고립 위험객이나 구명조끼 미착용 레저보트에 고출력 스피커로 안내 방송을 실시간 송출합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-life-ring"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">3. 구조 대원 안전 확보</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                야간 암초 지대 및 급류 구역에 구조 보트 진입 전 드론 서치라이트로 시야를 밝혀 2차 전복 사고를 방지합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-oil-well"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">4. 불법 조업·오염 채증</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                야간 선박 식별 장치(AIS) 차단 어선의 선명과 유류 유출 기름띠 범위를 열화상으로 자동 추적 채증합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 해양경찰 현장 적용 4대 핵심 임무 (Use Cases) -->
+            <section id="use-cases" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-anchor mr-1"></i> Coast Guard Operations
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">해양경찰 현장 적용 4대 임무</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        실제 해양 치안 및 해상 수색 구조 현장에 즉시 투입 가능한 특화 기능입니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-oceanBlue/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-red-900/50 text-red-300 px-3 py-1 rounded-full border border-red-500/30 font-bold">임무 01</span>
+                            <i class="fa-solid fa-person-falling text-2xl text-red-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">연안 갯벌·테트라포드 고립자 야간 열화상 수색</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            밀물 시 고립된 해루질객과 방파제 추락자를 열화상 센서로 체온 감지하여 즉각 위치를 특정합니다. 현장 상공에서 서치라이트를 고정 조사하며 팽창식 구명환을 투하해 익수를 방지합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 조류 표류 예측 알고리즘 연동 자동 수색 경로 생성
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-oceanBlue/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-oceanBlue/20 text-oceanBlue px-3 py-1 rounded-full border border-oceanBlue/40 font-bold">임무 02</span>
+                            <i class="fa-solid fa-vest text-2xl text-oceanBlue"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">선상 낚시객 구명조끼 착용 안전계도 방송</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            연안 출항 낚시 어선 및 레저 보트 밀집 해역을 정기 순찰합니다. AI 비전 카메라로 구명조끼 미착용 인원을 식별하고, 상공에서 해경 음성 경고 방송을 송출하여 안전 의식을 고취합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 실제 웰컴드론 X 보령해경 합동 작전 검증 완료
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-oceanBlue/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/40 font-bold">임무 03</span>
+                            <i class="fa-solid fa-skull-crossbones text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">불법 영해 침범 어선 및 불법 양식장 단속</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            야간 소등 후 불법 조업하는 무허가 어선의 선명과 작업 행위를 고배율 줌 카메라로 은밀 채증합니다. 경비정 접근 전 증거를 확보하여 단속 시 선박 도주와 저항을 무력화합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 선박 등록 번호판 300m 상공 광학 식별
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-oceanBlue/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full border border-yellow-500/30 font-bold">임무 04</span>
+                            <i class="fa-solid fa-biohazard text-2xl text-yellow-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">해양 기름 유출 오염 사고 실시간 확산 추적</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            선박 충돌 및 침몰 사고 발생 시 해상 유출유의 확산 방향과 유막 두께를 다분광 센서로 측정합니다. 방제정의 오일펜스 설치 지점을 최적 유도하여 양식장 등 2차 해양 오염 피해를 최소화합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 실시간 방제 지도(오염 범위 GIS) 상황실 자동 전송
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 데이터 통합 플랫폼 & 통신 체계 -->
+            <section id="tech-specs" class="reveal-up">
+                <div class="bg-gradient-to-br from-cardBg via-[#141414] to-black border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-2">Maritime Connectivity & VTS Integration</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mb-6">
+                                해양치안 통합 플랫폼과 <br/>
+                                <span class="text-oceanBlue">초저지연 LTE/5G·위성 데이터 통신망</span>
+                            </h2>
+                            <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+                                기지국 음영 구역이 많은 도서·해상에서도 다중 LTE/5G 본딩 모듈과 위성 통신 링크를 연계하여 끊김 없는 HD 영상을 해양경찰청 종합상황실과 현장 경비함정에 동시 스트리밍합니다.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-tower-cell text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">해상 전용 O4 Enhanced 전송 시스템</h4>
+                                        <p class="text-gray-400 text-xs">수면 반사파 및 전파 간섭 환경에서도 최대 20km 원격 영상 제어 링크 유지</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-satellite-dish text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">해경 종합상황실 및 VTS 레이더망 연동</h4>
+                                        <p class="text-gray-400 text-xs">레이더 미식별 선박 좌표 클릭 시 드론 자동 출동(Point-to-Fly) 인터페이스</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black shadow-2xl">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/26f2770d-9e15-4406-b9a0-e116ebb5c758.mp4?w=2400&h=1200" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-6">
+                                <p class="text-xs text-gray-300">
+                                    <strong class="text-primary">해상 상황실 관제 콘솔:</strong> 해도(전자해도) 오버레이 및 선박 추적 화면
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <section id="roi-analysis" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-gas-pump text-primary mr-2"></i> 함정 유류비·출동 비용 절감</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                단순 확인성 출동에 고마력 경비함정을 가동하는 대신 드론으로 사전 정찰하여 연간 함정 유류비와 기관 감가상각비를 대폭 절감합니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-helicopter text-primary mr-2"></i> 해경 헬기 출동 분담 효과</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                시간당 수백만 원이 소요되는 회전익 헬기 출동을 연안 수색 영역에서 드론이 대체 분담하여 비행 예산을 최적화합니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-users-gear text-primary mr-2"></i> 파출소 당직 인력 피로도 경감</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                야간 취약 시간대 정기 무인 순찰 자동화로 일선 파출소 경찰관의 격무를 해소하고 긴급 상황 대응 집중도를 극대화합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/80 border border-[#333] p-6 sm:p-8 rounded-2xl">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
+                            <div>
+                                <h4 class="text-white font-bold text-base sm:text-lg">
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 함정 순찰 체계 vs DJI Dock 4 무인 연안 관제 체계 비교
+                                </h4>
+                                <p class="text-gray-400 text-xs mt-1">연안 출동 소요 시간 및 유류·운영 예산 절감 시뮬레이션</p>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">연안 확인 순찰 유류비 및 경비정 가동 비용</span>
+                                    <span class="text-primary font-bold">약 60% 절감</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (함정 기동 기준 비용)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 40%;">절감 후 40%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">익수 조난 신고 접수 후 최초 현장 도달 시간</span>
+                                    <span class="text-primary font-bold">최대 80% 단축 (초기 구조망 전개)</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 평균 25~35분 소요 (보트 출항·이동)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 15%;">드론 즉시 이륙 3~5분 이내 도달</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">저수심·암초 지대 연안 감시 사각지대율</span>
+                                    <span class="text-primary font-bold">0% 실현 (공중 완전 시야 확보)</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 65%;">기존 함정 접근 불능 구역 다수</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">공중 시각선 100% (사각지대 0%)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. 해외 선진 활용 사례 (Global Case Studies) -->
+            <section id="global-cases" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-earth-asia mr-1"></i> Global Proven Cases
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">해외 선진 해양 무인 관제 사례</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        세계 각국 해양경비대 및 항만 공사에서 실증된 드론 스테이션 운영 모델입니다.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-8">
+                    <!-- 사례 1: 호주 해안 경비 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="호주 연안 인명구조" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Australia Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">호주 서프 라이프 세이빙 (SLSA)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">연안 상어 출몰 감시 및 조난자 자동 구명환 투하</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                해수욕장 주요 거점에 드론 스테이션을 배치하여 이안류와 상어 출몰을 AI 비전으로 실시간 감시했습니다. 익수 조난자 발견 시 자동 팽창식 튜브를 즉시 투하하여 헬기 도착 전 생존율을 3배 이상 향상시켰습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 2: 유럽 해상안전청 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/0ff5cc30522199f694696122d7a22ea6@770*462.jpg" alt="유럽 해양 배출가스 및 기름 유출 감시" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/770x462/111111/D4AF37?text=Europe+Maritime+Security'">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Europe Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">유럽 해상안전청 (EMSA)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">항만 인근 선박 불법 유류 유출 및 야간 배출가스 추적</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                북해 및 지중해 주요 항만 진입로에 자동 드론 스테이션을 가동하여 야간 세정수 및 폐유 불법 배출을 열화상 분광 센서로 적발했습니다. 24시간 감시망 확립 후 불법 해양 오염 행위가 75% 감소했습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 3: 일본 해상보안청 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="도서 지역 무인 경비" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Japan Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">일본 해상보안청</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">원격 도서 해안선 및 미식별 목선 자동 순찰</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                경찰관이 상주하지 않는 무인 도서 거점에 도킹 스테이션을 배치하여 1일 4회 자동 해안선 순찰을 전개했습니다. 밀입국 의심 선박과 표류 표류물을 레이더보다 정밀하게 영상으로 확인해 현장 대응력을 확보했습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. 시범 사업 제안 & 단계별 구축 로드맵 -->
+            <section id="roadmap" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                            <i class="fa-solid fa-map-location-dot mr-1"></i> Phased Roadmap
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">해양경찰 스마트 무인 치안 단계별 로드맵</h2>
+                        <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                            사고 빈발 연안 파출소 실증부터 전국 해안망 연계까지 단계별 이행 전략입니다.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">1단계 : 2026</span>
+                            <h4 class="text-xl font-bold text-white mb-3">연안 취약 파출소 시범 구축 (PoC)</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                보령·태안 등 서해안 갯벌 고립 및 테트라포드 사고 다발 파출소 1~2개소에 스테이션을 우선 구축하여 야간 순찰과 스피커 계도 방송의 실효성을 6개월간 검증합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full font-bold mb-4 inline-block">2단계 : 2027</span>
+                            <h4 class="text-xl font-bold text-white mb-3">지방해경청 관할 권역 확대</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                동·서·남해 주요 해양경찰서 관할 주요 항만 및 취약 도서 거점으로 확대 배치하고, 경비함정 탑재형 모바일 독(Dock) 운용을 실증합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-oceanBlue/20 text-oceanBlue px-3 py-1 rounded-full font-bold mb-4 inline-block">3단계 : 2028+</span>
+                            <h4 class="text-xl font-bold text-white mb-3">전국 연안 통합 스마트 안전망</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                해양경찰청 중앙상황실과 전국 VTS를 잇는 DJI Dock 4 네트워크를 확립하여 출항부터 수색까지 100% 무인 자동화 입체 치안망을 완성합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. 결론 및 도입 상담 안내 -->
+            <section class="reveal-up">
+                <div class="bg-gradient-to-r from-oceanBlue/20 via-[#111] to-black border border-primary/40 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+                    <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full mb-4 uppercase tracking-widest">
+                        Conclusion & Partnership
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-6">바다의 생명을 지키는 차세대 스마트 해양 치안 파트너</h3>
+                    <blockquote class="text-base sm:text-lg md:text-xl text-gray-200 italic font-light max-w-4xl mx-auto leading-relaxed mb-8">
+                        "DJI Dock 4 도입은 해양 치안을 <strong class="text-primary font-bold not-italic">'사고 발생 후 함정 출항'에서 'AI 드론 24시간 상시 감시 및 선제 구조 체계'</strong>로 전환하는 획기적 혁신입니다. 웰컴드론이 해양 환경에 최적화된 하드웨어 세팅과 맞춤형 운영 솔루션을 전담 지원하겠습니다."
+                    </blockquote>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="contact.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center">
+                            <i class="fa-solid fa-headset mr-2"></i> 해양경찰 솔루션 도입 문의
+                        </a>
+                        <a href="solution.html" class="bg-transparent text-white border-2 border-[#444] px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all inline-flex items-center justify-center">
+                            무인화 솔루션 메인으로 돌아가기
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
+            document.getElementById('mobile-menu').classList.toggle('hidden'); 
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const navHeight = 80;
+                const elementPosition = el.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal-up');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            const sections = [
+                'hero', 'background', 'dock-system', 'benefits', 
+                'use-cases', 'tech-specs', 'roi-analysis', 'global-cases', 'roadmap'
+            ];
+            const dots = document.querySelectorAll('.nav-dot');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(secId => {
+                    const sec = document.getElementById(secId);
+                    if (sec) {
+                        const top = sec.offsetTop - 120;
+                        if (window.pageYOffset >= top) {
+                            current = secId;
+                        }
+                    }
+                });
+
+                sections.forEach((secId, idx) => {
+                    if (dots[idx]) {
+                        dots[idx].classList.remove('active');
+                        if (current === secId) {
+                            dots[idx].classList.add('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
