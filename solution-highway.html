@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국도로공사 스마트 고속도로 관제·시설물 점검 솔루션 - 웰컴드론</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Pretendard"', 'sans-serif'], },
+                    colors: {
+                        primary: '#D4AF37',
+                        primaryHover: '#B5952F',
+                        highwayAmber: '#F59E0B',
+                        darkBg: '#050505',
+                        cardBg: '#111111',
+                        cardBorder: '#222222',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #000000; }
+        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #444;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .nav-dot.active {
+            background-color: #D4AF37;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        .nav-dot .tooltip {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .nav-dot:hover .tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-primary selection:text-black">
+    
+    <!-- 우측 플로팅 퀵 내비게이션 -->
+    <nav class="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col gap-4 bg-black/60 backdrop-blur-md p-3 rounded-full border border-[#222]" id="sideNav">
+        <div class="nav-dot active" onclick="scrollToSection('hero')"><span class="tooltip">개요</span></div>
+        <div class="nav-dot" onclick="scrollToSection('background')"><span class="tooltip">01. 추진 배경</span></div>
+        <div class="nav-dot" onclick="scrollToSection('dock-system')"><span class="tooltip">02. Dock 4 시스템</span></div>
+        <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
+        <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 도로 임무</span></div>
+        <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 안전</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 단계별 구축 로드맵</span></div>
+    </nav>
+
+    <!-- Global Navigation Bar -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
+                    <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
+                        <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
+                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
+                    </div>
+                </div>
+                <div class="hidden lg:flex space-x-8 items-center">
+                    <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-primary font-bold">무인화 솔루션</a>
+                    <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
+                    <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">무인화 솔루션</a>
+                <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
+                <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- [HERO SECTION] -->
+    <header id="hero" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 border-b border-cardBorder">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+            <source src="https://cdn.pixabay.com/video/2021/08/04/83861-584742630_large.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-darkBg z-0"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center py-20 reveal-up">
+            <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-highwayAmber/40 bg-highwayAmber/10 text-highwayAmber font-bold text-xs sm:text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-road"></i> 한국도로공사 맞춤 제안서
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+                DJI Dock 4 기반 <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-200 to-highwayAmber">스마트 고속도로 사면·교량 무인 자동화 점검 체계</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                낙석 위험 사면과 장대교량 하부 균열을 24시간 자율 정밀 스캔하고, 교통사고 발생 시 갓길 차로 통제 없이 상공에서 실시간 상황을 전파합니다.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
+                    <i class="fa-solid fa-chart-line mr-2"></i> 고속도로 ROI 및 예산 절감 보기
+                </a>
+                <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
+                    도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow bg-darkBg relative overflow-hidden">
+        <div class="absolute top-40 left-0 w-96 h-96 bg-highwayAmber/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 space-y-28">
+
+            <!-- 1. 추진 배경 및 제안 개요 -->
+            <section id="background" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/40">01</div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Background & Overview</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">추진 배경 및 기존 도로 유지보수의 한계</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                        <div class="space-y-4">
+                            <p class="text-gray-300 leading-relaxed text-base">
+                                전국 5,000km 이상의 고속도로망에는 <strong class="text-white font-semibold">수만 개소의 절토 사면, 장대 교량, 터널 입출구부</strong>가 분포되어 있어 해빙기와 집중호우 시 낙석·산사태 붕괴 위험이 상존합니다.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-sm">
+                                교량 하부 점검 시 고소작업차 투입에 따른 1~2개 차로 통제로 극심한 교통 정체가 발생하며, 작업 대원의 주행 차량 추돌 2차 사고 위험이 극히 높습니다.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 pt-4">
+                                <div class="bg-black/60 p-4 rounded-2xl border border-[#222]">
+                                    <span class="text-xs text-red-400 font-bold block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 현행 차로 통제 점검</span>
+                                    <p class="text-xs text-gray-400">교통 혼잡 유발, 고소차량 임차비 과다, 현장 점검원 교통사고 위험</p>
+                                </div>
+                                <div class="bg-black/60 p-4 rounded-2xl border border-highwayAmber/30">
+                                    <span class="text-xs text-highwayAmber font-bold block mb-1"><i class="fa-solid fa-check-circle mr-1"></i> DJI Dock 4 전환</span>
+                                    <p class="text-xs text-gray-300">차로 차단 제로, 초고해상도 줌 균열 검출, 사면 3D 변위 자동 측정</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/70 p-6 sm:p-8 rounded-2xl border border-[#333] space-y-4">
+                            <h3 class="text-lg font-bold text-white border-b border-[#222] pb-3 flex items-center">
+                                <i class="fa-solid fa-bullseye text-primary mr-2"></i> 스마트 도로 안전 제안 요약
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>대상 기관:</strong> 한국도로공사(도로교통본부, 시설처, ITS처), 각 지역본부 및 지사</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>핵심 장비:</strong> DJI Dock 4(고속 순환 배터리 스왑) + Matrice 5TD(LiDAR·밀리미터 줌 카메라)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>관제 연동:</strong> 한국도로공사 교통관제센터(TCC) 및 사면유지관리시스템(CSMS) 통합</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. DJI Dock 4 시스템 개요 & 참고 영상 -->
+            <section id="dock-system" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-cube mr-1"></i> 24/7 Expressway Station
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">DJI Dock 4 도로 인프라 무인 순찰 스테이션</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        고속도로 졸음쉼터, IC 유휴부지, 교량 교각 거점에 배치되어 정기 자율 순찰 및 돌발 교통사고 발생 시 45초 만에 출동합니다.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">돌발 사고 시 지체 없는 즉각 이륙</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                관제센터 1클릭 명령 시 도킹 도어가 개방되며 21m/s의 최고 속도로 비행해 교통 정체에 갇히지 않고 현장에 가장 먼저 도착합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-layer-group"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">LiDAR 기반 3차원 사면 변위 분석</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                매일 동일한 비행 궤적을 자율 운항하며 절토 사면의 흙과 암반 미세 이동을 mm 단위로 계측하여 붕괴를 사전 감지합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-truck-fast"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">순찰 차량 연계형 이동식 거치</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                고정 설치뿐 아니라 도로공사 순찰차량에 탑재하여 특별 재난 점검 주간에 이동형 거점으로 유연하게 투입할 수 있습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <div class="bg-cardBg border border-primary/40 rounded-3xl p-4 sm:p-6 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden group">
+                            <div class="w-full aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <source src="https://cdn.pixabay.com/video/2021/08/04/83861-584742630_large.mp4" type="video/mp4">
+                                </video>
+                                <div class="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs text-white flex items-center space-x-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-highwayAmber animate-pulse"></span>
+                                    <span>고속도로 자율 사면·교량 점검 실시간 프리뷰</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 도입에 따른 4대 핵심 이점 (Benefits) -->
+            <section id="benefits" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-award mr-1"></i> Core Benefits
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">도로공사 도입 4대 핵심 가치</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        도로 통제 없이 정밀한 인프라 안전을 확보하는 고속도로 맞춤 가치입니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-car-tunnel"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">1. 차로 차단 정체 제로</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                교량 및 터널 상공 비행으로 갓길 및 본선 차로를 막지 않아 통행료 수익 감소와 대국민 교통 불편을 없앱니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-hill-rockslide"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">2. 사면 붕괴 선제 예측</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                해빙기 토사 유실과 옹벽 배부름 현상을 LiDAR 정밀 3D 모델로 계측해 붕괴 전 보강 공사를 실행합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-person-burst"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">3. 점검원 추돌사고 예방</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                갓길 도보 순찰과 고소차 탑승 작업을 완전 대체하여 고속도로 유지보수 현장의 중대재해를 근절합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-car-burst"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">4. 2차 사고 즉각 방지</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                야간 교통사고 발생 시 상공에서 서치라이트 조사 및 스피커 안내 방송으로 후속 차량의 2차 대형 추돌을 차단합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 도로공사 현장 적용 4대 핵심 임무 (Use Cases) -->
+            <section id="use-cases" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-signs-post mr-1"></i> Highway Operations
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">고속도로 현장 적용 4대 임무</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        도로 시설물 안전 진단과 교통 안전 관리에 최적화된 자율 운용 시나리오입니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-highwayAmber/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-red-900/50 text-red-300 px-3 py-1 rounded-full border border-red-500/30 font-bold">임무 01</span>
+                            <i class="fa-solid fa-triangle-exclamation text-2xl text-red-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">절토 사면 낙석 위험 및 옹벽 배부름 3D 계측</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            낙석 방지망 손상, 지반 균열, 보강토 옹벽의 전면 배부름 변위를 라이다 및 고해상도 카메라로 정밀 스캔합니다. 누적 시계열 데이터를 비교하여 붕괴 임계치 도달 시 관리자에게 즉시 경보를 발행합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 사면안전관리시스템(CSMS) 데이터 자동 업데이트
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-highwayAmber/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-highwayAmber/20 text-highwayAmber px-3 py-1 rounded-full border border-highwayAmber/40 font-bold">임무 02</span>
+                            <i class="fa-solid fa-archway text-2xl text-highwayAmber"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">장대교량 교각·거더 하부 콘크리트 미세 균열 진단</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            인력 점검이 어려운 깊은 계곡 교량 하부나 하천 횡단 교각에 접근하여 콘크리트 탈락, 철근 노출, 0.1mm 이하 미세 균열을 고배율 광학 줌으로 촬영합니다. AI 균열 인식 알고리즘이 도면 위치별 결함 지도를 자동 작성합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 교량점검차(BT차) 임차료 절감 및 차로 통제 제로
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-highwayAmber/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/40 font-bold">임무 03</span>
+                            <i class="fa-solid fa-truck-moving text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">교통사고 현장 상공 진입 및 2차 추돌 경고 방송</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            갓길 정차 차량이나 본선 다중 추돌 사고 발생 시 순찰차보다 먼저 도달하여 상공 50m에서 후방 1km 전방 접근 차량에게 고출력 스피커와 경고 라이트로 서행을 유도합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 지능형교통체계(ITS) VMS 전광판 사고 문구 자동 표출 연동
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-highwayAmber/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full border border-blue-500/30 font-bold">임무 04</span>
+                            <i class="fa-solid fa-temperature-arrow-down text-2xl text-blue-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">겨울철 교량 노면 살얼음(블랙아이스) 열화상 탐지</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            지열을 받지 못해 결빙 위험이 높은 터널 출구부 및 교량 상판을 새벽 시간대 열화상으로 순시합니다. 노면 결빙 취약 구간의 온도 편차를 분석하여 제설제 살포 차량의 우선 출동 구간을 지정합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 자동 염수분사장치 연계 원격 분사 트리거
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 데이터 통합 플랫폼 & 안전 연동 체계 -->
+            <section id="tech-specs" class="reveal-up">
+                <div class="bg-gradient-to-br from-cardBg via-[#141414] to-black border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-2">ITS Integration & Infrastructure AI</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mb-6">
+                                교통상황실 CCTV 연동과 <br/>
+                                <span class="text-highwayAmber">도로 구조물 AI 디지털 트윈 엔진</span>
+                            </h2>
+                            <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+                                드론이 촬영한 영상은 한국도로공사 TCC(교통관제센터) 통합 비디오 월에 실시간 오버레이되며, 구조물 점검 데이터는 3D BIM(빌딩정보모델링)과 동기화되어 교량·사면의 생애주기 유지보수 비용을 예측합니다.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-server text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">국가 공간정보 보안 기준 준수</h4>
+                                        <p class="text-gray-400 text-xs">고정밀 3D 고속도로 데이터의 암호화 저장 및 도로공사 폐쇄 인트라넷 전송</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-vr-cardboard text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">사면·교량 3D 메쉬 디지털 트윈 구축</h4>
+                                        <p class="text-gray-400 text-xs">과거 점검 데이터와의 오버레이를 통해 콘크리트 균열 진행 속도 자동 계산</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black shadow-2xl">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/26f2770d-9e15-4406-b9a0-e116ebb5c758.mp4?w=2400&h=1200" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-6">
+                                <p class="text-xs text-gray-300">
+                                    <strong class="text-primary">도로 시설물 AI 관제 화면:</strong> 콘크리트 균열 검출 및 사면 변위 수치 시각화
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <section id="roi-analysis" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-truck-pickup text-primary mr-2"></i> 교량점검차·특수차량 임차비 절감</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                1회 투입에 수백만 원이 소요되는 교량점검 특수차량 투입 횟수를 드론 사전 진단으로 80% 이상 축소합니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 차로 차단 교통 혼잡 비용 제로화</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                점검을 위한 차선 통제가 필요 없어 사회적 물류 지체 비용과 정체에 따른 운전자 민원을 원천 해소합니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-car-burst text-primary mr-2"></i> 2차 대형 교통사고 피해 방지</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                고속도로 본선 정차 사고 시 상공 경고 방송으로 후속 차량 다중 추돌을 막아 수십억 원의 인명·물적 피해를 방지합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-black/80 border border-[#333] p-6 sm:p-8 rounded-2xl">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
+                            <div>
+                                <h4 class="text-white font-bold text-base sm:text-lg">
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 인력·차량 투입 점검 vs DJI Dock 4 무인 자동화 체계 비교
+                                </h4>
+                                <p class="text-gray-400 text-xs mt-1">연간 시설물 점검 예산 및 결함 진단 소요 시간 절감 시뮬레이션</p>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">연간 교량·사면 특수 차량 및 점검 인건비</span>
+                                    <span class="text-primary font-bold">약 65% 절감</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (기준 비용)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 35%;">절감 후 35%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">광역 구간 시설물 정밀 스캔 및 보고 시간</span>
+                                    <span class="text-primary font-bold">최대 80% 단축</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 수일~수주 소요 (차로 차단 일정 조율)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 20%;">자율 비행 후 수 시간 내 결과 생성</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">점검원 본선 고속도로 위험 노출 시간</span>
+                                    <span class="text-primary font-bold">0% 실현 (공중 원격 대체)</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 70%;">기존 갓길 및 도로변 상시 노출</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">완전 무인화 (0% 노출)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. 해외 선진 활용 사례 (Global Case Studies) -->
+            <section id="global-cases" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-earth-asia mr-1"></i> Global Proven Cases
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">해외 선진 고속도로 스마트 점검 사례</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        글로벌 고속도로 운영사 및 도로청에서 실증된 무인 드론 스테이션 운영 성과입니다.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-8">
+                    <!-- 사례 1: 스위스 연방도로청 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="스위스 알프스 사면 점검" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Swiss Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">스위스 연방도로청 (FEDRO)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">알프스 고속도로 절토 사면 낙석 자율 모니터링</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                급경사 산악 도로변에 드론 스테이션을 배치하여 해빙기 낙석 위험 절토 사면을 매일 자동 스캔했습니다. 낙석 방지망의 파손과 암반 균열 확대를 사전 감지하여 도로 차단 없이 위험 암반을 선제 제거했습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 2: 미국 플로리다 고속도로청 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/0ff5cc30522199f694696122d7a22ea6@770*462.jpg" alt="미국 고속도로 사고 현장 관제" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/770x462/111111/D4AF37?text=US+Highway+Monitoring'">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">US Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">미국 플로리다주 교통국 (FDOT)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">고속도로 다중 추돌 사고 즉각 공중 중계 및 차로 소통 유도</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                정체로 경찰차 진입이 지연되는 사고 현장에 상공 드론이 4분 만에 도착하여 실시간 차선 폐쇄 현황을 TCC에 중계했습니다. 갓길 우회 유도를 신속히 전파하여 2차 추돌 사고율을 70% 낮췄습니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 사례 3: 일본 NEXCO -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
+                        <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
+                            <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="일본 교량 정밀 진단" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Japan Case</div>
+                        </div>
+                        <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">일본 동일본고속도로 (NEXCO)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">장대교량 하부 콘크리트 중성화 및 염해 균열 무인 진단</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                해안가에 인접한 고속도로 고가 교각의 염해 부식과 콘크리트 박리 현상을 드론 초근접 촬영과 AI 이미지 분석으로 자동 분류했습니다. 점검 비용의 60%를 절감하고 유지보수 수명을 대폭 연장했습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. 시범 사업 제안 & 단계별 구축 로드맵 -->
+            <section id="roadmap" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                            <i class="fa-solid fa-map-location-dot mr-1"></i> Phased Roadmap
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">고속도로 스마트 인프라 단계별 로드맵</h2>
+                        <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                            위험 사면 실증을 시작으로 전국 고속도로망 입체 관제를 구축하는 3단계 방안입니다.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">1단계 : 2026</span>
+                            <h4 class="text-xl font-bold text-white mb-3">산악 구간 고위험 사면 실증 (PoC)</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                영동고속도로 또는 중앙고속도로 등 해빙기 낙석 위험 사면 1~2개 지점에 테스트베드를 구축하여 3D 변위 측정 신뢰성을 6개월간 검증합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full font-bold mb-4 inline-block">2단계 : 2027</span>
+                            <h4 class="text-xl font-bold text-white mb-3">권역별 지사 및 주요 교량 확대</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                서해대교 등 주요 특수교량 및 거점 휴게소·지사로 스테이션 배치를 확대하고 TCC 상황실 CCTV 시스템과 실시간 영상 API를 연동합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-highwayAmber/20 text-highwayAmber px-3 py-1 rounded-full font-bold mb-4 inline-block">3단계 : 2028+</span>
+                            <h4 class="text-xl font-bold text-white mb-3">전국 고속도로 입체 무인 안전망</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                전국 5,000km 본선과 시설물을 연계하는 DJI Dock 4 스마트 그리드를 완성하여 차로 차단 없는 100% 디지털 유지보수 체계를 확립합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. 결론 및 도입 상담 안내 -->
+            <section class="reveal-up">
+                <div class="bg-gradient-to-r from-highwayAmber/20 via-[#111] to-black border border-primary/40 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+                    <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full mb-4 uppercase tracking-widest">
+                        Conclusion & Partnership
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-6">차로 차단 없는 고속도로 안전의 새로운 표준</h3>
+                    <blockquote class="text-base sm:text-lg md:text-xl text-gray-200 italic font-light max-w-4xl mx-auto leading-relaxed mb-8">
+                        "DJI Dock 4 도입은 고속도로 시설물 관리를 <strong class="text-primary font-bold not-italic">'위험한 차로 차단 및 인력 고소작업'에서 'AI와 공중 3D 무인 자동화 진단'</strong>으로 전환하는 안전 혁신입니다. 웰컴드론이 현장 정밀 실사부터 시스템 통합까지 완벽한 파트너가 되겠습니다."
+                    </blockquote>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="contact.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center">
+                            <i class="fa-solid fa-headset mr-2"></i> 도로공사 솔루션 도입 문의
+                        </a>
+                        <a href="solution.html" class="bg-transparent text-white border-2 border-[#444] px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all inline-flex items-center justify-center">
+                            무인화 솔루션 메인으로 돌아가기
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex flex-col items-center md:items-start">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
+                </div>
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
+                    <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
+            document.getElementById('mobile-menu').classList.toggle('hidden'); 
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.style.background = 'rgba(5, 5, 5, 0.9)';
+                nav.classList.add('border-b', 'border-[#222]');
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.5)';
+                nav.classList.remove('border-b', 'border-[#222]');
+            }
+        });
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const navHeight = 80;
+                const elementPosition = el.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal-up');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            const sections = [
+                'hero', 'background', 'dock-system', 'benefits', 
+                'use-cases', 'tech-specs', 'roi-analysis', 'global-cases', 'roadmap'
+            ];
+            const dots = document.querySelectorAll('.nav-dot');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(secId => {
+                    const sec = document.getElementById(secId);
+                    if (sec) {
+                        const top = sec.offsetTop - 120;
+                        if (window.pageYOffset >= top) {
+                            current = secId;
+                        }
+                    }
+                });
+
+                sections.forEach((secId, idx) => {
+                    if (dots[idx]) {
+                        dots[idx].classList.remove('active');
+                        if (current === secId) {
+                            dots[idx].classList.add('active');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
