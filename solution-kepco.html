@@ -89,7 +89,7 @@
         <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
         <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 전력망 임무</span></div>
         <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 보안</span></div>
-        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. 3개년 예산/ROI</span></div>
         <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
         <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 단계별 구축 로드맵</span></div>
     </nav>
@@ -151,7 +151,7 @@
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
-                    <i class="fa-solid fa-chart-line mr-2"></i> 전력망 ROI 및 비용 절감 보기
+                    <i class="fa-solid fa-calculator mr-2"></i> 3개년 경제성·예산 비교 분석 보기
                 </a>
                 <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
                     도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
@@ -474,34 +474,178 @@
                 </div>
             </section>
 
-            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <!-- [업그레이드] 6. 비용 절감 및 3개년 누적 총소유비용(TCO) & ROI 분석 -->
             <section id="roi-analysis" class="reveal-up">
-                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
-                    <div class="flex items-center space-x-3 mb-8">
-                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
-                        <div>
-                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
-                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl space-y-12">
+                    
+                    <!-- 섹션 헤더 -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#222] pb-6 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                            <div>
+                                <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & 3-Year TCO Analysis</span>
+                                <h2 class="text-2xl sm:text-3xl font-black text-white">3개년 누적 비용 비교 (TCO) 및 경제성 분석</h2>
+                            </div>
+                        </div>
+                        <div class="bg-black/60 px-4 py-2 rounded-xl border border-primary/30 text-xs text-gray-300">
+                            산출 기준: <strong class="text-white">송전선로 약 10~15km (철탑 30~40기 및 변전·개폐 설비 1개 관제구간)</strong>
                         </div>
                     </div>
-                    
-                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+
+                    <!-- 핵심 요약 지표 카드 3종 -->
+                    <div class="grid sm:grid-cols-3 gap-6">
+                        <div class="bg-black/60 border border-primary/40 p-6 rounded-2xl relative overflow-hidden group hover:border-primary transition-all">
+                            <div class="text-xs text-primary font-bold uppercase tracking-wider mb-2">3개년 총 순절감액</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 1.57억 ~ 1.67억 원</div>
+                            <p class="text-gray-400 text-xs">기존 3.1억 원 대비 1.43억~1.53억 원으로 총비용 52% 이상 순감축</p>
+                        </div>
+                        <div class="bg-black/60 border border-electricBlue/40 p-6 rounded-2xl relative overflow-hidden group hover:border-electricBlue transition-all">
+                            <div class="text-xs text-electricBlue font-bold uppercase tracking-wider mb-2">투자 회수 기간 (BEP)</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 11개월 ~ 1년 2개월</div>
+                            <p class="text-gray-400 text-xs">연간 6,800만~7,000만 원의 외주 점검비 절감으로 1년 차 전후 투자금 전액 회수</p>
+                        </div>
+                        <div class="bg-black/60 border border-yellow-500/40 p-6 rounded-2xl relative overflow-hidden group hover:border-yellow-500 transition-all">
+                            <div class="text-xs text-yellow-400 font-bold uppercase tracking-wider mb-2">연간 운영비(OPEX) 절감율</div>
+                            <div class="text-3xl sm:text-4xl font-black text-white mb-2">약 72% 절감</div>
+                            <p class="text-gray-400 text-xs">인력 중심 연 9,200만~9,800만 원 → 스테이션 연 2,400만~2,900만 원</p>
+                        </div>
+                    </div>
+
+                    <!-- 3개년 누적 비용 상세 비교 테이블 (TCO Table) -->
+                    <div class="overflow-x-auto rounded-2xl border border-[#333]">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="bg-black/80 text-gray-300 border-b border-[#333] text-xs uppercase tracking-wider">
+                                    <th class="py-4 px-6 font-bold text-white">구분</th>
+                                    <th class="py-4 px-6 font-bold text-gray-400">① 미도입 (기존 인력 승탑 및 지상 순시)</th>
+                                    <th class="py-4 px-6 font-bold text-primary">② DJI Dock 4 무인 스테이션 도입</th>
+                                    <th class="py-4 px-6 font-bold text-electricBlue">차액 (예산 절감액)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-[#222] bg-[#0c0c0c]">
+                                <!-- 초기 구축비 (CAPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        초기 구축비<br><span class="text-xs text-gray-500 font-normal">(CAPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 2,500만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 현장 순찰용 4륜 특장차량 (감가상각 반영)</li>
+                                            <li>• 고소 작업용 안전장구, 망원카메라, 지상 열화상 장비 등</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 6,500만 ~ 7,500만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• DJI Dock 4 + 열화상·줌 카메라 탑재 드론: 약 4,500만~5,000만 원</li>
+                                            <li>• 전력설비 인근 고정식 기초 토목/전원 연계/RTK 기준국 연계: 약 2,000만~2,500만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-yellow-400 align-top">
+                                        Dock 도입 시 초기<br>+4,000만 ~ +5,000만 원
+                                    </td>
+                                </tr>
+
+                                <!-- 1년 차 운영비 (OPEX) -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">
+                                        1년 차 운영비<br><span class="text-xs text-gray-500 font-normal">(OPEX)</span>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,200만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 전문 특수기술자(승탑 점검원) 3인 1조 투입 (외주 용역 및 위험수당 포함: 연 약 7,500만 원)</li>
+                                            <li>• 유류비 및 차량 유지관리비: 약 700만 원</li>
+                                            <li>• 정밀 광학 진단 외주 분석비: 약 1,000만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,400만 원</div>
+                                        <ul class="text-xs text-gray-400 space-y-1">
+                                            <li>• 자동 관제 플랫폼 라이선스 및 AI 결함 판독 솔루션: 약 800만 원</li>
+                                            <li>• 정기 하드웨어 점검 및 배터리 소모품비: 약 600만 원</li>
+                                            <li>• 중앙 관제원 업무 분담 비용: 약 800만 원</li>
+                                            <li>• 통신(LTE/5G) 및 전기료: 약 200만 원</li>
+                                        </ul>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-electricBlue align-top">
+                                        연간 약 6,800만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 2년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">2년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,500만 원</div>
+                                        <p class="text-xs text-gray-400">인건비 및 특수 고소작업 용역비 인상 반영</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,500만 원</div>
+                                        <p class="text-xs text-gray-400">정기 소모품 교체 및 AI 플랫폼 라이선스 유지</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-electricBlue align-top">
+                                        연간 약 7,000만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 차 운영비 -->
+                                <tr class="hover:bg-white/[0.02] transition-colors">
+                                    <td class="py-4 px-6 font-bold text-white align-top">3년 차 운영비</td>
+                                    <td class="py-4 px-6 text-gray-300 align-top">
+                                        <div class="font-bold text-white mb-1">약 9,800만 원</div>
+                                        <p class="text-xs text-gray-400">노후 장비 보수 및 승탑 인력 단가 상승</p>
+                                    </td>
+                                    <td class="py-4 px-6 text-gray-300 align-top bg-primary/[0.03]">
+                                        <div class="font-bold text-primary mb-1">약 2,900만 원</div>
+                                        <p class="text-xs text-gray-400">배터리 세트 일괄 교체 및 스테이션 주요 부품 오버홀 포함</p>
+                                    </td>
+                                    <td class="py-4 px-6 font-bold text-electricBlue align-top">
+                                        연간 약 6,900만 원 절감
+                                    </td>
+                                </tr>
+
+                                <!-- 3년 총 누적 비용 (합계) -->
+                                <tr class="bg-black font-bold text-base border-t-2 border-[#333]">
+                                    <td class="py-5 px-6 text-primary">3년 총 누적 비용</td>
+                                    <td class="py-5 px-6 text-white">약 3억 1,000만 원</td>
+                                    <td class="py-5 px-6 text-primary bg-primary/[0.06]">약 1억 4,300만 ~ 1억 5,300만 원</td>
+                                    <td class="py-5 px-6 text-electricBlue text-lg">약 1억 5,700만 ~ 1억 6,700만 원 순절감</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 주요 금액 차이 발생 요인 3가지 상세 카드 -->
+                    <div class="grid md:grid-cols-3 gap-6 pt-2">
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 순시 인건비·장비비 70% 감축</h4>
+                            <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-person-falling-burst"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">1. 고위험 승탑 작업 인건비 절감</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                송전선로 점검에 투입되는 전문 외주 인건비, 특수 활선 작업차량 임차비, 위험 수당을 획기적으로 줄이고 점검 회차를 늘립니다.
+                                송전철탑 1기당 점검원이 직접 오르는 승탑 점검은 고위험 직무로, 인건비와 외주 용역 단가가 일반 인력에 비해 2~3배 높고 1일 점검 물량이 2~3기에 불과합니다. Dock 4 도입 시 웨이포인트 정밀 비행으로 애자 균열, 볼트 체결 불량, 코로나 방전을 고배율 줌/열화상으로 자동 촬영하여 현장 위험 인력 투입 비용을 <strong>70% 이상 절감</strong>합니다.
                             </p>
                         </div>
-                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-bolt text-primary mr-2"></i> 정전(Blackout) 사회적 손실 예방</h4>
+
+                        <div class="bg-black/50 p-6 rounded-2xl border border-electricBlue/20 text-electricBlue flex-col p-6 rounded-2xl border border-[#222]">
+                            <div class="w-10 h-10 rounded-xl bg-electricBlue/20 text-electricBlue flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">2. 조기 투자 회수 (BEP 11~14개월)</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                전력 공급 중단 시 발생하는 공장 가동 정지 등 수천억 원 대의 막대한 산업계 손실과 배상금 리스크를 사전에 완벽히 방지합니다.
+                                초기 하드웨어 및 설치 공사에 약 6,500만~7,500만 원이 투입되지만, 연간 약 6,800만~7,000만 원의 외주 용역 및 점검 인건비가 절감되므로 <strong>도입 후 약 11개월~1년 2개월 시점에 손익분기점(BEP)에 도달</strong>하여 이후 연간 수천만 원의 순예산 절감 효과가 발생합니다.
                             </p>
                         </div>
+
                         <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-chart-line text-primary mr-2"></i> 설비 교체 주기 과학적 최적화</h4>
+                            <div class="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold mb-4">
+                                <i class="fa-solid fa-plug-circle-bolt"></i>
+                            </div>
+                            <h4 class="text-white font-bold text-base mb-2">3. 돌발 정전 및 휴전 손실 최소화</h4>
                             <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
-                                단순 연수 기준 일괄 교체에서 축적된 열화 데이터를 바탕으로 한 상태기반 정비(CBM)로 전환하여 인프라 유지보수 예산을 최적화합니다.
+                                기존 방식은 정밀 점검 시 선로를 차단(휴전)해야 하는 경우가 있어 전력 판매 손실과 계통 불안정 비용이 발생합니다. Dock 4를 활용한 활선 점검은 <strong>송전 상태 그대로 원격 점검이 가능</strong>해 잠재적인 대형 휴전 손실과 정전 복구 비용을 획기적으로 줄여줍니다.
                             </p>
                         </div>
                     </div>
@@ -511,29 +655,29 @@
                         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
                             <div>
                                 <h4 class="text-white font-bold text-base sm:text-lg">
-                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 인력 중심 승탑 점검 vs DJI Dock 4 무인 자동화 체계 비교
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 3개년 누적 비용 및 점검 성과 시각화
                                 </h4>
-                                <p class="text-gray-400 text-xs mt-1">연간 송전선로 유지보수 예산 및 설비 결함 검출 소요 시간 시뮬레이션</p>
+                                <p class="text-gray-400 text-xs mt-1">송전철탑 30~40기 관제구간 기준 3개년 누적 지출액 및 진단 소요 시간 비교</p>
                             </div>
                             <div class="flex items-center space-x-4 text-xs">
-                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
-                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> ① 미도입 (기존 인력 승탑)</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> ② DJI Dock 4 도입</span>
                             </div>
                         </div>
 
                         <div class="space-y-6">
-                            <!-- 항목 1: 연간 선로 점검 비용 -->
+                            <!-- 항목 1: 3개년 누적 총비용(TCO) -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
-                                    <span class="text-gray-300 font-medium">연간 송전선로 및 철탑 점검 운영 예산</span>
-                                    <span class="text-primary font-bold">약 70% 절감</span>
+                                    <span class="text-gray-300 font-medium">3개년 누적 총소유비용 (TCO)</span>
+                                    <span class="text-electricBlue font-bold">약 1억 6,000만 원 순절감 (52% 감소)</span>
                                 </div>
                                 <div class="space-y-2">
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (기준 비용)</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[11px] text-white flex items-center pl-3 font-bold" style="width: 100%;">기존 인력 체계: 약 3억 1,000만 원</div>
                                     </div>
-                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 30%;">절감 후 30%</div>
+                                    <div class="w-full bg-[#1a1a1a] h-6 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[11px] text-black flex items-center pl-3 font-bold transition-all duration-1000" style="width: 48%;">DJI Dock 4 도입: 약 1억 4,800만 원</div>
                                     </div>
                                 </div>
                             </div>
@@ -541,15 +685,15 @@
                             <!-- 항목 2: 결함 검출 소요 시간 -->
                             <div>
                                 <div class="flex justify-between text-xs sm:text-sm mb-1.5">
-                                    <span class="text-gray-300 font-medium">광역 선로 구간 설비 결함 검출 및 보고 시간</span>
+                                    <span class="text-gray-300 font-medium">광역 구간(15km) 설비 결함 검출 및 보고 시간</span>
                                     <span class="text-primary font-bold">최대 85% 단축</span>
                                 </div>
                                 <div class="space-y-2">
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 수일~수주 소요 (도보 및 승탑)</div>
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 수일~수주 소요 (인력 이동 및 승탑 한계)</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 15%;">자동화 진단 수 시간 내 완료</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 15%;">자동화 진단 수 시간 내 완료</div>
                                     </div>
                                 </div>
                             </div>
@@ -562,10 +706,10 @@
                                 </div>
                                 <div class="space-y-2">
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 75%;">기존 정기 승탑 점검 필수</div>
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 75%;">기존 정기 승탑 점검 필수 투입</div>
                                     </div>
                                     <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">완전 무인화 (0% 노출)</div>
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 5%;">완전 무인화 (0% 노출)</div>
                                     </div>
                                 </div>
                             </div>
