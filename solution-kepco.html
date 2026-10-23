@@ -3,21 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한국전력공사(KEPCO) 솔루션 - 웰컴드론</title>
+    <title>한국전력공사(KEPCO) 스마트 전력망 진단 솔루션 - 웰컴드론</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'], }, colors: { primary: '#D4AF37', primaryHover: '#B5952F', darkBg: '#050505', cardBg: '#111111', cardBorder: '#222222', } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Pretendard"', 'sans-serif'], },
+                    colors: {
+                        primary: '#D4AF37',
+                        primaryHover: '#B5952F',
+                        electricBlue: '#0284C7',
+                        darkBg: '#050505',
+                        cardBg: '#111111',
+                        cardBorder: '#222222',
+                    }
+                }
+            }
+        }
     </script>
     <style>
         body { background-color: #000000; }
         .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+
+        /* Scroll Reveal Animation */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Side Navigation Dot */
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #444;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .nav-dot.active {
+            background-color: #D4AF37;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+        }
+        .nav-dot .tooltip {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+        .nav-dot:hover .tooltip {
+            opacity: 1;
+        }
     </style>
 </head>
-<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-primary selection:text-black">
     
-    <!-- Navigation -->
+    <!-- 우측 플로팅 퀵 내비게이션 -->
+    <nav class="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-50 flex-col gap-4 bg-black/60 backdrop-blur-md p-3 rounded-full border border-[#222]" id="sideNav">
+        <div class="nav-dot active" onclick="scrollToSection('hero')"><span class="tooltip">개요</span></div>
+        <div class="nav-dot" onclick="scrollToSection('background')"><span class="tooltip">01. 추진 배경</span></div>
+        <div class="nav-dot" onclick="scrollToSection('dock-system')"><span class="tooltip">02. Dock 4 시스템</span></div>
+        <div class="nav-dot" onclick="scrollToSection('benefits')"><span class="tooltip">03. 4대 핵심 이점</span></div>
+        <div class="nav-dot" onclick="scrollToSection('use-cases')"><span class="tooltip">04. 4대 전력망 임무</span></div>
+        <div class="nav-dot" onclick="scrollToSection('tech-specs')"><span class="tooltip">05. AI 플랫폼 & 보안</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roi-analysis')"><span class="tooltip">06. ROI 비용 절감</span></div>
+        <div class="nav-dot" onclick="scrollToSection('global-cases')"><span class="tooltip">07. 해외 선진 사례</span></div>
+        <div class="nav-dot" onclick="scrollToSection('roadmap')"><span class="tooltip">08. 단계별 구축 로드맵</span></div>
+    </nav>
+
+    <!-- Global Navigation Bar -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -41,6 +118,7 @@
                 </div>
             </div>
         </div>
+        <!-- Mobile Dropdown -->
         <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
@@ -53,287 +131,575 @@
         </div>
     </nav>
 
-    <!-- 상단 헤더 -->
-    <header class="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden">
+    <!-- [HERO SECTION] 한국전력공사 & 전력연구원 스마트 전력망 진단 제안서 -->
+    <header id="hero" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 border-b border-cardBorder">
         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
             <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/581da91d-232b-484b-a48a-d87fbe7e7083.mp4?w=1184&h=1200" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-black/60 z-0"></div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-12">
-            <span class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase">
-                <i class="fa-solid fa-bolt-lightning mr-1"></i> KEPCO & 전력연구원 스마트 전력망 진단
-            </span>
-            <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4">DJI Dock 기반 송전선로 및 전력 설비 무인 자동화 진단 시스템</h1>
-            <p class="text-base md:text-lg text-gray-300 font-light max-w-2xl mx-auto drop-shadow-md">
-                24시간 원격 열화상 진단과 AI 결함 자동 검출로 국가 전력망의 안정성과 무중단 전력 공급을 실현합니다.
+        <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/65 to-darkBg z-0"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center py-20 reveal-up">
+            <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-primary font-bold text-xs sm:text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-bolt-lightning"></i> KEPCO & 전력연구원 맞춤 제안서
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+                DJI Dock 4 기반 <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-200 to-electricBlue">송전선로 및 전력 설비 무인 자동화 진단 시스템</span>
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed mb-10">
+                원거리·험준 산악 송전탑과 선로를 24시간 무인 자율 순찰하고, 비접촉식 적외선 열화상 및 AI 정밀 분석으로 설비 이상을 조기 검출하여 국가 대정전(Blackout)을 원천 예방합니다.
             </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#roi-analysis" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center">
+                    <i class="fa-solid fa-chart-line mr-2"></i> 전력망 ROI 및 비용 절감 보기
+                </a>
+                <a href="contact.html" class="bg-cardBg border border-[#444] text-white px-8 py-4 rounded-xl font-bold text-base hover:border-primary hover:text-primary transition-all flex items-center">
+                    도입 컨설팅 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
         </div>
     </header>
 
-    <main class="flex-grow pb-24 bg-darkBg relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-16">
+    <main class="flex-grow bg-darkBg relative overflow-hidden">
+        <!-- Background Ambient Glows -->
+        <div class="absolute top-40 left-0 w-96 h-96 bg-electricBlue/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 space-y-28">
 
             <!-- 1. 추진 배경 및 제안 개요 -->
-            <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl mb-20 shadow-2xl">
-                <div class="flex items-center space-x-3 mb-6">
-                    <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold border border-primary/30">01</div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white">추진 배경 및 제안 개요</h2>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 text-gray-300">
-                    <div class="bg-black/40 p-6 rounded-2xl border border-[#222]">
-                        <h4 class="text-primary font-bold text-lg mb-2"><i class="fa-solid fa-bullseye mr-2"></i> 대상 기관</h4>
-                        <p class="text-gray-300 font-medium">한국전력공사(KEPCO), 전력연구원</p>
-                    </div>
-                    <div class="bg-black/40 p-6 rounded-2xl border border-[#222]">
-                        <h4 class="text-primary font-bold text-lg mb-2"><i class="fa-solid fa-lightbulb mr-2"></i> 제안 목적</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">
-                            산악 지형 및 원거리에 분포한 송전탑, 송전선로, 변전소 등의 전력 인프라를 점검하기 위해 기존의 고소작업 및 인력 중심 순찰의 한계를 극복하고, DJI Dock을 활용한 24시간 무인 원격 진단 체계를 구축하여 대정전(Blackout) 사고를 예방하고 설비 신뢰도를 극대화합니다.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2. 도입에 따른 핵심 이점 (Benefits) -->
-            <div class="mb-12">
-                <div class="text-center mb-12">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-star mr-1"></i> Core Benefits</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">도입에 따른 핵심 이점</h2>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- 이점 1 -->
-                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all duration-300 group">
+            <section id="background" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/40">01</div>
                         <div>
-                            <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Background & Overview</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">추진 배경 및 기존 전력 순시의 한계</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                        <div class="space-y-4">
+                            <p class="text-gray-300 leading-relaxed text-base">
+                                전국에 포진된 <strong class="text-white font-semibold">초고압 송전탑(154kV, 345kV, 765kV)과 수만 km의 송전선로</strong> 중 70% 이상이 험준한 산악 지형에 위치해 작업자의 도보 이동과 고소 승탑 점검에 막대한 시간과 안전사고 위험이 수반됩니다.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed text-sm">
+                                기존의 주기적 육안 순시는 절연체 미세 크랙, 코로나 방전, 열화 부위를 즉각 식별하기 어려우며 작업자 감전·추락 등 중대재해 위험에 상시 노출되어 있습니다.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4 pt-4">
+                                <div class="bg-black/60 p-4 rounded-2xl border border-[#222]">
+                                    <span class="text-xs text-red-400 font-bold block mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> 기존 고소 점검</span>
+                                    <p class="text-xs text-gray-400">철탑 승탑에 따른 감전·추락 위험, 점검 주기 장기화(수주~수개월), 이상 즉각 대응 한계</p>
+                                </div>
+                                <div class="bg-black/60 p-4 rounded-2xl border border-primary/30">
+                                    <span class="text-xs text-primary font-bold block mb-1"><i class="fa-solid fa-check-circle mr-1"></i> DJI Dock 4 전환</span>
+                                    <p class="text-xs text-gray-300">24시간 원격 자율 비행, 밀리미터 단위 정밀 줌·열화상 스캔, 고소 작업 인력 노출 0%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 개요 요약 카드 -->
+                        <div class="bg-black/70 p-6 sm:p-8 rounded-2xl border border-[#333] space-y-4">
+                            <h3 class="text-lg font-bold text-white border-b border-[#222] pb-3 flex items-center">
+                                <i class="fa-solid fa-bullseye text-primary mr-2"></i> 스마트 전력망 진단 제안 요약
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>대상 기관:</strong> 한국전력공사(송변전운영처, 배전운영처), 전력연구원, 한전KPS</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>핵심 장비:</strong> DJI Dock 4(25초~45초 자동 배터리 스왑) + Matrice 5TD(광학·열화상·LiDAR·레이더 통합)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5">•</span>
+                                    <span><strong>AI 분석 솔루션:</strong> FlightHub 2 연동 애자(Insulator) 결함 및 접속부 발열(Hot-spot) 자동 판독 모델</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. DJI Dock 4 시스템 개요 & 참고 영상 -->
+            <section id="dock-system" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-cube mr-1"></i> 24/7 Grid Inspection
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">DJI Dock 4 전력 설비 무인 자동화 진단 체계</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        예열 없이 즉각 출동하여 송전선로를 따라 정밀 자율 순시를 수행하고, 복귀 즉시 배터리를 기계식으로 교체해 무중단 진단을 완성합니다.
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">단 45초 핫스왑 & 연속 비행</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                장거리 송전선로 구간을 여러 번에 나누어 점검할 때 충전 대기 없이 배터리를 즉각 자동 교체하여 일일 점검 물량을 극대화합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">강한 전자기장(EMF) 내성 및 전천후 차폐</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                765kV 초고압 변전소 및 송전선 주변의 강한 전자기 간섭 환경에서도 안정적인 비행 제어와 고정밀 RTK 측위를 지원합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-cardBg border border-cardBorder p-6 rounded-2xl hover:border-primary/40 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-tower-broadcast"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white">변전소·철탑 기지 거점형 무인 운용</h4>
+                            </div>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                산악 주요 철탑 하부나 무인 변전소 유휴 부지에 스테이션을 거점 배치하여 원격 중앙 관제 센터에서 전국 선로를 제어합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 현장 운용 참고 영상 박스 -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-cardBg border border-primary/40 rounded-3xl p-4 sm:p-6 shadow-[0_0_50px_rgba(212,175,55,0.15)] relative overflow-hidden group">
+                            <div class="w-full aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/573c2620-ae4e-42f5-9074-7d746ec1c927.mp4?w=1184&h=1200" type="video/mp4">
+                                </video>
+                                <div class="absolute bottom-4 left-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs text-white flex items-center space-x-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+                                    <span>KEPCO 송전탑·선로 자율 무인 정밀 진단 프리뷰</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 도입에 따른 4대 핵심 이점 (Benefits) -->
+            <section id="benefits" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-award mr-1"></i> Core Benefits
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">도입에 따른 4대 핵심 가치</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        전력 설비 점검의 패러다임을 사람 중심에서 AI 무인 원격 체계로 전환하여 얻는 성과입니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-temperature-arrow-up"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-3">1. 송전선로 및 애자 열화상 정밀 진단</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                고해상도 열화상 카메라를 탑재한 기체가 송전탑 접속부의 과열(Hot-spot) 현상 및 애자(Insulator) 불량을 비접촉식으로 정밀 스캔하여 대형 전력 사고를 사전에 예방합니다.
+                            <h3 class="text-lg font-bold text-white mb-2">1. 발열(Hot-spot) 조기 진단</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                고해상도 열화상 센서로 전선 접속부 압착 불량과 애자 누설 전류에 따른 미세 온도 상승을 비접촉으로 정확히 감지합니다.
                             </p>
                         </div>
                     </div>
 
-                    <!-- 이점 2 -->
-                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all duration-300 group">
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
                         <div>
-                            <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-robot"></i>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-microchip"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-3">2. AI 기반 결함 자동 검출 및 분석</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                AI 딥러닝 알고리즘이 촬영된 이미지와 데이터를 실시간으로 분석하여 볼트 풀림, 부식, 수목 접촉 위험 등을 자동으로 판독하고 관리자에게 즉시 경고를 전송합니다.
+                            <h3 class="text-lg font-bold text-white mb-2">2. AI 결함 자동 검출</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                딥러닝 비전 알고리즘이 볼트 풀림, 댐퍼 이탈, 애자 파손, 핀 부식 등을 수천 장의 사진 속에서 실시간 자동 분류합니다.
                             </p>
                         </div>
                     </div>
 
-                    <!-- 이점 3 -->
-                    <div class="bg-cardBg border border-cardBorder p-8 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all duration-300 group">
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
                         <div>
-                            <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
                                 <i class="fa-solid fa-helmet-safety"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white mb-3">3. 고소 작업 위험 제거 및 안전 확보</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                작업자가 직접 송전탑에 오르거나 험난한 산악 지형을 도보로 순찰할 필요가 없어 감전 위험, 추락 사고 등 전력 현장의 중대재해 요인을 원천적으로 차단합니다.
+                            <h3 class="text-lg font-bold text-white mb-2">3. 승탑 중대재해 원천 차단</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                고위험 고소 승탑 점검을 드론 정밀 자율 비행으로 대체하여 현장 작업자의 추락 및 감전 사고 노출률을 0%로 줄입니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-cardBg border border-cardBorder p-6 rounded-3xl flex flex-col justify-between hover:border-primary/50 transition-all group">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-xl mb-5 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">4. 3D 자산 디지털 트윈</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                정밀 LiDAR 점검을 병행하여 송전탑 및 선로 이도(Sag)를 3차원 데이터로 축적, 주변 수목과의 이격거리를 완벽히 관리합니다.
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- 참고용 실시간 운용 영상 자료 -->
-            <div class="mb-20">
-                <div class="bg-cardBg border border-primary/40 rounded-3xl p-6 md:p-8 shadow-[0_0_40px_rgba(212,175,55,0.15)] relative overflow-hidden group">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
-                    <div class="flex flex-col md:flex-row items-center justify-between mb-6 relative z-10 gap-4">
-                        <div>
-                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold uppercase tracking-wider mb-2 inline-block">
-                                <i class="fa-solid fa-video mr-1"></i> Reference Video
-                            </span>
-                            <h3 class="text-xl md:text-2xl font-bold text-white">DJI Dock 전력 설비 무인 진단 참고 영상</h3>
-                        </div>
-                        <p class="text-gray-400 text-sm max-w-md text-left md:text-right">
-                            광활한 송전선로와 철탑 인근을 자율 비행하며 원격으로 데이터를 수집하는 실제 운용 참고 화면입니다.
-                        </p>
-                    </div>
-                    <div class="w-full aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black shadow-inner">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/573c2620-ae4e-42f5-9074-7d746ec1c927.mp4?w=1184&h=1200" type="video/mp4">
-                        </video>
-                        <div class="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 text-xs text-white flex items-center space-x-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
-                            <span>KEPCO INFRA MONITORING PREVIEW</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
-            <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl mb-20 shadow-2xl">
-                <div class="flex items-center space-x-3 mb-8">
-                    <div class="w-10 h-10 rounded-xl bg-primary/20 text-primary flex items-center justify-center font-bold border border-primary/30">03</div>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white">비용 절감 및 경제적 타당성 (ROI 분석)</h2>
-                </div>
-                
-                <div class="grid md:grid-cols-3 gap-8 mb-12">
-                    <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                        <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 점검 인력 및 장비 운용비 감축</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">광범위한 선로 점검에 투입되는 전문 인력 출장비, 특수 차량 임대료, 위험 수당 등의 운영 비용을 대폭 절감하고 점검 속도를 가속화합니다.</p>
-                    </div>
-                    <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                        <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-bolt text-primary mr-2"></i> 대정전(Blackout) 사회적 손실 예방</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">설비 결함을 사전에 발견하여 예방 정비를 수행함으로써, 대규모 정전으로 인해 발생하는 산업계 피해 및 복구 비용을 원천 차단합니다.</p>
-                    </div>
-                    <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
-                        <h4 class="text-white font-bold text-lg mb-3 flex items-center"><i class="fa-solid fa-chart-line text-primary mr-2"></i> 자산 수명 연장 및 효율 극대화</h4>
-                        <p class="text-gray-400 text-sm leading-relaxed">정기적이고 데이터에 기반한 정밀 진단으로 전력 설비의 교체 주기를 최적화하고 전체 인프라 자산의 가치를 보호합니다.</p>
-                    </div>
-                </div>
-
-                <!-- [시청각 자료] 비용 절감 효과 비교 그래프 (Visual Bar Chart) -->
-                <div class="bg-black/70 border border-[#333] p-6 md:p-8 rounded-2xl">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
-                        <div>
-                            <h4 class="text-white font-bold text-lg"><i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 인력 중심 점검 vs DJI Dock 무인 자동화 진단 비교</h4>
-                            <p class="text-gray-400 text-xs mt-1">연간 유지보수 예산 및 설비 진단 소요 시간 절감 효과 시뮬레이션</p>
-                        </div>
-                        <div class="flex items-center space-x-4 text-xs">
-                            <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 인력 점검</span>
-                            <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 도입 후</span>
-                        </div>
-                    </div>
-
-                    <!-- 그래프 그리드 -->
-                    <div class="space-y-6">
-                        <!-- 항목 1: 연간 선로 점검 비용 -->
-                        <div>
-                            <div class="flex justify-between text-sm mb-1.5">
-                                <span class="text-gray-300 font-medium">연간 송전선로 및 철탑 점검 비용</span>
-                                <span class="text-primary font-bold">약 70% 절감</span>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                    <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (기준 비용)</div>
-                                </div>
-                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                    <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 30%;">절감 후 30%</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 항목 2: 결함 검출 소요 시간 -->
-                        <div>
-                            <div class="flex justify-between text-sm mb-1.5">
-                                <span class="text-gray-300 font-medium">광역 구간 설비 결함 검출 및 분석 시간</span>
-                                <span class="text-primary font-bold">최대 85% 단축</span>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                    <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 수일~수주 소요</div>
-                                </div>
-                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                    <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 15%;">자동화 진단 수 시간 내 완료</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 항목 3: 작업자 고소작업 노출 빈도 -->
-                        <div>
-                            <div class="flex justify-between text-sm mb-1.5">
-                                <span class="text-gray-300 font-medium">작업자 위험 구역 및 고소작업 노출률</span>
-                                <span class="text-primary font-bold">0% 실현 (무인 원격 대체)</span>
-                            </div>
-                            <div class="space-y-2">
-                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                    <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 75%;">기존 정기적 고소 진단 투입</div>
-                                </div>
-                                <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
-                                    <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold transition-all duration-1000" style="width: 5%;">완전 무인화 (0% 노출)</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. 해외 활용 사례 (Global Case Studies) - 세로형 3단 와이드 카드 레이아웃 (사진 자료 적용) -->
-            <div class="mb-20">
+            <!-- 4. 전력 인프라 현장 적용 4대 핵심 임무 (Use Cases) -->
+            <section id="use-cases" class="reveal-up">
                 <div class="text-center mb-12">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-earth-asia mr-1"></i> Global Case Studies</span>
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">해외 선진 활용 사례</h2>
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-network-wired mr-1"></i> Grid Inspection Operations
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">전력 인프라 현장 적용 4대 임무</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        한국전력공사 송변전 및 배전 설비 현장에 즉시 적용되는 무인 자동화 임무 시나리오입니다.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- 임무 1: 송전선로 접속부 열화상 정밀 진단 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-primary/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-red-900/50 text-red-300 px-3 py-1 rounded-full border border-red-500/30 font-bold">임무 01</span>
+                            <i class="fa-solid fa-fire-burner text-2xl text-red-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">송전선로 및 클램프·접속부 열화상 진단</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            과부하 및 접촉 저항 증가로 발생하는 슬리브, 클램프 부위의 국부적 과열 현상(Hot-spot)을 공중에서 수평·수직 다각도로 스캔합니다. 기준 온도 대비 초과 발열 지점을 즉각 태그하여 단선 사고를 예방합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 정밀 방사율 보정 및 발열점 실시간 절대온도 측정
+                        </div>
+                    </div>
+
+                    <!-- 임무 2: 애자련 결함 및 방전 진단 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-primary/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/40 font-bold">임무 02</span>
+                            <i class="fa-solid fa-magnifying-glass-chart text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">애자(Insulator) 크랙 및 오손 AI 정밀 검출</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            망원 광학 카메라로 애자련(자기·폴리머·유리)의 미세 균열, 파손, 조류 분변 오손 상태를 초근접 줌 촬영합니다. AI 결함 판독 엔진이 파손 등급을 자동 산정하여 보수 우선순위를 제안합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 픽셀 단위 크랙 인식 및 과거 이력 데이터 대비 열화도 비교
+                        </div>
+                    </div>
+
+                    <!-- 임무 3: 수목 이격거리 및 송전선 이도 LiDAR 측정 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-primary/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-forestGreen/20 text-forestGreen px-3 py-1 rounded-full border border-forestGreen/40 font-bold">임무 03</span>
+                            <i class="fa-solid fa-tree text-2xl text-forestGreen"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">선로 주변 위험 수목 및 이도(Sag) 3D LiDAR 측량</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            여름철 고부하 시 전선 처짐(이도 현상)과 강풍 시 수목 접촉에 따른 지락 사고를 방지합니다. 라이다 포인트 클라우드 데이터를 활용해 선로와 수목 간 법정 이격거리 미달 구역을 3D로 시각화합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 벌채 대상 수목 자동 목록화 및 3D 이격거리 산출
+                        </div>
+                    </div>
+
+                    <!-- 임무 4: 변전소 설비 및 재난 신속 감시 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 hover:border-primary/50 transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs bg-blue-900/50 text-blue-300 px-3 py-1 rounded-full border border-blue-500/30 font-bold">임무 04</span>
+                            <i class="fa-solid fa-building-shield text-2xl text-blue-400"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3">무인 옥외 변전소 순시 및 침수·화재 신속 관제</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                            변압기 부싱, 단로기, 피뢰기 등 주요 설비의 주야간 정기 순시를 자동화합니다. 태풍·호우·지진 등 재난 발생 시 상주 인력보다 먼저 발진하여 옥외 변전 시설의 침수와 절연유 누유를 즉각 파악합니다.
+                        </p>
+                        <div class="text-xs text-primary font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i> 비상 상황 시 1클릭 즉각 원격 발진 및 실시간 영상 중계
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. 데이터 통합 플랫폼 & 전력 특화 보안 체계 -->
+            <section id="tech-specs" class="reveal-up">
+                <div class="bg-gradient-to-br from-cardBg via-[#141414] to-black border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="text-primary font-bold text-xs uppercase tracking-widest block mb-2">Grid Data Platform & Defense-Grade Security</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mb-6">
+                                FlightHub 2 전력망 관제와 <br/>
+                                <span class="text-primary">국가 핵심기반시설 전용 보안 아키텍처</span>
+                            </h2>
+                            <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-6">
+                                송전탑 GIS 지리정보시스템과 완벽히 연동되어 각 철탑 번호별 비행 경로를 자율 생성합니다. 수집된 모든 전력망 데이터는 국가정보원 암호 검증 모듈 기준에 부합하는 보안 네트워크를 통해 한전 사내망으로 안전하게 이관됩니다.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-network-wired text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">한전 GIS 및 전력설비 관리시스템 연계</h4>
+                                        <p class="text-gray-400 text-xs">철탑 번호별 좌표 자동 로딩, 전선 궤적 기반 자율 경로 생성 및 과거 점검 이력 자동 매핑</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-lock text-primary mt-1"></i>
+                                    <div>
+                                        <h4 class="text-white font-bold text-sm">국가 보안 폐쇄망(On-Premise) 구축 지원</h4>
+                                        <p class="text-gray-400 text-xs">외부 인터넷망과 차단된 자체 내부망 환경 완벽 구동, 전송 데이터 실시간 하드웨어 암호화</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 비디오/인터랙션 그래픽 박스 -->
+                        <div class="aspect-video rounded-2xl overflow-hidden border border-[#333] relative bg-black shadow-2xl">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/26f2770d-9e15-4406-b9a0-e116ebb5c758.mp4?w=2400&h=1200" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-6">
+                                <p class="text-xs text-gray-300">
+                                    <strong class="text-primary">전력망 자율 순시 관제 콘솔:</strong> GIS 기반 철탑 자동 식별 및 애자 결함 AI 바운딩 박스
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. 비용 절감 및 경제적 타당성 (Cost Reduction & ROI 분석) -->
+            <section id="roi-analysis" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder p-8 md:p-12 rounded-3xl shadow-2xl">
+                    <div class="flex items-center space-x-3 mb-8">
+                        <div class="w-12 h-12 rounded-2xl bg-primary/20 text-primary flex items-center justify-center font-bold text-lg border border-primary/30">06</div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-primary font-bold">Cost Reduction & ROI</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white">비용 절감 및 경제적 타당성 분석</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6 mb-12">
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-coins text-primary mr-2"></i> 순시 인건비·장비비 70% 감축</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                송전선로 점검에 투입되는 전문 외주 인건비, 특수 활선 작업차량 임차비, 위험 수당을 획기적으로 줄이고 점검 회차를 늘립니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-bolt text-primary mr-2"></i> 정전(Blackout) 사회적 손실 예방</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                전력 공급 중단 시 발생하는 공장 가동 정지 등 수천억 원 대의 막대한 산업계 손실과 배상금 리스크를 사전에 완벽히 방지합니다.
+                            </p>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-[#222]">
+                            <h4 class="text-white font-bold text-base mb-2 flex items-center"><i class="fa-solid fa-chart-line text-primary mr-2"></i> 설비 교체 주기 과학적 최적화</h4>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">
+                                단순 연수 기준 일괄 교체에서 축적된 열화 데이터를 바탕으로 한 상태기반 정비(CBM)로 전환하여 인프라 유지보수 예산을 최적화합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- [시각 자료] 비교 바 차트 -->
+                    <div class="bg-black/80 border border-[#333] p-6 sm:p-8 rounded-2xl">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b border-[#222] gap-2">
+                            <div>
+                                <h4 class="text-white font-bold text-base sm:text-lg">
+                                    <i class="fa-solid fa-chart-column text-primary mr-2"></i> 기존 인력 중심 승탑 점검 vs DJI Dock 4 무인 자동화 체계 비교
+                                </h4>
+                                <p class="text-gray-400 text-xs mt-1">연간 송전선로 유지보수 예산 및 설비 결함 검출 소요 시간 시뮬레이션</p>
+                            </div>
+                            <div class="flex items-center space-x-4 text-xs">
+                                <span class="flex items-center text-gray-400"><span class="w-3 h-3 bg-gray-600 rounded-sm mr-1.5"></span> 기존 방식</span>
+                                <span class="flex items-center text-primary font-bold"><span class="w-3 h-3 bg-primary rounded-sm mr-1.5"></span> DJI Dock 4 도입 후</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <!-- 항목 1: 연간 선로 점검 비용 -->
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">연간 송전선로 및 철탑 점검 운영 예산</span>
+                                    <span class="text-primary font-bold">약 70% 절감</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 90%;">기존 100% (기준 비용)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 30%;">절감 후 30%</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 항목 2: 결함 검출 소요 시간 -->
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">광역 선로 구간 설비 결함 검출 및 보고 시간</span>
+                                    <span class="text-primary font-bold">최대 85% 단축</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 85%;">기존 수일~수주 소요 (도보 및 승탑)</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 15%;">자동화 진단 수 시간 내 완료</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 항목 3: 작업자 고소작업 노출 빈도 -->
+                            <div>
+                                <div class="flex justify-between text-xs sm:text-sm mb-1.5">
+                                    <span class="text-gray-300 font-medium">작업자 위험 구역 및 철탑 승탑 노출률</span>
+                                    <span class="text-primary font-bold">0% 실현 (무인 원격 대체)</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gray-600 h-full text-[10px] text-white flex items-center pl-2 font-bold" style="width: 75%;">기존 정기 승탑 점검 필수</div>
+                                    </div>
+                                    <div class="w-full bg-[#1a1a1a] h-5 rounded-lg overflow-hidden flex items-center">
+                                        <div class="bg-gradient-to-r from-primary to-yellow-300 h-full text-[10px] text-black flex items-center pl-2 font-bold" style="width: 5%;">완전 무인화 (0% 노출)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. 해외 선진 활용 사례 (Global Case Studies) -->
+            <section id="global-cases" class="reveal-up">
+                <div class="text-center mb-12">
+                    <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                        <i class="fa-solid fa-earth-asia mr-1"></i> Global Proven Cases
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">해외 선진 전력망 무인 점검 사례</h2>
+                    <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                        글로벌 주요 전력청 및 유틸리티 기업에서 실증된 드론 스테이션 운영 성과입니다.
+                    </p>
                 </div>
 
                 <div class="flex flex-col gap-8">
                     <!-- 사례 1: 미국 유틸리티 기업 -->
-                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
                         <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
                             <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="미국 광역 송전망 점검" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">US Utility Case</div>
                         </div>
                         <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
-                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">미국 유틸리티 기업</span>
-                            <h4 class="text-2xl font-bold text-white mb-3">광역 송전망 자율 점검 시스템</h4>
-                            <p class="text-gray-400 leading-relaxed">
-                                험준한 산악과 사막 지형에 걸쳐진 송전선로에 DJI Dock 시스템을 구축하여 정기 무인 순찰을 수행합니다. 미세한 볼트 이완 및 송전선 과열 징후를 조기에 발견하여 대규모 전력 공급 중단을 성공적으로 예방했습니다.
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">미국 캘리포니아 유틸리티사</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">산악·사막 지대 광역 송전망 자율 순찰</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                건조 산림 지역의 송전선로에 DJI Dock을 구축하여 일 3회 정기 열화상 순찰을 전개했습니다. 전선 접속부 볼트 이완 및 미세 아크 방전을 조기에 검출하여 대규모 산불 유발 및 광역 정전 사태를 사전에 성공적으로 차단했습니다.
                             </p>
                         </div>
                     </div>
 
                     <!-- 사례 2: 유럽 전력망 운영사 -->
-                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
                         <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
                             <img src="https://www-cdn.djiits.com/cms/uploads/0ff5cc30522199f694696122d7a22ea6@770*462.jpg" alt="유럽 AI 애자 결함 검출" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/770x462/111111/D4AF37?text=Europe+Power+Grid'">
                             <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Europe Case</div>
                         </div>
                         <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
-                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">유럽 전력망 운영사</span>
-                            <h4 class="text-2xl font-bold text-white mb-3">AI 기반 애자 결함 자동 검출</h4>
-                            <p class="text-gray-400 leading-relaxed">
-                                드론이 수집한 고화질 점검 데이터를 클라우드 AI 엔진과 연동하여 송전탑 애자의 파손 여부를 자동으로 분류합니다. 육안 검사 대비 정확도가 대폭 향상되고 점검 리포트 작성 시간이 90% 이상 단축되었습니다.
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">유럽 TSO 송전망 운영사</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">AI 딥러닝 기반 애자 결함 자동 판독 체계</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                드론이 수집한 수십만 장의 고해상도 애자 사진을 클라우드 AI 엔진과 연동하여 미세 크랙 및 파손을 99% 이상의 정확도로 자동 판정했습니다. 점검 리포트 작성 시간이 90% 단축되었으며 엔지니어의 분석 업무 효율이 비약적으로 향상되었습니다.
                             </p>
                         </div>
                     </div>
 
                     <!-- 사례 3: 중국 국가전망(SGCC) -->
-                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 transition-all duration-300 flex flex-col md:flex-row group">
                         <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
                             <img src="https://www-cdn.djiits.com/cms/uploads/2fcdb2bd20e5475760a89b22e6b218fc@770*462.jpg" alt="중국 스마트 변전소 무인화" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                             <div class="absolute top-4 left-4 bg-primary text-black text-xs font-bold px-3 py-1 rounded shadow-md">Asia Case</div>
                         </div>
                         <div class="w-full md:w-7/12 p-8 md:p-10 flex flex-col justify-center">
-                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">중국 국가전망(SGCC)</span>
-                            <h4 class="text-2xl font-bold text-white mb-3">스마트 변전소 및 송전탑 무인화</h4>
-                            <p class="text-gray-400 leading-relaxed">
-                                주요 변전소 및 산악 송전선로 요충지에 도킹 스테이션을 배치하여 24시간 무중단 모니터링 체계를 확립했습니다. 악천후 직후나 재난 발생 시 즉각적인 피해 상황 파악으로 신속한 복구 조치를 이끌어냈습니다.
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-3 inline-block w-fit">중국 국가전망공사(SGCC)</span>
+                            <h4 class="text-2xl font-bold text-white mb-3">초고압 변전소 및 산악 송전탑 완전 무인화</h4>
+                            <p class="text-gray-400 leading-relaxed text-sm sm:text-base">
+                                원격 산간 변전소와 주요 500kV 선로에 수백 대의 도킹 스테이션을 연계 배치하여 완전 무인 원격 점검 체계를 실현했습니다. 폭설 및 태풍 직후 즉각적인 현장 피해 규모를 파악해 전력 복구 골든타임을 확보했습니다.
                             </p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- 5. 제안서 마무리 방향 (결론) -->
-            <div class="bg-gradient-to-r from-primary/20 via-[#111] to-black border border-primary/40 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
-                <h3 class="text-2xl md:text-3xl font-bold text-white mb-6">한국전력공사 및 전력연구원 적용 기대효과</h3>
-                <blockquote class="text-lg md:text-xl text-gray-200 italic font-light max-w-4xl mx-auto leading-relaxed mb-8">
-                    "DJI Dock 도입은 국가 핵심 기반 시설인 전력망을 <strong class="text-primary font-bold not-italic">'사후 대응 및 인력 순찰'에서 'AI 기반 24시간 무인 예방 진단 체계'</strong>로 완전히 전환하는 핵심 솔루션입니다. 이를 통해 전력 공급의 안정성을 확보하고, 작업자의 안전과 예산 절감이라는 두 마리 토기를 완벽하게 잡을 수 있습니다."
-                </blockquote>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="contact.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center">
-                        전력망 솔루션 도입 문의 <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
-                    <a href="solution.html" class="bg-transparent text-white border-2 border-[#444] px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all inline-flex items-center justify-center">
-                        무인화 솔루션 메인으로 돌아가기
-                    </a>
+            <!-- 8. 시범 사업 제안 & 단계별 구축 로드맵 -->
+            <section id="roadmap" class="reveal-up">
+                <div class="bg-cardBg border border-cardBorder rounded-3xl p-8 md:p-12">
+                    <div class="text-center mb-12">
+                        <span class="text-primary font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
+                            <i class="fa-solid fa-map-location-dot mr-1"></i> Phased Roadmap
+                        </span>
+                        <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">전력망 단계별 구축 전략 및 실증 제안</h2>
+                        <p class="text-gray-400 text-base max-w-2xl mx-auto">
+                            실증 검증부터 전국 송변전망 확산까지 단계별 안정적 이행 방안입니다.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-primary/20 text-primary px-3 py-1 rounded-full font-bold mb-4 inline-block">1단계 : 2026</span>
+                            <h4 class="text-xl font-bold text-white mb-3">산악 고위험 선로 실증 (PoC)</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                강원 및 충청권 산악 345kV 송전선로 1~2개 구간에 테스트베드를 설치하여 전자기장 내성, 열화상 데이터 수집, 자동 비행 경로의 신뢰성을 6개월간 실증합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-yellow-900/50 text-yellow-300 px-3 py-1 rounded-full font-bold mb-4 inline-block">2단계 : 2027</span>
+                            <h4 class="text-xl font-bold text-white mb-3">권역별 주요 변전소 및 선로 확대</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                각 지역 송변전지사별 핵심 거점 옥외 변전소 및 취약 선로로 스테이션을 확대 설치하고, 한전 본사 중앙 관제 시스템과 실시간 API 데이터 연계를 완료합니다.
+                            </p>
+                        </div>
+
+                        <div class="bg-black/60 p-6 rounded-2xl border border-[#333] relative">
+                            <span class="text-xs bg-electricBlue/20 text-electricBlue px-3 py-1 rounded-full font-bold mb-4 inline-block">3단계 : 2028+</span>
+                            <h4 class="text-xl font-bold text-white mb-3">전국 디지털 트윈 전력망 완성</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                전국 송배전망을 아우르는 DJI Dock 4 스마트 그리드 메시 네트워크를 확립하여 예방 정비와 자산 수명 관리의 100% 디지털 전환을 달성합니다.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- 9. 결론 및 도입 상담 안내 -->
+            <section class="reveal-up">
+                <div class="bg-gradient-to-r from-primary/20 via-[#111] to-black border border-primary/40 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+                    <span class="inline-block px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full mb-4 uppercase tracking-widest">
+                        Conclusion & Partnership
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white mb-6">대한민국 전력망의 안전과 미래를 여는 무인 솔루션</h3>
+                    <blockquote class="text-base sm:text-lg md:text-xl text-gray-200 italic font-light max-w-4xl mx-auto leading-relaxed mb-8">
+                        "DJI Dock 4 도입은 국가 핵심 기반 시설인 전력망을 <strong class="text-primary font-bold not-italic">'사후 대응 및 고위험 인력 승탑 점검'에서 'AI 기반 24시간 무인 예방 진단 체계'</strong>로 완전히 전환하는 핵심 혁신입니다. 웰컴드론이 현장 환경 실사부터 안전 컨설팅, 전용 인프라 구축, 운영 교육까지 전 과정을 책임지는 든든한 기술 파트너가 되겠습니다."
+                    </blockquote>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="contact.html" class="bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)] inline-flex items-center justify-center">
+                            <i class="fa-solid fa-headset mr-2"></i> 전력망 솔루션 도입 문의
+                        </a>
+                        <a href="solution.html" class="bg-transparent text-white border-2 border-[#444] px-8 py-4 rounded-xl font-bold text-lg hover:border-primary hover:text-primary transition-all inline-flex items-center justify-center">
+                            무인화 솔루션 메인으로 돌아가기
+                        </a>
+                    </div>
+                </div>
+            </section>
 
         </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Global Footer -->
     <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
@@ -351,8 +717,14 @@
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
+        // 모바일 메뉴 토글
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
+            document.getElementById('mobile-menu').classList.toggle('hidden'); 
+        });
+
+        // 네비게이션 바 스크롤 효과
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 20) {
@@ -362,6 +734,64 @@
                 nav.style.background = 'rgba(0, 0, 0, 0.5)';
                 nav.classList.remove('border-b', 'border-[#222]');
             }
+        });
+
+        // 부드러운 스크롤 이동 함수
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                const navHeight = 80;
+                const elementPosition = el.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        // 스크롤 인터랙션 (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal-up');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 우측 네비게이션 인디케이터 동기화
+            const sections = [
+                'hero', 'background', 'dock-system', 'benefits', 
+                'use-cases', 'tech-specs', 'roi-analysis', 'global-cases', 'roadmap'
+            ];
+            const dots = document.querySelectorAll('.nav-dot');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(secId => {
+                    const sec = document.getElementById(secId);
+                    if (sec) {
+                        const top = sec.offsetTop - 120;
+                        if (window.pageYOffset >= top) {
+                            current = secId;
+                        }
+                    }
+                });
+
+                sections.forEach((secId, idx) => {
+                    if (dots[idx]) {
+                        dots[idx].classList.remove('active');
+                        if (current === secId) {
+                            dots[idx].classList.add('active');
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
