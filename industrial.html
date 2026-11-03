@@ -25,25 +25,6 @@
         }
     </script>
     <style>
-        @media print {
-    body * {
-        visibility: hidden;
-    }
-    #official-quote-print-area, #official-quote-print-area * {
-        visibility: visible;
-    }
-    #official-quote-print-area {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        background: white !important;
-        color: black !important;
-    }
-    nav, header, main > div > div.lg\:col-span-8, footer, .glass-nav {
-        display: none !important;
-    }
-}
         body { background-color: #000000; }
         .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
         ::-webkit-scrollbar { width: 8px; }
@@ -70,6 +51,46 @@
             border-color: #38BDF8;
             box-shadow: 0 0 35px rgba(56, 189, 248, 0.15);
         }
+
+        /* 인쇄 및 PDF 저장 전용 스타일 */
+       @media print {
+    /* 웹사이트의 모든 기본 요소를 인쇄 시 숨김 처리 */
+    body * {
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* 오직 공식 견적서 인쇄 영역만 화면에 표시 및 전체 페이지 기준 설정 */
+    #official-quote-print-area, #official-quote-print-area * {
+        visibility: visible !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    #official-quote-print-area {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        display: block !important;
+        background: white !important;
+        color: black !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 99999 !important;
+    }
+
+    /* 불필요한 자동 페이지 넘김(Page Break) 방지 */
+    page {
+        size: auto;
+        margin: 0mm;
+    }
+    
+    table, tr, td, th {
+        page-break-inside: avoid !important;
+    }
+}
     </style>
 </head>
 <body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-primary selection:text-black">
@@ -145,7 +166,7 @@
                 </div>
                 <div class="text-xs text-gray-400 flex items-center">
                     <i class="fa-solid fa-circle-play text-primary mr-1.5"></i>
-                    모든 기체 카드는 실시간 루프 프리뷰 영상을 지원하며 클릭 시 호환 옵션이 펼쳐집니다.
+                    모든 기체 카드는 루프 영상을 지원하며 클릭 시 호환 옵션이 펼쳐집니다.
                 </div>
             </div>
 
@@ -155,7 +176,7 @@
                 <!-- [좌측] 세로형 산업용 드론 리스트 영역 -->
                 <div class="lg:col-span-8 space-y-12">
                     
-                    <!-- 그룹 1: 현장 운용 산업용 드론 (M400 -> M350 -> M30T -> M4T -> M4E) -->
+                    <!-- 그룹 1: 현장 운용 산업용 드론 -->
                     <section id="section-standard" class="space-y-6 scroll-mt-24">
                         <div class="border-l-4 border-primary pl-4 py-1">
                             <span class="text-xs font-extrabold uppercase tracking-widest text-primary">PART 01 · FIELD ENTERPRISE SERIES</span>
@@ -167,7 +188,7 @@
                         </div>
                     </section>
 
-                    <!-- 그룹 2: 독 스테이션 호환 전용 드론 (M5TD -> M4TD -> M4D) -->
+                    <!-- 그룹 2: 독 스테이션 호환 전용 드론 -->
                     <section id="section-dock" class="space-y-6 pt-6 border-t border-[#222] scroll-mt-24">
                         <div class="bg-gradient-to-r from-dockAccent/15 via-cardBg to-cardBg border border-dockAccent/40 p-6 rounded-3xl">
                             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -208,14 +229,17 @@
                         <!-- 선택한 기체 요약 -->
                         <div class="bg-black/60 p-4 rounded-2xl border border-[#2a2a2a]">
                             <div class="flex items-center justify-between mb-1">
-                                <span id="quote-category-tag" class="text-[11px] text-primary font-bold">선택한 기본 기체</span>
+                                <span id="quote-category-tag" class="text-[11px] text-gray-400 font-bold">선택된 기본 기체 없음</span>
+                                <button type="button" onclick="deselectCurrentDrone()" id="btn-deselect-drone" class="hidden text-[11px] text-gray-400 hover:text-primary transition-colors">
+                                    <i class="fa-solid fa-rotate-left mr-1"></i>기체 선택 해제
+                                </button>
                             </div>
                             <div class="flex justify-between items-start gap-2">
                                 <div>
-                                    <h3 id="quote-drone-name" class="text-white font-bold text-base leading-snug">-</h3>
-                                    <span id="quote-drone-unit-price" class="text-xs text-gray-400">단가: 0원</span>
+                                    <h3 id="quote-drone-name" class="text-white font-bold text-base leading-snug">선택된 기체가 없습니다.</h3>
+                                    <span id="quote-drone-unit-price" class="text-xs text-gray-500">좌측에서 기체를 선택해 주세요.</span>
                                 </div>
-                                <span id="quote-drone-qty-badge" class="bg-primary/20 text-primary border border-primary/40 px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap">1대</span>
+                                <span id="quote-drone-qty-badge" class="hidden bg-primary/20 text-primary border border-primary/40 px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap">0대</span>
                             </div>
                             <div class="mt-3 pt-3 border-t border-[#222] flex justify-between items-center">
                                 <span class="text-xs text-gray-400">기체 합계 금액</span>
@@ -232,7 +256,7 @@
                                 </button>
                             </div>
                             <div id="quote-options-list" class="space-y-2 max-h-64 overflow-y-auto pr-1 text-xs">
-                                <!-- 동적 옵션 항목 표시 -->
+                                <div class="text-center py-6 bg-black/30 rounded-xl border border-[#1f1f1f] text-gray-500 italic">선택된 추가 옵션이 없습니다.</div>
                             </div>
                         </div>
 
@@ -247,22 +271,6 @@
                                 <div class="text-right">
                                     <span id="quote-grand-total" class="text-2xl sm:text-3xl font-black text-primary">0원</span>
                                     <span class="block text-[11px] text-gray-400 mt-0.5">(VAT 포함 기준가)</span>
-
-                                    <!-- 기존 액션 버튼 그룹 하단에 추가 -->
-<div class="space-y-2.5 pt-2">
-    <button type="button" onclick="submitEstimate()" class="w-full bg-primary text-black py-4 rounded-2xl font-black text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center justify-center">
-        <i class="fa-solid fa-paper-plane mr-2"></i> 이 견적으로 도입 상담 신청
-    </button>
-    
-    <!-- 공공기관 제출용 견적서 인쇄 버튼 추가 -->
-    <button type="button" onclick="printOfficialEstimate()" class="w-full bg-white text-black hover:bg-gray-200 py-3.5 rounded-2xl font-bold text-sm transition-all flex items-center justify-center shadow-md">
-        <i class="fa-solid fa-file-pdf mr-2 text-red-600"></i> 공공기관 제출용 공식 견적서 인쇄 / PDF 저장
-    </button>
-
-    <a href="tel:010-9420-9946" class="w-full bg-black border border-[#333] hover:border-primary text-gray-200 hover:text-primary py-3 rounded-2xl font-bold text-sm transition-all flex items-center justify-center">
-        <i class="fa-solid fa-phone mr-2 text-primary"></i> 전화 즉시 상담 : 010-9420-9946
-    </a>
-</div>
                                 </div>
                             </div>
                         </div>
@@ -278,6 +286,12 @@
                             <button type="button" onclick="submitEstimate()" class="w-full bg-primary text-black py-4 rounded-2xl font-black text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center justify-center">
                                 <i class="fa-solid fa-paper-plane mr-2"></i> 이 견적으로 도입 상담 신청
                             </button>
+                            
+                            <!-- 공공기관 제출용 공식 견적서 인쇄 / PDF 저장 버튼 -->
+                            <button type="button" onclick="printOfficialEstimate()" class="w-full bg-white text-black hover:bg-gray-200 py-3.5 rounded-2xl font-bold text-sm transition-all flex items-center justify-center shadow-md">
+                                <i class="fa-solid fa-file-pdf mr-2 text-red-600 text-base"></i> 공공기관 제출용 공식 견적서 인쇄 / PDF 저장
+                            </button>
+
                             <a href="tel:010-9420-9946" class="w-full bg-black border border-[#333] hover:border-primary text-gray-200 hover:text-primary py-3 rounded-2xl font-bold text-sm transition-all flex items-center justify-center">
                                 <i class="fa-solid fa-phone mr-2 text-primary"></i> 전화 즉시 상담 : 010-9420-9946
                             </a>
@@ -289,6 +303,65 @@
             </div>
         </div>
     </main>
+
+    <!-- 공공기관 제출용 인쇄 전용 양식 (평소에는 화면에 보이지 않음) -->
+    <div id="official-quote-print-area" class="hidden bg-white text-black p-8 font-sans">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="text-center border-b-2 border-black pb-4">
+                <h1 class="text-3xl font-extrabold tracking-wider">공 식 견 적 서</h1>
+                <p class="text-sm text-gray-600 mt-1">OFFICIAL ESTIMATE SHEET</p>
+            </div>
+
+            <div class="flex justify-between items-start text-sm pt-2">
+                <div>
+                    <p id="print-date" class="font-semibold">발행일자: 2026년 __월 __일</p>
+                    <p class="mt-1">문서번호: WD-EST-2026-001</p>
+                </div>
+                <div class="text-right border border-black p-3 bg-gray-50">
+                    <p class="font-bold text-base">공급자 정보</p>
+                    <p>상호: 웰컴드론 (Welcome Drone)</p>
+                    <p>대표자: 최 용 진 (인)</p>
+                    <p>사업자등록번호: 317-06-01971</p>
+                    <p>주소: 충청남도 보령시 보령북로 81</p>
+                    <p>연락처: 010-9420-9946 | 이메일: oogoo1818@naver.com</p>
+                </div>
+            </div>
+
+            <div class="border border-black p-4 text-sm bg-gray-50">
+                <p class="font-bold text-base mb-1">귀하 (수신처)</p>
+                <p>아래와 같이 견적합니다.</p>
+                <p class="font-bold text-lg text-primary mt-2">합계 금액(VAT 별도): <span id="print-grand-total" class="text-black font-bold">0원</span></p>
+            </div>
+
+            <table class="w-full border-collapse border border-black text-xs text-left">
+                <thead>
+                    <tr class="bg-gray-200 border border-black text-center font-bold">
+                        <th class="border border-black p-2 w-12">번호</th>
+                        <th class="border border-black p-2">품명 및 규격 (모델명 / 옵션)</th>
+                        <th class="border border-black p-2 w-16">수량</th>
+                        <th class="border border-black p-2 w-28">단가 (원)</th>
+                        <th class="border border-black p-2 w-32">금액 (원)</th>
+                    </tr>
+                </thead>
+                <tbody id="print-table-body">
+                    <!-- 자바스크립트로 동적 삽입 -->
+                </tbody>
+            </table>
+
+            <div class="border border-black p-4 text-xs space-y-2 bg-gray-50">
+                <p class="font-bold text-sm">특기 및 조달 참고사항:</p>
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    <li>본 견적서는 웰컴드론 스마트 견적 시스템을 통해 공공기관 제출용으로 자동 발행되었습니다.</li>
+                    <li>나라장터 종합쇼핑몰 조달 계약 및 수의계약 진행 시 규격서 및 공급자 증빙서류가 제공됩니다.</li>
+                    <li>견적 유효기간: 발행일로부터 30일</li>
+                </ul>
+            </div>
+
+            <div class="text-center pt-8">
+                <h2 class="text-xl font-bold tracking-widest">웰 컴 드 론 (직인생략)</h2>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
@@ -310,16 +383,11 @@
 
     <!-- 견적 시스템 전체 데이터 및 동작 스크립트 -->
     <script>
-        // 모바일 메뉴 토글
         document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
             document.getElementById('mobile-menu').classList.toggle('hidden'); 
         });
 
-        // MGIT 공식 쇼핑몰 데이터 기반 8종 라인업 (전용 루프 영상 URL 100% 반영)
         const droneDatabase = [
-            // =========================================================================
-            // PART 1. 현장 투입형 산업용 드론 (M400 -> M350 -> M30T -> Matrice 4T -> Matrice 4E)
-            // =========================================================================
             {
                 id: 'm400',
                 group: 'standard',
@@ -499,11 +567,9 @@
             }
         ];
 
-        // 상태 관리 객체
-        let currentDroneId = droneDatabase[0].id;
+        let currentDroneId = null; // 초기 선택 없음
         let state = {};
 
-        // 초기 상태 세팅
         droneDatabase.forEach(drone => {
             state[drone.id] = {
                 droneQty: 1,
@@ -518,7 +584,6 @@
             return num.toLocaleString('ko-KR') + '원';
         }
 
-        // 개별 드론 카드 HTML 생성 함수 (.webm 및 .mp4 자동 대응)
         function createDroneCardHTML(drone) {
             const isSelected = (drone.id === currentDroneId);
             const isDock = (drone.group === 'dock');
@@ -560,11 +625,9 @@
             return `
                 <div id="card-${drone.id}" class="drone-card-wrapper bg-cardBg border-2 ${isSelected ? activeCardClass : 'border-cardBorder'} rounded-3xl overflow-hidden transition-all duration-300">
                     
-                    <!-- 상단: 좌측 루프 영상 + 우측 설명(무게, 사양, 금액) -->
                     <div class="p-6 sm:p-8 cursor-pointer hover:bg-white/[0.01] transition-colors" onclick="selectDroneCard('${drone.id}')">
                         <div class="flex flex-col md:flex-row gap-6 items-center">
                             
-                            <!-- 좌측: 제품 루프 영상 -->
                             <div class="w-full md:w-2/5 aspect-[4/3] rounded-2xl overflow-hidden bg-black border border-[#2a2a2a] relative flex-shrink-0 group">
                                 <video autoplay loop muted playsinline preload="auto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
                                     <source src="${drone.video}" type="${videoMimeType}">
@@ -580,7 +643,6 @@
                                 ${isDock ? `<div class="absolute bottom-3 right-3 bg-dockAccent text-black text-[10px] font-black px-2.5 py-1 rounded-md shadow-lg"><i class="fa-solid fa-warehouse mr-1"></i>DOCK 호환</div>` : ''}
                             </div>
 
-                            <!-- 우측: 제품 설명 + 무게 / 사양 / 금액 -->
                             <div class="w-full md:w-3/5 flex flex-col justify-between space-y-4">
                                 <div>
                                     <div class="flex items-start justify-between gap-2">
@@ -592,7 +654,6 @@
                                     <p class="text-gray-400 text-xs sm:text-sm leading-relaxed mt-2">${drone.desc}</p>
                                 </div>
 
-                                <!-- 무게 / 사양 / 금액 3단 요약 박스 -->
                                 <div class="bg-black/70 border border-[#262626] rounded-2xl p-4 space-y-2.5 text-xs sm:text-sm">
                                     <div class="flex items-center justify-between border-b border-[#1f1f1f] pb-2 gap-2">
                                         <span class="text-gray-400 font-medium whitespace-nowrap"><i class="fa-solid fa-weight-hanging ${accentColor} mr-2 w-4 text-center"></i>무게/하중</span>
@@ -608,7 +669,6 @@
                                     </div>
                                 </div>
 
-                                <!-- 클릭 유도 바 -->
                                 <div class="flex items-center justify-between text-xs pt-1">
                                     <span class="${accentColor} font-bold flex items-center">
                                         <i class="fa-solid fa-layer-group mr-1.5"></i> 호환 페이로드·배터리 옵션 ${drone.options.length}종
@@ -622,11 +682,9 @@
                         </div>
                     </div>
 
-                    <!-- 하단 아코디언: 기체 수량 조절 및 호환 페이로드/배터리 선택 -->
                     <div id="panel-${drone.id}" class="accordion-panel ${isSelected ? 'open' : ''} bg-[#0a0a0a] border-t border-[#262626]">
                         <div class="p-6 sm:p-8 space-y-6">
                             
-                            <!-- 기체 도입 대수 조절 -->
                             <div class="bg-[#121212] border ${accentBorder} p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                 <div>
                                     <span class="text-xs ${accentColor} font-bold uppercase">STEP 1. 기체 수량</span>
@@ -643,7 +701,6 @@
                                 </div>
                             </div>
 
-                            <!-- 호환 페이로드 및 배터리 리스트 -->
                             <div>
                                 <div class="mb-3 flex items-center justify-between">
                                     <div>
@@ -664,7 +721,6 @@
             `;
         }
 
-        // 두 섹션(현장 투입형 / 독 스테이션 호환형)으로 나누어 렌더링
         function renderAllDroneSections() {
             const standardContainer = document.getElementById('standard-drone-container');
             const dockContainer = document.getElementById('dock-drone-container');
@@ -684,10 +740,12 @@
             dockContainer.innerHTML = dockHtml;
         }
 
-        // 드론 카드 클릭 시 아코디언 전환 및 견적 연동
         function selectDroneCard(droneId) {
-            const prevId = currentDroneId;
-            currentDroneId = droneId;
+            if (currentDroneId === droneId) {
+                currentDroneId = null;
+            } else {
+                currentDroneId = droneId;
+            }
 
             droneDatabase.forEach(drone => {
                 const card = document.getElementById(`card-${drone.id}`);
@@ -697,14 +755,8 @@
                 const activeClass = (drone.group === 'dock') ? 'active-dock-card' : 'active-card';
 
                 if (drone.id === currentDroneId) {
-                    const isAlreadyOpen = panel.classList.contains('open') && (prevId === currentDroneId);
-                    if (isAlreadyOpen) {
-                        panel.classList.remove('open');
-                        toggleText.innerHTML = '클릭하여 옵션 및 수량 선택 <i class="fa-solid fa-chevron-down ml-1.5"></i>';
-                    } else {
-                        panel.classList.add('open');
-                        toggleText.innerHTML = '옵션 접기 <i class="fa-solid fa-chevron-up ml-1.5 text-primary"></i>';
-                    }
+                    panel.classList.add('open');
+                    toggleText.innerHTML = '옵션 접기 <i class="fa-solid fa-chevron-up ml-1.5 text-primary"></i>';
                     card.classList.add(activeClass);
                     card.classList.remove('border-cardBorder');
                     indicator.className = 'w-6 h-6 rounded-full border-2 border-primary bg-primary text-black flex items-center justify-center flex-shrink-0 mt-1 transition-all';
@@ -720,7 +772,23 @@
             updateQuoteSidebar();
         }
 
-        // 기체 수량 증감
+        function deselectCurrentDrone() {
+            currentDroneId = null;
+            droneDatabase.forEach(drone => {
+                const card = document.getElementById(`card-${drone.id}`);
+                const panel = document.getElementById(`panel-${drone.id}`);
+                const indicator = document.getElementById(`radio-indicator-${drone.id}`);
+                const toggleText = document.getElementById(`toggle-text-${drone.id}`);
+
+                panel.classList.remove('open');
+                card.classList.remove('active-card', 'active-dock-card');
+                card.classList.add('border-cardBorder');
+                indicator.className = 'w-6 h-6 rounded-full border-2 border-gray-600 text-transparent flex items-center justify-center flex-shrink-0 mt-1 transition-all';
+                toggleText.innerHTML = '클릭하여 옵션 및 수량 선택 <i class="fa-solid fa-chevron-down ml-1.5"></i>';
+            });
+            updateQuoteSidebar();
+        }
+
         function updateDroneQty(droneId, delta) {
             let nextQty = state[droneId].droneQty + delta;
             if (nextQty < 1) nextQty = 1;
@@ -737,7 +805,6 @@
             }
         }
 
-        // 옵션 수량 증감
         function updateOptionQty(droneId, optId, delta) {
             let currentQty = state[droneId].options[optId] || 0;
             let nextQty = currentQty + delta;
@@ -755,8 +822,8 @@
             }
         }
 
-        // 현재 선택된 드론의 옵션 초기화
         function resetAllOptions() {
+            if (!currentDroneId) return;
             const drone = droneDatabase.find(d => d.id === currentDroneId);
             if (!drone) return;
 
@@ -769,15 +836,37 @@
             updateQuoteSidebar();
         }
 
-        // 우측 실시간 견적함 업데이트
         function updateQuoteSidebar() {
+            const tagEl = document.getElementById('quote-category-tag');
+            const nameEl = document.getElementById('quote-drone-name');
+            const unitPriceEl = document.getElementById('quote-drone-unit-price');
+            const qtyBadgeEl = document.getElementById('quote-drone-qty-badge');
+            const subtotalEl = document.getElementById('quote-drone-subtotal');
+            const deselectBtn = document.getElementById('btn-deselect-drone');
+            const listContainer = document.getElementById('quote-options-list');
+            const optionsSubtotalEl = document.getElementById('quote-options-subtotal');
+            const grandTotalEl = document.getElementById('quote-grand-total');
+
+            if (!currentDroneId) {
+                tagEl.textContent = '선택된 기본 기체 없음';
+                tagEl.className = 'text-[11px] text-gray-400 font-bold';
+                nameEl.textContent = '선택된 기체가 없습니다.';
+                unitPriceEl.textContent = '좌측에서 기체를 선택해 주세요.';
+                qtyBadgeEl.classList.add('hidden');
+                deselectBtn.classList.add('hidden');
+                subtotalEl.textContent = '0원';
+                listContainer.innerHTML = `<div class="text-center py-6 bg-black/30 rounded-xl border border-[#1f1f1f] text-gray-500 italic">선택된 추가 옵션이 없습니다.</div>`;
+                optionsSubtotalEl.textContent = '+0원';
+                grandTotalEl.textContent = '0원';
+                return;
+            }
+
             const drone = droneDatabase.find(d => d.id === currentDroneId);
             if (!drone) return;
 
             const droneQty = state[currentDroneId].droneQty;
             const droneSubtotal = drone.price * droneQty;
 
-            const tagEl = document.getElementById('quote-category-tag');
             if (drone.group === 'dock') {
                 tagEl.textContent = '선택 기체 (DJI Dock 호환 라인업)';
                 tagEl.className = 'text-[11px] text-dockAccent font-bold';
@@ -786,10 +875,12 @@
                 tagEl.className = 'text-[11px] text-primary font-bold';
             }
 
-            document.getElementById('quote-drone-name').textContent = drone.name;
-            document.getElementById('quote-drone-unit-price').textContent = `기본 단가: ${formatKRW(drone.price)}`;
-            document.getElementById('quote-drone-qty-badge').textContent = `${droneQty}대`;
-            document.getElementById('quote-drone-subtotal').textContent = formatKRW(droneSubtotal);
+            nameEl.textContent = drone.name;
+            unitPriceEl.textContent = `기본 단가: ${formatKRW(drone.price)}`;
+            qtyBadgeEl.textContent = `${droneQty}대`;
+            qtyBadgeEl.classList.remove('hidden');
+            deselectBtn.classList.remove('hidden');
+            subtotalEl.textContent = formatKRW(droneSubtotal);
 
             let optionsSubtotal = 0;
             let optionsListHtml = '';
@@ -811,7 +902,6 @@
                 }
             });
 
-            const listContainer = document.getElementById('quote-options-list');
             if (optionsListHtml === '') {
                 listContainer.innerHTML = `<div class="text-center py-6 bg-black/30 rounded-xl border border-[#1f1f1f] text-gray-500 italic">선택된 추가 옵션이 없습니다.<br>좌측에서 필요한 옵션을 추가해 보세요.</div>`;
             } else {
@@ -819,12 +909,16 @@
             }
 
             const grandTotal = droneSubtotal + optionsSubtotal;
-            document.getElementById('quote-options-subtotal').textContent = `+${formatKRW(optionsSubtotal)}`;
-            document.getElementById('quote-grand-total').textContent = formatKRW(grandTotal);
+            optionsSubtotalEl.textContent = `+${formatKRW(optionsSubtotal)}`;
+            grandTotalEl.textContent = formatKRW(grandTotal);
         }
 
-        // 견적 상담 신청 버튼 클릭 -> localStorage에 견적 데이터 저장 후 contact.html로 이동
         function submitEstimate() {
+            if (!currentDroneId) {
+                alert('상담 신청하실 기체를 먼저 선택해 주세요.');
+                return;
+            }
+
             const drone = droneDatabase.find(d => d.id === currentDroneId);
             const droneQty = state[currentDroneId].droneQty;
             const droneSubtotal = drone.price * droneQty;
@@ -849,7 +943,6 @@
 
             const grandTotal = droneSubtotal + optionsSubtotal;
 
-            // contact.html의 문의 내용 칸에 자동으로 들어갈 포맷팅된 텍스트 생성
             let formattedText = `[산업용 드론 스마트 견적 산출 내역]\n`;
             formattedText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
             formattedText += `■ 선택 기체 : ${drone.name}\n`;
@@ -870,9 +963,8 @@
             formattedText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
             formattedText += `[추가 문의 및 요청사항]\n`;
             formattedText += `• 도입 예정 기관/업체명 : \n`;
-            formattedText += `• 희망 납품 일정 또는 문의사항을 아래에 편하게 적어주세요.\n`;
+            formattedText += `• 희망 납품 일정 또는 문의사항을 아래에 적어주세요.\n`;
 
-            // localStorage에 견적 객체 저장
             const quotePayload = {
                 timestamp: new Date().toLocaleString('ko-KR'),
                 group: drone.group,
@@ -886,135 +978,71 @@
             };
 
             localStorage.setItem('welcomeDroneQuote', JSON.stringify(quotePayload));
-
-            // contact.html 페이지의 상담 폼 위치로 즉시 이동
             location.href = 'contact.html?from=quote#inquiry-section';
         }
 
-        // 초기 실행
+        function printOfficialEstimate() {
+            if (!currentDroneId) {
+                alert('인쇄할 견적의 기체를 먼저 선택해 주세요.');
+                return;
+            }
+
+            const drone = droneDatabase.find(d => d.id === currentDroneId);
+            const droneQty = state[currentDroneId].droneQty;
+            const droneSubtotal = drone.price * droneQty;
+
+            let rowsHtml = '';
+            let rowIndex = 1;
+
+            rowsHtml += `
+                <tr class="border border-black text-center">
+                    <td class="border border-black p-2">${rowIndex++}</td>
+                    <td class="border border-black p-2 text-left font-bold">${drone.name}<br><span class="text-[11px] font-normal text-gray-600">${drone.specs}</span></td>
+                    <td class="border border-black p-2">${droneQty}대</td>
+                    <td class="border border-black p-2 text-right">${formatKRW(drone.price)}</td>
+                    <td class="border border-black p-2 text-right font-bold">${formatKRW(droneSubtotal)}</td>
+                </tr>
+            `;
+
+            drone.options.forEach(opt => {
+                const qty = state[currentDroneId].options[opt.id] || 0;
+                if (qty > 0) {
+                    const lineTotal = opt.price * qty;
+                    rowsHtml += `
+                        <tr class="border border-black text-center">
+                            <td class="border border-black p-2">${rowIndex++}</td>
+                            <td class="border border-black p-2 text-left">[호환옵션] ${opt.name}<br><span class="text-[11px] text-gray-600">${opt.desc}</span></td>
+                            <td class="border border-black p-2">${qty}개</td>
+                            <td class="border border-black p-2 text-right">${formatKRW(opt.price)}</td>
+                            <td class="border border-black p-2 text-right">${formatKRW(lineTotal)}</td>
+                        </tr>
+                    `;
+                }
+            });
+
+            document.getElementById('print-table-body').innerHTML = rowsHtml;
+
+            let optionsSubtotal = 0;
+            drone.options.forEach(opt => {
+                const qty = state[currentDroneId].options[opt.id] || 0;
+                optionsSubtotal += (opt.price * qty);
+            });
+            const grandTotal = droneSubtotal + optionsSubtotal;
+            
+            document.getElementById('print-grand-total').textContent = formatKRW(grandTotal);
+
+            const today = new Date();
+            const dateStr = `발행일자: ${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
+            document.getElementById('print-date').textContent = dateStr;
+
+            window.print();
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
+            currentDroneId = null;
             renderAllDroneSections();
             updateQuoteSidebar();
         });
     </script>
-    // 공공기관 제출용 공식 견적서 인쇄 및 PDF 저장 함수
-function printOfficialEstimate() {
-    const drone = droneDatabase.find(d => d.id === currentDroneId);
-    const droneQty = state[currentDroneId].droneQty;
-    const droneSubtotal = drone.price * droneQty;
-
-    let rowsHtml = '';
-    let rowIndex = 1;
-
-    // 1. 기본 기체 행 추가
-    rowsHtml += `
-        <tr class="border border-black text-center">
-            <td class="border border-black p-2">${rowIndex++}</td>
-            <td class="border border-black p-2 text-left font-bold">${drone.name}<br><span class="text-[11px] font-normal text-gray-600">${drone.specs}</span></td>
-            <td class="border border-black p-2">${droneQty}대</td>
-            <td class="border border-black p-2 text-right">${formatKRW(drone.price)}</td>
-            <td class="border border-black p-2 text-right font-bold">${formatKRW(droneSubtotal)}</td>
-        </tr>
-    `;
-
-    // 2. 선택된 옵션 행 추가
-    drone.options.forEach(opt => {
-        const qty = state[currentDroneId].options[opt.id] || 0;
-        if (qty > 0) {
-            const lineTotal = opt.price * qty;
-            rowsHtml += `
-                <tr class="border border-black text-center">
-                    <td class="border border-black p-2">${rowIndex++}</td>
-                    <td class="border border-black p-2 text-left">[호환옵션] ${opt.name}<br><span class="text-[11px] text-gray-600">${opt.desc}</span></td>
-                    <td class="border border-black p-2">${qty}개</td>
-                    <td class="border border-black p-2 text-right">${formatKRW(opt.price)}</td>
-                    <td class="border border-black p-2 text-right">${formatKRW(lineTotal)}</td>
-                </tr>
-            `;
-        }
-    });
-
-    document.getElementById('print-table-body').innerHTML = rowsHtml;
-
-    // 총합 계산 및 발행일 세팅
-    let optionsSubtotal = 0;
-    drone.options.forEach(opt => {
-        const qty = state[currentDroneId].options[opt.id] || 0;
-        optionsSubtotal += (opt.price * qty);
-    });
-    const grandTotal = droneSubtotal + optionsSubtotal;
-    
-    document.getElementById('print-grand-total').textContent = formatKRW(grandTotal);
-
-    const today = new Date();
-    const dateStr = `발행일자: ${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
-    document.getElementById('print-date').textContent = dateStr;
-
-    // 인쇄창 호출 (브라우저 인쇄 설정에서 '대상'을 'PDF로 저장'으로 선택하면 PDF 파일로 즉시 다운로드 가능)
-    window.print();
-}
-    <!-- 공공기관 제출용 인쇄 전용 양식 (평소에는 화면에 보이지 않음) -->
-<div id="official-quote-print-area" class="hidden print:block bg-white text-black p-8 font-sans">
-    <div class="max-w-3xl mx-auto space-y-6">
-        <!-- 문서 제목 -->
-        <div class="text-center border-b-2 border-black pb-4">
-            <h1 class="text-3xl font-extrabold tracking-wider">공 식 견 적 서</h1>
-            <p class="text-sm text-gray-600 mt-1">OFFICIAL ESTIMATE SHEET</p>
-        </div>
-
-        <!-- 공급자 정보 및 발행일 -->
-        <div class="flex justify-between items-start text-sm pt-2">
-            <div>
-                <p id="print-date" class="font-semibold">발행일자: 2026년 __월 __일</p>
-                <p class="mt-1">문서번호: WD-EST-2026-001</p>
-            </div>
-            <div class="text-right border border-black p-3 bg-gray-50">
-                <p class="font-bold text-base">공급자 정보</p>
-                <p>상호: 웰컴드론 (Welcome Drone)</p>
-                <p>대표자: 최 용 진 (인)</p>
-                <p>사업자등록번호: 317-06-01971</p>
-                <p>주소: 충청남도 보령시 보령북로 81</p>
-                <p>연락처: 010-9420-9946 | 이메일: oogoo1818@naver.com</p>
-            </div>
-        </div>
-
-        <!-- 수신자(공공기관) 안내 -->
-        <div class="border border-black p-4 text-sm bg-gray-50">
-            <p class="font-bold text-base mb-1">귀하 (수신처)</p>
-            <p>아래와 같이 견적합니다.</p>
-            <p class="font-bold text-lg text-primary mt-2">합계 금액(VAT 별도): <span id="print-grand-total" class="text-black">0원</span></p>
-        </div>
-
-        <!-- 품목 상세 테이블 -->
-        <table class="w-full border-collapse border border-black text-xs text-left">
-            <thead>
-                <tr class="bg-gray-200 border border-black text-center font-bold">
-                    <th class="border border-black p-2 w-12">번호</th>
-                    <th class="border border-black p-2">품명 및 규격 (모델명 / 옵션)</th>
-                    <th class="border border-black p-2 w-16">수량</th>
-                    <th class="border border-black p-2 w-24">단가 (원)</th>
-                    <th class="border border-black p-2 w-28">금액 (원)</th>
-                </tr>
-            </thead>
-            <tbody id="print-table-body">
-                <!-- 자바스크립트로 동적 삽입 -->
-            </tbody>
-        </table>
-
-        <!-- 하단 특기사항 및 직인 -->
-        <div class="border border-black p-4 text-xs space-y-2 bg-gray-50">
-            <p class="font-bold text-sm">특기 및 조달 참고사항:</p>
-            <ul class="list-disc list-inside space-y-1 text-gray-700">
-                <li>본 견적서는 웰컴드론 스마트 견적 시스템을 통해 공공기관 제출용으로 자동 발행되었습니다.</li>
-                <li>나라장터 종합쇼핑몰 조달 계약 및 수의계약 진행 시 규격서 및 공급자 증빙서류가 제공됩니다.</li>
-                <li>견적 유효기간: 발행일로부터 30일</li>
-            </ul>
-        </div>
-
-        <div class="text-center pt-8">
-            <h2 class="text-xl font-bold tracking-widest">웰 컴 드 론 (직인생략)</h2>
-        </div>
-    </div>
-</div>
 </body>
 </html>
