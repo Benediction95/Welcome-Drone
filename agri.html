@@ -47,17 +47,9 @@
             box-shadow: 0 0 35px rgba(34, 197, 94, 0.15);
         }
 
-       @media print {
-            body * {
-                visibility: hidden !important;
-                height: 0 !important;
-                overflow: hidden !important;
-            }
-            #official-quote-print-area, #official-quote-print-area * {
-                visibility: visible !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
+        @media print {
+            body * { visibility: hidden !important; }
+            #official-quote-print-area, #official-quote-print-area * { visibility: visible !important; }
             #official-quote-print-area {
                 position: absolute !important;
                 left: 0 !important;
@@ -67,16 +59,10 @@
                 background: white !important;
                 color: black !important;
                 padding: 10px 20px !important;
-                margin: 0 !important;
                 z-index: 99999 !important;
             }
-            @page {
-                size: A4;
-                margin: 10mm;
-            }
-            table, tr, td, th {
-                page-break-inside: avoid !important;
-            }
+            @page { size: A4; margin: 10mm; }
+            table, tr, td, th { page-break-inside: avoid !important; }
         }
     </style>
 </head>
@@ -130,7 +116,7 @@
             </span>
             <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">농업용 드론 라인업 및 스마트 견적 시스템</h1>
             <p class="text-sm sm:text-lg text-gray-300 font-light max-w-2xl mx-auto">
-                고효율 방제·살포 플래그십 기체(T70P, T25 등)를 비교하고, 카드를 클릭하여 <strong class="text-agriAccent font-semibold">전용 배터리·충전기·살포 장치</strong>를 조합해 실시간 합산 견적을 확인하세요.
+                고효율 방제·살포 플래그십 기체(T70P, T25)를 비교하고, 카드를 클릭하여 <strong class="text-agriAccent font-semibold">전용 배터리·충전기·입제기 옵션</strong>을 조합해 실시간 합산 견적을 확인하세요.
             </p>
         </div>
     </header>
@@ -225,14 +211,17 @@
                         <div class="bg-black/50 p-4 rounded-2xl border border-agriAccent/30 space-y-2.5 text-xs">
                             <div class="flex items-center space-x-2 text-agriAccent font-bold">
                                 <i class="fa-solid fa-file-invoice-dollar"></i>
-                                <span>지자체 보조사업 신청 절차 안내</span>
+                                <span>지자체 보조사업 및 융자 지원 신청 절차</span>
                             </div>
                             <ol class="list-decimal list-inside space-y-1.5 text-gray-300 leading-relaxed text-[11px]">
-                                <li><strong class="text-white">견적서 발급:</strong> 본 시스템에서 기체·옵션 선택 후 <span class="text-agriAccent">공식 견적서 인쇄</span></li>
-                                <li><strong class="text-white">사업 신청:</strong> 관할 시·군·구청 또는 읍·면·동 행정복지센터 농업 부서에 <strong class="text-white">보조사업 신청서 및 견적서 제출</strong></li>
-                                <li><strong class="text-white">대상자 선정:</strong> 지자체 심사 후 보조금 지원 대상자 확정 (보조금 통보)</li>
-                                <li><strong class="text-white">납품 및 계약:</strong> 웰컴드론과 최종 계약 및 자부담금 납부 후 현장 납품·교육 진행</li>
+                                <li class="pl-1"><strong class="text-white">견적서 발급:</strong> 본 시스템에서 기체 및 필수 옵션 선택 후 <span class="text-agriAccent font-semibold">공식 견적서 인쇄 / PDF 저장</span></li>
+                                <li class="pl-1"><strong class="text-white">사업 신청:</strong> 관할 시·군·구청 또는 읍·면·동 행정복지센터 농업 관련 부서에 방문하여 <strong class="text-white">농업용 드론 보조사업 신청서 및 본 견적서 제출</strong></li>
+                                <li class="pl-1"><strong class="text-white">대상자 선정:</strong> 지자체 심의 위원회 평가 후 최종 보조금 지원 대상자 확정 (보조금 확정 통보서 수령)</li>
+                                <li class="pl-1"><strong class="text-white">납품 및 계약:</strong> 웰컴드론과 최종 공급 계약 체결, 자부담금 납부 완료 후 <strong class="text-white">현장 인도 및 방제 비행 안전 교육 실시</strong></li>
                             </ol>
+                            <p class="text-[10px] text-gray-400 pt-1 border-t border-white/10">
+                                ※ 지역별 지자체 사업 공고 시기에 따라 보조금 비율(보통 50%~70%) 및 지원 한도가 상이할 수 있으므로 사전에 관할 지자체 담당 주무관과 상담을 권장합니다.
+                            </p>
                         </div>
 
                         <div class="space-y-2.5">
@@ -343,40 +332,42 @@
             document.getElementById('mobile-menu').classList.toggle('hidden'); 
         });
 
+        // 알려주신 정확한 단가 정보가 반영된 농업용 드론 DB
         const agriDroneDatabase = [
+            {
+                id: 't25',
+                group: 'agri',
+                badge: '01 · 콤팩트 스마트 방제 표준',
+                name: 'DJI Agras T25 (경량형 다목적 농업용 드론)',
+                desc: '1인 조작이 용이한 컴팩트한 사이즈와 가벼운 기체 무게로 소규모 농가, 과수원, 논밭 방제에 가장 널리 쓰이는 표준형 농업용 드론입니다.',
+                weight: '최대 살포 하중 25kg 급 / 1인 휴대 용이',
+                specs: '컴팩트 폴딩 디자인 · 짐벌 카메라 탑재 · 자율 비행 방제 · 과수원 최적화',
+                price: 13640000,
+                video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/39844bb8-ade7-4447-bbea-090ab2f09efe.mp4?w=1386&h=1040',
+                options: [
+                    { id: 't25_db800_bat', category: '배터리/충전', name: '[DJI] T25 DB800 배터리', desc: 'T25 컴팩트 전용 고효율 인텔리전트 배터리', price: 1870000 },
+                    { id: 't30_bat', category: '배터리/충전', name: '[DJI] T30 배터리', desc: '고용량 고출력 호환 배터리', price: 2695000 },
+                    { id: 'c8000_charger', category: '배터리/충전', name: '[DJI] C8000 충전기', desc: '현장 급속 충전을 위한 정품 인버터/스마트 충전기', price: 2266000 },
+                    { id: 't25_spread', category: '살포시스템', name: '[DJI] 입제기', desc: '비료, 사료, 파종용 입제 살포 전용 모듈', price: 2090000 },
+                    { id: 't25_ nozzle_ext', category: '살포시스템', name: '[DJI] 확장노즐', desc: '광역 살포 및 과수원 맞춤형 확장 노즐 세트', price: 1430000 }
+                ]
+            },
             {
                 id: 't70p',
                 group: 'agri',
-                badge: '01 · 대용량 고효율 플래그십 방제',
+                badge: '02 · 대용량 고효율 플래그십 방제',
                 name: 'DJI Agras T70P (농업용 방제·살포 드론)',
                 desc: '대규모 농경지 방제와 고효율 과수원 살포를 위한 플래그십 농업용 드론입니다. 대용량 살포 탱크와 고출력 분사 시스템을 탑재하여 압도적인 작업 속도를 자랑합니다.',
                 weight: '최대 살포/파종 하중 70kg 급',
                 specs: '초대용량 살포 탱크 · 고속 원심 분사 · 듀얼 레이더 및 야간 FPV',
                 price: 16500000,
-                video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/7acc8aaa-a34f-4f9a-90ae-9617eddeb0d2.mp4',
+                video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/581da91d-232b-484b-a48a-d87fbe7e7083.mp4?w=1184&h=1200',
                 options: [
-                    { id: 't70_bat', category: '배터리/충전', name: '[DJI] T70P 전용 인텔리전트 플라이트 배터리', desc: '고출력 대용량 스마트 배터리', price: 3190000 },
-                    { id: 't70_charger', category: '배터리/충전', name: '[DJI] 인텔리전트 인버터 충전기 / 발전기 세트', desc: '현장 급속 충전을 위한 고성능 발전기 시스템', price: 2266000 },
-                    { id: 't70_spread', category: '살포시스템', name: '[DJI] T70P 전용 대용량 입제 살포기 시스템', desc: '비료, 사료, 파종용 고효율 입제 살포 장치', price: 2200000 },
-                    { id: 't70_expansion', category: '확장노즐', name: '[DJI] Agras T70P Care 확장 노즐', desc: '4방향 분사 확장 시스템', price: 2090000 }
-                    { id: 't70_expansion', category: '케이블 아답터', name: '[DJI] Agras T70P Care 케이블 아답터', desc: '전용 케이블 아답터', price: 2090000 }
-                ]
-            },
-            {
-                id: 't25',
-                group: 'agri',
-                badge: '02 · 콤팩트 스마트 방제 표준',
-                name: 'DJI Agras T25 (경량형 다목적 농업용 드론)',
-                desc: '1인 조작이 용이한 컴팩트한 사이즈와 가벼운 기체 무게로 소규모 농가, 과수원, 논밭 방제에 가장 널리 쓰이는 표준형 농업용 드론입니다.',
-                weight: '최대 살포 하중 25kg 급 / 1인 휴대 용이',
-                specs: '컴팩트 폴딩 디자인 · 짐벌 카메라 탑재 · 자율 비행 방제 · 과수원 최적화',
-                price: 15800000,
-                video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/7b6b81df-57e5-4308-a6ec-19174d4f2882.webm',
-                options: [
-                    { id: 't25_bat', category: '배터리/충전', name: '[DJI] T25 전용 인텔리전트 플라이트 배터리', desc: 'T25 컴팩트 전용 고효율 배터리', price: 1450000 },
-                    { id: 't25_charger', category: '배터리/충전', name: '[DJI] T25 멀티 채널 급속 충전 스테이션', desc: '현장 충전 효율을 높여주는 전용 충전기', price: 1900000 },
-                    { id: 't25_spread', category: '살포시스템', name: '[DJI] T25 전용 입제 살포기 세트', desc: '비료 및 제초제 입제 살포 전용 모듈', price: 1800000 },
-                    { id: 't25_care', category: '안심케어', name: '[DJI] Agras T25 Care 파손 보증 플랜 1년', desc: '농업 현장 안심 보장 케어 서비스', price: 1100000 }
+                    { id: 't70_bat', category: '배터리/충전', name: '[DJI] 배터리', desc: 'T70P 전용 고출력 대용량 스마트 배터리', price: 3190000 },
+                    { id: 'c8000_charger', category: '배터리/충전', name: '[DJI] C8000 충전기', desc: '현장 급속 충전을 위한 정품 인버터/스마트 충전기', price: 2266000 },
+                    { id: 't70_spread', category: '살포시스템', name: '[DJI] 입제기', desc: '대용량 비료, 사료, 파종용 고효율 입제 살포 장치', price: 2200000 },
+                    { id: 't70_ nozzle_ext', category: '살포시스템', name: '[DJI] 확장노즐', desc: '광역 방제 및 작물 맞춤형 확장 노즐 세트', price: 2090000 },
+                    { id: 'cable_adapter', category: '배터리/충전', name: '[DJI] 케이블 아답터', desc: '충전 및 전원 연결용 정품 케이블 아답터', price: 275000 }
                 ]
             }
         ];
