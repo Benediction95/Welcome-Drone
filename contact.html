@@ -3,27 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의하기 - 웰컴드론</title>
+    <title>오시는 길 / 견적 및 도입 문의 - 웰컴드론</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'], }, colors: { primary: '#D4AF37', primaryHover: '#B5952F', darkBg: '#050505', cardBg: '#111111', cardBorder: '#222222', } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Pretendard"', 'sans-serif'], },
+                    colors: {
+                        primary: '#D4AF37',
+                        primaryHover: '#B5952F',
+                        darkBg: '#050505',
+                        cardBg: '#111111',
+                        cardBorder: '#222222',
+                    }
+                }
+            }
+        }
     </script>
     <style>
         body { background-color: #000000; }
         .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
     </style>
 </head>
-<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-primary selection:text-black">
+
+    <!-- Global Navigation Bar -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
-                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
                     <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
                         <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
-                        <a href="tel:010-9420-9946" class="text-primary text-sm font-bold tracking-wide hover:text-white transition-colors"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</a>
+                        <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
                     </div>
                 </div>
                 <div class="hidden lg:flex space-x-8 items-center">
@@ -51,88 +70,190 @@
         </div>
     </nav>
 
-    <main class="flex-grow pt-24 pb-20 bg-black">
-        <section id="contact" class="py-12">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <!-- 헤더 영역 -->
-                <div class="text-center mb-12">
-                    <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">Contact & Location</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">오시는 길 및 문의</h2>
-                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">드론 구매, DJI Dock 솔루션 도입, 전문 항공 촬영 견적 등 궁금하신 점을 언제든 편하게 문의해 주시면 웰컴드론 전문가가 신속하게 안내해 드립니다.</p>
-                </div>
+    <!-- Header -->
+    <header class="pt-32 pb-16 bg-gradient-to-b from-[#0f0f0f] to-darkBg border-b border-cardBorder text-center px-4">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block mb-3 px-4 py-1 rounded-full border border-primary/40 bg-primary/10 text-primary font-bold text-xs tracking-widest uppercase">
+                Contact & Quote Inquiry
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-black text-white mb-4">오시는 길 및 공식 도입 문의</h1>
+            <p class="text-gray-400 text-sm sm:text-lg max-w-2xl mx-auto font-light">
+                산업용·농업용 드론 구매, 공공기관 나라장터 조달 견적, DJI Dock 무인 관제 솔루션 구축까지 웰컴드론이 빠르고 정확하게 안내해 드립니다.
+            </p>
+        </div>
+    </header>
 
-                <!-- 연락처 및 지도 메인 박스 -->
-                <div class="bg-cardBg border border-cardBorder rounded-3xl p-6 lg:p-10 shadow-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
-                    
-                    <!-- 연락처 정보 카드 -->
-                    <div class="grid md:grid-cols-2 gap-6 mb-10 relative z-10">
-                        <!-- 전화번호 및 문자 연결 -->
-                        <div class="flex items-center group bg-[#0a0a0a] p-6 rounded-2xl border border-[#333] hover:border-primary/50 transition-colors duration-300">
-                            <div class="bg-primary/10 border border-primary/30 p-4 rounded-full text-primary shadow-sm group-hover:bg-primary group-hover:text-black transition-colors duration-300">
-                                <i class="fa-solid fa-phone text-2xl w-8 h-8 flex items-center justify-center"></i>
-                            </div>
-                            <div class="ml-6 flex flex-col items-start">
-                                <h4 class="text-sm font-bold mb-1 text-gray-400">고객센터 / 대표 최용진</h4>
-                                <div class="flex items-center gap-3">
-                                    <a href="tel:010-9420-9946" class="text-primary text-2xl font-bold tracking-wide hover:text-white transition-colors">
-                                        010-9420-9946
-                                    </a>
-                                    <a href="sms:010-9420-9946" class="bg-[#1a1a1a] text-gray-400 text-xs px-3 py-1.5 rounded-full border border-[#333] hover:bg-primary hover:text-black hover:border-primary transition-colors flex items-center gap-1.5">
-                                        <i class="fa-solid fa-comment-sms"></i> 문자
-                                    </a>
+    <main class="flex-grow py-16 bg-darkBg relative overflow-hidden">
+        <div class="absolute top-20 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[130px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="grid lg:grid-cols-12 gap-10 items-start" id="inquiry-section">
+
+                <!-- [좌측] 연락처 및 오시는 길 안내 (5칸) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl p-7 sm:p-8 shadow-xl space-y-6">
+                        <div>
+                            <span class="text-xs text-primary font-bold uppercase tracking-wider">Direct Contact</span>
+                            <h2 class="text-2xl font-black text-white mt-1">직통 상담 및 매장 안내</h2>
+                            <p class="text-xs text-gray-400 mt-1">전화나 문자로 문의주시면 현장 실사 및 맞춤 견적서를 즉시 발송해 드립니다.</p>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-start space-x-4 bg-black/50 p-4 rounded-2xl border border-[#222]">
+                                <div class="w-11 h-11 rounded-xl bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 text-lg border border-primary/30">
+                                    <i class="fa-solid fa-phone-volume"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-gray-400 block">대표 직통 전화 (최용진 대표)</span>
+                                    <a href="tel:010-9420-9946" class="text-xl font-black text-primary hover:underline">010 - 9420 - 9946</a>
+                                    <span class="block text-[11px] text-gray-500 mt-0.5">평일/주말 긴급 기술 및 견적 상담 가능</span>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- 운영시간 -->
-                        <div class="flex items-center group bg-[#0a0a0a] p-6 rounded-2xl border border-[#333] hover:border-primary/50 transition-colors duration-300">
-                            <div class="bg-primary/10 border border-primary/30 p-4 rounded-full text-primary shadow-sm group-hover:bg-primary group-hover:text-black transition-colors duration-300">
-                                <i class="fa-solid fa-clock text-2xl w-8 h-8 flex items-center justify-center"></i>
-                            </div>
-                            <div class="ml-6">
-                                <h4 class="text-sm font-bold mb-1 text-gray-400">운영시간</h4>
-                                <p class="text-white text-lg font-medium">평일 09:00 - 18:00</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- 지도 영역 -->
-                    <div class="relative z-10">
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary mr-3 border border-primary/30">
+                            <div class="flex items-start space-x-4 bg-black/50 p-4 rounded-2xl border border-[#222]">
+                                <div class="w-11 h-11 rounded-xl bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 text-lg border border-primary/30">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs text-gray-400 block">공식 이메일 (견적서·제안서 요청)</span>
+                                    <a href="mailto:oogoo1818@naver.com" class="text-base font-bold text-white hover:text-primary transition-colors">oogoo1818@naver.com</a>
+                                    <span class="block text-[11px] text-gray-500 mt-0.5">사업자등록증 첨부 시 전자세금계산서·조달 견적 즉시 발행</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4 bg-black/50 p-4 rounded-2xl border border-[#222]">
+                                <div class="w-11 h-11 rounded-xl bg-primary/20 text-primary flex items-center justify-center flex-shrink-0 text-lg border border-primary/30">
                                     <i class="fa-solid fa-location-dot"></i>
                                 </div>
-                                <h4 class="text-xl font-bold text-white">웰컴드론 본사 위치</h4>
+                                <div>
+                                    <span class="text-xs text-gray-400 block">본사 및 전시장 주소</span>
+                                    <p class="text-sm font-bold text-white mt-0.5">충청남도 보령시 보령북로 81 (웰컴드론)</p>
+                                    <span class="block text-[11px] text-gray-500 mt-0.5">방문 전 연락 주시면 기체 실물 시연 및 맞춤 상담이 가능합니다.</span>
+                                </div>
                             </div>
-                            <p class="text-primary text-sm font-bold bg-primary/10 px-3 py-1 rounded-full border border-primary/20 inline-block w-max">
-                                <i class="fa-solid fa-circle-exclamation mr-1"></i> 방문 전 사전 예약 권장
-                            </p>
                         </div>
-                        <p class="text-gray-400 text-sm mb-6 ml-11 sm:ml-0">충청남도 보령시 보령북로 81 (장비 시연 및 상세 상담을 위해 미리 연락 부탁드립니다.)</p>
-                        
-                        <!-- 구글 맵 (가로 꽉 차게 확장) -->
-                        <div class="w-full rounded-2xl overflow-hidden border border-[#333] shadow-inner grayscale hover:grayscale-0 transition-all duration-700 h-[400px] md:h-[500px]">
-                            <iframe src="https://maps.google.com/maps?q=충청남도%20보령시%20보령북로%2081&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" title="웰컴드론 위치"></iframe>
+
+                        <!-- 지도 바로가기 버튼 -->
+                        <div class="pt-2">
+                            <a href="https://map.naver.com/p/search/%EC%B6%A9%EC%B2%AD%EB%82%A8%EB%8F%84%20%EB%B3%B4%EB%A0%B9%EC%8B%9C%20%EB%B3%B4%EB%A0%B9%EB%B6%81%EB%A1%9C%2081" target="_blank" rel="noopener noreferrer" class="w-full bg-[#1a1a1a] hover:bg-primary hover:text-black text-white border border-[#333] py-3.5 rounded-2xl font-bold text-sm transition-all flex items-center justify-center">
+                                <i class="fa-solid fa-map-location-dot mr-2 text-primary"></i> 네이버 지도로 길찾기 (보령북로 81)
+                            </a>
                         </div>
                     </div>
-                    
                 </div>
+
+                <!-- [우측] 견적 자동 연동 온라인 문의 폼 (7칸) -->
+                <div class="lg:col-span-7">
+                    <div class="bg-cardBg border-2 border-primary/40 rounded-3xl p-7 sm:p-10 shadow-[0_0_50px_rgba(212,175,55,0.12)] space-y-6">
+                        
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-[#222]">
+                            <div>
+                                <span class="text-xs text-primary font-bold uppercase tracking-wider">Online Estimate & Inquiry</span>
+                                <h2 class="text-2xl font-black text-white mt-0.5">맞춤 견적 및 도입 상담 신청서</h2>
+                            </div>
+                            <a href="industrial.html" class="text-xs text-primary hover:underline font-bold flex items-center">
+                                <i class="fa-solid fa-calculator mr-1.5"></i>견적 계산기로 다시 선택하기
+                            </a>
+                        </div>
+
+                        <!-- [자동 연동 알림 배너] industrial.html에서 견적을 선택해 넘어온 경우 자동 활성화 -->
+                        <div id="auto-quote-banner" class="hidden bg-gradient-to-r from-primary/20 via-primary/10 to-black border border-primary/50 rounded-2xl p-4 sm:p-5">
+                            <div class="flex items-start justify-between gap-3">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-9 h-9 rounded-xl bg-primary text-black flex items-center justify-center font-black flex-shrink-0 mt-0.5">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-[11px] font-extrabold uppercase tracking-wider text-primary block">스마트 견적 계산기 연동 완료</span>
+                                        <h4 id="banner-quote-title" class="text-white font-bold text-sm sm:text-base mt-0.5">선택하신 기체 및 옵션 견적 내역이 아래 문의 칸에 자동 입력되었습니다!</h4>
+                                        <p id="banner-quote-sub" class="text-xs text-gray-300 mt-1"></p>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="clearSavedQuote()" class="text-xs text-gray-400 hover:text-white whitespace-nowrap">
+                                    <i class="fa-solid fa-xmark mr-1"></i>비우기
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 문의 입력 폼 -->
+                        <form id="contact-form" class="space-y-5" onsubmit="handleFormSubmit(event)">
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 mb-2">성함 / 담당자명 <span class="text-primary">*</span></label>
+                                    <input type="text" id="input-name" required placeholder="예: 홍길동 주무관 / 김철수 팀장" class="w-full bg-black border border-[#333] focus:border-primary rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 mb-2">연락처 <span class="text-primary">*</span></label>
+                                    <input type="tel" id="input-phone" required placeholder="예: 010-1234-5678" class="w-full bg-black border border-[#333] focus:border-primary rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none transition-colors">
+                                </div>
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 mb-2">소속 기관 / 기업명</label>
+                                    <input type="text" id="input-org" placeholder="예: 산림청 / 한국전력 / OO건설" class="w-full bg-black border border-[#333] focus:border-primary rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-gray-300 mb-2">문의 분야 <span class="text-primary">*</span></label>
+                                    <select id="input-category" class="w-full bg-black border border-[#333] focus:border-primary rounded-xl px-4 py-3 text-sm text-white focus:outline-none transition-colors">
+                                        <option value="산업용 드론 맞춤형 견적 및 구매 문의">산업용 드론 맞춤형 견적 및 구매 문의</option>
+                                        <option value="DJI Dock 무인 자동화 스테이션 구축 문의">DJI Dock 무인 자동화 스테이션 구축 문의</option>
+                                        <option value="공공기관 나라장터 조달 구매 문의">공공기관 나라장터 조달 구매 문의</option>
+                                        <option value="농업용 드론 (T70P / T25) 구매 문의">농업용 드론 (T70P / T25) 구매 문의</option>
+                                        <option value="항공 촬영 및 기타 기술 지원 문의">항공 촬영 및 기타 기술 지원 문의</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- 견적 내역이 자동으로 채워지는 상세 문의 내용 칸 -->
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <label for="input-message" class="block text-xs font-bold text-gray-300">
+                                        상세 문의 내용 및 선택 견적 내역 <span class="text-primary">*</span>
+                                    </label>
+                                    <button type="button" onclick="copyMessageContent()" class="text-xs text-primary hover:underline font-semibold flex items-center">
+                                        <i class="fa-regular fa-copy mr-1"></i>견적 내용 복사하기
+                                    </button>
+                                </div>
+                                <textarea id="input-message" rows="12" required placeholder="문의하실 내용을 입력해 주세요. (산업용 드론 페이지에서 견적을 산출하고 오시면 이곳에 선택 기체와 옵션 내역이 자동으로 입력됩니다.)" class="w-full bg-black border border-[#333] focus:border-primary rounded-2xl p-4 text-sm text-gray-200 font-mono leading-relaxed placeholder-gray-600 focus:outline-none transition-colors"></textarea>
+                            </div>
+
+                            <!-- 전송 버튼 그룹 (온라인 접수 / 문자 즉시 발송 / 이메일 발송) -->
+                            <div class="pt-2 space-y-3">
+                                <button type="submit" class="w-full bg-primary text-black py-4 rounded-2xl font-black text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center justify-center">
+                                    <i class="fa-solid fa-paper-plane mr-2"></i> 위 견적 및 내용으로 공식 상담 접수하기
+                                </button>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                    <button type="button" onclick="sendViaSMS()" class="w-full bg-[#161616] hover:bg-[#222] text-white border border-[#333] hover:border-primary py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center">
+                                        <i class="fa-solid fa-comment-sms text-primary mr-2 text-base"></i> 모바일 문자(SMS)로 견적 바로 전송
+                                    </button>
+                                    <button type="button" onclick="sendViaEmail()" class="w-full bg-[#161616] hover:bg-[#222] text-white border border-[#333] hover:border-primary py-3.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center">
+                                        <i class="fa-solid fa-envelope-open-text text-primary mr-2 text-base"></i> 이메일 프로그램으로 바로 발송
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
             </div>
-        </section>
+
+        </div>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4" onerror="this.src='https://placehold.co/150x60/000000/D4AF37?text=WD+LOGO'">
                     <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
                 </div>
                 <div class="text-sm text-center md:text-right space-y-1">
-                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 000-00-00000</p>
+                    <p>상호: 웰컴드론 | 대표: 최용진 | 사업자등록번호: 317-06-01971</p>
                     <p>주소: 충청남도 보령시 보령북로 81</p>
                     <p>연락처: 010 - 9420 - 9946 | 이메일: oogoo1818@naver.com</p>
                     <p class="mt-4 text-[#444]">Copyright © 2026 WelcomeDrone. All rights reserved.</p>
@@ -141,20 +262,121 @@
         </div>
     </footer>
 
+    <!-- 견적 데이터 자동 수신 및 전송 처리 스크립트 -->
     <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
-        
-        // 스크롤 시 네비게이션 바 블러 효과
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.style.background = 'rgba(5, 5, 5, 0.9)';
-                nav.classList.add('border-b', 'border-[#222]');
-            } else {
-                nav.style.background = 'rgba(0, 0, 0, 0.5)';
-                nav.classList.remove('border-b', 'border-[#222]');
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
+            document.getElementById('mobile-menu').classList.toggle('hidden'); 
+        });
+
+        // 페이지 로드 시 localStorage에 저장된 견적 데이터 확인 후 문의 내용 칸에 자동 입력
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedQuoteRaw = localStorage.getItem('welcomeDroneQuote');
+            if (!savedQuoteRaw) return;
+
+            try {
+                const quote = JSON.parse(savedQuoteRaw);
+                if (quote && quote.formattedMessage) {
+                    const messageTextarea = document.getElementById('input-message');
+                    const categorySelect = document.getElementById('input-category');
+                    const banner = document.getElementById('auto-quote-banner');
+                    const bannerTitle = document.getElementById('banner-quote-title');
+                    const bannerSub = document.getElementById('banner-quote-sub');
+
+                    // 1. 문의 내용 텍스트 영역에 견적서 자동 채우기
+                    messageTextarea.value = quote.formattedMessage;
+
+                    // 2. 선택한 기체 그룹(Dock 호환 여부)에 맞춰 문의 유형 자동 선택
+                    if (quote.group === 'dock') {
+                        categorySelect.value = 'DJI Dock 무인 자동화 스테이션 구축 문의';
+                    } else {
+                        categorySelect.value = '산업용 드론 맞춤형 견적 및 구매 문의';
+                    }
+
+                    // 3. 상단 안내 배너 활성화
+                    banner.classList.remove('hidden');
+                    bannerTitle.textContent = `${quote.droneName} (${quote.droneQty}대) 견적이 자동 입력되었습니다.`;
+                    bannerSub.textContent = `추가 옵션 ${quote.optionsCount}종 포함 · 총 예상 견적가: ${quote.grandTotalFormatted}`;
+                }
+            } catch (e) {
+                console.error('견적 데이터 로드 중 오류:', e);
             }
         });
+
+        // 자동 입력된 견적 비우기
+        function clearSavedQuote() {
+            localStorage.removeItem('welcomeDroneQuote');
+            document.getElementById('input-message').value = '';
+            document.getElementById('auto-quote-banner').classList.add('hidden');
+        }
+
+        // 문의 내용 클립보드 복사
+        function copyMessageContent() {
+            const msg = document.getElementById('input-message').value;
+            if (!msg.trim()) {
+                alert('복사할 견적 또는 문의 내용이 없습니다.');
+                return;
+            }
+            navigator.clipboard.writeText(msg).then(() => {
+                alert('견적 및 문의 내역이 클립보드에 복사되었습니다.');
+            });
+        }
+
+        // 기본 폼 제출 시 (클립보드 자동 복사 + 이메일/문자 연동 안내)
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('input-name').value.trim();
+            const phone = document.getElementById('input-phone').value.trim();
+            const org = document.getElementById('input-org').value.trim() || '미기재';
+            const category = document.getElementById('input-category').value;
+            const message = document.getElementById('input-message').value.trim();
+
+            const fullBody = `[웰컴드론 공식 상담 및 견적 요청]\n• 성함/담당자: ${name}\n• 연락처: ${phone}\n• 소속기관/기업: ${org}\n• 문의분야: ${category}\n\n${message}`;
+
+            // 클립보드에 자동 복사 후 이메일 발송 창 호출
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(fullBody).catch(() => {});
+            }
+
+            const subject = encodeURIComponent(`[웰컴드론 견적문의] ${org} - ${name}님 상담 요청`);
+            const bodyEncoded = encodeURIComponent(fullBody);
+
+            alert(`작성하신 견적 문의 내역이 클립보드에 복사되었으며, 공식 이메일(oogoo1818@naver.com) 발송 창으로 연결됩니다.\n\n빠른 상담을 원하시면 하단의 [모바일 문자로 견적 바로 전송] 또는 직통 전화(010-9420-9946)를 이용해 주세요.`);
+            window.location.href = `mailto:oogoo1818@naver.com?subject=${subject}&body=${bodyEncoded}`;
+        }
+
+        // 모바일 문자(SMS)로 견적 내역 바로 전송
+        function sendViaSMS() {
+            const name = document.getElementById('input-name').value.trim() || '고객';
+            const org = document.getElementById('input-org').value.trim();
+            const message = document.getElementById('input-message').value.trim();
+
+            if (!message) {
+                alert('전송할 문의 또는 견적 내용을 입력해 주세요.');
+                return;
+            }
+
+            const senderInfo = org ? `[${org} / ${name}]` : `[${name}]`;
+            const smsBody = encodeURIComponent(`${senderInfo} 웰컴드론 견적 상담 요청\n\n${message}`);
+            window.location.href = `sms:010-9420-9946?body=${smsBody}`;
+        }
+
+        // 이메일로 바로 전송
+        function sendViaEmail() {
+            const name = document.getElementById('input-name').value.trim() || '고객';
+            const phone = document.getElementById('input-phone').value.trim() || '미기재';
+            const org = document.getElementById('input-org').value.trim() || '미기재';
+            const category = document.getElementById('input-category').value;
+            const message = document.getElementById('input-message').value.trim();
+
+            if (!message) {
+                alert('전송할 문의 또는 견적 내용을 입력해 주세요.');
+                return;
+            }
+
+            const subject = encodeURIComponent(`[웰컴드론 견적문의] ${org} ${name}님 (${category})`);
+            const body = encodeURIComponent(`■ 성함/담당자: ${name}\n■ 연락처: ${phone}\n■ 소속기관/기업: ${org}\n■ 문의분야: ${category}\n\n${message}`);
+            window.location.href = `mailto:oogoo1818@naver.com?subject=${subject}&body=${body}`;
+        }
     </script>
 </body>
 </html>
