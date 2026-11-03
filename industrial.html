@@ -25,6 +25,25 @@
         }
     </script>
     <style>
+        @media print {
+    body * {
+        visibility: hidden;
+    }
+    #official-quote-print-area, #official-quote-print-area * {
+        visibility: visible;
+    }
+    #official-quote-print-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background: white !important;
+        color: black !important;
+    }
+    nav, header, main > div > div.lg\:col-span-8, footer, .glass-nav {
+        display: none !important;
+    }
+}
         body { background-color: #000000; }
         .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
         ::-webkit-scrollbar { width: 8px; }
@@ -878,6 +897,62 @@
             updateQuoteSidebar();
         });
     </script>
+    // 공공기관 제출용 공식 견적서 인쇄 및 PDF 저장 함수
+function printOfficialEstimate() {
+    const drone = droneDatabase.find(d => d.id === currentDroneId);
+    const droneQty = state[currentDroneId].droneQty;
+    const droneSubtotal = drone.price * droneQty;
+
+    let rowsHtml = '';
+    let rowIndex = 1;
+
+    // 1. 기본 기체 행 추가
+    rowsHtml += `
+        <tr class="border border-black text-center">
+            <td class="border border-black p-2">${rowIndex++}</td>
+            <td class="border border-black p-2 text-left font-bold">${drone.name}<br><span class="text-[11px] font-normal text-gray-600">${drone.specs}</span></td>
+            <td class="border border-black p-2">${droneQty}대</td>
+            <td class="border border-black p-2 text-right">${formatKRW(drone.price)}</td>
+            <td class="border border-black p-2 text-right font-bold">${formatKRW(droneSubtotal)}</td>
+        </tr>
+    `;
+
+    // 2. 선택된 옵션 행 추가
+    drone.options.forEach(opt => {
+        const qty = state[currentDroneId].options[opt.id] || 0;
+        if (qty > 0) {
+            const lineTotal = opt.price * qty;
+            rowsHtml += `
+                <tr class="border border-black text-center">
+                    <td class="border border-black p-2">${rowIndex++}</td>
+                    <td class="border border-black p-2 text-left">[호환옵션] ${opt.name}<br><span class="text-[11px] text-gray-600">${opt.desc}</span></td>
+                    <td class="border border-black p-2">${qty}개</td>
+                    <td class="border border-black p-2 text-right">${formatKRW(opt.price)}</td>
+                    <td class="border border-black p-2 text-right">${formatKRW(lineTotal)}</td>
+                </tr>
+            `;
+        }
+    });
+
+    document.getElementById('print-table-body').innerHTML = rowsHtml;
+
+    // 총합 계산 및 발행일 세팅
+    let optionsSubtotal = 0;
+    drone.options.forEach(opt => {
+        const qty = state[currentDroneId].options[opt.id] || 0;
+        optionsSubtotal += (opt.price * qty);
+    });
+    const grandTotal = droneSubtotal + optionsSubtotal;
+    
+    document.getElementById('print-grand-total').textContent = formatKRW(grandTotal);
+
+    const today = new Date();
+    const dateStr = `발행일자: ${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
+    document.getElementById('print-date').textContent = dateStr;
+
+    // 인쇄창 호출 (브라우저 인쇄 설정에서 '대상'을 'PDF로 저장'으로 선택하면 PDF 파일로 즉시 다운로드 가능)
+    window.print();
+}
     <!-- 공공기관 제출용 인쇄 전용 양식 (평소에는 화면에 보이지 않음) -->
 <div id="official-quote-print-area" class="hidden print:block bg-white text-black p-8 font-sans">
     <div class="max-w-3xl mx-auto space-y-6">
