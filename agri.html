@@ -48,38 +48,43 @@
         }
 
         @media print {
-            body * {
-                visibility: hidden !important;
-                height: 0 !important;
-                overflow: hidden !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            #official-quote-print-area, #official-quote-print-area * {
-                visibility: visible !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
-            #official-quote-print-area {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                display: block !important;
-                background: white !important;
-                color: black !important;
-                padding: 10px 20px !important;
-                margin: 0 !important;
-                z-index: 99999 !important;
-            }
-            @page {
-                size: A4;
-                margin: 10mm;
-            }
-            table, tr, td, th {
-                page-break-inside: avoid !important;
-            }
-        }
+    /* 웹사이트의 모든 기본 요소를 인쇄 시 숨김 처리 */
+    body * {
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* 오직 공식 견적서 인쇄 영역만 화면에 표시 및 전체 페이지 기준 설정 */
+    #official-quote-print-area, #official-quote-print-area * {
+        visibility: visible !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    #official-quote-print-area {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        display: block !important;
+        background: white !important;
+        color: black !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        z-index: 99999 !important;
+    }
+
+    /* 불필요한 자동 페이지 넘김(Page Break) 방지 */
+    page {
+        size: auto;
+        margin: 0mm;
+    }
+    
+    table, tr, td, th {
+        page-break-inside: avoid !important;
+    }
+}
     </style>
 </head>
 <body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-agriAccent selection:text-black">
