@@ -3,24 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>솔루션 & 촬영 - 웰컴드론</title>
+    <title>무인화 솔루션 (DJI Dock) - 웰컴드론</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Noto Sans KR"', 'sans-serif'], }, colors: { primary: '#D4AF37', primaryHover: '#B5952F', darkBg: '#050505', cardBg: '#111111', cardBorder: '#222222', } } } }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Pretendard"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#D4AF37',
+                        primaryHover: '#B5952F',
+                        dockAccent: '#FFFFFF',
+                        dockMuted: '#9CA3AF',
+                        darkBg: '#050505',
+                        cardBg: '#111111',
+                        cardBorder: '#222222',
+                    }
+                }
+            }
+        }
     </script>
     <style>
         body { background-color: #000000; }
-        .glass-nav { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #222; }
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #222;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFFFFF; }
+        
+        .dock-glow {
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.15);
+        }
     </style>
 </head>
-<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen">
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-white selection:text-black">
+    
+    <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="location.href='index.html'">
-                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-16 w-auto object-contain" onerror="this.src='https://placehold.co/200x80/000000/D4AF37?text=WD+LOGO'">
                     <div class="hidden md:flex flex-col ml-4 pl-4 border-l border-[#333] justify-center">
                         <span class="text-gray-400 text-xs font-medium mb-0.5">대표자 : 최 용 진</span>
                         <span class="text-primary text-sm font-bold tracking-wide"><i class="fa-solid fa-phone text-xs mr-1"></i>010 - 9420 - 9946</span>
@@ -28,389 +59,203 @@
                 </div>
                 <div class="hidden lg:flex space-x-8 items-center">
                     <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
-                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
-                    <a href="industrial.html" class="text-gray-300 hover:text-primary font-medium transition-colors">산업용 드론</a>
-                    <a href="solution.html" class="text-primary font-bold">무인화 솔루션</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-green-500 font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-gray-300 hover:text-blue-500 font-medium transition-colors">산업용 드론</a>
+                    <a href="solution.html" class="text-white font-bold tracking-wide border-b-2 border-white pb-1">무인화 솔루션</a>
                     <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
                     <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
                 </div>
                 <div class="lg:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-primary focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none"><i class="fa-solid fa-bars text-2xl"></i></button>
                 </div>
             </div>
         </div>
         <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
-                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
-                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">산업용 드론</a>
-                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">무인화 솔루션</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-green-500 hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-blue-500 hover:bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-bold text-white bg-black">무인화 솔루션</a>
                 <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
                 <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
             </div>
         </div>
     </nav>
 
-    <!-- 상단 헤더 -->
-    <header class="relative w-full h-[50vh] md:h-[100vh] flex items-center justify-center overflow-hidden">
+    <!-- 상단 비디오 헤더 -->
+    <header class="relative w-full h-[50vh] md:h-[60vh] flex items-center justify-center overflow-hidden pt-20 border-b border-cardBorder">
         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
-            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/f1e137e5-62da-40bb-a525-69dd32830bc4.mp4?w=2560&h=1440" type="video/mp4">
+            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/1915a283-4058-4ed7-92b2-2fd26e0b833c.mp4?w=2400&h=1200" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-black/60 z-0"></div>
-        <div class="relative z-10 text-center px-4">
-            <span class="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary font-bold text-sm tracking-widest uppercase">
-                <i class="fa-solid fa-drone mr-1"></i> Always There, Always Ready
+        <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-darkBg z-0"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <span class="inline-block mb-3 px-4 py-1.5 rounded-full border border-white/40 bg-white/10 text-white font-bold text-xs sm:text-sm tracking-widest uppercase shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+                <i class="fa-solid fa-cube mr-1.5"></i> Autonomous Drone-in-a-Box Solution
             </span>
-            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">DJI Dock 4</h1>
-            <p class="text-lg md:text-xl text-gray-300 font-light max-w-2xl mx-auto drop-shadow-md">
-                DJI 최초의 배터리 교체가 가능한 Dock Station
+            <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">완전 자동화 무인 드론 스테이션</h1>
+            <p class="text-sm sm:text-lg text-gray-300 font-light max-w-2xl mx-auto">
+                사람의 개입 없이 24시간 365일 자동 이착륙, 고속 충전, 원격 데이터 송수신을 실현하는 차세대 스마트 무인화 시스템입니다.
             </p>
         </div>
     </header>
 
-    <main class="flex-grow pb-20 bg-darkBg relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
-        
-        <section class="py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="flex-grow py-16 bg-darkBg relative">
+        <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[160px] pointer-events-none"></div>
 
-                <!-- [섹션 1] 단 45초, 무중단 연속 임무의 완성 -->
-                <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
-                    <div class="relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/99e45280-79ab-4121-9cbc-3bdaa90892bd.mp4?w=2400&h=1200" type="video/mp4">
-                        </video>
-                        <div class="absolute top-4 left-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">01. BATTERY SWAP</div>
-                    </div>
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">단 <span class="text-primary">45초</span>, 무중단 연속 임무의 완성</h3>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                            기존 30분 이상 소요되던 충전 대기 시간을 완벽하게 없앴습니다. DJI Dock 4는 드론이 복귀하는 즉시 기계식 스왑 시스템을 통해 단 45초 만에 완충된 배터리로 자동 교체합니다. 산불, 수색 등 긴박한 재난 상황에서도 공백 없는 24시간 연속 운용을 보장합니다.
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-bolt text-xs"></i></div>
-                                <p class="text-gray-300">자동 배터리 스왑 모듈 내장</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-infinity text-xs"></i></div>
-                                <p class="text-gray-300">대기 시간 제로, 무한에 가까운 사이클 비행</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- [섹션 2] 가장 중요한 순간, 21m/s 즉각 이륙 -->
-                <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
-                    <div class="order-2 lg:order-1">
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">가장 중요한 순간, <span class="text-primary">21m/s</span> 즉각 이륙</h3>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                            "Always There, Always Ready." 긴급 출동 명령이 떨어지면 시스템이 즉각 반응하여 커버를 개방하고 비행을 시작합니다. 지상 교통 체증에 구애받지 않고 최대 21m/s의 엄청난 속도로 비행하여 지상 구조 대원보다 먼저 현장에 진입합니다.
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-jet-fighter-up text-xs"></i></div>
-                                <p class="text-gray-300">사전 워밍업을 통한 명령 즉시 출동 시스템</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-truck-fast text-xs"></i></div>
-                                <p class="text-gray-300">차량 탑재 지원으로 언제 어디서든 기동성 확보</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ece6306f-ce49-4008-9a0f-d87a13065e26.mp4?w=2400&h=1200" type="video/mp4">
-                        </video>
-                        <div class="absolute top-4 right-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">02. FAST DEPLOY</div>
-                    </div>
-                </div>
-
-                <!-- [섹션 3] 다중 센서의 궁극적 진화, Matrice 5TD -->
-                <div class="grid lg:grid-cols-2 gap-12 items-center mb-32">
-                    <div class="relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] bg-[#111] group">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/581da91d-232b-484b-a48a-d87fbe7e7083.mp4?w=1184&h=960" type="video/mp4">
-                        </video>
-                        <div class="absolute top-4 left-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">03. MATRICE 5TD</div>
-                    </div>
-                    <div>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">다중 센서의 궁극적 진화, <span class="text-primary">Matrice 5TD</span></h3>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                            Dock 4 전용 기체인 Matrice 5TD는 광각 카메라, 고해상도 적외선 열화상 렌즈, mmWave 레이더, 그리고 정밀 LiDAR 센서를 단 하나의 기체에 모두 담았습니다. 낮과 밤, 악천후를 가리지 않고 완벽한 공간 정보와 열결함 데이터를 실시간으로 수집합니다.
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-camera text-xs"></i></div>
-                                <p class="text-gray-300">광학 + 열화상 + LiDAR 올인원 통합 페이로드</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-shield-halved text-xs"></i></div>
-                                <p class="text-gray-300">강력한 전방위 장애물 회피 및 비행 안정성</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- [섹션 4] 스스로 생각하는 17종 AI 감지 시스템 -->
-                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                    <div class="order-2 lg:order-1">
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">스스로 생각하는 <span class="text-primary">17종 AI 감지 시스템</span></h3>
-                        <p class="text-gray-400 text-lg leading-relaxed mb-6">
-                            DJI FlightHub 2와 연동된 강력한 AI 알고리즘이 화면 속 상황을 실시간으로 분석합니다. 차량, 인물, 굴착기 등 17가지의 객체 유형을 스스로 식별하고 추적하여, 관리자가 놓칠 수 있는 미세한 현장의 변화나 보안 침입을 즉각적으로 경고합니다.
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-brain text-xs"></i></div>
-                                <p class="text-gray-300">AI 기반 실시간 객체 식별 및 스마트 추적</p>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary mt-1 border border-primary/30 mr-3 flex-shrink-0"><i class="fa-solid fa-cloud text-xs"></i></div>
-                                <p class="text-gray-300">클라우드 기반 원격 관제 (FlightHub 2 완벽 연동)</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="order-1 lg:order-2 relative rounded-3xl overflow-hidden aspect-video border border-[#333] shadow-[0_0_40px_rgba(212,175,55,0.15)] group">
-                        <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/26f2770d-9e15-4406-b9a0-e116ebb5c758.mp4?w=2400&h=1200" type="video/mp4">
-                        </video>
-                        <div class="absolute top-4 right-4 bg-primary text-black text-xs font-black px-3 py-1.5 rounded-full shadow-lg">04. AI WORKFLOW</div>
-                    </div>
-                </div>
-
-                <!-- [섹션 5] 통신 및 데이터 전송 스펙 (영상 포함 카드 레이아웃) -->
-                <div class="pt-10 mb-16">
-                    <div class="text-center mb-12">
-                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-satellite text-primary mr-1"></i> Connectivity</span>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">어떤 현장에서도 끊김 없는 데이터 통신</h3>
-                        <p class="text-gray-400 text-lg max-w-3xl mx-auto">드론이 촬영하는 모든 데이터와 제어 명령을 실시간으로 지연 없이 전송하는 강력한 통신 시스템을 지원합니다.</p>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-8">
-                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
-                            <div class="aspect-video relative overflow-hidden bg-[#111]">
-                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ed882c1b-3f78-4c81-b3cd-d3237723fd30.mp4?w=2400&h=1200">
-                                </video>
-                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
-                                    <i class="fa-solid fa-video"></i>
-                                </div>
-                            </div>
-                            <div class="p-8 text-center flex-grow flex flex-col items-center">
-                                <h4 class="text-xl font-bold text-white mb-3">저지연 라이브 스트리밍</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">
-                                    초저지연 기술을 적용하여 드론이 촬영하는 고화질 현장 영상을 관리 센터 모니터에서 실시간으로 즉시 확인할 수 있습니다.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
-                            <div class="aspect-video relative overflow-hidden bg-[#111]">
-                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/901f2b3a-afa3-43ba-88f2-aed83beec975.mp4?w=2400&h=1200">
-                                </video>
-                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
-                                    <i class="fa-solid fa-shield-cat"></i>
-                                </div>
-                            </div>
-                            <div class="p-8 text-center flex-grow flex flex-col items-center">
-                                <h4 class="text-xl font-bold text-white mb-3">간섭 방지 전송</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">
-                                    전파 방해가 심한 도심이나 복잡한 산업 현장에서도 신호 끊김을 원천 차단하는 O4 업그레이드 전송 시스템으로 기체를 안전하게 제어합니다.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col group">
-                            <div class="aspect-video relative overflow-hidden bg-[#111]">
-                                <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/4383fbf6-0bd6-4464-96bb-c3cde4e5bf33.mp4?w=1386&h=1040">
-                                </video>
-                                <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm">
-                                    <i class="fa-solid fa-bolt"></i>
-                                </div>
-                            </div>
-                            <div class="p-8 text-center flex-grow flex flex-col items-center">
-                                <h4 class="text-xl font-bold text-white mb-3">고속 데이터 전송</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed">
-                                    비행이 끝남과 동시에 기체가 수집한 방대한 3D 맵핑 데이터 및 고해상도 미디어 파일들을 클라우드 서버로 빠르게 전송하여 분석 시간을 단축합니다.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- [섹션 6] 신규 추가: 다목적 확장 페이로드 스펙 (영상 포함 카드 레이아웃) -->
-                <div class="pt-16 mb-20 border-t border-[#333]">
-                    <div class="text-center mb-12">
-                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-layer-group text-primary mr-1"></i> Versatile Payload</span>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">무한한 확장을 위한 다목적 페이로드</h3>
-                        <p class="text-gray-400 text-lg max-w-3xl mx-auto">현장의 특수 임무를 완벽하게 지원하는 맞춤형 확장 모듈과 강력한 하중 탑재 능력을 제공합니다.</p>
-                    </div>
-
-                    <div class="flex flex-col gap-8">
-                        <!-- 1. 최대 450g 페이로드 -->
-                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
-                            <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
-                                <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/416ce5d7-7bbb-456f-8d52-33f855f47a51.mp4?w=2400&h=1200" type="video/mp4">
-                                </video>
-                                <div class="absolute top-6 left-6 w-12 h-12 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm shadow-lg">
-                                    <i class="fa-solid fa-weight-hanging text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
-                                <h4 class="text-2xl md:text-3xl font-bold text-white mb-4">최대 450g 확장 페이로드</h4>
-                                <p class="text-gray-400 text-lg leading-relaxed">
-                                    다양한 산업 현장의 특수 목적에 맞춰 서드파티 확장 모듈을 추가로 장착할 수 있는 450g의 넉넉한 페이로드 용량을 제공합니다.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- 2. 스피커/스포트라이트/낙하산 콤보 -->
-                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
-                            <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
-                                <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/a2f4b588-2135-4568-af0a-5294cbd78d23.mp4?w=1184&h=960" type="video/mp4">
-                                </video>
-                                <div class="absolute top-6 left-6 w-12 h-12 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm shadow-lg">
-                                    <i class="fa-solid fa-bullhorn text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
-                                <h4 class="text-2xl md:text-3xl font-bold text-white mb-4">스피커/라이트/낙하산 콤보</h4>
-                                <p class="text-gray-400 text-lg leading-relaxed">
-                                    고출력 스피커와 야간 수색용 스포트라이트로 구조 활동을 돕고, 비상 낙하산 시스템을 연동하여 도심 비행의 안전성을 극대화합니다.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- 3. 내장형 경고등 -->
-                        <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-primary/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.15)] transition-all duration-300 flex flex-col md:flex-row group">
-                            <div class="w-full md:w-5/12 relative overflow-hidden bg-[#111] aspect-video md:aspect-auto min-h-[250px] flex-shrink-0">
-                                <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                                    <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/75676232-deec-443f-a207-d1c8ef0cf21e.mp4?w=1184&h=960" type="video/mp4">
-                                </video>
-                                <div class="absolute top-6 left-6 w-12 h-12 bg-black/60 rounded-xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-sm shadow-lg">
-                                    <i class="fa-solid fa-triangle-exclamation text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
-                                <h4 class="text-2xl md:text-3xl font-bold text-white mb-4">내장형 사용자 맞춤 경고등</h4>
-                                <p class="text-gray-400 text-lg leading-relaxed">
-                                    기체에 탑재된 스마트 경고등을 통해 비행 상태와 현장 상황에 맞춰 관리자가 직접 점멸 패턴과 색상을 설정하여 시인성을 확보합니다.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- [섹션 7] 공공기관 및 주요 인프라 맞춤형 솔루션 바로가기 섹션 -->
-                <div class="pt-16 border-t border-[#333]">
-                    <div class="text-center mb-12">
-                        <span class="text-primary font-bold tracking-wider uppercase text-sm mb-2 block"><i class="fa-solid fa-building-shield text-primary mr-1"></i> Public & Enterprise Solutions</span>
-                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">주요 기관별 맞춤형 무인화 솔루션</h3>
-                        <p class="text-gray-400 text-lg max-w-3xl mx-auto">각 산업 현장의 특수한 임무 환경에 최적화된 웰컴드론의 전문 솔루션 페이지를 확인해보세요.</p>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- 1. 산림청 및 국립공원공단 -->
-                        <a href="solution-forest.html" class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-all duration-300 flex flex-col justify-between group">
-                            <div>
-                                <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-tree"></i>
-                                </div>
-                                <h4 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">산림청 및 국립공원공단 솔루션</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6">산불 감시, 불법 산나물 채취 단속, 산림 병해충 정밀 예찰 및 국립공원 생태 모니터링 무인화 체계</p>
-                            </div>
-                            <div class="flex items-center text-primary font-bold text-sm">
-                                <span>상세 내용 보기</span>
-                                <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                            </div>
-                        </a>
-
-                        <!-- 2. 한국전력공사 및 전력연구원 -->
-                        <a href="solution-kepco.html" class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-all duration-300 flex flex-col justify-between group">
-                            <div>
-                                <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-bolt-lightning"></i>
-                                </div>
-                                <h4 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">한국전력공사(KEPCO) 및 전력연구원 솔루션</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6">송전탑 및 송전선로 열화상 진단, AI 기반 애자 결함 자동 검출, 산악 지형 전력 설비 실시간 원격 점검</p>
-                            </div>
-                            <div class="flex items-center text-primary font-bold text-sm">
-                                <span>상세 내용 보기</span>
-                                <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                            </div>
-                        </a>
-
-                        <!-- 3. 해양경찰청 -->
-                        <a href="solution-coastguard.html" class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-all duration-300 flex flex-col justify-between group">
-                            <div>
-                                <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-water"></i>
-                                </div>
-                                <h4 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">해양경찰청 솔루션</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6">해상 실종자 수색, 연안 안전계도 방송, 불법 조업 단속 및 해양 오염 사고 실시간 감시 체계 구축</p>
-                            </div>
-                            <div class="flex items-center text-primary font-bold text-sm">
-                                <span>상세 내용 보기</span>
-                                <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                            </div>
-                        </a>
-
-                        <!-- 4. 한국도로공사 -->
-                        <a href="solution-highway.html" class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-all duration-300 flex flex-col justify-between group">
-                            <div>
-                                <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-road"></i>
-                                </div>
-                                <h4 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">한국도로공사 솔루션</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6">고속도로 사면 낙석 위험 구간 모니터링, 교량 및 터널 하부 균열 점검, 교통 혼잡 및 재난 상황 신속 대응</p>
-                            </div>
-                            <div class="flex items-center text-primary font-bold text-sm">
-                                <span>상세 내용 보기</span>
-                                <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                            </div>
-                        </a>
-
-                        <!-- 5. 한국수자원공사 -->
-                        <a href="solution-kwater.html" class="bg-cardBg border border-cardBorder p-8 rounded-3xl hover:border-primary hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] transition-all duration-300 flex flex-col justify-between group md:col-span-2 lg:col-span-1">
-                            <div>
-                                <div class="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary text-2xl mb-6 group-hover:scale-110 transition-transform">
-                                    <i class="fa-solid fa-droplet"></i>
-                                </div>
-                                <h4 class="text-xl font-bold text-white mb-3 group-hover:text-primary transition-colors">한국수자원공사(K-water) 솔루션</h4>
-                                <p class="text-gray-400 text-sm leading-relaxed mb-6">다목적 댐 주변 수변 구역 관리, 녹조 발생 모니터링, 상수도 관로 및 댐 시설물 안전 점검 무인 자동화</p>
-                            </div>
-                            <div class="flex items-center text-primary font-bold text-sm">
-                                <span>상세 내용 보기</span>
-                                <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 하단 도입 안내 배너 -->
-                <div class="mt-24 bg-gradient-to-r from-primary/10 via-[#111] to-black border border-primary/30 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_50px_rgba(212,175,55,0.1)]">
-                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">인건비 절감과 100% 무인화의 실현</h3>
-                    <p class="text-gray-400 text-lg mb-8 max-w-3xl mx-auto">
-                        더 이상 현장에 조종사가 상주할 필요가 없습니다. 기업과 공공기관의 고정 인건비를 획기적으로 낮추고 작업 효율을 극대화하는 DJI Dock 4 솔루션, 웰컴드론에서 현장 맞춤형 컨설팅을 받아보세요.
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24">
+            
+            <!-- 섹션 1: 무인화 핵심 개요 (지그재그 1) -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-xs text-white/80 border border-white/30 bg-white/10 px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
+                        01 · AUTOMATED DEPLOYMENT
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+                        조종사가 상주하지 않는<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">100% 무인 순찰·감시의 실현</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        DJI Dock 시스템은 원격 제어 센터의 예약 스케줄에 따라 덮개를 열고 즉각 이륙합니다. 임무 완료 후 지정된 스테이션으로 복귀하여 자동 정렬 및 급속 충전을 수행하므로 극한 환경에서도 완벽한 보안 순찰이 가능합니다.
                     </p>
-                    <a href="contact.html" class="inline-flex items-center justify-center bg-primary text-black px-8 py-4 rounded-xl font-bold text-lg hover:bg-primaryHover transition-all shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-                        솔루션 도입 상담하기 <i class="fa-solid fa-arrow-right ml-2"></i>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="bg-cardBg border border-cardBorder p-4 rounded-2xl">
+                            <span class="text-white text-xl font-black block mb-1">IP55</span>
+                            <span class="text-xs text-gray-400">전천후 방수·방진 등급</span>
+                        </div>
+                        <div class="bg-cardBg border border-cardBorder p-4 rounded-2xl">
+                            <span class="text-white text-xl font-black block mb-1">20-25분</span>
+                            <span class="text-xs text-gray-400">20%에서 90% 급속 충전</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="aspect-video rounded-3xl overflow-hidden bg-black border border-cardBorder relative dock-glow group">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/1915a283-4058-4ed7-92b2-2fd26e0b833c.mp4?w=2400&h=1200" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+            </div>
+
+            <!-- 섹션 2: 정밀 원격 제어 & 클라우드 연동 (지그재그 2) -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="aspect-video rounded-3xl overflow-hidden bg-black border border-cardBorder relative dock-glow order-2 lg:order-1 group">
+                    <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ed882c1b-3f78-4c81-b3cd-d3237723fd30.mp4?w=2400&h=1200" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+                <div class="space-y-6 order-1 lg:order-2">
+                    <span class="text-xs text-white/80 border border-white/30 bg-white/10 px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
+                        02 · CLOUD MANAGEMENT
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+                        웹 브라우저 하나로<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">전국 현장을 실시간 관제</span>
+                    </h2>
+                    <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        DJI FlightHub 2 클라우드 플랫폼을 통해 현장에 직접 방문하지 않고도 3D 모델 기반 비행 경로 계획, 라이브 스트리밍 시청, 촬영 데이터 자동 동기화 및 보고서 생성이 가능합니다.
+                    </p>
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-gray-300">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-white mr-2.5"></i> 센티미터(cm)급 RTK 자동 보정 비행</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-white mr-2.5"></i> 이상 징후 감지 시 관제 센터 자동 경보 알림</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-white mr-2.5"></i> 비상 상황 시 원격 수동 제어(Cloud Control) 즉각 전환</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 섹션 3: 3개 독립 카드 - 핵심 기능 (라이브 스트리밍, 간섭 방지, 데이터 전송) -->
+            <div>
+                <div class="text-center mb-12">
+                    <span class="text-xs text-white/80 border border-white/30 bg-white/10 px-3.5 py-1 rounded-full font-bold uppercase tracking-wider">
+                        KEY CAPABILITIES
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-3">안정적인 무인 임무를 위한 핵심 기술</h3>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- 카드 1 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300 flex flex-col group">
+                        <div class="aspect-video relative overflow-hidden bg-[#111]">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ed882c1b-3f78-4c81-b3cd-d3237723fd30.mp4?w=2400&h=1200">
+                            </video>
+                            <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-white border border-white/30 backdrop-blur-sm">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 text-center flex-grow flex flex-col items-center">
+                            <h4 class="text-xl font-bold text-white mb-3">초저지연 라이브 스트리밍</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                드론이 촬영하는 고화질 영상과 열화상 화면을 중앙 통제실 모니터로 지연 없이 실시간 전송합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 카드 2 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300 flex flex-col group">
+                        <div class="aspect-video relative overflow-hidden bg-[#111]">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/901f2b3a-afa3-43ba-88f2-aed83beec975.mp4?w=2400&h=1200">
+                            </video>
+                            <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-white border border-white/30 backdrop-blur-sm">
+                                <i class="fa-solid fa-tower-broadcast"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 text-center flex-grow flex flex-col items-center">
+                            <h4 class="text-xl font-bold text-white mb-3">강력한 간섭 방지 전송</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                복잡한 전파 간섭이 존재하는 도심 및 발전소 인근에서도 신호 끊김을 원천 차단하는 O4 업그레이드 링크를 적용합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 카드 3 -->
+                    <div class="bg-cardBg border border-cardBorder rounded-3xl overflow-hidden hover:border-white/60 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] transition-all duration-300 flex flex-col group">
+                        <div class="aspect-video relative overflow-hidden bg-[#111]">
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/55a44641-a6c9-4912-97f8-40fd3e9d37d4.mp4?w=1386&h=1040">
+                            </video>
+                            <div class="absolute top-4 left-4 w-10 h-10 bg-black/60 rounded-xl flex items-center justify-center text-white border border-white/30 backdrop-blur-sm">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 text-center flex-grow flex flex-col items-center">
+                            <h4 class="text-xl font-bold text-white mb-3">초고속 원격 데이터 동기화</h4>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                착륙과 동시에 수집된 고화질 사진과 측량 포인트 클라우드 데이터를 클라우드 서버로 자동 업로드합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 하단 도입 안내 배너 (화이트 포인트 스타일) -->
+            <div class="bg-gradient-to-r from-white/10 via-[#111] to-black border border-white/30 p-10 md:p-14 rounded-3xl text-center shadow-[0_0_50px_rgba(255,255,255,0.08)]">
+                <span class="text-xs text-white/90 border border-white/30 bg-white/10 px-3.5 py-1 rounded-full font-bold uppercase tracking-wider mb-4 inline-block">
+                    CONSULTING & DEPLOYMENT
+                </span>
+                <h3 class="text-2xl md:text-3xl font-black text-white mb-4">인건비 절감과 100% 무인 순찰 체계 구축</h3>
+                <p class="text-gray-400 text-sm md:text-base mb-8 max-w-3xl mx-auto leading-relaxed">
+                    기업 및 공공기관의 고정 인건비를 획기적으로 낮추고 임무 완수율을 극대화하는 DJI Dock 무인화 솔루션. 현장 실사부터 인허가 컨설팅까지 웰컴드론에서 원스톱으로 지원합니다.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="contact.html" class="inline-flex items-center justify-center bg-white text-black px-8 py-4 rounded-2xl font-black text-base hover:bg-gray-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                        무인화 솔루션 도입 문의하기 <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                    <a href="industrial.html" class="inline-flex items-center justify-center bg-black border border-white/40 text-white px-8 py-4 rounded-2xl font-bold text-base hover:border-white transition-all">
+                        산업용 기체 견적 확인하기
                     </a>
                 </div>
-
             </div>
-        </section>
+
+        </div>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="flex flex-col items-center md:items-start">
-                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+                    <img src="Welcome Drone WD 로고.png" alt="웰컴드론 로고" class="h-12 w-auto opacity-50 grayscale hover:grayscale-0 transition-all mb-4" onerror="this.src='https://placehold.co/150x60/000000/D4AF37?text=WD+LOGO'">
                     <p class="text-sm">DJI Enterprise & Agriculture Authorized Dealer</p>
                 </div>
                 <div class="text-sm text-center md:text-right space-y-1">
@@ -422,17 +267,10 @@
             </div>
         </div>
     </footer>
+
     <script>
-        document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 20) {
-                nav.style.background = 'rgba(5, 5, 5, 0.9)';
-                nav.classList.add('border-b', 'border-[#222]');
-            } else {
-                nav.style.background = 'rgba(0, 0, 0, 0.5)';
-                nav.classList.remove('border-b', 'border-[#222]');
-            }
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
+            document.getElementById('mobile-menu').classList.toggle('hidden'); 
         });
     </script>
 </body>
