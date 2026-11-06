@@ -15,8 +15,7 @@
                     colors: { 
                         primary: '#D4AF37', 
                         primaryHover: '#B5952F', 
-                        indusAccent: '#3B82F6', 
-                        indusAccentHover: '#2563EB',
+                        dockAccent: '#38BDF8',
                         darkBg: '#050505', 
                         cardBg: '#111111', 
                         cardBorder: '#222222', 
@@ -31,8 +30,9 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #000; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3B82F6; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
         
+        /* 아코디언 애니메이션 */
         .accordion-panel {
             max-height: 0;
             overflow: hidden;
@@ -40,50 +40,50 @@
             transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease;
         }
         .accordion-panel.open {
-            max-height: 3500px;
+            max-height: 2500px;
             opacity: 1;
         }
-        .drone-card-wrapper.active-indus-card {
-            border-color: #3B82F6;
-            box-shadow: 0 0 35px rgba(59, 130, 246, 0.2);
+        .drone-card-wrapper.active-card {
+            border-color: #D4AF37;
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.15);
+        }
+        .drone-card-wrapper.active-dock-card {
+            border-color: #38BDF8;
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.15);
         }
 
+        /* 인쇄 및 PDF 저장 전용 스타일 */
         @media print {
-            body * {
-                visibility: hidden !important;
-                height: 0 !important;
-                overflow: hidden !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-            #official-quote-print-area, #official-quote-print-area * {
-                visibility: visible !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
-            #official-quote-print-area {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                display: block !important;
-                background: white !important;
-                color: black !important;
-                padding: 10px 20px !important;
-                margin: 0 !important;
-                z-index: 99999 !important;
-            }
-            @page {
-                size: A4;
-                margin: 10mm;
-            }
-            table, tr, td, th {
-                page-break-inside: avoid !important;
-            }
-        }
+    body * {
+        visibility: hidden !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+    #official-quote-print-area, #official-quote-print-area * {
+        visibility: visible !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+    #official-quote-print-area {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        display: block !important;
+        background: white !important;
+        color: black !important;
+        padding: 10px 20px !important; /* 인쇄 용지 여백 최소화 */
+        margin: 0 !important;
+        z-index: 99999 !important;
+    }
+    @page {
+        size: A4;
+        margin: 10mm; /* A4 용지 여백을 줄여서 한 페이지에 더 많이 들어가도록 설정 */
+    }
+}
     </style>
 </head>
-<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-indusAccent selection:text-white">
+<body class="font-sans text-gray-300 bg-black antialiased flex flex-col min-h-screen selection:bg-primary selection:text-black">
     
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
@@ -98,9 +98,9 @@
                 </div>
                 <div class="hidden lg:flex space-x-8 items-center">
                     <a href="about.html" class="text-gray-300 hover:text-primary font-medium transition-colors">회사 소개</a>
-                    <a href="agri.html" class="text-gray-300 hover:text-green-500 font-medium transition-colors">농업용 드론</a>
-                    <a href="industrial.html" class="text-indusAccent font-bold">산업용 드론</a>
-                    <a href="solution.html" class="text-gray-300 hover:text-white font-medium transition-colors">무인화 솔루션</a>
+                    <a href="agri.html" class="text-gray-300 hover:text-primary font-medium transition-colors">농업용 드론</a>
+                    <a href="industrial.html" class="text-primary font-bold">산업용 드론</a>
+                    <a href="solution.html" class="text-gray-300 hover:text-primary font-medium transition-colors">무인화 솔루션</a>
                     <a href="photo.html" class="text-gray-300 hover:text-primary font-medium transition-colors">항공 촬영</a>
                     <a href="contact.html" class="bg-primary text-black px-6 py-2.5 rounded-full font-bold hover:bg-primaryHover transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">오시는 길 / 문의</a>
                 </div>
@@ -112,9 +112,9 @@
         <div id="mobile-menu" class="hidden lg:hidden bg-cardBg border-t border-cardBorder absolute w-full shadow-2xl">
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <a href="about.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">회사 소개</a>
-                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-green-500 hover:bg-black">농업용 드론</a>
-                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-bold text-indusAccent bg-black">산업용 드론</a>
-                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-black">무인화 솔루션</a>
+                <a href="agri.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">농업용 드론</a>
+                <a href="industrial.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary bg-black">산업용 드론</a>
+                <a href="solution.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">무인화 솔루션</a>
                 <a href="photo.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-300 hover:text-primary hover:bg-black">항공 촬영</a>
                 <a href="contact.html" class="block px-3 py-3 rounded-md text-base font-bold text-primary hover:bg-black">오시는 길 / 문의</a>
             </div>
@@ -124,64 +124,103 @@
     <!-- 상단 헤더 -->
     <header class="relative w-full h-[45vh] md:h-[52vh] flex items-center justify-center overflow-hidden pt-20 border-b border-cardBorder">
         <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
-            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/39844bb8-ade7-4447-bbea-090ab2f09efe.mp4?w=1386&h=1040" type="video/mp4">
+            <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/581da91d-232b-484b-a48a-d87fbe7e7083.mp4?w=1184&h=1200" type="video/mp4">
         </video>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/85 via-black/70 to-darkBg z-0"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/65 to-darkBg z-0"></div>
         <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <span class="inline-block mb-3 px-4 py-1.5 rounded-full border border-indusAccent/40 bg-indusAccent/10 text-indusAccent font-bold text-xs sm:text-sm tracking-widest uppercase">
-                <i class="fa-solid fa-industry mr-1"></i> DJI Enterprise Official Lineup & Estimator
+            <span class="inline-block mb-3 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-primary font-bold text-xs sm:text-sm tracking-widest uppercase">
+                <i class="fa-solid fa-sliders mr-1"></i> DJI Enterprise Official Lineup & Estimator
             </span>
             <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">산업용 드론 라인업 및 스마트 견적 시스템</h1>
             <p class="text-sm sm:text-lg text-gray-300 font-light max-w-2xl mx-auto">
-                공공 안전, 측량, 인프라 점검 및 물류 운송을 위한 플래그십 기체를 비교하고, 카드를 클릭하여 <strong class="text-indusAccent font-semibold">전용 페이로드·배터리·스테이션 옵션</strong>을 조합해 실시간 견적을 산출하세요.
+                생생한 기체 운용 루프 영상과 함께 사양을 비교하고, 카드를 클릭하여 <strong class="text-primary font-semibold">전용 페이로드·배터리</strong>를 조합해 실시간 합산 견적을 확인하세요.
             </p>
         </div>
     </header>
 
     <!-- 메인 컨텐츠 -->
     <main class="flex-grow py-12 bg-darkBg relative">
-        <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-indusAccent/5 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-20 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[140px] pointer-events-none"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             
+            <!-- 상단 카테고리 퀵 이동 & 안내 바 -->
             <div class="mb-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 bg-cardBg border border-[#2a2a2a] p-4 sm:px-6 rounded-2xl">
-                <div class="flex items-center space-x-3">
-                    <span class="w-8 h-8 rounded-full bg-indusAccent/20 text-indusAccent flex items-center justify-center font-bold text-sm">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </span>
-                    <p class="text-xs sm:text-sm text-gray-300">
-                        원하시는 <strong class="text-white">산업용 드론 카드를 클릭</strong>하여 기체 대수와 호환 페이로드·보증 옵션을 추가해 보세요.
-                    </p>
+                <div class="flex flex-wrap items-center gap-2">
+                    <a href="#section-standard" class="px-4 py-2 rounded-xl bg-primary/15 border border-primary/40 text-primary font-bold text-xs sm:text-sm hover:bg-primary hover:text-black transition-all">
+                        <i class="fa-solid fa-helicopter mr-1.5"></i>현장 투입형 산업용 드론 (5종)
+                    </a>
+                    <a href="#section-dock" class="px-4 py-2 rounded-xl bg-dockAccent/15 border border-dockAccent/40 text-dockAccent font-bold text-xs sm:text-sm hover:bg-dockAccent hover:text-black transition-all">
+                        <i class="fa-solid fa-warehouse mr-1.5"></i>DJI Dock 스테이션 호환 드론 (3종)
+                    </a>
                 </div>
-                <span class="text-xs text-indusAccent bg-indusAccent/10 border border-indusAccent/30 px-3 py-1 rounded-full font-semibold">
-                    나라장터 조달 및 기업 예산 맞춤 견적 가능 (VAT 10% 포함)
-                </span>
+                <div class="text-xs text-gray-400 flex items-center">
+                    <i class="fa-solid fa-circle-play text-primary mr-1.5"></i>
+                    모든 기체 카드는 루프 영상을 지원하며 클릭 시 호환 옵션이 펼쳐집니다.
+                </div>
             </div>
 
             <!-- 전체 그리드: 좌측 드론 리스트(8칸) + 우측 고정 견적함(4칸) -->
             <div class="grid lg:grid-cols-12 gap-8 items-start">
                 
                 <!-- [좌측] 세로형 산업용 드론 리스트 영역 -->
-                <div class="lg:col-span-8 space-y-6" id="indus-drone-container">
-                    <!-- JS 렌더링 -->
+                <div class="lg:col-span-8 space-y-12">
+                    
+                    <!-- 그룹 1: 현장 운용 산업용 드론 -->
+                    <section id="section-standard" class="space-y-6 scroll-mt-24">
+                        <div class="border-l-4 border-primary pl-4 py-1">
+                            <span class="text-xs font-extrabold uppercase tracking-widest text-primary">PART 01 · FIELD ENTERPRISE SERIES</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-white mt-0.5">현장 투입형 산업용 드론 라인업</h2>
+                            <p class="text-xs sm:text-sm text-gray-400 mt-1">조종기 기반 현장 즉시 투입, 정밀 측량, 열화상 점검 및 대형 페이로드 장착용 기체 (M400 · M350 · M30T · M4T · M4E)</p>
+                        </div>
+                        <div class="space-y-6" id="standard-drone-container">
+                            <!-- JS 렌더링 -->
+                        </div>
+                    </section>
+
+                    <!-- 그룹 2: 독 스테이션 호환 전용 드론 -->
+                    <section id="section-dock" class="space-y-6 pt-6 border-t border-[#222] scroll-mt-24">
+                        <div class="bg-gradient-to-r from-dockAccent/15 via-cardBg to-cardBg border border-dockAccent/40 p-6 rounded-3xl">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                <div>
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-dockAccent text-black mb-2">
+                                        <i class="fa-solid fa-robot mr-1.5"></i>PART 02 · DJI DOCK AUTOMATION SERIES
+                                    </span>
+                                    <h2 class="text-2xl sm:text-3xl font-black text-white">무인 도킹 스테이션(DJI Dock) 호환 라인업</h2>
+                                    <p class="text-xs sm:text-sm text-gray-300 mt-1">
+                                        24시간 무인 자동 이착륙·충전·배터리 스왑 스테이션(<strong class="text-dockAccent">DJI Dock 4 / Dock 3</strong>) 연동 및 단독 운용 겸용 기체 (M5TD · M4TD · M4D)
+                                    </p>
+                                </div>
+                                <a href="solution.html" class="text-xs font-bold text-dockAccent hover:underline whitespace-nowrap flex items-center">
+                                    무인화 솔루션 자세히 보기 <i class="fa-solid fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="space-y-6" id="dock-drone-container">
+                            <!-- JS 렌더링 -->
+                        </div>
+                    </section>
+
                 </div>
 
                 <!-- [우측] 실시간 견적 합산 사이드바 (Sticky) -->
                 <div class="lg:col-span-4 lg:sticky lg:top-28">
-                    <div class="bg-cardBg border-2 border-indusAccent/50 rounded-3xl p-6 sm:p-7 shadow-[0_0_50px_rgba(59,130,246,0.15)] space-y-6">
+                    <div class="bg-cardBg border-2 border-primary/50 rounded-3xl p-6 sm:p-7 shadow-[0_0_50px_rgba(212,175,55,0.15)] space-y-6">
                         
+                        <!-- 헤더 -->
                         <div class="flex items-center justify-between pb-4 border-b border-[#262626]">
                             <div class="flex items-center space-x-2.5">
-                                <i class="fa-solid fa-calculator text-indusAccent text-xl"></i>
+                                <i class="fa-solid fa-calculator text-primary text-xl"></i>
                                 <h2 class="text-lg font-black text-white">실시간 견적 계산기</h2>
                             </div>
-                            <span class="text-[11px] bg-indusAccent text-white px-2.5 py-0.5 rounded-full font-extrabold tracking-wider">ENTERPRISE</span>
+                            <span class="text-[11px] bg-primary text-black px-2.5 py-0.5 rounded-full font-extrabold tracking-wider">LIVE QUOTE</span>
                         </div>
 
+                        <!-- 선택한 기체 요약 -->
                         <div class="bg-black/60 p-4 rounded-2xl border border-[#2a2a2a]">
                             <div class="flex items-center justify-between mb-1">
                                 <span id="quote-category-tag" class="text-[11px] text-gray-400 font-bold">선택된 기본 기체 없음</span>
-                                <button type="button" onclick="deselectCurrentDrone()" id="btn-deselect-drone" class="hidden text-[11px] text-gray-400 hover:text-indusAccent transition-colors">
+                                <button type="button" onclick="deselectCurrentDrone()" id="btn-deselect-drone" class="hidden text-[11px] text-gray-400 hover:text-primary transition-colors">
                                     <i class="fa-solid fa-rotate-left mr-1"></i>기체 선택 해제
                                 </button>
                             </div>
@@ -190,7 +229,7 @@
                                     <h3 id="quote-drone-name" class="text-white font-bold text-base leading-snug">선택된 기체가 없습니다.</h3>
                                     <span id="quote-drone-unit-price" class="text-xs text-gray-500">좌측에서 기체를 선택해 주세요.</span>
                                 </div>
-                                <span id="quote-drone-qty-badge" class="hidden bg-indusAccent/20 text-indusAccent border border-indusAccent/40 px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap">0대</span>
+                                <span id="quote-drone-qty-badge" class="hidden bg-primary/20 text-primary border border-primary/40 px-2.5 py-1 rounded-lg text-xs font-bold whitespace-nowrap">0대</span>
                             </div>
                             <div class="mt-3 pt-3 border-t border-[#222] flex justify-between items-center">
                                 <span class="text-xs text-gray-400">기체 합계 금액</span>
@@ -198,59 +237,53 @@
                             </div>
                         </div>
 
+                        <!-- 선택한 호환 옵션 리스트 -->
                         <div>
                             <div class="flex justify-between items-center mb-2.5">
                                 <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">선택한 추가 옵션 내역</span>
-                                <button type="button" onclick="resetAllOptions()" class="text-[11px] text-gray-400 hover:text-indusAccent transition-colors">
+                                <button type="button" onclick="resetAllOptions()" class="text-[11px] text-gray-400 hover:text-primary transition-colors">
                                     <i class="fa-solid fa-rotate-left mr-1"></i>옵션 초기화
                                 </button>
                             </div>
-                            <div id="quote-options-list" class="space-y-2 max-h-56 overflow-y-auto pr-1 text-xs">
+                            <div id="quote-options-list" class="space-y-2 max-h-64 overflow-y-auto pr-1 text-xs">
                                 <div class="text-center py-6 bg-black/30 rounded-xl border border-[#1f1f1f] text-gray-500 italic">선택된 추가 옵션이 없습니다.</div>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t-2 border-[#2a2a2a] space-y-2">
+                        <!-- 총 합산 금액 -->
+                        <div class="pt-5 border-t-2 border-[#2a2a2a] space-y-2">
                             <div class="flex justify-between items-center text-xs text-gray-400">
                                 <span>옵션 추가 합계</span>
                                 <span id="quote-options-subtotal" class="text-gray-200 font-semibold">+0원</span>
                             </div>
-                            <div class="flex justify-between items-baseline pt-1">
+                            <div class="flex justify-between items-baseline pt-2">
                                 <span class="text-sm font-bold text-white">총 예상 견적가</span>
                                 <div class="text-right">
-                                    <span id="quote-grand-total" class="text-2xl sm:text-3xl font-black text-indusAccent">0원</span>
+                                    <span id="quote-grand-total" class="text-2xl sm:text-3xl font-black text-primary">0원</span>
                                     <span class="block text-[11px] text-gray-400 mt-0.5">(VAT 포함 기준가)</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 공공 조달 및 기업 예산 검토 안내 박스 -->
-                        <div class="bg-black/50 p-4 rounded-2xl border border-indusAccent/30 space-y-2.5 text-xs">
-                            <div class="flex items-center space-x-2 text-indusAccent font-bold">
-                                <i class="fa-solid fa-file-contract"></i>
-                                <span>공공 조달 / 기업 맞춤 도입 프로세스</span>
-                            </div>
-                            <ol class="list-decimal list-inside space-y-1.5 text-gray-300 leading-relaxed text-[11px]">
-                                <li class="pl-1"><strong class="text-white">실시간 산출:</strong> 기체 및 필수 페이로드·보증 옵션 조합 후 공식 견적서 즉시 인쇄/PDF 저장</li>
-                                <li class="pl-1"><strong class="text-white">행정 서류 지원:</strong> 나라장터 조달 규격서, 과업지시서 기초 자료, 비교견적서 원본 발급 지원</li>
-                                <li class="pl-1"><strong class="text-white">납품 및 시연:</strong> 전문 조종 인력의 현장 시연 비행 및 직무 맞춤형 오퍼레이션 교육 제공</li>
-                            </ol>
-                            <p class="text-[10px] text-gray-400 pt-1 border-t border-white/10">
-                                ※ 대량 납품 및 커스텀 시스템 구축(DJI Dock 스테이션 등) 시 추가 기술 지원 및 현장 실사가 진행됩니다.
-                            </p>
+                        <!-- 안내 문구 -->
+                        <div class="bg-black/40 p-3.5 rounded-xl border border-[#222] text-[11px] text-gray-400 leading-relaxed">
+                            <i class="fa-solid fa-circle-info text-primary mr-1"></i>
+                            공공기관 나라장터 조달 구매, 지자체 보조사업 및 도킹 스테이션 현장 시공비는 상담을 통해 맞춤 안내해 드립니다.
                         </div>
 
+                        <!-- 액션 버튼 -->
                         <div class="space-y-2.5">
-                            <button type="button" onclick="submitEstimate()" class="w-full bg-indusAccent text-white py-4 rounded-2xl font-black text-base hover:bg-indusAccentHover transition-all shadow-[0_0_25px_rgba(59,130,246,0.35)] flex items-center justify-center">
+                            <button type="button" onclick="submitEstimate()" class="w-full bg-primary text-black py-4 rounded-2xl font-black text-base hover:bg-primaryHover transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] flex items-center justify-center">
                                 <i class="fa-solid fa-paper-plane mr-2"></i> 이 견적으로 도입 상담 신청
                             </button>
                             
+                            <!-- 공공기관 제출용 공식 견적서 인쇄 / PDF 저장 버튼 -->
                             <button type="button" onclick="printOfficialEstimate()" class="w-full bg-white text-black hover:bg-gray-200 py-3.5 rounded-2xl font-bold text-sm transition-all flex items-center justify-center shadow-md">
                                 <i class="fa-solid fa-file-pdf mr-2 text-red-600 text-base"></i> 공공기관 제출용 공식 견적서 인쇄 / PDF 저장
                             </button>
 
-                            <a href="tel:010-9420-9946" class="w-full bg-black border border-[#333] hover:border-indusAccent text-gray-200 hover:text-indusAccent py-3 rounded-2xl font-bold text-sm transition-all flex items-center justify-center">
-                                <i class="fa-solid fa-phone mr-2 text-indusAccent"></i> 직통 유선 상담 : 010-9420-9946
+                            <a href="tel:010-9420-9946" class="w-full bg-black border border-[#333] hover:border-primary text-gray-200 hover:text-primary py-3 rounded-2xl font-bold text-sm transition-all flex items-center justify-center">
+                                <i class="fa-solid fa-phone mr-2 text-primary"></i> 전화 즉시 상담 : 010-9420-9946
                             </a>
                         </div>
 
@@ -261,70 +294,75 @@
         </div>
     </main>
 
-    <!-- 인쇄 전용 공식 견적서 양식 (VAT 포함 기준) -->
-    <div id="official-quote-print-area" class="hidden bg-white text-black p-8 font-sans text-xs">
-        <div class="max-w-3xl mx-auto space-y-4">
-            <div class="text-center border-b-2 border-black pb-2">
-                <h1 class="text-2xl font-extrabold tracking-wider">산업용 드론 및 무인화 솔루션 공식 견적서</h1>
-                <p class="text-[11px] text-gray-600 mt-0.5">OFFICIAL ESTIMATE SHEET - ENTERPRISE & DOCK SERIES</p>
+    <!-- 공공기관 제출용 인쇄 전용 양식 (평소에는 화면에 보이지 않음) -->
+    <!-- 공공기관 제출용 인쇄 전용 양식 (폰트 및 간격 최적화) -->
+<div id="official-quote-print-area" class="hidden bg-white text-black p-4 font-sans text-xs">
+    <div class="max-w-3xl mx-auto space-y-4">
+        <!-- 문서 제목 -->
+        <div class="text-center border-b-2 border-black pb-2">
+            <h1 class="text-2xl font-extrabold tracking-wider">산업용 드론 공식견적서</h1>
+            <p class="text-[11px] text-gray-600 mt-0.5">OFFICIAL ESTIMATE SHEET</p>
+        </div>
+
+        <!-- 공급자 정보 및 발행일 -->
+        <div class="flex justify-between items-start text-xs pt-1">
+            <div>
+                <p id="print-date" class="font-semibold">발행일자: 2026년 __월 __일</p>
+                <p class="mt-0.5">문서번호: WD-EST-2026-001</p>
             </div>
-
-            <div class="flex justify-between items-start text-xs pt-1">
-                <div>
-                    <p id="print-date" class="font-semibold">발행일자: 2026년 __월 __일</p>
-                    <p class="mt-0.5">문서번호: WD-ENT-2026-001</p>
-                </div>
-                <div class="text-right border border-black p-2 bg-gray-50 text-[11px] leading-tight">
-                    <p class="font-bold text-xs mb-0.5">공급자 정보</p>
-                    <p>상호: 웰컴드론 (Welcome Drone)</p>
-                    <p>대표자: 최 용 진 (인)</p>
-                    <p>사업자등록번호: 317-06-01971</p>
-                    <p>주소: 충청남도 보령시 보령북로 81</p>
-                    <p>연락처: 010-9420-9946 | 이메일: oogoo1818@naver.com</p>
-                </div>
-            </div>
-
-            <div class="border border-black p-2.5 text-xs bg-gray-50 flex justify-between items-center">
-                <div>
-                    <p class="font-bold">귀하 (수신처 / 공공기관 및 기업 도입 담당자)</p>
-                    <p class="text-gray-600 text-[11px]">아래와 같이 견적합니다.</p>
-                </div>
-                <div class="text-right">
-                    <span class="text-gray-600 text-[11px] block">합계 금액 (VAT 포함)</span>
-                    <span id="print-grand-total" class="text-black font-extrabold text-base">0원</span>
-                </div>
-            </div>
-
-            <table class="w-full border-collapse border border-black text-[11px] text-left">
-                <thead>
-                    <tr class="bg-gray-200 border border-black text-center font-bold">
-                        <th class="border border-black p-1.5 w-10">번호</th>
-                        <th class="border border-black p-1.5">품명 및 규격 (모델명 / 옵션)</th>
-                        <th class="border border-black p-1.5 w-14">수량</th>
-                        <th class="border border-black p-1.5 w-28">단가 (원, VAT포함)</th>
-                        <th class="border border-black p-2 w-32">금액 (원, VAT포함)</th>
-                    </tr>
-                </thead>
-                <tbody id="print-table-body">
-                    <!-- 동적 삽입 -->
-                </tbody>
-            </table>
-
-            <div class="border border-black p-2.5 text-[10px] space-y-1 bg-gray-50">
-                <p class="font-bold text-xs">조달 및 계약 참고사항:</p>
-                <ul class="list-disc list-inside space-y-0.5 text-gray-700">
-                    <li>본 견적서에 기재된 모든 품목의 단가 및 합계 금액은 <strong>부가가치세(VAT 10%)가 포함된 금액</strong>입니다.</li>
-                    <li>본 견적서는 웰컴드론 산업용 기체 및 무인화 솔루션 견적 시스템을 통해 발행되었습니다.</li>
-                    <li>공공기관 계약, 나라장터 조달 및 기업 예산 편성을 위한 공식 비교 견적서로 활용 가능합니다.</li>
-                    <li>견적 유효기간: 발행일로부터 30일</li>
-                </ul>
-            </div>
-
-            <div class="text-center pt-4">
-                <h2 class="text-lg font-bold tracking-widest">웰 컴 드 론 (직인생략)</h2>
+            <div class="text-right border border-black p-2 bg-gray-50 text-[11px] leading-tight">
+                <p class="font-bold text-xs mb-0.5">공급자 정보</p>
+                <p>상호: 웰컴드론 (Welcome Drone)</p>
+                <p>대표자: 최 용 진 (인)</p>
+                <p>사업자등록번호: 317-06-01971</p>
+                <p>주소: 충청남도 보령시 보령북로 81</p>
+                <p>연락처: 010-9420-9946 | 이메일: oogoo1818@naver.com</p>
             </div>
         </div>
+
+        <!-- 수신자 안내 및 합계금액 -->
+        <div class="border border-black p-2.5 text-xs bg-gray-50 flex justify-between items-center">
+            <div>
+                <p class="font-bold">귀하 (수신처)</p>
+                <p class="text-gray-600 text-[11px]">아래와 같이 견적합니다.</p>
+            </div>
+            <div class="text-right">
+                <span class="text-gray-600 text-[11px] block">합계 금액 (VAT 포함)</span>
+                <span id="print-grand-total" class="text-black font-extrabold text-base">0원</span>
+            </div>
+        </div>
+
+        <!-- 품목 상세 테이블 (패딩과 글자 크기를 줄여 10개 이상 한 페이지 수용) -->
+        <table class="w-full border-collapse border border-black text-[11px] text-left">
+            <thead>
+                <tr class="bg-gray-200 border border-black text-center font-bold">
+                    <th class="border border-black p-1.5 w-10">번호</th>
+                    <th class="border border-black p-1.5">품명 및 규격 (모델명 / 옵션)</th>
+                    <th class="border border-black p-1.5 w-14">수량</th>
+                    <th class="border border-black p-1.5 w-24">단가 (원/ 부가세 포함)</th>
+                    <th class="border border-black p-2 w-28">금액 (원/ 부가세 포함)</th>
+                </tr>
+            </thead>
+            <tbody id="print-table-body">
+                <!-- 자바스크립트로 동적 삽입 -->
+            </tbody>
+        </table>
+
+        <!-- 하단 특기사항 -->
+        <div class="border border-black p-2.5 text-[10px] space-y-1 bg-gray-50">
+            <p class="font-bold text-xs">특기 및 조달 참고사항:</p>
+            <ul class="list-disc list-inside space-y-0.5 text-gray-700">
+                <li>본 견적서는 웰컴드론 스마트 견적 시스템을 통해 공공기관 제출용으로 자동 발행되었습니다.</li>
+                <li>나라장터 종합쇼핑몰 조달 계약 및 수의계약 진행 시 규격서 및 공급자 증빙서류가 제공됩니다.</li>
+                <li>견적 유효기간: 발행일로부터 30일</li>
+            </ul>
+        </div>
+
+        <div class="text-center pt-4">
+            <h2 class="text-lg font-bold tracking-widest">웰 컴 드 론</h2>
+        </div>
     </div>
+</div>
 
     <!-- Footer -->
     <footer class="bg-[#050505] text-gray-500 py-12 border-t border-[#1a1a1a]">
@@ -344,125 +382,196 @@
         </div>
     </footer>
 
+    <!-- 견적 시스템 전체 데이터 및 동작 스크립트 -->
     <script>
         document.getElementById('mobile-menu-btn').addEventListener('click', () => { 
             document.getElementById('mobile-menu').classList.toggle('hidden'); 
         });
 
-        // 산업용 드론 DB (VAT 10% 포함 기준)
-        const indusDroneDatabase = [
+        const droneDatabase = [
             {
                 id: 'm400',
-                group: 'industrial',
-                badge: '01 · 중량물 탑재 플래그십 쿼드콥터',
-                name: 'DJI Matrice 400 (M400)',
-                desc: '최대 3개의 산업용 고중량 특수 페이로드를 동시 운용할 수 있는 하이엔드 쿼드콥터 플랫폼입니다. 광범위 정밀 측량 및 인프라 점검에 탁월합니다.',
-                weight: '최대 탑재 중량 4.0kg / 최대 이륙 중량 대폭 확장',
-                specs: '트리플 짐벌 탑재 가능 · 55분 비행 · O4 Enterprise 20km 전송 · 전방위 장애물 감지',
+                group: 'standard',
+                badge: '01 · 차세대 대형 플래그십',
+                name: 'DJI Matrice 400 (KR) SP Plus COMBO',
+                desc: '최대 59분 비행과 6kg 페이로드 탑재를 지원하는 차세대 대형 산업용 플래그십 플랫폼입니다. 장거리 LiDAR(젠뮤즈 L3), 고출력 스피커, 스포트라이트 등 다중 임무 장비를 동시에 장착할 수 있습니다.',
+                weight: '약 6.4 kg (배터리 포함) / 최대 페이로드 6 kg',
+                specs: '최대 59분 비행 · IP55 방수방진 · O4 Enterprise 전송 · RC Plus 포함',
                 price: 12100000,
                 video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/39844bb8-ade7-4447-bbea-090ab2f09efe.mp4?w=1386&h=1040',
                 options: [
-                    { id: 'm400_bat', category: '배터리/충전', name: '[DJI] TB65 지능형 배터리 (2개 1조)', desc: 'M400 장시간 운용을 위한 정품 고밀도 배터리 세트', price: 1600000 },
-                    { id: 'm400_station', category: '배터리/충전', name: '[DJI] BS65 지능형 배터리 충전 스테이션', desc: '동시 급속 충전 및 현장 보관이 가능한 캐리어형 충전기', price: 1400000 },
-                    { id: 'zen_l2', category: '페이로드', name: '[DJI] Zenmuse L2 정밀 라이다(LiDAR)', desc: '고정밀 3D 지형 매핑 및 산림 측량용 항공 라이다 센서', price: 17500000 },
-                    { id: 'zen_h30t', category: '페이로드', name: '[DJI] Zenmuse H30T 전천후 멀티센서', desc: '광학 40배 줌, 열화상, 거리측정기 통합 주야간 감시 카메라', price: 15400000 },
-                    { id: 'care_m400', category: '보증서비스', name: '[DJI] Care Enterprise Plus (1년 연장)', desc: '기체 파손 시 무제한 무상 교체 및 신속 교환 보증 서비스', price: 1250000 }
+                    { id: 'tb100_bat', category: '배터리/전원', name: '[DJI] TB100 인텔리전트 플라이트 배터리', desc: 'Matrice 400 전용 고에너지 셀 (최대 400회 충전 사이클)', price: 1820500 },
+                    { id: 'tb100c_tether', category: '배터리/전원', name: '[DJI] TB100C Tethered 배터리 (유선 전원용)', desc: '장시간 공중 조명 및 통신 중계용 테더드 배터리', price: 2150500 },
+                    { id: 'bs100_station', category: '배터리/전원', name: '[DJI] BS100 인텔리전트 배터리 스테이션 (KR)', desc: '고속 충전 및 저소음 모드, 360° 휠 장착 전용 충전함', price: 1522400 },
+                    { id: 'zenmuse_l3', category: '페이로드', name: '[DJI] ZENMUSE L3 장거리 고정밀 라이다(LiDAR)', desc: '1535nm 장거리 LiDAR + 듀얼 100MP RGB 매핑 시스템', price: 22385000 },
+                    { id: 'zenmuse_s1', category: '페이로드', name: '[DJI] Zenmuse S1 대형 플랫폼 전용 스포트라이트', desc: '야간 수색 및 재난 현장 고휘도 조명 모듈', price: 1716000 },
+                    { id: 'zenmuse_v1', category: '페이로드', name: '[DJI] Zenmuse V1 대형 플랫폼 전용 스피커', desc: '원거리 고출력 비상 방송 및 계도용 확성기', price: 1298000 },
+                    { id: 'drtk3_relay', category: '측량/액세서리', name: '[DJI] D-RTK 3 릴레이 고정 배치 버전', desc: '센티미터급 고정밀 위치 보정 및 통신 릴레이 스테이션', price: 3256000 },
+                    { id: 'manifold3', category: '측량/액세서리', name: '[DJI] Manifold 3 고성능 온보드 컴퓨터', desc: '고성능 AI 엣지 컴퓨팅 파워 박스', price: 1947000 },
+                    { id: 'm400_dual_gimbal', category: '측량/액세서리', name: '[DJI] Matrice 400 듀얼 짐벌 커넥터', desc: '하단 듀얼 페이로드 동시 장착용 브라켓', price: 290400 },
+                    { id: 'm400_third_gimbal', category: '측량/액세서리', name: '[DJI] Matrice 400 서드(3rd) 짐벌 커넥터', desc: '트리플 페이로드 확장 장착용 커넥터', price: 173800 },
+                    { id: 'skyport_v3', category: '측량/액세서리', name: '[DJI] SKYPORT V3 어댑터 세트', desc: '서드파티 페이로드 호환 장착 어댑터', price: 524700 },
+                    { id: 'm400_prop', category: '측량/액세서리', name: '[DJI] Matrice 400 2510F 프로펠러 (예비)', desc: '정품 예비 프로펠러 세트', price: 48400 },
+                    { id: 'm400_care', category: '안심케어', name: '[DJI] 매트리스 400 Care Plus 1년 보증 연장', desc: '공식 수리 및 파손 보장 엔터프라이즈 케어', price: 1100000 }
                 ]
             },
             {
                 id: 'm350',
-                group: 'industrial',
-                badge: '02 · 공공·점검 표준 플래그십 기체',
-                name: 'DJI Matrice 350 RTK (M350)',
-                desc: '산업용 드론의 독보적인 글로벌 표준 기체입니다. 강력한 내후성(IP55)과 다채로운 페이로드 호환성으로 소방, 경찰, 공공기관 현장에서 가장 신뢰받습니다.',
-                weight: '최대 페이로드 2.7kg / IP55 방수방진 등급',
-                specs: '듀얼 배터리 55분 비행 · 야간 나이트비전 FPV 카메라 · CSM 레이더 호환',
+                group: 'standard',
+                badge: '02 · 정밀 측량·점검 표준 플랫폼',
+                name: 'DJI Matrice 350 RTK (M350 RTK)',
+                desc: '고정밀 RTK 측량, 라이다(L2) 지형 모델링, 시설물 정밀 진단(H30T/H20T) 등 가장 폭넓은 페이로드 호환성을 자랑하는 베스트셀러 대형 산업용 드론입니다.',
+                weight: '약 6.47 kg (TB65 배터리 2개 포함) / 최대 페이로드 2.7 kg',
+                specs: '최대 55분 비행 · IP55 보호등급 · O3 Enterprise 전송 · 야간 FPV 카메라',
                 price: 10800000,
                 video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/a5456273-cef8-4201-8dda-73831d2fdbb7.webm',
                 options: [
-                    { id: 'm350_bat', category: '배터리/충전', name: '[DJI] TB65 배터리 (2개 1세트)', desc: 'M350 RTK 필수 정품 지능형 비행 배터리', price: 1600000 },
-                    { id: 'm350_bs65', category: '배터리/충전', name: '[DJI] BS65 배터리 스테이션', desc: '현장 급속 충전 및 배터리 보관 관리용 스테이션', price: 1400000 },
-                    { id: 'zen_p1', category: '페이로드', name: '[DJI] Zenmuse P1 풀프레임 항공 사진측량 카메라', desc: '4,500만 화소 고정밀 지적 측량 전용 센서', price: 8200000 },
-                    { id: 'czi_lp35', category: '임무장비', name: '[CZI] LP35 탐조등 & 메가폰 결합 모듈', desc: '야간 수색 및 원거리 방송용 고출력 특수 장비', price: 3400000 },
-                    { id: 'care_m350', category: '보증서비스', name: '[DJI] Care Enterprise Plus (1년)', desc: '비행 사고 시 무상 교체 지원 공식 워런티', price: 1100000 }
+                    { id: 'tb65_bat', category: '배터리/전원', name: '[DJI] TB65 인텔리전트 플라이트 배터리 (1개)', desc: 'M350 RTK 전용 배터리 (기체 1회 비행 시 2개 1조 장착)', price: 1110000 },
+                    { id: 'bs65_station', category: '배터리/전원', name: '[DJI] BS65 인텔리전트 배터리 스테이션', desc: 'TB65 배터리 8개 및 WB37 배터리 4개 통합 스마트 충전함', price: 1480000 },
+                    { id: 'wb37_bat_350', category: '배터리/전원', name: '[DJI] WB37 조종기용 인텔리전트 배터리', desc: 'RC Plus 조종기 및 D-RTK 스테이션 외부 전원 배터리', price: 84240 },
+                    { id: 'zenmuse_l2', category: '페이로드', name: '[DJI] Zenmuse L2 고정밀 라이다(LiDAR) 측량 페이로드', desc: '레이저 포인트클라우드 + RGB 통합 3D 공간 데이터 수집', price: 20020000 },
+                    { id: 'zenmuse_h30t', category: '페이로드', name: '[DJI] Zenmuse H30T 플래그십 멀티센서 열화상 카메라', desc: '40MP 광각·고배율 줌·적외선 열화상·레이저 거리측정기 올인원', price: 15627000 },
+                    { id: 'zenmuse_h20t', category: '페이로드', name: '[DJI] Zenmuse H20T 열화상 멀티센서 카메라', desc: '광각·23배 하이브리드 줌·열화상·거리측정 쿼드 센서', price: 13020000 },
+                    { id: 'zenmuse_p1', category: '페이로드', name: '[DJI] Zenmuse P1 45MP 풀프레임 항공측량 카메라', desc: '4500만 화소 풀프레임 센서 및 3축 짐벌 정밀 사진측량 장비', price: 7025000 },
+                    { id: 'zenmuse_h30', category: '페이로드', name: '[DJI] Zenmuse H30 주야간 멀티센서 광학 카메라', desc: '광각·줌·레이저 거리측정·나이트비전 결합 점검 카메라', price: 5097000 },
+                    { id: 'zenmuse_h20', category: '페이로드', name: '[DJI] Zenmuse H20 트리플 센서 광학 카메라', desc: '광각·줌·레이저 거리측정 결합 현장 점검 카메라', price: 3400000 },
+                    { id: 'czi_lp35', category: '페이로드', name: '[CZI] LP35 서치라이트·방송 스피커 일체형', desc: 'M350 RTK 호환 야간 조명 및 고출력 방송 일체형 페이로드', price: 3690000 },
+                    { id: 'czi_gl60_plus', category: '페이로드', name: '[CZI] GL60 Plus 짐벌 서치라이트', desc: '카메라 시선 연동 3축 짐벌 고출력 탐조등', price: 2500000 },
+                    { id: 'zenmuse_s1_350', category: '페이로드', name: '[DJI] Zenmuse S1 스포트라이트', desc: 'DJI 정품 대형 플랫폼 전용 고휘도 스포트라이트', price: 1716000 },
+                    { id: 'zenmuse_v1_350', category: '페이로드', name: '[DJI] Zenmuse V1 방송 스피커', desc: 'DJI 정품 대형 플랫폼 전용 고출력 안내 방송 스피커', price: 1298000 },
+                    { id: 'rc_plus_350', category: '측량/액세서리', name: '[DJI] RC Plus 전문가용 스마트 조종기 (추가)', desc: '2인 교대 제어(Dual Operator) 운용을 위한 추가 조종기', price: 1900000 },
+                    { id: 'm350_care_plus', category: '안심케어', name: '[DJI] 매트리스 350 RTK Care Plus 1년', desc: '보장 한도 내 무제한 수리 및 리퍼 교체 지원', price: 2000000 },
+                    { id: 'm350_care_basic', category: '안심케어', name: '[DJI] 매트리스 350 RTK Care Basic 1년', desc: '연 2회 합리적 자기부담금 기반 공식 교체 보증', price: 1000000 }
                 ]
             },
             {
                 id: 'm30t',
-                group: 'industrial',
-                badge: '03 · 하이브리드 멀티센서 일체형',
-                name: 'DJI Matrice 30T (M30T COMBO)',
-                desc: '백팩에 휴대 가능한 폴더블 컴팩트 바디에 광학 줌, 광각, 열화상, 레이저 거리측정기를 모두 집약한 전천후 재난 수색 및 시설물 점검 기체입니다.',
-                weight: '기체 무게 3.77kg (배터리 포함) / 접이식 휴대형',
-                specs: '광학 16배(최대 200배) 줌 · 640×512 열화상 센서 · IP55 등급 방수',
+                group: 'standard',
+                badge: '03 · 올인원 전천후 열화상 드론',
+                name: '[DJI] 매트리스 30T (M30T) COMBO',
+                desc: '강력한 비행 성능과 접이식 휴대성을 겸비한 올인원 열화상·광학 드론입니다. 별도 카메라 장착 없이 즉시 이륙하여 산불 감시, 야간 수색, 전력·시설물 점검을 수행합니다.',
+                weight: '약 3,770 g (배터리 2개 포함)',
+                specs: '최대 41분 비행 · IP55 방수방진 · 열화상+16배 광학줌+거리측정 통합 · 23m/s 고속비행',
                 price: 11353000,
                 video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/b126c33f-18dc-4ecd-a393-e0cfb74396ae.webm',
                 options: [
-                    { id: 'm30_tb30_bat', category: '배터리/충전', name: '[DJI] TB30 배터리 (2개 1조)', desc: 'M30 시리즈 전용 자가발열 인텔리전트 배터리', price: 920000 },
-                    { id: 'm30_bs30', category: '배터리/충전', name: '[DJI] BS30 스마트 충전 케이스', desc: '현장 연속 운용을 위한 급속 충전 케이스', price: 1150000 },
-                    { id: 'czi_lp12', category: '임무장비', name: '[CZI] LP12 서치라이트 및 스피커 번들', desc: '수색 구조 및 안내 방송용 초경량 임무 장비', price: 1980000 },
-                    { id: 'dji_cellular', category: '통신모듈', name: '[DJI] 셀룰러 4G 동글 키트', desc: '도심 전파 음영 지역 극복을 위한 4G LTE 이중화 통신 모듈', price: 350000 },
-                    { id: 'care_m30t', category: '보증서비스', name: '[DJI] Care Enterprise Plus (1년)', desc: 'M30T 전용 무제한 무상 교환 서비스', price: 990000 }
+                    { id: 'tb30_bat', category: '배터리/전원', name: '[DJI] TB30 인텔리전트 비행 배터리 (1개)', desc: 'M30 시리즈 전용 자체 발열 지원 배터리 (기체당 2개 장착)', price: 426000 },
+                    { id: 'bs30_station', category: '배터리/전원', name: '[DJI] BS30 스마트 배터리 충전 스테이션', desc: 'TB30 배터리 최대 8개 + WB37 2개 동시 관리 고속 충전함', price: 1180000 },
+                    { id: 'wb37_bat_30', category: '배터리/전원', name: '[DJI] WB37 조종기 전용 인텔리전트 배터리', desc: 'RC Plus 조종기 장시간 연속 운용을 위한 외장 배터리', price: 84240 },
+                    { id: 'czi_lp12', category: '페이로드', name: '[CZI] LP12 일체형 서치라이트 & 방송 스피커', desc: 'Matrice 30 시리즈 전용 초경량 고출력 조명·방송 통합 모듈', price: 2500000 },
+                    { id: 'rc_plus_30', category: '측량/액세서리', name: '[DJI] RC Plus 전문가용 스마트 조종기 (추가)', desc: '7인치 고휘도 화면, IP54 방수방진 추가 조종기', price: 1900000 },
+                    { id: 'm30_dongle', category: '측량/액세서리', name: '[DJI] 매트리스 30 셀룰러 동글 4G 키트', desc: '산악 및 도심 전파 음영지역 극복을 위한 LTE 하이브리드 통신 키트', price: 165000 },
+                    { id: 'm30_prop', category: '측량/액세서리', name: '[DJI] M30 저소음 프로펠러 (1671 Propeller)', desc: '정품 예비 저소음 프로펠러 세트', price: 56000 },
+                    { id: 'm30t_care_plus', category: '안심케어', name: '[DJI] 매트리스 30T Care Plus 1년', desc: '공식 파손 보장 및 무제한 수리 한도 케어 플러스', price: 1547000 },
+                    { id: 'm30t_care_basic', category: '안심케어', name: '[DJI] 매트리스 30T Care Basic 1년', desc: '공식 파손 보장 베이직 플랜 (1년)', price: 1094000 }
                 ]
             },
             {
                 id: 'm4t',
-                group: 'industrial',
-                badge: '04 · 열화상·줌 컴팩트 엔터프라이즈',
-                name: 'DJI Matrice 4T (M4T Plus Combo)',
-                desc: '소형 경량 바디에 고해상도 열화상 카메라와 망원 줌 렌즈를 일체형으로 탑재하여 태양광 패널, 전력선 점검, 산불 감시 현장에 기동성 있게 투입됩니다.',
-                weight: '1kg 미만 초경량 폴딩 설계 / 즉각 출동 가능',
-                specs: '광학 56배 하이브리드 줌 · 열화상 640×512 · 기계식 셔터 매핑 호환',
+                group: 'standard',
+                badge: '04 · AI 컴팩트 열화상 멀티센서',
+                name: '[DJI] Matrice 4T 열화상드론 SP Plus (Care 포함)',
+                desc: '신속한 초동 출동이 필요한 산불 감시, 주야간 실종자 수색, 송배전 설비 열화상 진단에 최적화된 차세대 인텔리전트 멀티 센서 컴팩트 플래그십 드론입니다.',
+                weight: '약 1,219 g (초경량 폴딩 바디)',
+                specs: '최대 49분 비행 · 열화상+광각+중망원+망원+레이저 거리측정기+NIR 보조등 · Care Plus 포함',
                 price: 9250000,
                 video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/14d594f2-22d8-4daa-a66c-02524d86eac9.mp4?w=1184&h=800',
                 options: [
-                    { id: 'm4t_bat_kit', category: '배터리/충전', name: '[DJI] 스마트 배터리 3개 + 충전 허브 키트', desc: '연속 순찰 임무를 위한 배터리 번들', price: 1100000 },
-                    { id: 'm4t_speaker', category: '임무장비', name: '[DJI] 전용 방송용 확성기 모듈', desc: '상공 100m에서 지상으로 명확한 음성 전달', price: 420000 },
-                    { id: 'm4t_rtk', category: '측량모듈', name: '[DJI] RTK 고정밀 측위 모듈', desc: '센티미터급 정밀 위치 정보를 기록하는 탈부착 모듈', price: 850000 },
-                    { id: 'care_m4t', category: '보증서비스', name: '[DJI] Care Enterprise Plus (1년)', desc: '침수, 충돌 시 신속 교체 지원 공식 보증', price: 770000 }
+                    { id: 'm4_bat_t', category: '배터리/전원', name: '[DJI] 매트리스 4 시리즈 인텔리전트 배터리', desc: 'Matrice 4T / 4E 전용 고용량 지능형 비행 배터리', price: 253000 },
+                    { id: 'al1_spotlight_t', category: '페이로드', name: '[DJI] AL1 전용 스포트라이트', desc: '상시 점등 및 스트로브 지원, 짐벌 연동 야간 수색 조명', price: 418000 },
+                    { id: 'as1_speaker_t', category: '페이로드', name: '[DJI] AS1 전용 고출력 스피커', desc: '1m 기준 114dB 음량, 최대 300m 방송 송출 및 TTS 지원', price: 319000 },
+                    { id: 'drtk3_station_t', category: '측량/액세서리', name: '[DJI] D-RTK 3 다기능 고정밀 스테이션', desc: '고정밀 RTK 위치 보정 및 신호 중계 스테이션', price: 2112000 },
+                    { id: 'drtk3_tripod_t', category: '측량/액세서리', name: '[DJI] D-RTK 3 측량 폴 및 삼각대 키트', desc: '야외 현장 RTK 스테이션 고정 설치 키트', price: 418000 },
+                    { id: 'rc_plus2_t', category: '측량/액세서리', name: '[DJI] RC Plus 2 Enterprise 추가 조종기', desc: '고휘도 디스플레이, O4 Enterprise 전송 지원 추가 조종기', price: 1900000 }
                 ]
             },
             {
                 id: 'm4e',
-                group: 'industrial',
-                badge: '05 · 고정밀 3D 항공 매핑 표준',
-                name: 'DJI Matrice 4E (M4E Plus Combo)',
-                desc: '기계식 셔터를 탑재하여 0.7초 간격 초고속 촬영이 가능한 항공 측량 및 3D 모델링 전용 컴팩트 산업용 드론입니다.',
-                weight: '컴팩트 폴딩 / 단독 1인 운용 측량 솔루션',
-                specs: '4/3인치 CMOS 2,000만 화소 · 기계식 셔터(1/2000s) · 45분 비행 시간',
+                group: 'standard',
+                badge: '05 · AI 초고속 정밀 측량·매핑',
+                name: '[DJI] Matrice 4E 측량드론 SP Plus (Care 포함)',
+                desc: '토목 시공 측량, 3D 디지털 트윈 모델링, 광역 정사영상 제작을 위해 기계식 셔터 광각 카메라와 다방향 사선 촬영 기능을 탑재한 고정밀 측량 특화 드론입니다.',
+                weight: '약 1,219 g (기계식 셔터 매핑 카메라 내장)',
+                specs: '최대 49분 비행 · 0.5초 초고속 인터벌 촬영 · 5방향 사선 촬영 · Care Plus 기본 포함',
                 price: 7000000,
                 video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/0f34d610-6471-4f07-a277-6a4a29130070.mp4?w=1184&h=800',
                 options: [
-                    { id: 'm4e_bat_kit', category: '배터리/충전', name: '[DJI] 스마트 배터리 3개 + 충전 허브 세트', desc: '대규모 면적 측량을 위한 필수 배터리 키트', price: 1100000 },
-                    { id: 'm4e_rtk', category: '측량모듈', name: '[DJI] RTK 센티미터급 모듈', desc: '지상 기준점(GCP) 없이 정밀 측량이 가능한 RTK 유닛', price: 850000 },
-                    { id: 'dji_terra', category: '소프트웨어', name: '[DJI] Terra 전기/측량 3D 재구성 라이선스 (1년)', desc: '2D 지도 및 3D 모델 자동 변환 정품 소프트웨어', price: 1950000 },
-                    { id: 'care_m4e', category: '보증서비스', name: '[DJI] Care Enterprise Plus (1년)', desc: '기체 손상 대비 공식 무상 교체 보증', price: 650000 }
+                    { id: 'm4_bat_e', category: '배터리/전원', name: '[DJI] 매트리스 4 시리즈 인텔리전트 배터리', desc: 'Matrice 4E / 4T 전용 고용량 지능형 비행 배터리', price: 253000 },
+                    { id: 'drtk3_station_e', category: '측량/액세서리', name: '[DJI] D-RTK 3 다기능 고정밀 스테이션', desc: '무기준점(GCP) 정밀 측량을 위한 필수 RTK 기준국', price: 2112000 },
+                    { id: 'drtk3_tripod_e', category: '측량/액세서리', name: '[DJI] D-RTK 3 측량 폴 및 삼각대 키트', desc: '야외 현장 RTK 스테이션 안정적 거치 키트', price: 418000 },
+                    { id: 'al1_spotlight_e', category: '페이로드', name: '[DJI] AL1 전용 스포트라이트', desc: '어두운 시설물 점검 및 야간 비행 보조 조명', price: 418000 },
+                    { id: 'as1_speaker_e', category: '페이로드', name: '[DJI] AS1 전용 고출력 스피커', desc: '현장 안전 계도 및 경고 방송용 스피커', price: 319000 },
+                    { id: 'rc_plus2_e', category: '측량/액세서리', name: '[DJI] RC Plus 2 Enterprise 추가 조종기', desc: '고휘도 산업용 스마트 조종기 추가 구성', price: 1900000 }
                 ]
             },
+
+            // =========================================================================
+            // PART 2. 무인 도킹 스테이션(DJI Dock) 호환 전용 라인업 (M5TD -> M4TD -> M4D)
+            // =========================================================================
             {
                 id: 'm5td',
-                group: 'industrial',
-                badge: '06 · DJI Dock 4 연동 무인 원격 기체',
-                name: 'DJI Matrice 5TD (M5TD + Dock 4 패키지)',
-                desc: 'DJI Dock 4 무인 도킹 스테이션과 완벽히 연동되어 원격 제어 및 24시간 자율 순찰 비행을 수행하는 차세대 완전 무인화 솔루션 기체입니다.',
-                weight: 'IP55 방진방수 / 전자동 도킹 및 급속 충전 지원',
-                specs: '열화상·줌 통합 짐벌 · 저조도 나이트비전 · 무인 자율 원격 스테이션 지원',
+                group: 'dock',
+                badge: 'DOCK 4 호환 · 25초 자동 배터리 스왑',
+                name: 'DJI Matrice 5TD + O4 Ground Station KR SP Plus',
+                desc: '차세대 자동 배터리 교체 스테이션(DJI Dock 4)과 완벽히 연동되는 최상위 멀티센서 무인 드론입니다. 3개의 50MP 카메라, 고해상도 열화상, 회전식 LiDAR 및 mmWave 레이더를 통합 탑재했습니다.',
+                weight: 'Dock 4 전용 고내구 설계 / 12138mAh 대용량 배터리',
+                specs: '3×50MP(광각·중망원·망원) + 열화상 + LiDAR/레이더 · O4 지상국 포함 · Dock 4 연동',
                 price: 14171800,
                 video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/1915a283-4058-4ed7-92b2-2fd26e0b833c.mp4?w=2400&h=1200',
                 options: [
-                    { id: 'dji_dock4', category: '무인스테이션', name: '[DJI] Dock 4 무인 도킹 스테이션 본체', desc: '자동 충전, 기상 모니터링, 냉각 시스템 통합 무인 베이스 스테이션', price: 18374400 },
-                    { id: 'm5td_bat', category: '배터리/충전', name: '[DJI] M5TD 전용 고속 충전 배터리 (2개)', desc: '스테이션 20분 급속 충전을 지원하는 특수 배터리', price: 1200000 },
-                    { id: 'm5td_bundle', category: '임무장비', name: '[DJI] AL2D 조명 & AS2D 스피커 번들', desc: '무인 야간 감시를 위한 스테이션 연동 조명·음향 장비', price: 2800000 },
-                    { id: 'ap1_para', category: '안전장비', name: '[CZI] AP1 지능형 비상 낙하산 시스템', desc: '고장 감지 시 자동 사출되는 공공안전 필수 낙하산', price: 2900000 },
-                    { id: 'care_m5td', category: '보증서비스', name: '[DJI] Care Enterprise Plus (Dock 패키지)', desc: '스테이션 연동 기체 전용 공식 종합 보증', price: 1600000 }
+                    { id: 'dji_dock4', category: '도킹 스테이션', name: '[DJI] DJI Dock 4 KR SP Plus (자동 배터리 교체 도크)', desc: '25초 자동 배터리 스왑으로 24시간 무중단 연속 임무를 지원하는 차세대 스테이션 (IP56, -40~50°C)', price: 18374400 },
+                    { id: 'm5td_bat', category: '배터리/전원', name: '[DJI] Matrice 5TD 전용 인텔리전트 배터리 (260Wh)', desc: 'Dock 4 자동 교체 수납부 및 M5TD 전용 대용량 배터리 (12,138mAh)', price: 729300 },
+                    { id: 'al2d_as2d_bundle', category: '페이로드', name: '[DJI] AL2D 조명 + AS2D 스피커 + 마운트 번들', desc: '야간 고휘도 조명과 원거리 음성 방송을 동시에 구성하는 M5TD 전용 번들', price: 926200 },
+                    { id: 'ap1_parachute', category: '안전/액세서리', name: '[DJI] AP1 비상 낙하산 + 액세서리 마운트 번들', desc: '도심 및 중요 시설 상공 비행 안전성을 보장하는 M5TD 정품 낙하산 키트', price: 540100 },
+                    { id: 'm5td_ice_prop', category: '안전/액세서리', name: '[DJI] Matrice 5TD 저소음 방빙(Anti-icing) 프로펠러', desc: '동절기 결빙 방지 및 저소음 비행을 위한 전용 프로펠러 세트', price: 42900 }
+                ]
+            },
+            {
+                id: 'm4td',
+                group: 'dock',
+                badge: 'DOCK 3 호환 · 전천후 열화상 무인기',
+                name: 'DJI Matrice 4TD (RC Plus 2 포함) SP Plus+',
+                desc: 'DJI Dock 3 무인 스테이션 및 차량 탑재 이동형 스테이션과 완벽히 호환되는 전천후 열화상·광학 멀티 드론입니다. 산불 초동 감시, 국경·해안 경비, 전력 설비 무인 진단에 최적화되어 있습니다.',
+                weight: '약 1,850 g (IP55 전천후 방수·방진 바디)',
+                specs: '최대 54분 비행 · IP55 등급 · 열화상+20배 광학줌+AI 분석 · RC Plus 2 기본 포함',
+                price: 12400000,
+                video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/55a44641-a6c9-4912-97f8-40fd3e9d37d4.mp4?w=1386&h=1040',
+                options: [
+                    { id: 'o4_ground_td', category: '도킹/통신스테이션', name: '[DJI] O4 Ground Station (원격 자동 임무 지상국)', desc: 'M4D/M4TD 원격 자동 이착륙·고속 충전 연동 및 7km 반경 제어 스테이션 (IP55)', price: 3256000 },
+                    { id: 'drtk3_relay_td', category: '도킹/통신스테이션', name: '[DJI] D-RTK 3 릴레이 고정 배치 버전', desc: '산악·도심 음영지역 통신 릴레이 및 고정밀 RTK 위치 보정 스테이션', price: 3256000 },
+                    { id: 'm4d_bat_td', category: '배터리/전원', name: '[DJI] Matrice 4D / 4TD 전용 인텔리전트 배터리', desc: '54분 장시간 체공 및 고속 충전을 지원하는 전용 배터리', price: 407300 },
+                    { id: 'al1_spot_td', category: '페이로드', name: '[DJI] AL1 전용 스포트라이트', desc: '야간 무인 순찰 및 수색용 짐벌 연동 고휘도 조명', price: 418000 },
+                    { id: 'as1_spk_td', category: '페이로드', name: '[DJI] AS1 전용 고출력 스피커', desc: '원격 계도 방송 및 비상 경고음 송출 스피커', price: 319000 },
+                    { id: 'm4d_case_td', category: '안전/액세서리', name: '[DJI] Matrice 4D 시리즈 전용 휴대용 하드케이스', desc: '현장 이동 및 단독 작전 시 기체를 안전하게 보호하는 캐리 케이스', price: 198000 },
+                    { id: 'm4td_care', category: '안심케어', name: '[DJI] 매트리스 4TD Care Plus 1년 추가 보증', desc: '기체 파손 및 침수 보장 공식 엔터프라이즈 케어', price: 1290000 }
+                ]
+            },
+            {
+                id: 'm4d',
+                group: 'dock',
+                badge: 'DOCK 3 호환 · 무인 광학·정밀 매핑',
+                name: 'DJI Matrice 4D (RC Plus 2 포함) SP Plus+',
+                desc: 'DJI Dock 3와 연동하여 대규모 건설 현장 공정 관리, 댐·교량 등 국가 기반시설의 정기적 3D 디지털 트윈 구축 및 자동 순찰을 수행하는 고정밀 광학 무인 드론입니다.',
+                weight: '약 1,850 g (IP55 전천후 방수·방진 바디)',
+                specs: '최대 54분 비행 · 고정밀 광각(기계식 셔터)+중망원+망원 · O4 Enterprise · RC Plus 2 포함',
+                price: 9521000,
+                video: 'https://www-cdn.djiits.com/reactor/assets/_next/static/videos/61ab1dcd-23ae-49b1-9ada-6dda5936644d.mp4?w=1386&h=1040',
+                options: [
+                    { id: 'o4_ground_d', category: '도킹/통신스테이션', name: '[DJI] O4 Ground Station (원격 자동 임무 지상국)', desc: 'M4D/M4TD 원격 자동 이착륙·고속 충전 연동 및 7km 반경 제어 스테이션 (IP55)', price: 3256000 },
+                    { id: 'drtk3_relay_d', category: '도킹/통신스테이션', name: '[DJI] D-RTK 3 릴레이 고정 배치 버전', desc: '센티미터급 고정밀 무인 자동 측량을 위한 고정형 RTK 기준국', price: 3256000 },
+                    { id: 'm4d_bat_d', category: '배터리/전원', name: '[DJI] Matrice 4D / 4TD 전용 인텔리전트 배터리', desc: '장시간 비행과 안정적 전력 공급을 위한 전용 배터리', price: 407300 },
+                    { id: 'al1_spot_d', category: '페이로드', name: '[DJI] AL1 전용 스포트라이트', desc: '시설물 암부 촬영 및 야간 비행 보조 조명', price: 418000 },
+                    { id: 'as1_spk_d', category: '페이로드', name: '[DJI] AS1 전용 고출력 스피커', desc: '산업 현장 안전 안내 방송용 고출력 스피커', price: 319000 },
+                    { id: 'm4d_case_d', category: '안전/액세서리', name: '[DJI] Matrice 4D 시리즈 전용 휴대용 하드케이스', desc: '전문가용 드론 운반 보호 하드케이스', price: 198000 },
+                    { id: 'm4d_care', category: '안심케어', name: '[DJI] 매트리스 4D Care Plus 1년 추가 보증', desc: '공식 수리 및 파손 보장 엔터프라이즈 케어', price: 930000 }
                 ]
             }
         ];
 
-        let currentDroneId = null;
+        let currentDroneId = null; // 초기 선택 없음
         let state = {};
 
-        indusDroneDatabase.forEach(drone => {
+        droneDatabase.forEach(drone => {
             state[drone.id] = {
                 droneQty: 1,
                 options: {}
@@ -476,8 +585,13 @@
             return num.toLocaleString('ko-KR') + '원';
         }
 
-        function createIndusCardHTML(drone) {
+        function createDroneCardHTML(drone) {
             const isSelected = (drone.id === currentDroneId);
+            const isDock = (drone.group === 'dock');
+            const accentColor = isDock ? 'text-dockAccent' : 'text-primary';
+            const accentBorder = isDock ? 'border-dockAccent/40' : 'border-primary/40';
+            const accentBg = isDock ? 'bg-dockAccent/15' : 'bg-primary/15';
+            const activeCardClass = isDock ? 'active-dock-card' : 'active-card';
             const droneQty = state[drone.id].droneQty;
             const videoMimeType = drone.video.includes('.webm') ? 'video/webm' : 'video/mp4';
 
@@ -485,22 +599,22 @@
             drone.options.forEach(opt => {
                 const optQty = state[drone.id].options[opt.id] || 0;
                 optionsHtml += `
-                    <div class="bg-black/60 border border-[#2a2a2a] hover:border-indusAccent/40 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all">
+                    <div class="bg-black/60 border border-[#2a2a2a] hover:border-primary/40 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all">
                         <div class="space-y-1">
                             <div class="flex items-center space-x-2">
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-indusAccent/15 text-indusAccent border border-indusAccent/30">${opt.category}</span>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded ${accentBg} ${accentColor} border ${accentBorder}">${opt.category}</span>
                                 <h5 class="text-white font-bold text-sm">${opt.name}</h5>
                             </div>
                             <p class="text-gray-400 text-xs">${opt.desc}</p>
                         </div>
                         <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-[#222]">
-                            <span class="text-indusAccent font-bold text-sm whitespace-nowrap">+${formatKRW(opt.price)}</span>
+                            <span class="${accentColor} font-bold text-sm whitespace-nowrap">+${formatKRW(opt.price)}</span>
                             <div class="flex items-center space-x-2 bg-[#141414] px-2.5 py-1.5 rounded-xl border border-[#333]" onclick="event.stopPropagation()">
-                                <button type="button" onclick="updateOptionQty('${drone.id}', '${opt.id}', -1)" class="w-7 h-7 rounded-lg bg-[#222] hover:bg-indusAccent hover:text-white text-white font-bold transition-colors flex items-center justify-center text-xs">
+                                <button type="button" onclick="updateOptionQty('${drone.id}', '${opt.id}', -1)" class="w-7 h-7 rounded-lg bg-[#222] hover:bg-primary hover:text-black text-white font-bold transition-colors flex items-center justify-center text-xs">
                                     <i class="fa-solid fa-minus"></i>
                                 </button>
                                 <span id="opt-qty-${drone.id}-${opt.id}" class="text-white font-extrabold text-sm w-6 text-center">${optQty}</span>
-                                <button type="button" onclick="updateOptionQty('${drone.id}', '${opt.id}', 1)" class="w-7 h-7 rounded-lg bg-[#222] hover:bg-indusAccent hover:text-white text-white font-bold transition-colors flex items-center justify-center text-xs">
+                                <button type="button" onclick="updateOptionQty('${drone.id}', '${opt.id}', 1)" class="w-7 h-7 rounded-lg bg-[#222] hover:bg-primary hover:text-black text-white font-bold transition-colors flex items-center justify-center text-xs">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                             </div>
@@ -510,9 +624,9 @@
             });
 
             return `
-                <div id="card-${drone.id}" class="drone-card-wrapper bg-cardBg border-2 ${isSelected ? 'active-indus-card' : 'border-cardBorder'} rounded-3xl overflow-hidden transition-all duration-300">
+                <div id="card-${drone.id}" class="drone-card-wrapper bg-cardBg border-2 ${isSelected ? activeCardClass : 'border-cardBorder'} rounded-3xl overflow-hidden transition-all duration-300">
                     
-                    <div class="p-6 sm:p-8 cursor-pointer hover:bg-white/[0.01] transition-colors" onclick="selectIndusCard('${drone.id}')">
+                    <div class="p-6 sm:p-8 cursor-pointer hover:bg-white/[0.01] transition-colors" onclick="selectDroneCard('${drone.id}')">
                         <div class="flex flex-col md:flex-row gap-6 items-center">
                             
                             <div class="w-full md:w-2/5 aspect-[4/3] rounded-2xl overflow-hidden bg-black border border-[#2a2a2a] relative flex-shrink-0 group">
@@ -520,20 +634,21 @@
                                     <source src="${drone.video}" type="${videoMimeType}">
                                 </video>
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
-                                <div class="absolute top-3 left-3 bg-black/85 backdrop-blur-md border border-indusAccent/40 text-indusAccent text-[11px] font-bold px-3 py-1 rounded-full">
+                                <div class="absolute top-3 left-3 bg-black/85 backdrop-blur-md border ${accentBorder} ${accentColor} text-[11px] font-bold px-3 py-1 rounded-full">
                                     ${drone.badge}
                                 </div>
                                 <div class="absolute bottom-3 left-3 bg-black/75 backdrop-blur-md border border-white/10 text-gray-200 text-[10px] font-semibold px-2.5 py-1 rounded-md flex items-center space-x-1.5">
-                                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                                    <span>ENTERPRISE SPEC</span>
+                                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                                    <span>LIVE PREVIEW</span>
                                 </div>
+                                ${isDock ? `<div class="absolute bottom-3 right-3 bg-dockAccent text-black text-[10px] font-black px-2.5 py-1 rounded-md shadow-lg"><i class="fa-solid fa-warehouse mr-1"></i>DOCK 호환</div>` : ''}
                             </div>
 
                             <div class="w-full md:w-3/5 flex flex-col justify-between space-y-4">
                                 <div>
                                     <div class="flex items-start justify-between gap-2">
                                         <h3 class="text-xl sm:text-2xl font-black text-white leading-snug">${drone.name}</h3>
-                                        <div id="radio-indicator-${drone.id}" class="w-6 h-6 rounded-full border-2 ${isSelected ? 'border-indusAccent bg-indusAccent text-white' : 'border-gray-600 text-transparent'} flex items-center justify-center flex-shrink-0 mt-1 transition-all">
+                                        <div id="radio-indicator-${drone.id}" class="w-6 h-6 rounded-full border-2 ${isSelected ? 'border-primary bg-primary text-black' : 'border-gray-600 text-transparent'} flex items-center justify-center flex-shrink-0 mt-1 transition-all">
                                             <i class="fa-solid fa-check text-xs"></i>
                                         </div>
                                     </div>
@@ -542,25 +657,25 @@
 
                                 <div class="bg-black/70 border border-[#262626] rounded-2xl p-4 space-y-2.5 text-xs sm:text-sm">
                                     <div class="flex items-center justify-between border-b border-[#1f1f1f] pb-2 gap-2">
-                                        <span class="text-gray-400 font-medium whitespace-nowrap"><i class="fa-solid fa-weight-hanging text-indusAccent mr-2 w-4 text-center"></i>탑재 용량 / 등급</span>
+                                        <span class="text-gray-400 font-medium whitespace-nowrap"><i class="fa-solid fa-weight-hanging ${accentColor} mr-2 w-4 text-center"></i>무게/하중</span>
                                         <span class="text-gray-200 font-semibold text-right">${drone.weight}</span>
                                     </div>
                                     <div class="flex items-center justify-between border-b border-[#1f1f1f] pb-2 gap-2">
-                                        <span class="text-gray-400 font-medium whitespace-nowrap"><i class="fa-solid fa-microchip text-indusAccent mr-2 w-4 text-center"></i>핵심 사양</span>
+                                        <span class="text-gray-400 font-medium whitespace-nowrap"><i class="fa-solid fa-microchip ${accentColor} mr-2 w-4 text-center"></i>핵심 사양</span>
                                         <span class="text-gray-200 font-semibold text-right">${drone.specs}</span>
                                     </div>
                                     <div class="flex items-center justify-between pt-1">
-                                        <span class="text-gray-400 font-medium"><i class="fa-solid fa-won-sign text-indusAccent mr-2 w-4 text-center"></i>기준 금액</span>
-                                        <span class="text-indusAccent font-black text-lg">${formatKRW(drone.price)} <span class="text-xs font-normal text-gray-400">(VAT포함)</span></span>
+                                        <span class="text-gray-400 font-medium"><i class="fa-solid fa-won-sign ${accentColor} mr-2 w-4 text-center"></i>기준 금액</span>
+                                        <span class="${accentColor} font-black text-lg">${formatKRW(drone.price)}</span>
                                     </div>
                                 </div>
 
                                 <div class="flex items-center justify-between text-xs pt-1">
-                                    <span class="text-indusAccent font-bold flex items-center">
-                                        <i class="fa-solid fa-layer-group mr-1.5"></i> 전용 페이로드·옵션 ${drone.options.length}종
+                                    <span class="${accentColor} font-bold flex items-center">
+                                        <i class="fa-solid fa-layer-group mr-1.5"></i> 호환 페이로드·배터리 옵션 ${drone.options.length}종
                                     </span>
                                     <span id="toggle-text-${drone.id}" class="text-gray-400 font-medium flex items-center">
-                                        ${isSelected ? '옵션 접기 <i class="fa-solid fa-chevron-up ml-1.5 text-indusAccent"></i>' : '클릭하여 옵션 및 수량 선택 <i class="fa-solid fa-chevron-down ml-1.5"></i>'}
+                                        ${isSelected ? '옵션 접기 <i class="fa-solid fa-chevron-up ml-1.5 text-primary"></i>' : '클릭하여 옵션 및 수량 선택 <i class="fa-solid fa-chevron-down ml-1.5"></i>'}
                                     </span>
                                 </div>
                             </div>
@@ -571,17 +686,17 @@
                     <div id="panel-${drone.id}" class="accordion-panel ${isSelected ? 'open' : ''} bg-[#0a0a0a] border-t border-[#262626]">
                         <div class="p-6 sm:p-8 space-y-6">
                             
-                            <div class="bg-[#121212] border border-indusAccent/40 p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                            <div class="bg-[#121212] border ${accentBorder} p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                                 <div>
-                                    <span class="text-xs text-indusAccent font-bold uppercase">STEP 1. 기체 수량</span>
+                                    <span class="text-xs ${accentColor} font-bold uppercase">STEP 1. 기체 수량</span>
                                     <h4 class="text-white font-bold text-base mt-0.5">${drone.name} 도입 대수</h4>
                                 </div>
                                 <div class="flex items-center space-x-3 bg-black px-4 py-2 rounded-xl border border-[#333]" onclick="event.stopPropagation()">
-                                    <button type="button" onclick="updateDroneQty('${drone.id}', -1)" class="w-8 h-8 rounded-lg bg-[#222] hover:bg-indusAccent hover:text-white text-white font-bold transition-colors flex items-center justify-center">
+                                    <button type="button" onclick="updateDroneQty('${drone.id}', -1)" class="w-8 h-8 rounded-lg bg-[#222] hover:bg-primary hover:text-black text-white font-bold transition-colors flex items-center justify-center">
                                         <i class="fa-solid fa-minus text-xs"></i>
                                     </button>
                                     <span id="drone-qty-${drone.id}" class="text-white font-black text-lg w-8 text-center">${droneQty}</span>
-                                    <button type="button" onclick="updateDroneQty('${drone.id}', 1)" class="w-8 h-8 rounded-lg bg-[#222] hover:bg-indusAccent hover:text-white text-white font-bold transition-colors flex items-center justify-center">
+                                    <button type="button" onclick="updateDroneQty('${drone.id}', 1)" class="w-8 h-8 rounded-lg bg-[#222] hover:bg-primary hover:text-black text-white font-bold transition-colors flex items-center justify-center">
                                         <i class="fa-solid fa-plus text-xs"></i>
                                     </button>
                                 </div>
@@ -590,8 +705,8 @@
                             <div>
                                 <div class="mb-3 flex items-center justify-between">
                                     <div>
-                                        <span class="text-xs text-indusAccent font-bold uppercase">STEP 2. 호환 옵션 추가</span>
-                                        <h4 class="text-white font-bold text-base mt-0.5">전용 페이로드 · 배터리 스테이션 · 워런티 수량 선택</h4>
+                                        <span class="text-xs ${accentColor} font-bold uppercase">STEP 2. 호환 옵션 추가</span>
+                                        <h4 class="text-white font-bold text-base mt-0.5">전용 배터리 · 페이로드 · 스테이션 수량 선택</h4>
                                     </div>
                                     <span class="text-xs text-gray-400">복수 선택 및 수량 조절 가능</span>
                                 </div>
@@ -607,37 +722,48 @@
             `;
         }
 
-        function renderIndusSections() {
-            const container = document.getElementById('indus-drone-container');
-            let html = '';
-            indusDroneDatabase.forEach(drone => {
-                html += createIndusCardHTML(drone);
+        function renderAllDroneSections() {
+            const standardContainer = document.getElementById('standard-drone-container');
+            const dockContainer = document.getElementById('dock-drone-container');
+
+            let standardHtml = '';
+            let dockHtml = '';
+
+            droneDatabase.forEach(drone => {
+                if (drone.group === 'dock') {
+                    dockHtml += createDroneCardHTML(drone);
+                } else {
+                    standardHtml += createDroneCardHTML(drone);
+                }
             });
-            container.innerHTML = html;
+
+            standardContainer.innerHTML = standardHtml;
+            dockContainer.innerHTML = dockHtml;
         }
 
-        function selectIndusCard(droneId) {
+        function selectDroneCard(droneId) {
             if (currentDroneId === droneId) {
                 currentDroneId = null;
             } else {
                 currentDroneId = droneId;
             }
 
-            indusDroneDatabase.forEach(drone => {
+            droneDatabase.forEach(drone => {
                 const card = document.getElementById(`card-${drone.id}`);
                 const panel = document.getElementById(`panel-${drone.id}`);
                 const indicator = document.getElementById(`radio-indicator-${drone.id}`);
                 const toggleText = document.getElementById(`toggle-text-${drone.id}`);
+                const activeClass = (drone.group === 'dock') ? 'active-dock-card' : 'active-card';
 
                 if (drone.id === currentDroneId) {
                     panel.classList.add('open');
-                    toggleText.innerHTML = '옵션 접기 <i class="fa-solid fa-chevron-up ml-1.5 text-indusAccent"></i>';
-                    card.classList.add('active-indus-card');
+                    toggleText.innerHTML = '옵션 접기 <i class="fa-solid fa-chevron-up ml-1.5 text-primary"></i>';
+                    card.classList.add(activeClass);
                     card.classList.remove('border-cardBorder');
-                    indicator.className = 'w-6 h-6 rounded-full border-2 border-indusAccent bg-indusAccent text-white flex items-center justify-center flex-shrink-0 mt-1 transition-all';
+                    indicator.className = 'w-6 h-6 rounded-full border-2 border-primary bg-primary text-black flex items-center justify-center flex-shrink-0 mt-1 transition-all';
                 } else {
                     panel.classList.remove('open');
-                    card.classList.remove('active-indus-card');
+                    card.classList.remove('active-card', 'active-dock-card');
                     card.classList.add('border-cardBorder');
                     indicator.className = 'w-6 h-6 rounded-full border-2 border-gray-600 text-transparent flex items-center justify-center flex-shrink-0 mt-1 transition-all';
                     toggleText.innerHTML = '클릭하여 옵션 및 수량 선택 <i class="fa-solid fa-chevron-down ml-1.5"></i>';
@@ -649,14 +775,14 @@
 
         function deselectCurrentDrone() {
             currentDroneId = null;
-            indusDroneDatabase.forEach(drone => {
+            droneDatabase.forEach(drone => {
                 const card = document.getElementById(`card-${drone.id}`);
                 const panel = document.getElementById(`panel-${drone.id}`);
                 const indicator = document.getElementById(`radio-indicator-${drone.id}`);
                 const toggleText = document.getElementById(`toggle-text-${drone.id}`);
 
                 panel.classList.remove('open');
-                card.classList.remove('active-indus-card');
+                card.classList.remove('active-card', 'active-dock-card');
                 card.classList.add('border-cardBorder');
                 indicator.className = 'w-6 h-6 rounded-full border-2 border-gray-600 text-transparent flex items-center justify-center flex-shrink-0 mt-1 transition-all';
                 toggleText.innerHTML = '클릭하여 옵션 및 수량 선택 <i class="fa-solid fa-chevron-down ml-1.5"></i>';
@@ -674,7 +800,7 @@
             if (qtyEl) qtyEl.textContent = nextQty;
 
             if (currentDroneId !== droneId) {
-                selectIndusCard(droneId);
+                selectDroneCard(droneId);
             } else {
                 updateQuoteSidebar();
             }
@@ -691,7 +817,7 @@
             if (optQtyEl) optQtyEl.textContent = nextQty;
 
             if (currentDroneId !== droneId) {
-                selectIndusCard(droneId);
+                selectDroneCard(droneId);
             } else {
                 updateQuoteSidebar();
             }
@@ -699,7 +825,7 @@
 
         function resetAllOptions() {
             if (!currentDroneId) return;
-            const drone = indusDroneDatabase.find(d => d.id === currentDroneId);
+            const drone = droneDatabase.find(d => d.id === currentDroneId);
             if (!drone) return;
 
             drone.options.forEach(opt => {
@@ -726,7 +852,7 @@
                 tagEl.textContent = '선택된 기본 기체 없음';
                 tagEl.className = 'text-[11px] text-gray-400 font-bold';
                 nameEl.textContent = '선택된 기체가 없습니다.';
-                unitPriceEl.textContent = '좌측에서 산업용 기체를 선택해 주세요.';
+                unitPriceEl.textContent = '좌측에서 기체를 선택해 주세요.';
                 qtyBadgeEl.classList.add('hidden');
                 deselectBtn.classList.add('hidden');
                 subtotalEl.textContent = '0원';
@@ -736,17 +862,22 @@
                 return;
             }
 
-            const drone = indusDroneDatabase.find(d => d.id === currentDroneId);
+            const drone = droneDatabase.find(d => d.id === currentDroneId);
             if (!drone) return;
 
             const droneQty = state[currentDroneId].droneQty;
             const droneSubtotal = drone.price * droneQty;
 
-            tagEl.textContent = '선택 기체 (산업용 엔터프라이즈 라인업)';
-            tagEl.className = 'text-[11px] text-indusAccent font-bold';
+            if (drone.group === 'dock') {
+                tagEl.textContent = '선택 기체 (DJI Dock 호환 라인업)';
+                tagEl.className = 'text-[11px] text-dockAccent font-bold';
+            } else {
+                tagEl.textContent = '선택 기체 (현장 투입형 라인업)';
+                tagEl.className = 'text-[11px] text-primary font-bold';
+            }
 
             nameEl.textContent = drone.name;
-            unitPriceEl.textContent = `기본 단가: ${formatKRW(drone.price)} (VAT 포함)`;
+            unitPriceEl.textContent = `기본 단가: ${formatKRW(drone.price)}`;
             qtyBadgeEl.textContent = `${droneQty}대`;
             qtyBadgeEl.classList.remove('hidden');
             deselectBtn.classList.remove('hidden');
@@ -764,7 +895,7 @@
                         <div class="flex justify-between items-center bg-black/40 px-3 py-2 rounded-xl border border-[#222]">
                             <div class="pr-2">
                                 <span class="text-gray-200 font-medium block">${opt.name}</span>
-                                <span class="text-[11px] text-indusAccent font-bold">수량: ${qty}개</span>
+                                <span class="text-[11px] text-primary font-bold">수량: ${qty}개</span>
                             </div>
                             <span class="text-white font-bold whitespace-nowrap">+${formatKRW(lineTotal)}</span>
                         </div>
@@ -785,11 +916,11 @@
 
         function submitEstimate() {
             if (!currentDroneId) {
-                alert('상담 신청하실 산업용 기체를 먼저 선택해 주세요.');
+                alert('상담 신청하실 기체를 먼저 선택해 주세요.');
                 return;
             }
 
-            const drone = indusDroneDatabase.find(d => d.id === currentDroneId);
+            const drone = droneDatabase.find(d => d.id === currentDroneId);
             const droneQty = state[currentDroneId].droneQty;
             const droneSubtotal = drone.price * droneQty;
 
@@ -813,10 +944,10 @@
 
             const grandTotal = droneSubtotal + optionsSubtotal;
 
-            let formattedText = `[산업용 드론(엔터프라이즈) 스마트 견적 산출 내역]\n`;
+            let formattedText = `[산업용 드론 스마트 견적 산출 내역]\n`;
             formattedText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
             formattedText += `■ 선택 기체 : ${drone.name}\n`;
-            formattedText += `■ 도입 수량 : ${droneQty}대 (단가 ${formatKRW(drone.price)} [VAT포함] / 소계 ${formatKRW(droneSubtotal)})\n\n`;
+            formattedText += `■ 도입 수량 : ${droneQty}대 (단가 ${formatKRW(drone.price)} / 소계 ${formatKRW(droneSubtotal)})\n\n`;
             formattedText += `■ 선택 추가 옵션 (${selectedOptions.length}종) :\n`;
 
             if (selectedOptions.length > 0) {
@@ -829,16 +960,15 @@
             }
 
             formattedText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-            formattedText += `★ 총 예상 견적금액 : ${formatKRW(grandTotal)} (VAT 10% 포함)\n`;
+            formattedText += `★ 총 예상 견적금액 : ${formatKRW(grandTotal)} (VAT 포함 기준)\n`;
             formattedText += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
             formattedText += `[추가 문의 및 요청사항]\n`;
-            formattedText += `• 기관/기업명 : \n`;
-            formattedText += `• 도입 용도 (점검, 측량, 수색 등) : \n`;
-            formattedText += `• 납품 희망 일정 및 기타 요청사항을 적어주세요.\n`;
+            formattedText += `• 도입 예정 기관/업체명 : \n`;
+            formattedText += `• 희망 납품 일정 또는 문의사항을 아래에 적어주세요.\n`;
 
             const quotePayload = {
                 timestamp: new Date().toLocaleString('ko-KR'),
-                group: 'industrial',
+                group: drone.group,
                 droneName: drone.name,
                 droneQty: droneQty,
                 droneSubtotalFormatted: formatKRW(droneSubtotal),
@@ -854,11 +984,11 @@
 
         function printOfficialEstimate() {
             if (!currentDroneId) {
-                alert('인쇄할 견적의 산업용 기체를 먼저 선택해 주세요.');
+                alert('인쇄할 견적의 기체를 먼저 선택해 주세요.');
                 return;
             }
 
-            const drone = indusDroneDatabase.find(d => d.id === currentDroneId);
+            const drone = droneDatabase.find(d => d.id === currentDroneId);
             const droneQty = state[currentDroneId].droneQty;
             const droneSubtotal = drone.price * droneQty;
 
@@ -882,7 +1012,7 @@
                     rowsHtml += `
                         <tr class="border border-black text-center">
                             <td class="border border-black p-2">${rowIndex++}</td>
-                            <td class="border border-black p-2 text-left">[산업옵션] ${opt.name}<br><span class="text-[11px] text-gray-600">${opt.desc}</span></td>
+                            <td class="border border-black p-2 text-left">[호환옵션] ${opt.name}<br><span class="text-[11px] text-gray-600">${opt.desc}</span></td>
                             <td class="border border-black p-2">${qty}개</td>
                             <td class="border border-black p-2 text-right">${formatKRW(opt.price)}</td>
                             <td class="border border-black p-2 text-right">${formatKRW(lineTotal)}</td>
@@ -911,7 +1041,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             currentDroneId = null;
-            renderIndusSections();
+            renderAllDroneSections();
             updateQuoteSidebar();
         });
     </script>
