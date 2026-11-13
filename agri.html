@@ -303,13 +303,34 @@
             <table class="w-full border-collapse border border-black text-[11px] text-left">
                 <thead>
                     <tr class="bg-gray-200 border border-black text-center font-bold">
-    <th class="border border-black p-1.5 w-10">번호</th>
-    <th class="border border-black p-1.5">품명 및 규격 (모델명 / 옵션)</th>
-    <th class="border border-black p-1.5 w-14">수량</th>
-    <th class="border border-black p-1.5 w-24">단가 (원, VAT포함)</th>
-    <th class="border border-black p-2 w-28">금액 (원, VAT포함)</th>
-</tr>
-                </thead>
+    <table class="w-full border-collapse border border-black text-xs">
+    <thead>
+        <tr class="bg-gray-100 text-center">
+            <th class="border border-black p-2 w-12">No</th>
+            <th class="border border-black p-2">품목 및 규격</th>
+            <th class="border border-black p-2 w-16">수량</th>
+            <th class="border border-black p-2 w-28">단가 (공급가)</th>
+            <th class="border border-black p-2 w-32">금액 (공급가액)</th>
+        </tr>
+    </thead>
+    <tbody id="print-table-body">
+        <!-- 품목별 행 동적 삽입 -->
+    </tbody>
+    <tfoot class="border-t-2 border-black font-semibold">
+        <tr>
+            <td colspan="4" class="border border-black p-2 text-right bg-gray-50">공급가액 합계</td>
+            <td id="print-supply-total" class="border border-black p-2 text-right">0원</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="border border-black p-2 text-right bg-gray-50">부가가치세 (VAT 10%)</td>
+            <td id="print-vat-total" class="border border-black p-2 text-right">0원</td>
+        </tr>
+        <tr class="bg-gray-100 text-sm font-bold">
+            <td colspan="4" class="border border-black p-2.5 text-right">총 합계금액 (VAT 포함)</td>
+            <td id="print-grand-total" class="border border-black p-2.5 text-right text-blue-600">0원</td>
+        </tr>
+    </tfoot>
+</table>
                 <tbody id="print-table-body">
                     <!-- 동적 삽입 -->
                 </tbody>
